@@ -33,7 +33,7 @@ public class ItemNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBl
 		if (te instanceof AbstractItemNodeBlockEntity<?> rte) {
 			if (rte.filter.isEmpty()) {
 				if (!pl.getMainHandItem().isEmpty()) {
-					rte.filter = pl.getMainHandItem().copy().split(1);
+					rte.filter = pl.getMainHandItem().copy();
 					level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, true));
 				}
 			} else {

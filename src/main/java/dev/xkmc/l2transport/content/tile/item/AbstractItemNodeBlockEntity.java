@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.item.ItemNodeEntity;
-import dev.xkmc.l2transport.content.item.NodalItemHandler;
+import dev.xkmc.l2transport.content.capability.item.ItemNodeEntity;
+import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
 import net.minecraft.core.BlockPos;

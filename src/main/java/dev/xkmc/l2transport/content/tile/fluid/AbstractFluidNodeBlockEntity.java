@@ -1,9 +1,8 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.fluid.FluidNodeEntity;
-import dev.xkmc.l2transport.content.fluid.NodalFluidHandler;
-import dev.xkmc.l2transport.content.item.NodalItemHandler;
+import dev.xkmc.l2transport.content.capability.fluid.FluidNodeEntity;
+import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
 import net.minecraft.core.BlockPos;

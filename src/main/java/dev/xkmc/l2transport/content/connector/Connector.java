@@ -1,6 +1,6 @@
 package dev.xkmc.l2transport.content.connector;
 
-import dev.xkmc.l2transport.content.api.NetworkType;
+import dev.xkmc.l2transport.content.flow.NetworkType;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
 import net.minecraft.core.BlockPos;
 
