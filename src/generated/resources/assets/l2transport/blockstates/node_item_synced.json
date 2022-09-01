@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "l2transport:block/node_item_synced"
+    },
+    "lit=true": {
+      "model": "l2transport:block/node_item_synced_lit"
+    }
+  }
+}

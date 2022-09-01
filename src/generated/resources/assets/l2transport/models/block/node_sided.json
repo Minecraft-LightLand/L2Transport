@@ -1,0 +1,7 @@
+{
+  "parent": "l2transport:block/node_side",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "l2transport:block/node/sided"
+  }
+}

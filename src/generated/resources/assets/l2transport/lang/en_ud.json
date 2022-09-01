@@ -1,0 +1,13 @@
+{
+  "block.l2transport.node_item_distribute": "ǝʇnqıɹʇsıᗡ ɯǝʇI ǝpoN",
+  "block.l2transport.node_item_ordered": "pǝɹǝpɹO ɯǝʇI ǝpoN",
+  "block.l2transport.node_item_retrieve": "ǝʌǝıɹʇǝᴚ ɯǝʇI ǝpoN",
+  "block.l2transport.node_item_simple": "ǝןdɯıS ɯǝʇI ǝpoN",
+  "block.l2transport.node_item_synced": "pǝɔuʎS ɯǝʇI ǝpoN",
+  "block.l2transport.node_sided": "pǝpıS ǝpoN",
+  "item.l2transport.clear": "ɹɐǝןƆ",
+  "item.l2transport.linker": "ɹǝʞuıꞀ",
+  "item.l2transport.rotate": "ǝʇɐʇoᴚ",
+  "item.l2transport.validator": "ɹoʇɐpıןɐΛ",
+  "itemGroup.l2transport.transport": "ʇɹodsuɐɹ⟘ ᄅꞀ"
+}
