@@ -8,9 +8,13 @@ import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvid
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2transport.content.tile.base.SidedBlockEntity;
+import dev.xkmc.l2transport.content.tile.block.FluidNodeSetFilter;
+import dev.xkmc.l2transport.content.tile.block.FluidTransferBlock;
+import dev.xkmc.l2transport.content.tile.block.ItemNodeSetFilter;
 import dev.xkmc.l2transport.content.tile.block.ItemTransferBlock;
-import dev.xkmc.l2transport.content.tile.block.NodeSetFilter;
+import dev.xkmc.l2transport.content.tile.client.FluidNodeRenderer;
 import dev.xkmc.l2transport.content.tile.client.ItemNodeRenderer;
+import dev.xkmc.l2transport.content.tile.fluid.*;
 import dev.xkmc.l2transport.content.tile.item.*;
 import dev.xkmc.l2transport.init.L2Transport;
 import net.minecraft.resources.ResourceLocation;
@@ -29,56 +33,68 @@ public class LTBlocks {
 		L2Transport.REGISTRATE.creativeModeTab(() -> LTItems.TAB_MAIN);
 	}
 
-	public static final BlockEntry<DelegateBlock> B_SIDED, B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE;
+	public static final BlockEntry<DelegateBlock> B_SIDED,
+			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
+			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE;
+
+	public static final BlockEntityEntry<SidedBlockEntity> TE_SIDED;
 
 	public static final BlockEntityEntry<SimpleItemNodeBlockEntity> TE_ITEM_SIMPLE;
 	public static final BlockEntityEntry<OrderedItemNodeBlockEntity> TE_ITEM_ORDERED;
 	public static final BlockEntityEntry<SyncedItemNodeBlockEntity> TE_ITEM_SYNCED;
 	public static final BlockEntityEntry<DistributeItemNodeBlockEntity> TE_ITEM_DISTRIBUTE;
 	public static final BlockEntityEntry<RetrieverItemNodeBlockEntity> TE_ITEM_RETRIEVE;
-	public static final BlockEntityEntry<SidedBlockEntity> TE_SIDED;
+
+	public static final BlockEntityEntry<SimpleFluidNodeBlockEntity> TE_FLUID_SIMPLE;
+	public static final BlockEntityEntry<OrderedFluidNodeBlockEntity> TE_FLUID_ORDERED;
+	public static final BlockEntityEntry<SyncedFluidNodeBlockEntity> TE_FLUID_SYNCED;
+	public static final BlockEntityEntry<DistributeFluidNodeBlockEntity> TE_FLUID_DISTRIBUTE;
+	public static final BlockEntityEntry<RetrieverFluidNodeBlockEntity> TE_FLUID_RETRIEVE;
 
 	static {
+
+		DelegateBlockProperties NOLIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
+				.noOcclusion().lightLevel(bs -> 7)
+				.isRedstoneConductor((a, b, c) -> false));
+
+		DelegateBlockProperties LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
+				.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
+				.isRedstoneConductor((a, b, c) -> false));
+
+		B_SIDED = L2Transport.REGISTRATE.block("node_sided",
+						(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, ItemTransferBlock.SIDED))
+				.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+				.defaultLoot().defaultLang().simpleItem().register();
+
+		TE_SIDED = L2Transport.REGISTRATE.blockEntity("node_sided", SidedBlockEntity::new)
+				.validBlock(B_SIDED).register();
+
 		{
-
-			DelegateBlockProperties NOLIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-					.noOcclusion().lightLevel(bs -> 7)
-					.isRedstoneConductor((a, b, c) -> false));
-
-			DelegateBlockProperties LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-					.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
-					.isRedstoneConductor((a, b, c) -> false));
-
 			B_ITEM_SIMPLE = L2Transport.REGISTRATE.block("node_item_simple",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.SIMPLE))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SIMPLE))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			B_ITEM_ORDERED = L2Transport.REGISTRATE.block("node_item_ordered",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.ORDERED))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.ORDERED))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			B_ITEM_SYNCED = L2Transport.REGISTRATE.block("node_item_synced",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.SYNCED))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SYNCED))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			B_ITEM_DISTRIBUTE = L2Transport.REGISTRATE.block("node_item_distribute",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, ItemTransferBlock.DISTRIBUTE))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.DISTRIBUTE))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			B_ITEM_RETRIEVE = L2Transport.REGISTRATE.block("node_item_retrieve",
-							(p) -> DelegateBlock.newBaseBlock(LIT, NodeSetFilter.INSTANCE, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE))
 					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
-
-			B_SIDED = L2Transport.REGISTRATE.block("node_sided",
-							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, ItemTransferBlock.SIDED))
-					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().simpleItem().register();
 
 			TE_ITEM_SIMPLE = L2Transport.REGISTRATE.blockEntity("node_item_simple", SimpleItemNodeBlockEntity::new)
 					.validBlock(B_ITEM_SIMPLE).renderer(() -> ItemNodeRenderer::new).register();
@@ -90,8 +106,44 @@ public class LTBlocks {
 					.validBlock(B_ITEM_DISTRIBUTE).renderer(() -> ItemNodeRenderer::new).register();
 			TE_ITEM_RETRIEVE = L2Transport.REGISTRATE.blockEntity("node_item_retrieve", RetrieverItemNodeBlockEntity::new)
 					.validBlock(B_ITEM_RETRIEVE).renderer(() -> ItemNodeRenderer::new).register();
-			TE_SIDED = L2Transport.REGISTRATE.blockEntity("node_sided", SidedBlockEntity::new)
-					.validBlock(B_SIDED).register();
+		}
+		{
+			B_FLUID_SIMPLE = L2Transport.REGISTRATE.block("node_fluid_simple",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SIMPLE))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			B_FLUID_ORDERED = L2Transport.REGISTRATE.block("node_fluid_ordered",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.ORDERED))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			B_FLUID_SYNCED = L2Transport.REGISTRATE.block("node_fluid_synced",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SYNCED))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			B_FLUID_DISTRIBUTE = L2Transport.REGISTRATE.block("node_fluid_distribute",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.DISTRIBUTE))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			B_FLUID_RETRIEVE = L2Transport.REGISTRATE.block("node_fluid_retrieve",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, BlockProxy.ALL_DIRECTION, FluidTransferBlock.RETRIEVE))
+					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+
+			TE_FLUID_SIMPLE = L2Transport.REGISTRATE.blockEntity("node_fluid_simple", SimpleFluidNodeBlockEntity::new)
+					.validBlock(B_FLUID_SIMPLE).renderer(() -> FluidNodeRenderer::new).register();
+			TE_FLUID_ORDERED = L2Transport.REGISTRATE.blockEntity("node_fluid_ordered", OrderedFluidNodeBlockEntity::new)
+					.validBlock(B_FLUID_ORDERED).renderer(() -> FluidNodeRenderer::new).register();
+			TE_FLUID_SYNCED = L2Transport.REGISTRATE.blockEntity("node_fluid_synced", SyncedFluidNodeBlockEntity::new)
+					.validBlock(B_FLUID_SYNCED).renderer(() -> FluidNodeRenderer::new).register();
+			TE_FLUID_DISTRIBUTE = L2Transport.REGISTRATE.blockEntity("node_fluid_distribute", DistributeFluidNodeBlockEntity::new)
+					.validBlock(B_FLUID_DISTRIBUTE).renderer(() -> FluidNodeRenderer::new).register();
+			TE_FLUID_RETRIEVE = L2Transport.REGISTRATE.blockEntity("node_fluid_retrieve", RetrieverFluidNodeBlockEntity::new)
+					.validBlock(B_FLUID_RETRIEVE).renderer(() -> FluidNodeRenderer::new).register();
 		}
 	}
 

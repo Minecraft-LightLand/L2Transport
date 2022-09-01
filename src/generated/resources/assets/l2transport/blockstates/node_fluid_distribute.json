@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "l2transport:block/node_fluid_distribute"
+    },
+    "lit=true": {
+      "model": "l2transport:block/node_fluid_distribute_lit"
+    }
+  }
+}

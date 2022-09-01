@@ -13,8 +13,11 @@ public class SyncedConnector extends SingleCoolDownConnector {
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
 
-	public SyncedConnector(int max) {
+	private final int limit;
+
+	public SyncedConnector(int max, int limit) {
 		super(max);
+		this.limit = limit;
 	}
 
 	@Override
@@ -45,7 +48,7 @@ public class SyncedConnector extends SingleCoolDownConnector {
 
 	@Override
 	public int provide(int available, int consumed, int size) {
-		return 1;
+		return limit;
 	}
 
 }

@@ -1,4 +1,9 @@
 {
+  "block.l2transport.node_fluid_distribute": "ǝʇnqıɹʇsıᗡ pınןℲ ǝpoN",
+  "block.l2transport.node_fluid_ordered": "pǝɹǝpɹO pınןℲ ǝpoN",
+  "block.l2transport.node_fluid_retrieve": "ǝʌǝıɹʇǝᴚ pınןℲ ǝpoN",
+  "block.l2transport.node_fluid_simple": "ǝןdɯıS pınןℲ ǝpoN",
+  "block.l2transport.node_fluid_synced": "pǝɔuʎS pınןℲ ǝpoN",
   "block.l2transport.node_item_distribute": "ǝʇnqıɹʇsıᗡ ɯǝʇI ǝpoN",
   "block.l2transport.node_item_ordered": "pǝɹǝpɹO ɯǝʇI ǝpoN",
   "block.l2transport.node_item_retrieve": "ǝʌǝıɹʇǝᴚ ɯǝʇI ǝpoN",

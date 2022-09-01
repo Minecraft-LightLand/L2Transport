@@ -28,7 +28,16 @@ public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemS
 
 	@Override
 	public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-		return TransportHandler.insert(this, new ItemHolder(stack), simulate);
+		int consumed = TransportHandler.insert(this, new ItemHolder(stack), simulate);
+		if (consumed == 0) {
+			return stack;
+		}
+		if (consumed == stack.getCount()) {
+			return ItemStack.EMPTY;
+		}
+		ItemStack ans = stack.copy();
+		ans.shrink(consumed);
+		return ans;
 	}
 
 	@Override

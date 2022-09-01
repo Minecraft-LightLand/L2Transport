@@ -28,8 +28,8 @@ public class RealToken<T> {
 		count += remain;
 	}
 
-	public T getRemain() {
-		return holder.getCopy(count);
+	public int getRemain() {
+		return count;
 	}
 
 }

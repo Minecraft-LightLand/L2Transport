@@ -1,0 +1,66 @@
+package dev.xkmc.l2transport.content.tile.fluid;
+
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.connector.SimpleConnector;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+
+@SerialClass
+public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<RetrieverFluidNodeBlockEntity> {
+
+	@SerialClass.SerialField(toClient = true)
+	private final SimpleConnector connector = new SimpleConnector(80);
+
+	public RetrieverFluidNodeBlockEntity(BlockEntityType<RetrieverFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
+	}
+
+	@Override
+	public Connector getConnector() {
+		return connector;
+	}
+
+	@Override
+	public void tick() {
+		if (level != null && !level.isClientSide() && getConnector().isReady()) {
+			Direction facing = getBlockState().getValue(BlockStateProperties.FACING);
+			BlockPos next = getBlockPos().relative(facing);
+			BlockEntity target = level.getBlockEntity(next);
+			if (target != null) {
+				var lazyCap = target.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite());
+				if (lazyCap.resolve().isPresent()) {
+					var cap = lazyCap.resolve().get();
+					tryRetrieve(cap);
+				}
+			}
+
+		}
+		super.tick();
+	}
+
+	protected void tryRetrieve(IFluidHandler target) {
+		for (int i = 0; i < target.getTanks(); i++) {
+			FluidStack toDrain = target.drain(getMaxTransfer(), IFluidHandler.FluidAction.SIMULATE);
+			if (toDrain.isEmpty()) continue;
+			int toFill = getHandler().fill(toDrain, IFluidHandler.FluidAction.SIMULATE);
+			if (toFill == 0) continue;
+			while (toFill != toDrain.getAmount()) {
+				toDrain = target.drain(toFill, IFluidHandler.FluidAction.SIMULATE);
+				toFill = getHandler().fill(toDrain, IFluidHandler.FluidAction.SIMULATE);
+			}
+			if (toFill == 0) continue;
+			toDrain = target.drain(toFill, IFluidHandler.FluidAction.EXECUTE);
+			getHandler().fill(toDrain, IFluidHandler.FluidAction.EXECUTE);
+			return;
+		}
+	}
+
+}

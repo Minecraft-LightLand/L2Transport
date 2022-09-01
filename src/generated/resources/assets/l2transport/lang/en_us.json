@@ -1,4 +1,9 @@
 {
+  "block.l2transport.node_fluid_distribute": "Node Fluid Distribute",
+  "block.l2transport.node_fluid_ordered": "Node Fluid Ordered",
+  "block.l2transport.node_fluid_retrieve": "Node Fluid Retrieve",
+  "block.l2transport.node_fluid_simple": "Node Fluid Simple",
+  "block.l2transport.node_fluid_synced": "Node Fluid Synced",
   "block.l2transport.node_item_distribute": "Node Item Distribute",
   "block.l2transport.node_item_ordered": "Node Item Ordered",
   "block.l2transport.node_item_retrieve": "Node Item Retrieve",
