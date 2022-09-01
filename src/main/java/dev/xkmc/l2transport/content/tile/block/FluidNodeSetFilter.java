@@ -3,13 +3,12 @@ package dev.xkmc.l2transport.content.tile.block;
 import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
 import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
-import dev.xkmc.l2transport.content.tile.item.AbstractItemNodeBlockEntity;
+import dev.xkmc.l2transport.content.tile.fluid.AbstractFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.tools.ILinker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,6 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod {
 
@@ -30,15 +31,15 @@ public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateB
 			return InteractionResult.SUCCESS;
 		}
 		BlockEntity te = level.getBlockEntity(pos);
-		//TODO fluid filter
-		if (te instanceof AbstractItemNodeBlockEntity<?> rte) {
+		if (te instanceof AbstractFluidNodeBlockEntity<?> rte) {
+			var stackCap = pl.getMainHandItem().getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
 			if (rte.filter.isEmpty()) {
-				if (!pl.getMainHandItem().isEmpty()) {
-					rte.filter = pl.getMainHandItem().copy().split(1);
+				if (stackCap.resolve().isPresent()) {
+					rte.filter = stackCap.resolve().get().getFluidInTank(0);
 					level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, true));
 				}
 			} else {
-				rte.filter = ItemStack.EMPTY;
+				rte.filter = FluidStack.EMPTY;
 				level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, false));
 			}
 		}

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SyncedFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<SyncedFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SyncedConnector connector = new SyncedConnector(80, 1000);
+	private final SyncedConnector connector = new SyncedConnector(80, this::getLimit);
 
 	public SyncedFluidNodeBlockEntity(BlockEntityType<SyncedFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -21,4 +21,9 @@ public class SyncedFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<Syn
 	public Connector getConnector() {
 		return connector;
 	}
+
+	private int getLimit() {
+		return getFluid().isEmpty() ? 1000 : getFluid().getAmount();
+	}
+
 }

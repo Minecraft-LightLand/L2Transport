@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
 @SerialClass
@@ -13,9 +14,9 @@ public class SyncedConnector extends SingleCoolDownConnector {
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<BlockPos> list = new ArrayList<>();
 
-	private final int limit;
+	private final IntSupplier limit;
 
-	public SyncedConnector(int max, int limit) {
+	public SyncedConnector(int max, IntSupplier limit) {
 		super(max);
 		this.limit = limit;
 	}
@@ -48,7 +49,7 @@ public class SyncedConnector extends SingleCoolDownConnector {
 
 	@Override
 	public int provide(int available, int consumed, int size) {
-		return limit;
+		return limit.getAsInt();
 	}
 
 }
