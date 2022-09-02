@@ -10,7 +10,7 @@ import java.util.function.IntSupplier;
 
 public class ExtractConnector extends SimpleConnector {
 
-	public ExtractConnector(int max, IntSupplier limit) {
+	public ExtractConnector(IntSupplier max, IntSupplier limit) {
 		super(max, limit);
 	}
 

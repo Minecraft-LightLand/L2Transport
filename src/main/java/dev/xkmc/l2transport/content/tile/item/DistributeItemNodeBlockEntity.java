@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class DistributeItemNodeBlockEntity extends AbstractItemNodeBlockEntity<DistributeItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final DistributeConnector connector = new DistributeConnector(80);
+	private final DistributeConnector connector = new DistributeConnector(this::getMaxCoolDown);
 
 	public DistributeItemNodeBlockEntity(BlockEntityType<DistributeItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

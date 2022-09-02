@@ -18,7 +18,7 @@ import net.minecraftforge.items.IItemHandler;
 public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<RetrieverItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(80, this::getLimit);
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit);
 
 	public RetrieverItemNodeBlockEntity(BlockEntityType<RetrieverItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SimpleItemNodeBlockEntity extends AbstractItemNodeBlockEntity<SimpleItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SimpleConnector connector = new SimpleConnector(80, this::getLimit);
+	private final SimpleConnector connector = new SimpleConnector(this::getMaxCoolDown, this::getLimit);
 
 	public SimpleItemNodeBlockEntity(BlockEntityType<SimpleItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

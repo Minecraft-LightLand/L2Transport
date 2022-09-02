@@ -21,7 +21,7 @@ public class SimpleConnector extends SingleCoolDownConnector {
 
 	private final IntSupplier limit;
 
-	public SimpleConnector(int max, IntSupplier limit) {
+	public SimpleConnector(IntSupplier max, IntSupplier limit) {
 		super(max);
 		this.limit = limit;
 	}

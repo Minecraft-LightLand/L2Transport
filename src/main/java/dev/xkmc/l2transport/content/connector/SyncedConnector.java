@@ -20,7 +20,7 @@ public class SyncedConnector extends SingleCoolDownConnector {
 
 	private final IntSupplier limit;
 
-	public SyncedConnector(int max, IntSupplier limit) {
+	public SyncedConnector(IntSupplier max, IntSupplier limit) {
 		super(max);
 		this.limit = limit;
 	}

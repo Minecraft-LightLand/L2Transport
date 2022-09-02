@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
 @SerialClass
@@ -21,7 +22,7 @@ public class OrderedConnector extends SingleCoolDownConnector {
 
 	private final BlockEntity center;
 
-	public OrderedConnector(BlockEntity center, int max) {
+	public OrderedConnector(BlockEntity center, IntSupplier max) {
 		super(max);
 		this.center = center;
 	}

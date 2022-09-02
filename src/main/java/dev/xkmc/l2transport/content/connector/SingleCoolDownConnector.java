@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.IntSupplier;
 
 @SerialClass
 public abstract class SingleCoolDownConnector implements Connector {
@@ -18,20 +19,20 @@ public abstract class SingleCoolDownConnector implements Connector {
 
 	private int simulatedCoolDown;
 
-	public int maxCoolDown;
+	public IntSupplier maxCoolDown;
 
 	@Override
 	public List<BlockPos> getAvailableTarget() {
 		return getConnected();
 	}
 
-	protected SingleCoolDownConnector(int maxCoolDown) {
+	protected SingleCoolDownConnector(IntSupplier maxCoolDown) {
 		this.maxCoolDown = maxCoolDown;
 	}
 
 	@Override
 	public int getMaxCoolDown(BlockPos pos) {
-		return maxCoolDown;
+		return maxCoolDown.getAsInt();
 	}
 
 	@Override

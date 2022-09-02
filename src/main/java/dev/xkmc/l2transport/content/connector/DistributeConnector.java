@@ -9,6 +9,7 @@ import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 
 @SerialClass
@@ -20,7 +21,7 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	@SerialClass.SerialField(toClient = true)
 	private int id;
 
-	public DistributeConnector(int max) {
+	public DistributeConnector(IntSupplier max) {
 		super(max);
 	}
 

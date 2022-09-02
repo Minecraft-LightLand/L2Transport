@@ -43,6 +43,10 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		getConnector().tick();
 	}
 
+	public int getMaxCoolDown() {
+		return 80;//TODO configurable
+	}
+
 	public abstract Connector getConnector();
 
 	public final void refreshCoolDown(BlockPos target, boolean success, boolean simulate) {
@@ -54,7 +58,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 
 	@Override
 	public int getMaxDistanceSqr() {
-		return 256;
+		return 256;//TODO configurable
 	}
 
 	@Override

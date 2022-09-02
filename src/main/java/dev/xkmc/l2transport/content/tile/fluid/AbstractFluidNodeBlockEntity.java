@@ -35,7 +35,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	@Override
 	public int getMaxTransfer() {
-		return 8000;
+		return 8000;//TODO configurable
 	}
 
 	public FluidStack getFluid() {

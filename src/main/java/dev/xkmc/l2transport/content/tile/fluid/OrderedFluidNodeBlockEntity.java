@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class OrderedFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<OrderedFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final OrderedConnector connector = new OrderedConnector(this, 80);
+	private final OrderedConnector connector = new OrderedConnector(this, this::getMaxCoolDown);
 
 	public OrderedFluidNodeBlockEntity(BlockEntityType<OrderedFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
