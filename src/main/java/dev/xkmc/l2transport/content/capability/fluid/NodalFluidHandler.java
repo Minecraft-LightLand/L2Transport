@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public record NodalFluidHandler(FluidNodeEntity be) implements IFluidHandler, FluidStackNode {
+public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandler, FluidStackNode {
 
 	@Override
 	public int getTanks() {

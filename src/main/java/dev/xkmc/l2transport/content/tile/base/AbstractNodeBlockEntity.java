@@ -3,6 +3,7 @@ package dev.xkmc.l2transport.content.tile.base;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.connector.Connector;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,7 @@ import java.util.List;
 
 @SerialClass
 public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity<BE>> extends BaseBlockEntity
-		implements TickableBlockEntity, IRenderableNode, ILinkableNode {
+		implements TickableBlockEntity, IRenderableNode, ILinkableNode, INodeBlockEntity {
 
 	public AbstractNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

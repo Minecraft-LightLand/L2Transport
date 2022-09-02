@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public record NodalItemHandler(ItemNodeEntity be) implements IItemHandler, ItemStackNode {
+public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler, ItemStackNode {
 
 	@Override
 	public int getSlots() {

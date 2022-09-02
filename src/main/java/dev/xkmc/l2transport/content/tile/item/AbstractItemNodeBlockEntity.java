@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.item.ItemHolder;
-import dev.xkmc.l2transport.content.capability.item.ItemNodeEntity;
+import dev.xkmc.l2transport.content.capability.item.IItemNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
@@ -22,7 +22,7 @@ import java.util.List;
 
 @SerialClass
 public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlockEntity<BE>> extends AbstractNodeBlockEntity<BE>
-		implements ItemNodeEntity, IRenderableItemNode {
+		implements IItemNodeBlockEntity, IRenderableItemNode {
 
 	protected final LazyOptional<NodalItemHandler> itemHandler = LazyOptional.of(() -> new NodalItemHandler(this));
 

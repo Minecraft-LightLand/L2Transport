@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.fluid.FluidHolder;
-import dev.xkmc.l2transport.content.capability.fluid.FluidNodeEntity;
+import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
@@ -22,7 +22,7 @@ import java.util.List;
 
 @SerialClass
 public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeBlockEntity<BE>> extends AbstractNodeBlockEntity<BE>
-		implements FluidNodeEntity, IRenderableFluidNode {
+		implements IFluidNodeBlockEntity, IRenderableFluidNode {
 
 	protected final LazyOptional<NodalFluidHandler> fluidHandler = LazyOptional.of(() -> new NodalFluidHandler(this));
 
