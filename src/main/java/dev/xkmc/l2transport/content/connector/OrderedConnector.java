@@ -50,10 +50,10 @@ public class OrderedConnector extends SingleCoolDownConnector {
 	@Override
 	public <T> void addTooltips(List<MutableComponent> list, IContentHolder<T> filter) {
 		if (filter.getCount() > 0) {
-			list.add(LangData.INFO_FILTER.get(filter.getDesc()).withStyle(ChatFormatting.BLUE));
+			list.add(LangData.INFO_FILTER.get(filter.getDesc()));
 		}
-		list.add(LangData.INFO_SPEED.get(maxCoolDown).withStyle(ChatFormatting.BLUE));
-		list.add(LangData.ORDERED.get().withStyle(ChatFormatting.GRAY));
+		list.add(LangData.INFO_SPEED.getLiteral(maxCoolDown.getAsInt() / 20f));
+		list.add(LangData.ORDERED.get());
 	}
 
 }
