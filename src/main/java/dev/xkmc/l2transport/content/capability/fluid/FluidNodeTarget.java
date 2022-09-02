@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.content.capability.fluid;
 
+import dev.xkmc.l2transport.content.capability.base.AbstractNodeTarget;
 import dev.xkmc.l2transport.content.flow.IContentToken;
 import dev.xkmc.l2transport.content.flow.RealToken;
-import dev.xkmc.l2transport.content.capability.base.AbstractNodeTarget;
 import dev.xkmc.l2transport.init.L2Transport;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.fluids.FluidStack;

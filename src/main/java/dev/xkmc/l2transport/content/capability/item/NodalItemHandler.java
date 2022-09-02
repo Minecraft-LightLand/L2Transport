@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.content.capability.item;
 
-import dev.xkmc.l2transport.content.flow.*;
 import dev.xkmc.l2transport.content.capability.base.ItemStackNode;
 import dev.xkmc.l2transport.content.capability.base.SimpleNodeSupplier;
+import dev.xkmc.l2transport.content.flow.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;

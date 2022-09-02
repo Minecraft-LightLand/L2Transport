@@ -22,8 +22,4 @@ public class SyncedItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Synce
 		return connector;
 	}
 
-	private int getLimit() {
-		return getItem().isEmpty() ? 1 : getItem().getCount();
-	}
-
 }

@@ -1,7 +1,11 @@
 package dev.xkmc.l2transport.content.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.flow.IContentHolder;
+import dev.xkmc.l2transport.init.data.LangData;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +64,15 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	@Override
 	public boolean shouldContinue(int available, int consumed, int size) {
 		return consumed == 0 && super.shouldContinue(available, consumed, size);
+	}
+
+	@Override
+	public <T> void addTooltips(List<MutableComponent> list, IContentHolder<T> filter) {
+		if (filter.getCount() > 0) {
+			list.add(LangData.INFO_FILTER.get(filter.getDesc()).withStyle(ChatFormatting.BLUE));
+		}
+		list.add(LangData.INFO_SPEED.get(maxCoolDown).withStyle(ChatFormatting.BLUE));
+		list.add(LangData.DISTRIBUTE.get().withStyle(ChatFormatting.GRAY));
 	}
 
 }

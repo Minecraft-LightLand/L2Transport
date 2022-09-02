@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.connector.Connector;
-import dev.xkmc.l2transport.content.connector.SimpleConnector;
+import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<RetrieverFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SimpleConnector connector = new SimpleConnector(80);
+	private final ExtractConnector connector = new ExtractConnector(80, this::getLimit);
 
 	public RetrieverFluidNodeBlockEntity(BlockEntityType<RetrieverFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -50,6 +50,10 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 		for (int i = 0; i < target.getTanks(); i++) {
 			FluidStack toDrain = target.drain(getMaxTransfer(), IFluidHandler.FluidAction.SIMULATE);
 			if (toDrain.isEmpty()) continue;
+			if (!getFluid().isEmpty()) {
+				if (!isFluidStackValid(toDrain)) continue;
+				if (toDrain.getAmount() < getFluid().getAmount()) continue;
+			}
 			int toFill = getHandler().fill(toDrain, IFluidHandler.FluidAction.SIMULATE);
 			if (toFill == 0) continue;
 			while (toFill != toDrain.getAmount()) {

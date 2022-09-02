@@ -1,5 +1,7 @@
 package dev.xkmc.l2transport.content.flow;
 
+import net.minecraft.network.chat.MutableComponent;
+
 /**
  * Holder of content, such as ItemStack, FluidStack, Energy, Gas.
  * This should be immutable.
@@ -32,5 +34,7 @@ public interface IContentHolder<T> {
 	default RealToken<T> toReal() {
 		return new RealToken<>(this, getCount());
 	}
+
+	MutableComponent getDesc();
 
 }

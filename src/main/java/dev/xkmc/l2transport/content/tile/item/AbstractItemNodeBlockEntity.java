@@ -1,12 +1,14 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.capability.item.ItemHolder;
 import dev.xkmc.l2transport.content.capability.item.ItemNodeEntity;
 import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,6 +17,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @SerialClass
 public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlockEntity<BE>> extends AbstractNodeBlockEntity<BE>
@@ -41,6 +45,13 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	}
 
 	@Override
+	public List<MutableComponent> getTooltips() {
+		var ans = super.getTooltips();
+		getConnector().addTooltips(ans, new ItemHolder(getItem()));
+		return ans;
+	}
+
+	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return itemHandler.cast();
@@ -50,6 +61,10 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 
 	protected NodalItemHandler getHandler() {
 		return itemHandler.resolve().get();
+	}
+
+	protected int getLimit() {
+		return getItem().isEmpty() ? 1 : getItem().getCount();
 	}
 
 }

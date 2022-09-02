@@ -14,5 +14,15 @@
   "item.l2transport.linker": "ɹǝʞuıꞀ",
   "item.l2transport.rotate": "ǝʇɐʇoᴚ",
   "item.l2transport.validator": "ɹoʇɐpıןɐΛ",
-  "itemGroup.l2transport.transport": "ʇɹodsuɐɹ⟘ ᄅꞀ"
+  "itemGroup.l2transport.transport": "ʇɹodsuɐɹ⟘ ᄅꞀ",
+  "l2transport.connect.distribute": "˙ǝɯıʇ ʇxǝu ǝuo ʇxǝu ǝɥʇ ɯoɹɟ ʇɹɐʇs puɐ 'ʇǝbɹɐʇ Ɩ oʇ puǝs ʎןuO ˙ʇǝbɹɐʇ pıןɐʌ ǝuo buıpuıɟ ןıʇun sʇǝbɹɐʇ ןןɐ ɥbnoɹɥʇ ǝʇɐɹǝʇı 'ʇuǝʇuoɔ buıʌıǝɔǝɹ uǝɥM ˙sʇǝbɹɐʇ ǝןdıʇןnɯ oʇ sʇɔǝuuoƆ",
+  "l2transport.connect.ordered": "˙pǝɹɹǝɟsuɐɹʇ sʇuǝʇuoɔ ןןɐ ןıʇun ǝɔuɐʇsıp ɟo ɹǝpɹo uı sʇǝbɹɐʇ ןןɐ ɥbnoɹɥʇ ǝʇɐɹǝʇı 'ʇuǝʇuoɔ buıʌıǝɔǝɹ uǝɥM ˙ǝɔuɐʇsıp ǝɯɐs ǝɥʇ ɥʇıʍ sʇǝbɹɐʇ oʇ ʇɔǝuuoɔ ʇouuɐƆ ˙ǝɔuɐʇsıp ʇuǝɹǝɟɟıp ɥʇıʍ sʇǝbɹɐʇ ǝןdıʇןnɯ oʇ sʇɔǝuuoƆ",
+  "l2transport.connect.receive": "˙ǝpou ǝןdɯıs ɐ sɐ sʇɔɐ osןɐ ʇI ˙pǝıɟıɔǝds ɹǝʇןıɟ ǝɥʇ ʇunoɯɐ ǝɥʇ ʇɔɐɹʇxǝ ʎןuo ןןıʍ ʇı 'ɹǝʇןıɟ buıʎןddɐ uǝɥM ˙ʞɔoןq pǝɥɔɐʇʇɐ ɯoɹɟ ʇuǝʇuoɔ sʇɔɐɹʇxǝ ʎןǝʌıʇɔⱯ ˙ʇǝbɹɐʇ ǝuo ʎןuo oʇ sʇɔǝuuoƆ",
+  "l2transport.connect.simple": "˙ʇunoɯɐ ɹǝʇןıɟ ǝɥʇ oʇ ʇunoɯɐ ʇuǝʇuoɔ ǝʇɐb puɐ 'ssɐd oʇ ɹǝʇןıɟ buıɥɔʇɐɯ ʇuǝʇuoɔ ʍoןןɐ ʎןuo 'ɹǝʇןıɟ buıppɐ uǝɥM ˙ʇǝbɹɐʇ ǝuo ʎןuo oʇ sʇɔǝuuoƆ",
+  "l2transport.connect.synced": "˙ʇunoɯɐ ɹǝʇןıɟ ǝɥʇ sɐ ʇunoɯɐ ǝɯɐs ǝɥʇ puǝs 'ɹǝʇןıɟ buıʎןddɐ uǝɥʍ puɐ 'ʇןnɐɟǝp ʎq Ɩ puǝS ˙ʇuǝʇuoɔ ou puǝs ǝsıʍɹǝɥʇo puɐ 'ʇǝbɹɐʇ ןןɐ oʇ ʇunoɯɐ ǝɯɐs ǝɥʇ puǝs oʇ ʇdɯǝʇʇɐ 'ʇuǝʇuoɔ buıʌıǝɔǝɹ uǝɥM ˙sʇǝbɹɐʇ ǝןdıʇןnɯ oʇ sʇɔǝuuoƆ",
+  "l2transport.info.extract": "%s uı ʇɔɐɹʇxƎ",
+  "l2transport.info.filter": "%s :ɹǝʇןıℲ",
+  "l2transport.info.gated": "%s oʇ pǝʇɐb ɹǝɟsuɐɹ⟘",
+  "l2transport.info.speed": "%s :uʍop ןooɔ ɹǝɟsuɐɹ⟘",
+  "l2transport.info.sync": "sʇǝbɹɐʇ ןןɐ oʇ %s ɹǝɟsuɐɹʇ ǝɔɹoℲ"
 }

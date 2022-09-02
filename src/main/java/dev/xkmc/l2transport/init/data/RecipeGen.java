@@ -18,7 +18,7 @@ import java.util.function.BiFunction;
 
 public class RecipeGen {
 
-	private static String currentFolder = "";
+	private static final String currentFolder = "";
 
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
 

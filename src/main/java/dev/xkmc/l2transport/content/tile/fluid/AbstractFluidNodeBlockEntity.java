@@ -1,12 +1,14 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.capability.fluid.FluidHolder;
 import dev.xkmc.l2transport.content.capability.fluid.FluidNodeEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -15,6 +17,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 @SerialClass
 public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeBlockEntity<BE>> extends AbstractNodeBlockEntity<BE>
@@ -46,6 +50,13 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	}
 
 	@Override
+	public List<MutableComponent> getTooltips() {
+		var ans = super.getTooltips();
+		getConnector().addTooltips(ans, new FluidHolder(getFluid()));
+		return ans;
+	}
+
+	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {
 		if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 			return fluidHandler.cast();
@@ -55,6 +66,10 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	protected NodalFluidHandler getHandler() {
 		return fluidHandler.resolve().get();
+	}
+
+	protected int getLimit() {
+		return getFluid().isEmpty() ? 1000 : getFluid().getAmount();
 	}
 
 }

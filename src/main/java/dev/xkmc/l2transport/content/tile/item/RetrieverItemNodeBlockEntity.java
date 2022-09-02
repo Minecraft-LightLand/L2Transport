@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.connector.Connector;
-import dev.xkmc.l2transport.content.connector.SimpleConnector;
+import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -18,7 +18,7 @@ import net.minecraftforge.items.IItemHandler;
 public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<RetrieverItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SimpleConnector connector = new SimpleConnector(80);
+	private final ExtractConnector connector = new ExtractConnector(80, this::getLimit);
 
 	public RetrieverItemNodeBlockEntity(BlockEntityType<RetrieverItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -51,6 +51,10 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 		for (int i = 0; i < target.getSlots(); i++) {
 			ItemStack stack = target.extractItem(i, 64, true);
 			if (stack.isEmpty()) continue;
+			if (!getItem().isEmpty()) {
+				if (!isItemStackValid(stack)) continue;
+				if (stack.getCount() < getItem().getCount()) continue;
+			}
 			ItemStack attempt = getHandler().insertItem(0, stack, true);
 			if (attempt.getCount() == stack.getCount()) continue;
 			stack = target.extractItem(i, stack.getCount() - attempt.getCount(), false);

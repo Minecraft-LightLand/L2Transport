@@ -1,6 +1,8 @@
 package dev.xkmc.l2transport.content.capability.item;
 
 import dev.xkmc.l2transport.content.flow.IContentHolder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
 public record ItemHolder(ItemStack stack) implements IContentHolder<ItemStack> {
@@ -26,6 +28,11 @@ public record ItemHolder(ItemStack stack) implements IContentHolder<ItemStack> {
 	@Override
 	public ItemStack empty() {
 		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public MutableComponent getDesc() {
+		return Component.empty().append(stack.getHoverName()).withStyle(stack.getRarity().getStyleModifier());
 	}
 
 }

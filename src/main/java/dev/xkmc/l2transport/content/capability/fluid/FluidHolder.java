@@ -1,6 +1,7 @@
 package dev.xkmc.l2transport.content.capability.fluid;
 
 import dev.xkmc.l2transport.content.flow.IContentHolder;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraftforge.fluids.FluidStack;
 
 public record FluidHolder(FluidStack stack) implements IContentHolder<FluidStack> {
@@ -26,6 +27,11 @@ public record FluidHolder(FluidStack stack) implements IContentHolder<FluidStack
 	@Override
 	public FluidStack empty() {
 		return FluidStack.EMPTY;
+	}
+
+	@Override
+	public MutableComponent getDesc() {
+		return stack.getDisplayName().copy().withStyle(stack.getFluid().getFluidType().getRarity().getStyleModifier());
 	}
 
 }

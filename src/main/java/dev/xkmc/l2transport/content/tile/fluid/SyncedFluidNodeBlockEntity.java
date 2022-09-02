@@ -22,8 +22,4 @@ public class SyncedFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<Syn
 		return connector;
 	}
 
-	private int getLimit() {
-		return getFluid().isEmpty() ? 1000 : getFluid().getAmount();
-	}
-
 }
