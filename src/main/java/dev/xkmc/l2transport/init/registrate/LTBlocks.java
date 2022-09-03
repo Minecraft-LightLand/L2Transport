@@ -153,17 +153,17 @@ public class LTBlocks {
 		}
 		{
 			B_FLUX_SIMPLE = L2Transport.REGISTRATE.block("node_flux_simple",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluxTransferBlock.SIMPLE))
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.SIMPLE))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			B_FLUX_ORDERED = L2Transport.REGISTRATE.block("node_flux_ordered",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluxTransferBlock.ORDERED))
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.ORDERED))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			B_FLUX_RETRIEVE = L2Transport.REGISTRATE.block("node_flux_retrieve",
-							(p) -> DelegateBlock.newBaseBlock(LIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE))
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE))
 					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
@@ -178,7 +178,7 @@ public class LTBlocks {
 
 	private static void genNodeModel(DataGenContext<Block, DelegateBlock> ctx, RegistrateBlockstateProvider pvd) {
 		pvd.getVariantBuilder(ctx.getEntry()).forAllStates(bs -> {
-			boolean lit = bs.getValue(BlockStateProperties.LIT);
+			boolean lit = bs.hasProperty(BlockStateProperties.LIT) && bs.getValue(BlockStateProperties.LIT);
 			String model = ctx.getName() + (lit ? "_lit" : "");
 			String name = ctx.getName().replace('_', '/') + (lit ? "_lit" : "");
 			return ConfiguredModel.builder().modelFile(pvd.models()

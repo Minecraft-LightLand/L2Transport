@@ -6,8 +6,8 @@ import dev.xkmc.l2transport.content.flow.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,7 +69,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandl
 		for (BlockPos pos : be.getConnector().getAvailableTarget()) {
 			BlockEntity target = level.getBlockEntity(pos);
 			if (target != null) {
-				var lazyCap = target.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
+				var lazyCap = target.getCapability(ForgeCapabilities.FLUID_HANDLER);
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
 					if (cap instanceof FluidStackNode node) {

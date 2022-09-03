@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
 public class LinkerItem extends Item implements ILinker {
@@ -44,7 +44,7 @@ public class LinkerItem extends Item implements ILinker {
 		}
 		if (old instanceof ILinkableNode node) {
 			if (be != null) {
-				var lazyCap = be.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				var lazyCap = be.getCapability(ForgeCapabilities.ITEM_HANDLER);
 				if (lazyCap.resolve().isPresent()) {
 					if (!ctx.getLevel().isClientSide()) {
 						node.link(ctx.getClickedPos());

@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -73,7 +73,7 @@ public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler,
 		for (BlockPos pos : be.getConnector().getAvailableTarget()) {
 			BlockEntity target = level.getBlockEntity(pos);
 			if (target != null) {
-				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+				var lazyCap = target.getCapability(ForgeCapabilities.ITEM_HANDLER);
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
 					if (cap instanceof ItemStackNode node) {

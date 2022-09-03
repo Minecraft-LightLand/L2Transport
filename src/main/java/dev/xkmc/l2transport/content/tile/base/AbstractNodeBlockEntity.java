@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 			if (level == null) return true;
 			BlockEntity be = level.getBlockEntity(e);
 			if (be == null) return true;
-			return be.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).resolve().isEmpty();
+			return be.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().isEmpty();//FIXME
 		});
 		sync();
 	}

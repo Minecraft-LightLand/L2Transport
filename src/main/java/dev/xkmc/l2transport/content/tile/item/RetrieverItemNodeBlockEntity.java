@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 
 @SerialClass
@@ -36,7 +36,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);
 			if (target != null) {
-				var lazyCap = target.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite());
+				var lazyCap = target.getCapability(ForgeCapabilities.ITEM_HANDLER, facing.getOpposite());
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
 					tryRetrieve(cap);

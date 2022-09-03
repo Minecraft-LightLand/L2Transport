@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 @SerialClass
@@ -35,7 +35,7 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);
 			if (target != null) {
-				var lazyCap = target.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing.getOpposite());
+				var lazyCap = target.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite());
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
 					tryRetrieve(cap);

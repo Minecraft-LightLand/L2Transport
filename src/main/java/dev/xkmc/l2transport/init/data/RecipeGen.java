@@ -6,11 +6,13 @@ import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2transport.init.L2Transport;
+import dev.xkmc.l2transport.init.registrate.LTBlocks;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -21,7 +23,20 @@ public class RecipeGen {
 	private static final String currentFolder = "";
 
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
-
+		full(pvd, Items.REDSTONE_BLOCK, Items.IRON_INGOT, Items.COPPER_INGOT, LTBlocks.B_SIDED.get().asItem(), 16);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_SIMPLE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_SIMPLE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_SIMPLE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_RETRIEVE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_ORDERED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_DISTRIBUTE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_SYNCED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_RETRIEVE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_ORDERED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_DISTRIBUTE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_SYNCED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_RETRIEVE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_ORDERED);
 	}
 
 	private static ResourceLocation getID(Item item) {

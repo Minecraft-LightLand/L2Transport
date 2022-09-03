@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod {
 
@@ -32,7 +32,7 @@ public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateB
 		}
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof AbstractFluidNodeBlockEntity<?> rte) {
-			var stackCap = pl.getMainHandItem().getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+			var stackCap = pl.getMainHandItem().getCapability(ForgeCapabilities.FLUID_HANDLER);
 			if (rte.filter.isEmpty()) {
 				if (stackCap.resolve().isPresent()) {
 					rte.filter = stackCap.resolve().get().getFluidInTank(0);

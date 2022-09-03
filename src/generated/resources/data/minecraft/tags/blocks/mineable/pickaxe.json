@@ -10,6 +10,9 @@
     "l2transport:node_fluid_ordered",
     "l2transport:node_fluid_synced",
     "l2transport:node_fluid_distribute",
-    "l2transport:node_fluid_retrieve"
+    "l2transport:node_fluid_retrieve",
+    "l2transport:node_flux_simple",
+    "l2transport:node_flux_ordered",
+    "l2transport:node_flux_retrieve"
   ]
 }

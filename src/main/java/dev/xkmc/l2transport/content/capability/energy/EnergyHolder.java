@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 
 public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
@@ -23,7 +23,7 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 
 	@Override
 	public Capability<IEnergyStorage> cap() {
-		return CapabilityEnergy.ENERGY;
+		return ForgeCapabilities.ENERGY;
 	}
 
 	@Override

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "l2transport:block/node_flux_simple"
+    }
+  }
+}
