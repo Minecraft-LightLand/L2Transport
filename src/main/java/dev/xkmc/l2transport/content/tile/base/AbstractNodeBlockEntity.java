@@ -76,7 +76,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 			if (level == null) return true;
 			BlockEntity be = level.getBlockEntity(e);
 			if (be == null) return true;
-			return be.getCapability(ForgeCapabilities.ITEM_HANDLER).resolve().isEmpty();//FIXME
+			return be.getCapability(getValidTarget()).resolve().isEmpty();
 		});
 		sync();
 	}

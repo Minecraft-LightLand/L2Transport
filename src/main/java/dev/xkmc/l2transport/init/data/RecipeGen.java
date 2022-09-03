@@ -7,6 +7,7 @@ import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2transport.init.L2Transport;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
+import dev.xkmc.l2transport.init.registrate.LTItems;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -27,16 +28,27 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_SIMPLE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_RETRIEVE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_ORDERED);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_DISTRIBUTE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_SYNCED);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_RETRIEVE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_ORDERED);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_DISTRIBUTE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_SYNCED);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_RETRIEVE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_ORDERED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_RETRIEVE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_ORDERED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_DISTRIBUTE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_SYNCED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUID_SIMPLE.get()), LTBlocks.B_FLUID_RETRIEVE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUID_SIMPLE.get()), LTBlocks.B_FLUID_ORDERED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUID_SIMPLE.get()), LTBlocks.B_FLUID_DISTRIBUTE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUID_SIMPLE.get()), LTBlocks.B_FLUID_SYNCED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUX_SIMPLE.get()), LTBlocks.B_FLUX_RETRIEVE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUX_SIMPLE.get()), LTBlocks.B_FLUX_ORDERED);
+
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.LINKER.get())::unlockedBy, Items.COPPER_INGOT)
+				.pattern(" AB").pattern(" BB").pattern("B  ")
+				.define('A', Items.REDSTONE)
+				.define('B', Items.COPPER_INGOT)
+				.save(pvd);
+
+		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.ROTATE);
+		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.VALIDATOR);
+		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.CLEAR);
+
 	}
 
 	private static ResourceLocation getID(Item item) {

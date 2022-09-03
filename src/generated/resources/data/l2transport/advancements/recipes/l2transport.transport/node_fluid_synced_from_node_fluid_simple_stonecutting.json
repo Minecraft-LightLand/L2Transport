@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_node_sided": {
+    "has_node_fluid_simple": {
       "conditions": {
         "items": [
           {
             "items": [
-              "l2transport:node_sided"
+              "l2transport:node_fluid_simple"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "l2transport:node_fluid_synced_from_node_sided_stonecutting"
+        "recipe": "l2transport:node_fluid_synced_from_node_fluid_simple_stonecutting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_node_sided",
+      "has_node_fluid_simple",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "l2transport:node_fluid_synced_from_node_sided_stonecutting"
+      "l2transport:node_fluid_synced_from_node_fluid_simple_stonecutting"
     ]
   }
 }

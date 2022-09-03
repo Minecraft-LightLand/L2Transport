@@ -34,6 +34,11 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	public FluidStack filter = FluidStack.EMPTY;
 
 	@Override
+	public Capability<?> getValidTarget() {
+		return ForgeCapabilities.FLUID_HANDLER;
+	}
+
+	@Override
 	public int getMaxTransfer() {
 		return 8000;//TODO configurable
 	}
@@ -69,7 +74,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	}
 
 	protected int getLimit() {
-		return getFluid().isEmpty() ? 1000 : getFluid().getAmount();
+		return getFluid().isEmpty() ? 1000 : getFluid().getAmount();//TODO configurable
 	}
 
 }

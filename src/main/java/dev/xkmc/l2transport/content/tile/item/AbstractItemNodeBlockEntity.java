@@ -33,6 +33,11 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	@SerialClass.SerialField(toClient = true)
 	public ItemStack filter = ItemStack.EMPTY;
 
+	@Override
+	public Capability<?> getValidTarget() {
+		return ForgeCapabilities.ITEM_HANDLER;
+	}
+
 	public ItemStack getItem() {
 		return filter;
 	}

@@ -29,7 +29,7 @@ public class TransportHandler {
 			tree.perform(real);
 			return real.getRemain();
 		}
-		return token.getAvailable();
+		else return tree.getConsumed();
 	}
 
 }
