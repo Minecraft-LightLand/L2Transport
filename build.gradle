@@ -120,6 +120,7 @@ dependencies {
     runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3947982')
     runtimeOnly fg.deobf('curse.maven:badpackets-615134:3903799')
     runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
+    runtimeOnly fg.deobf('curse.maven:mekanism-268560:3954410')
 
 }
 

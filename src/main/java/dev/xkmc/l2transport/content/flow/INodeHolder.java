@@ -24,7 +24,7 @@ public interface INodeHolder<T> {
 	/**
 	 * refresh cool down for this node
 	 */
-	void refreshCooldown(BlockPos target, boolean success, TransportContext<T> ctx);
+	void refreshCoolDown(BlockPos target, boolean success, TransportContext<T> ctx);
 
 	/**
 	 * return the block position of the node it represents

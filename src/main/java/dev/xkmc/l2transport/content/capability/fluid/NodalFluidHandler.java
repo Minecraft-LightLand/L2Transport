@@ -86,7 +86,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandl
 	}
 
 	@Override
-	public void refreshCooldown(BlockPos target, boolean success, TransportContext<FluidStack> ctx) {
+	public void refreshCoolDown(BlockPos target, boolean success, TransportContext<FluidStack> ctx) {
 		be.refreshCoolDown(target, success, ctx.simulate);
 	}
 

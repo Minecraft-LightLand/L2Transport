@@ -22,7 +22,7 @@ record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, ICo
 	public void refreshCoolDown(TransportContext<T> ctx, boolean success) {
 		for (INetworkNode<T> child : children) {
 			boolean subSuc = success && child.hasAction();
-			node.refreshCooldown(child.getIdentifier(), subSuc, ctx);
+			node.refreshCoolDown(child.getIdentifier(), subSuc, ctx);
 			child.refreshCoolDown(ctx, subSuc);
 		}
 	}

@@ -12,6 +12,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 @SerialClass
 public class SidedBlockEntity extends BlockEntity {
 
@@ -26,10 +29,33 @@ public class SidedBlockEntity extends BlockEntity {
 			BlockPos pos = getBlockPos().relative(dire);
 			BlockEntity be = level.getBlockEntity(pos);
 			if (be != null) {
+				if (be instanceof SidedBlockEntity target) {
+					Set<BlockPos> set = new TreeSet<>();
+					set.add(getBlockPos());
+					set.add(pos);
+					return target.recursiveCap(cap, set);
+				}
 				return be.getCapability(cap, dire.getOpposite());
 			}
 		}
-		return super.getCapability(cap, side);
+		return LazyOptional.empty();
+	}
+
+	private <C> LazyOptional<C> recursiveCap(Capability<C> cap, Set<BlockPos> set) {
+		if (level != null) {
+			Direction dire = getBlockState().getValue(BlockStateProperties.FACING);
+			BlockPos pos = getBlockPos().relative(dire);
+			if (set.contains(pos)) return LazyOptional.empty();
+			BlockEntity be = level.getBlockEntity(pos);
+			if (be != null) {
+				if (be instanceof SidedBlockEntity target) {
+					set.add(pos);
+					return target.recursiveCap(cap, set);
+				}
+				return be.getCapability(cap, dire.getOpposite());
+			}
+		}
+		return LazyOptional.empty();
 	}
 
 }

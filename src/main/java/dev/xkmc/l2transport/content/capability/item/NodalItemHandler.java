@@ -90,7 +90,7 @@ public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler,
 	}
 
 	@Override
-	public void refreshCooldown(BlockPos target, boolean success, TransportContext<ItemStack> ctx) {
+	public void refreshCoolDown(BlockPos target, boolean success, TransportContext<ItemStack> ctx) {
 		be.refreshCoolDown(target, success, ctx.simulate);
 	}
 
