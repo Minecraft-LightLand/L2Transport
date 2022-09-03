@@ -1,7 +1,11 @@
 package dev.xkmc.l2transport.content.tile.flux;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.capability.generic.*;
+import dev.xkmc.l2transport.compat.energy.EnergyHolder;
+import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
+import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
+import dev.xkmc.l2transport.content.capability.generic.IGenericNodeBlockEntity;
+import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import net.minecraft.core.BlockPos;
@@ -10,7 +14,6 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +42,7 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 
 	@Override
 	public ICapabilityEntry<?> getCapType() {
-		return GenericCapabilityRegistry.ENERGY;
+		return EnergyHolder.ENERGY;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package dev.xkmc.l2transport.init;
 
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2transport.compat.CompatHandler;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.RecipeGen;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
@@ -30,6 +31,7 @@ public class L2Transport {
 		LTBlocks.register();
 		LTItems.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
+		CompatHandler.register();
 	}
 
 	private static void registerForgeEvents() {

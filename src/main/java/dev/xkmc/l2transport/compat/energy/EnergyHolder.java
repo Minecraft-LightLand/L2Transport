@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.capability.energy;
+package dev.xkmc.l2transport.compat.energy;
 
 import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
 import dev.xkmc.l2transport.content.capability.generic.HandlerWrapper;
@@ -12,6 +12,8 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 
 public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
+
+	public static final EnergyHolder ENERGY = new EnergyHolder();
 
 	public final ResourceLocation TYPE_ID = new ResourceLocation("forge", "energy");
 	public final ResourceLocation UNIT = new ResourceLocation("forge", "unit");

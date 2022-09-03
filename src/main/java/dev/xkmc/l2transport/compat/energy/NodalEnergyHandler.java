@@ -1,6 +1,5 @@
-package dev.xkmc.l2transport.content.capability.energy;
+package dev.xkmc.l2transport.compat.energy;
 
-import dev.xkmc.l2transport.content.capability.generic.GenericCapabilityRegistry;
 import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.l2transport.content.flow.TransportHandler;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -9,7 +8,7 @@ public record NodalEnergyHandler(NodalGenericHandler node) implements IEnergySto
 
 	@Override
 	public int receiveEnergy(int maxReceive, boolean simulate) {
-		return TransportHandler.insert(node, GenericCapabilityRegistry.ENERGY.empty().getCopy(maxReceive), simulate);
+		return TransportHandler.insert(node, EnergyHolder.ENERGY.empty().getCopy(maxReceive), simulate);
 	}
 
 	@Override
@@ -24,7 +23,7 @@ public record NodalEnergyHandler(NodalGenericHandler node) implements IEnergySto
 
 	@Override
 	public int getMaxEnergyStored() {
-		return GenericCapabilityRegistry.ENERGY.getDefaultMax();
+		return EnergyHolder.ENERGY.getDefaultMax();
 	}
 
 	@Override

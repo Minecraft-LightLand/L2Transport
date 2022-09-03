@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2transport.content.capability.energy;
+package dev.xkmc.l2transport.compat.mekanism;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

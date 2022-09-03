@@ -28,8 +28,7 @@ public class TransportHandler {
 			RealToken<T> real = holder.toReal();
 			tree.perform(real);
 			return real.getRemain();
-		}
-		else return tree.getConsumed();
+		} else return tree.getConsumed();
 	}
 
 }

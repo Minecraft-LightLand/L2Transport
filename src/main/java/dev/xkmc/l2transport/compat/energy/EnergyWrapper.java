@@ -1,6 +1,5 @@
-package dev.xkmc.l2transport.content.capability.energy;
+package dev.xkmc.l2transport.compat.energy;
 
-import dev.xkmc.l2transport.content.capability.generic.GenericCapabilityRegistry;
 import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
 import dev.xkmc.l2transport.content.capability.generic.HandlerWrapper;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -14,7 +13,7 @@ public record EnergyWrapper(IEnergyStorage be) implements HandlerWrapper {
 
 	@Override
 	public GenericHolder extract(int slot, int max, boolean b) {
-		return GenericCapabilityRegistry.ENERGY.empty().getCopy(be.extractEnergy(max, true));
+		return EnergyHolder.ENERGY.empty().getCopy(be.extractEnergy(max, true));
 	}
 
 	@Override
