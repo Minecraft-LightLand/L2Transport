@@ -8,13 +8,14 @@ import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvid
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2transport.content.tile.base.SidedBlockEntity;
-import dev.xkmc.l2transport.content.tile.block.FluidNodeSetFilter;
-import dev.xkmc.l2transport.content.tile.block.FluidTransferBlock;
-import dev.xkmc.l2transport.content.tile.block.ItemNodeSetFilter;
-import dev.xkmc.l2transport.content.tile.block.ItemTransferBlock;
+import dev.xkmc.l2transport.content.tile.block.*;
 import dev.xkmc.l2transport.content.tile.client.FluidNodeRenderer;
 import dev.xkmc.l2transport.content.tile.client.ItemNodeRenderer;
+import dev.xkmc.l2transport.content.tile.client.NodeRenderer;
 import dev.xkmc.l2transport.content.tile.fluid.*;
+import dev.xkmc.l2transport.content.tile.flux.OrderedFluxNodeBlockEntity;
+import dev.xkmc.l2transport.content.tile.flux.RetrieverFluxNodeBlockEntity;
+import dev.xkmc.l2transport.content.tile.flux.SimpleFluxNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.item.*;
 import dev.xkmc.l2transport.init.L2Transport;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +36,8 @@ public class LTBlocks {
 
 	public static final BlockEntry<DelegateBlock> B_SIDED,
 			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
-			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE;
+			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE,
+			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE;
 
 	public static final BlockEntityEntry<SidedBlockEntity> TE_SIDED;
 
@@ -50,6 +52,10 @@ public class LTBlocks {
 	public static final BlockEntityEntry<SyncedFluidNodeBlockEntity> TE_FLUID_SYNCED;
 	public static final BlockEntityEntry<DistributeFluidNodeBlockEntity> TE_FLUID_DISTRIBUTE;
 	public static final BlockEntityEntry<RetrieverFluidNodeBlockEntity> TE_FLUID_RETRIEVE;
+
+	public static final BlockEntityEntry<SimpleFluxNodeBlockEntity> TE_FLUX_SIMPLE;
+	public static final BlockEntityEntry<OrderedFluxNodeBlockEntity> TE_FLUX_ORDERED;
+	public static final BlockEntityEntry<RetrieverFluxNodeBlockEntity> TE_FLUX_RETRIEVE;
 
 	static {
 
@@ -144,6 +150,29 @@ public class LTBlocks {
 					.validBlock(B_FLUID_DISTRIBUTE).renderer(() -> FluidNodeRenderer::new).register();
 			TE_FLUID_RETRIEVE = L2Transport.REGISTRATE.blockEntity("node_fluid_retrieve", RetrieverFluidNodeBlockEntity::new)
 					.validBlock(B_FLUID_RETRIEVE).renderer(() -> FluidNodeRenderer::new).register();
+		}
+		{
+			B_FLUX_SIMPLE = L2Transport.REGISTRATE.block("node_flux_simple",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluxTransferBlock.SIMPLE))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			B_FLUX_ORDERED = L2Transport.REGISTRATE.block("node_flux_ordered",
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluxTransferBlock.ORDERED))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			B_FLUX_RETRIEVE = L2Transport.REGISTRATE.block("node_flux_retrieve",
+							(p) -> DelegateBlock.newBaseBlock(LIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE))
+					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			TE_FLUX_SIMPLE = L2Transport.REGISTRATE.blockEntity("node_flux_simple", SimpleFluxNodeBlockEntity::new)
+					.validBlock(B_FLUX_SIMPLE).renderer(() -> NodeRenderer::new).register();
+			TE_FLUX_ORDERED = L2Transport.REGISTRATE.blockEntity("node_flux_ordered", OrderedFluxNodeBlockEntity::new)
+					.validBlock(B_FLUX_ORDERED).renderer(() -> NodeRenderer::new).register();
+			TE_FLUX_RETRIEVE = L2Transport.REGISTRATE.blockEntity("node_flux_retrieve", RetrieverFluxNodeBlockEntity::new)
+					.validBlock(B_FLUX_RETRIEVE).renderer(() -> NodeRenderer::new).register();
 		}
 	}
 

@@ -5,8 +5,6 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Matrix4f;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
-import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
-import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

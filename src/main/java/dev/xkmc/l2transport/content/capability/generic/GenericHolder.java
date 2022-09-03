@@ -1,13 +1,11 @@
 package dev.xkmc.l2transport.content.capability.generic;
 
 import dev.xkmc.l2transport.content.flow.IContentHolder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
-public record GenericHolder(ResourceLocation id, int amount) implements IContentHolder<GenericHolder> {
-
-	private static final GenericHolder EMPTY = new GenericHolder(new ResourceLocation("empty"), 0);
+public record GenericHolder(ICapabilityEntry<?> type, ResourceLocation id,
+							int amount) implements IContentHolder<GenericHolder> {
 
 	@Override
 	public int getCount() {
@@ -21,16 +19,16 @@ public record GenericHolder(ResourceLocation id, int amount) implements IContent
 
 	@Override
 	public GenericHolder getCopy(int count) {
-		return new GenericHolder(id, count);
+		return new GenericHolder(type, id, count);
 	}
 
 	@Override
 	public GenericHolder empty() {
-		return EMPTY;
+		return getCopy(0);
 	}
 
 	@Override
 	public MutableComponent getDesc() {
-		return Component.literal(amount + " " + id.toString());
+		return type.getDesc(id, amount);
 	}
 }

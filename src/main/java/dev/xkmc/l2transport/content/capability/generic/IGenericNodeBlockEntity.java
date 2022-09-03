@@ -8,4 +8,6 @@ public interface IGenericNodeBlockEntity extends INodeBlockEntity {
 
 	int getMaxTransfer();
 
+	ICapabilityEntry<?> getCapType();
+
 }

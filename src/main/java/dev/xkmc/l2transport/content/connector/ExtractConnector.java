@@ -3,8 +3,6 @@ package dev.xkmc.l2transport.content.connector;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.init.data.LangData;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.List;
