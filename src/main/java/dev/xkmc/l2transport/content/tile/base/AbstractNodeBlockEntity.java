@@ -5,6 +5,8 @@ import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
@@ -89,9 +91,9 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	// render related
 
 	@Override
-	public List<MutableComponent> getTooltips() {
-		List<MutableComponent> ans = new ArrayList<>();
-		ans.add(Component.translatable(getBlockState().getBlock().getDescriptionId()).withStyle(ChatFormatting.YELLOW));
+	public TooltipBuilder getTooltips() {
+		var ans = new TooltipBuilder();
+		ans.add(TooltipType.NAME, Component.translatable(getBlockState().getBlock().getDescriptionId()).withStyle(ChatFormatting.YELLOW));
 		return ans;
 	}
 

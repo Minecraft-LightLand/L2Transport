@@ -8,6 +8,7 @@ import dev.xkmc.l2transport.content.capability.generic.IGenericNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.MutableComponent;
@@ -51,7 +52,7 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 	}
 
 	@Override
-	public List<MutableComponent> getTooltips() {
+	public TooltipBuilder getTooltips() {
 		var ans = super.getTooltips();
 		getConnector().addTooltips(ans, getCapType().empty());
 		return ans;

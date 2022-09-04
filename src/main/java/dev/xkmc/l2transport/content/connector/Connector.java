@@ -3,10 +3,12 @@ package dev.xkmc.l2transport.content.connector;
 import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.content.flow.NetworkType;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 
 public interface Connector extends NetworkType {
@@ -33,7 +35,7 @@ public interface Connector extends NetworkType {
 
 	CoolDownType getType(BlockPos pos);
 
-	<T> void addTooltips(List<MutableComponent> list, IContentHolder<T> filter);
+	<T> void addTooltips(TooltipBuilder list, IContentHolder<T> filter);
 
 	@Override
 	default boolean testConsumption(int avail, int c) {

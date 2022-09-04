@@ -136,7 +136,7 @@ public class OverlayRenderer extends GuiComponent implements IGuiOverlay {
 		BlockPos pos = ray.getBlockPos();
 		BlockEntity entity = player.level.getBlockEntity(pos);
 		if (entity instanceof IRenderableNode be) {
-			renderText(gui, poseStack, be.getTooltips(), screenWidth / 2 + 16);
+			renderText(gui, poseStack, be.getTooltips().build(), screenWidth / 2 + 16);
 		}
 	}
 

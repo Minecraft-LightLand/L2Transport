@@ -6,6 +6,7 @@ import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.MutableComponent;
@@ -55,7 +56,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	}
 
 	@Override
-	public List<MutableComponent> getTooltips() {
+	public TooltipBuilder getTooltips() {
 		var ans = super.getTooltips();
 		getConnector().addTooltips(ans, new FluidHolder(getFluid()));
 		return ans;

@@ -6,6 +6,7 @@ import dev.xkmc.l2transport.content.capability.item.ItemHolder;
 import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.MutableComponent;
@@ -50,7 +51,7 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	}
 
 	@Override
-	public List<MutableComponent> getTooltips() {
+	public TooltipBuilder getTooltips() {
 		var ans = super.getTooltips();
 		getConnector().addTooltips(ans, new ItemHolder(getItem()));
 		return ans;
