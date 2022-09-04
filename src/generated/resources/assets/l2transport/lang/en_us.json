@@ -1,4 +1,5 @@
 {
+  "block.l2transport.node_extended": "Node Extended",
   "block.l2transport.node_fluid_distribute": "Node Fluid Distribute",
   "block.l2transport.node_fluid_ordered": "Node Fluid Ordered",
   "block.l2transport.node_fluid_retrieve": "Node Fluid Retrieve",
@@ -19,6 +20,7 @@
   "item.l2transport.validator": "Validator",
   "itemGroup.l2transport.transport": "L2 Transport",
   "l2transport.connect.distribute": "Connects to multiple targets. When receiving content, iterate through all targets until finding one valid target. Only send to 1 target, and start from the next one next time.",
+  "l2transport.connect.invalid": "This node is connected to one or more invalid target. To remove unused connections, use validator wand to clear them.",
   "l2transport.connect.ordered": "Connects to multiple targets with different distance. Cannot connect to targets with the same distance. When receiving content, iterate through all targets in order of distance until all contents transferred.",
   "l2transport.connect.receive": "Connects to only one target. Actively extracts content from attached block. When applying filter, it will only extract the amount the filter specified. It also acts as a simple node.",
   "l2transport.connect.simple": "Connects to only one target. When adding filter, only allow content matching filter to pass, and gate content amount to the filter amount.",

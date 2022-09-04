@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
-import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
+import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import dev.xkmc.l2transport.content.tools.ILinker;
 import dev.xkmc.l2transport.content.tools.LinkerItem;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,7 +28,6 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 									   BeamRenderer br, double x, double y, double z) {
 		double xz = Math.sqrt(x * x + z * z);
 		float len = (float) Math.sqrt(xz * xz + y * y);
-		mat.pushPose();
 		mat.mulPose(Vector3f.YN.rotation((float) (Math.atan2(z, x) - Math.PI / 2)));
 		mat.mulPose(Vector3f.XN.rotation((float) (Math.atan2(y, xz))));
 		mat.mulPose(Vector3f.ZP.rotationDegrees(t1 * 4.5f));
@@ -36,7 +35,6 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 		float h = 0.05f;
 		br.setUV(0, 1, t2, t2 + len / h);
 		br.drawCube(mat, vcp.getBuffer(RenderType.beaconBeam(id, false)), 0, len, h);
-		mat.popPose();
 	}
 
 	public NodeRenderer(BlockEntityRendererProvider.Context dispatcher) {
@@ -55,16 +53,26 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 			float coolDown = Math.max(0, connector.getCoolDown(target) - partialTick);
 			int max = Math.max(1, connector.getMaxCoolDown(target));
 			float percentage = Mth.clamp(coolDown / max, 0, 1);
+			CoolDownType type = connector.getType(target);
+			if (!entity.isTargetValid(target)) {
+				type = type.invalidate();
+			}
+			type.setColor(percentage, br::setColorHSB);
+
 			BlockPos p = target.subtract(entity.getBlockPos());
 			int x = p.getX();
 			int y = p.getY();
 			int z = p.getZ();
-			CoolDownType type = connector.getType(target);
-			float hue = type == CoolDownType.GREEN ? 0.67f : 0;
-			float sat = type == CoolDownType.GREY ? 0 : percentage;
-			float bright = type == CoolDownType.GREY ? 0.5f : (percentage + 1) * 0.5f;
-			br.setColorHSB(hue, sat, bright);
+
+			poseStack.pushPose();
+			if (type.isReversed()) {
+				poseStack.translate(x, y, z);
+				x *= -1;
+				y *= -1;
+				z *= -1;
+			}
 			renderLightBeam(poseStack, source, BEAM_TEXTURE, time, br, x, y, z);
+			poseStack.popPose();
 		}
 		ItemStack linker = Proxy.getPlayer().getMainHandItem();
 		if (linker.getItem() instanceof ILinker item && item.storesPos()) {

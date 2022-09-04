@@ -43,8 +43,7 @@ public class LinkerItem extends Item implements ILinker {
 		}
 		if (old instanceof ILinkableNode node) {
 			if (be != null) {
-				var lazyCap = be.getCapability(node.getValidTarget());
-				if (lazyCap.resolve().isPresent()) {
+				if (node.isTargetValid(ctx.getClickedPos())) {
 					if (!ctx.getLevel().isClientSide()) {
 						node.link(ctx.getClickedPos());
 						stack.removeTagKey(KEY_POS);

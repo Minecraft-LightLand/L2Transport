@@ -2,6 +2,7 @@ package dev.xkmc.l2transport.content.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.flow.IContentHolder;
+import dev.xkmc.l2transport.content.tile.base.CoolDownType;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.init.data.LangData;
@@ -29,6 +30,16 @@ public class ExtractConnector extends SimpleConnector {
 	@Override
 	public List<BlockPos> getAvailableTarget() {
 		return pos == null ? List.of() : List.of(pos);
+	}
+
+	@Override
+	public int getCoolDown(BlockPos pos) {
+		return pos.equals(target.get()) ? 0 : super.getCoolDown(pos);
+	}
+
+	@Override
+	public CoolDownType getType(BlockPos pos) {
+		return pos.equals(target.get()) ? CoolDownType.RETRIEVE : super.getType(pos);
 	}
 
 	@Override

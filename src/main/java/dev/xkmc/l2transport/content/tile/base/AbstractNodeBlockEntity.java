@@ -7,6 +7,7 @@ import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
+import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.Nullable;
 
 @SerialClass
@@ -69,12 +71,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 
 	@Override
 	public void validate() {
-		getConnector().removeIf(e -> {
-			if (level == null) return true;
-			BlockEntity be = level.getBlockEntity(e);
-			if (be == null) return true;
-			return be.getCapability(getValidTarget()).resolve().isEmpty();
-		});
+		getConnector().removeIf(e -> !isTargetValid(e));
 		sync();
 	}
 
@@ -90,6 +87,9 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	public TooltipBuilder getTooltips() {
 		var ans = new TooltipBuilder();
 		ans.add(TooltipType.NAME, Component.translatable(getBlockState().getBlock().getDescriptionId()).withStyle(ChatFormatting.YELLOW));
+		if (getConnector().getVisibleConnection().stream().anyMatch(e -> !isTargetValid(e))) {
+			ans.add(TooltipType.DESC, LangData.INVALID.get());
+		}
 		return ans;
 	}
 
@@ -109,5 +109,15 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		super.onDataPacket(net, pkt);
 		compiledBox = null;
 	}
+
+	@Override
+	public boolean isTargetValid(BlockPos pos) {
+		if (level == null) return false;
+		BlockEntity be = level.getBlockEntity(pos);
+		if (be == null) return false;
+		return be.getCapability(getValidTarget()).resolve().isPresent();
+	}
+
+	public abstract Capability<?> getValidTarget();
 
 }

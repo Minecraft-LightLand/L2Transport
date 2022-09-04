@@ -28,6 +28,7 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_SIMPLE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_EXTENDED);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_RETRIEVE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_ORDERED);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_DISTRIBUTE);

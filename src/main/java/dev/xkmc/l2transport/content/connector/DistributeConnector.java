@@ -6,11 +6,9 @@ import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.function.IntSupplier;
 import java.util.function.Predicate;
 

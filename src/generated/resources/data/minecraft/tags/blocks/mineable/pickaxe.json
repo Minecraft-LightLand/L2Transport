@@ -1,6 +1,7 @@
 {
   "values": [
     "l2transport:node_sided",
+    "l2transport:node_extended",
     "l2transport:node_item_simple",
     "l2transport:node_item_ordered",
     "l2transport:node_item_synced",

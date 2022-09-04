@@ -7,11 +7,12 @@ import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
-import dev.xkmc.l2transport.content.tile.base.SidedBlockEntity;
 import dev.xkmc.l2transport.content.tile.block.*;
 import dev.xkmc.l2transport.content.tile.client.FluidNodeRenderer;
 import dev.xkmc.l2transport.content.tile.client.ItemNodeRenderer;
 import dev.xkmc.l2transport.content.tile.client.NodeRenderer;
+import dev.xkmc.l2transport.content.tile.extend.ExtendedBlockEntity;
+import dev.xkmc.l2transport.content.tile.extend.SidedBlockEntity;
 import dev.xkmc.l2transport.content.tile.fluid.*;
 import dev.xkmc.l2transport.content.tile.flux.OrderedFluxNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.flux.RetrieverFluxNodeBlockEntity;
@@ -34,12 +35,13 @@ public class LTBlocks {
 		L2Transport.REGISTRATE.creativeModeTab(() -> LTItems.TAB_MAIN);
 	}
 
-	public static final BlockEntry<DelegateBlock> B_SIDED,
+	public static final BlockEntry<DelegateBlock> B_SIDED, B_EXTENDED,
 			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
 			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE,
 			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE;
 
 	public static final BlockEntityEntry<SidedBlockEntity> TE_SIDED;
+	public static final BlockEntityEntry<ExtendedBlockEntity> TE_EXTENDED;
 
 	public static final BlockEntityEntry<SimpleItemNodeBlockEntity> TE_ITEM_SIMPLE;
 	public static final BlockEntityEntry<OrderedItemNodeBlockEntity> TE_ITEM_ORDERED;
@@ -67,14 +69,24 @@ public class LTBlocks {
 				.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
 				.isRedstoneConductor((a, b, c) -> false));
 
-		B_SIDED = L2Transport.REGISTRATE.block("node_sided",
-						(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, ItemTransferBlock.SIDED))
-				.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-				.defaultLoot().defaultLang().simpleItem().register();
+		{
 
-		TE_SIDED = L2Transport.REGISTRATE.blockEntity("node_sided", SidedBlockEntity::new)
-				.validBlock(B_SIDED).renderer(() -> NodeRenderer::new).register();
+			B_SIDED = L2Transport.REGISTRATE.block("node_sided",
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, ExtensionBlock.SIDED))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
 
+			TE_SIDED = L2Transport.REGISTRATE.blockEntity("node_sided", SidedBlockEntity::new)
+					.validBlock(B_SIDED).renderer(() -> NodeRenderer::new).register();
+
+			B_EXTENDED = L2Transport.REGISTRATE.block("node_extended",
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, ExtensionBlock.EXTENDED))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().simpleItem().register();
+
+			TE_EXTENDED = L2Transport.REGISTRATE.blockEntity("node_extended", ExtendedBlockEntity::new)
+					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
+		}
 		{
 			B_ITEM_SIMPLE = L2Transport.REGISTRATE.block("node_item_simple",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SIMPLE))
@@ -187,20 +199,6 @@ public class LTBlocks {
 							new ResourceLocation(L2Transport.MODID, "block/node_small"))
 					.texture("all", new ResourceLocation(L2Transport.MODID, "block/" + name))
 					.renderType("cutout")).build();
-		});
-	}
-
-	private static void genFacingModel(DataGenContext<Block, DelegateBlock> ctx, RegistrateBlockstateProvider pvd) {
-		pvd.directionalBlock(ctx.getEntry(), bs -> {
-			boolean lit = bs.hasProperty(BlockStateProperties.LIT) && bs.getValue(BlockStateProperties.LIT);
-			String model = ctx.getName() + (lit ? "_lit" : "");
-			String name = ctx.getName().replace('_', '/') + (lit ? "_lit" : "");
-			return pvd.models()
-					.withExistingParent(model, lit ?
-							new ResourceLocation(L2Transport.MODID, "block/node_side_large") :
-							new ResourceLocation(L2Transport.MODID, "block/node_side"))
-					.texture("all", new ResourceLocation(L2Transport.MODID, "block/" + name))
-					.renderType("cutout");
 		});
 	}
 
