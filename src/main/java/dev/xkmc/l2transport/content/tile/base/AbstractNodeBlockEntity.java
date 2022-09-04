@@ -4,23 +4,19 @@ import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
-import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SerialClass
 public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity<BE>> extends BaseBlockEntity
@@ -49,7 +45,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		return 80;//TODO configurable
 	}
 
-	public abstract Connector getConnector();
+	public abstract IConnector getConnector();
 
 	public final void refreshCoolDown(BlockPos target, boolean success, boolean simulate) {
 		getConnector().refreshCoolDown(target, success, simulate);

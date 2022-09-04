@@ -2,18 +2,14 @@ package dev.xkmc.l2transport.content.connector;
 
 import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.content.flow.NetworkType;
-import dev.xkmc.l2transport.content.tile.base.CoolDownType;
+import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.MutableComponent;
 
 import java.util.List;
-import java.util.TreeMap;
 import java.util.function.Predicate;
 
-public interface Connector extends NetworkType {
-
-	List<BlockPos> getConnected();
+public interface IConnector extends NetworkType, IRenderableConnector {
 
 	List<BlockPos> getAvailableTarget();
 
@@ -23,17 +19,11 @@ public interface Connector extends NetworkType {
 
 	void removeIf(Predicate<BlockPos> o);
 
-	int getMaxCoolDown(BlockPos pos);
-
-	int getCoolDown(BlockPos pos);
-
 	void tick();
 
 	boolean isReady();
 
 	void refreshCoolDown(BlockPos target, boolean success, boolean simulate);
-
-	CoolDownType getType(BlockPos pos);
 
 	<T> void addTooltips(TooltipBuilder list, IContentHolder<T> filter);
 

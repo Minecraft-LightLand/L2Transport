@@ -3,9 +3,9 @@ package dev.xkmc.l2transport.content.tile.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2transport.content.connector.Connector;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
+import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
 import dev.xkmc.l2transport.content.tools.ILinker;
 import dev.xkmc.l2transport.content.tools.LinkerItem;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -50,7 +50,7 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 		poseStack.pushPose();
 		poseStack.translate(0.5D, 0.5D, 0.5D);
 		BeamRenderer br = new BeamRenderer();
-		Connector connector = entity.getConnector();
+		IRenderableConnector connector = entity.getConnector();
 		for (BlockPos target : connector.getConnected()) {
 			float coolDown = Math.max(0, connector.getCoolDown(target) - partialTick);
 			int max = Math.max(1, connector.getMaxCoolDown(target));

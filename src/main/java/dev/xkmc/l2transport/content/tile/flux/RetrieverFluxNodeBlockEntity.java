@@ -4,7 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
 import dev.xkmc.l2transport.content.capability.generic.HandlerWrapper;
 import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
-import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +24,7 @@ public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<Re
 	}
 
 	@Override
-	public Connector getConnector() {
+	public IConnector getConnector() {
 		return connector;
 	}
 

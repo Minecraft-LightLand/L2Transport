@@ -1,6 +1,8 @@
 package dev.xkmc.l2transport.content.tile.base;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.connector.IConnector;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,7 +18,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 @SerialClass
-public class SidedBlockEntity extends BlockEntity {
+public class SidedBlockEntity extends BlockEntity implements IRenderableNode {
 
 	public SidedBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -58,4 +60,13 @@ public class SidedBlockEntity extends BlockEntity {
 		return LazyOptional.empty();
 	}
 
+	@Override
+	public IConnector getConnector() {
+		return null;
+	}
+
+	@Override
+	public TooltipBuilder getTooltips() {
+		return null;
+	}
 }

@@ -1,7 +1,7 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +24,7 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 	}
 
 	@Override
-	public Connector getConnector() {
+	public IConnector getConnector() {
 		return connector;
 	}
 

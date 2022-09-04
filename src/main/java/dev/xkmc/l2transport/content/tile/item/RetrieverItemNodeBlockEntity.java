@@ -1,7 +1,7 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,7 +25,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 	}
 
 	@Override
-	public Connector getConnector() {
+	public IConnector getConnector() {
 		return connector;
 	}
 

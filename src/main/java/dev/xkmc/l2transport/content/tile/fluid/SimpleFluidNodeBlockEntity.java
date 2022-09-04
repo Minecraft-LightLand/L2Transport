@@ -1,7 +1,7 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.connector.Connector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.SimpleConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,7 +18,7 @@ public class SimpleFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<Sim
 	}
 
 	@Override
-	public Connector getConnector() {
+	public IConnector getConnector() {
 		return connector;
 	}
 }

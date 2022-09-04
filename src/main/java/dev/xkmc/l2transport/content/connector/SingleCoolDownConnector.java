@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.IntSupplier;
 
 @SerialClass
-public abstract class SingleCoolDownConnector implements Connector {
+public abstract class SingleCoolDownConnector implements IConnector {
 
 	@SerialClass.SerialField(toClient = true)
 	private int coolDown;
