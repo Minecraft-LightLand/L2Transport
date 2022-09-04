@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IRenderableConnector {
 
-	List<BlockPos> getConnected();
+	List<BlockPos> getVisibleConnection();
 
 	int getCoolDown(BlockPos target);
 

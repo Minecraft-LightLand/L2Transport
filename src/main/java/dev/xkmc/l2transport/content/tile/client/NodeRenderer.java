@@ -51,7 +51,7 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 		poseStack.translate(0.5D, 0.5D, 0.5D);
 		BeamRenderer br = new BeamRenderer();
 		IRenderableConnector connector = entity.getConnector();
-		for (BlockPos target : connector.getConnected()) {
+		for (BlockPos target : connector.getVisibleConnection()) {
 			float coolDown = Math.max(0, connector.getCoolDown(target) - partialTick);
 			int max = Math.max(1, connector.getMaxCoolDown(target));
 			float percentage = Mth.clamp(coolDown / max, 0, 1);

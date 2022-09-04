@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -17,7 +17,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<RetrieverFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit);
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit,
+			() -> getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
 
 	public RetrieverFluidNodeBlockEntity(BlockEntityType<RetrieverFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

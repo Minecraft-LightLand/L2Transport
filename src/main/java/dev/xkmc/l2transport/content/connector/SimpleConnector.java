@@ -27,7 +27,7 @@ public class SimpleConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public List<BlockPos> getConnected() {
+	public List<BlockPos> getVisibleConnection() {
 		return pos == null ? List.of() : List.of(pos);
 	}
 

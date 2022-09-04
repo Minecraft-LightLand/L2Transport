@@ -69,11 +69,11 @@ public class LTBlocks {
 
 		B_SIDED = L2Transport.REGISTRATE.block("node_sided",
 						(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, ItemTransferBlock.SIDED))
-				.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+				.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 				.defaultLoot().defaultLang().simpleItem().register();
 
 		TE_SIDED = L2Transport.REGISTRATE.blockEntity("node_sided", SidedBlockEntity::new)
-				.validBlock(B_SIDED).register();
+				.validBlock(B_SIDED).renderer(() -> NodeRenderer::new).register();
 
 		{
 			B_ITEM_SIMPLE = L2Transport.REGISTRATE.block("node_item_simple",
@@ -98,7 +98,7 @@ public class LTBlocks {
 
 			B_ITEM_RETRIEVE = L2Transport.REGISTRATE.block("node_item_retrieve",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE))
-					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 
@@ -136,7 +136,7 @@ public class LTBlocks {
 
 			B_FLUID_RETRIEVE = L2Transport.REGISTRATE.block("node_fluid_retrieve",
 							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, BlockProxy.ALL_DIRECTION, FluidTransferBlock.RETRIEVE))
-					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 
@@ -164,7 +164,7 @@ public class LTBlocks {
 
 			B_FLUX_RETRIEVE = L2Transport.REGISTRATE.block("node_flux_retrieve",
 							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE))
-					.blockstate(LTBlocks::genFacingModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().simpleItem().register();
 
 			TE_FLUX_SIMPLE = L2Transport.REGISTRATE.blockEntity("node_flux_simple", SimpleFluxNodeBlockEntity::new)

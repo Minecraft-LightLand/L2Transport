@@ -1,30 +1,22 @@
 {
   "variants": {
     "facing=down": {
-      "model": "l2transport:block/node_sided",
-      "x": 180
+      "model": "l2transport:block/node_sided"
     },
     "facing=east": {
-      "model": "l2transport:block/node_sided",
-      "x": 90,
-      "y": 90
+      "model": "l2transport:block/node_sided"
     },
     "facing=north": {
-      "model": "l2transport:block/node_sided",
-      "x": 90
+      "model": "l2transport:block/node_sided"
     },
     "facing=south": {
-      "model": "l2transport:block/node_sided",
-      "x": 90,
-      "y": 180
+      "model": "l2transport:block/node_sided"
     },
     "facing=up": {
       "model": "l2transport:block/node_sided"
     },
     "facing=west": {
-      "model": "l2transport:block/node_sided",
-      "x": 90,
-      "y": 270
+      "model": "l2transport:block/node_sided"
     }
   }
 }

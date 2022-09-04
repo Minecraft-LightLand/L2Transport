@@ -97,7 +97,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	public AABB getRenderBoundingBox() {
 		if (compiledBox == null) {
 			compiledBox = new AABB(getBlockPos());
-			for (BlockPos pos : getConnector().getConnected()) {
+			for (BlockPos pos : getConnector().getVisibleConnection()) {
 				compiledBox = compiledBox.minmax(new AABB(pos));
 			}
 		}

@@ -28,7 +28,7 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public List<BlockPos> getConnected() {
+	public List<BlockPos> getVisibleConnection() {
 		return list;
 	}
 

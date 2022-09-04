@@ -5,14 +5,30 @@ import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.init.data.LangData;
+import net.minecraft.core.BlockPos;
 
+import java.util.List;
 import java.util.function.IntSupplier;
+import java.util.function.Supplier;
 
 @SerialClass
 public class ExtractConnector extends SimpleConnector {
 
-	public ExtractConnector(IntSupplier max, IntSupplier limit) {
+	private final Supplier<BlockPos> target;
+
+	public ExtractConnector(IntSupplier max, IntSupplier limit, Supplier<BlockPos> target) {
 		super(max, limit);
+		this.target = target;
+	}
+
+	@Override
+	public List<BlockPos> getVisibleConnection() {
+		return pos == null ? List.of(target.get()) : List.of(pos, target.get());
+	}
+
+	@Override
+	public List<BlockPos> getAvailableTarget() {
+		return pos == null ? List.of() : List.of(pos);
 	}
 
 	@Override

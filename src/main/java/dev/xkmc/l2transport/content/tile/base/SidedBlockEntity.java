@@ -1,7 +1,6 @@
 package dev.xkmc.l2transport.content.tile.base;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,11 +13,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 @SerialClass
-public class SidedBlockEntity extends BlockEntity implements IRenderableNode {
+public class SidedBlockEntity extends BlockEntity
+		implements IRenderableNode, IRenderableConnector {
 
 	public SidedBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -61,12 +62,33 @@ public class SidedBlockEntity extends BlockEntity implements IRenderableNode {
 	}
 
 	@Override
-	public IConnector getConnector() {
-		return null;
+	public IRenderableConnector getConnector() {
+		return this;
 	}
 
 	@Override
 	public TooltipBuilder getTooltips() {
-		return null;
+		return new TooltipBuilder();
 	}
+
+	@Override
+	public List<BlockPos> getVisibleConnection() {
+		return List.of(getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
+	}
+
+	@Override
+	public int getCoolDown(BlockPos target) {
+		return 0;
+	}
+
+	@Override
+	public int getMaxCoolDown(BlockPos target) {
+		return 1;
+	}
+
+	@Override
+	public CoolDownType getType(BlockPos target) {
+		return CoolDownType.GREEN;
+	}
+
 }

@@ -23,7 +23,7 @@ public abstract class SingleCoolDownConnector implements IConnector {
 
 	@Override
 	public List<BlockPos> getAvailableTarget() {
-		return getConnected();
+		return getVisibleConnection();
 	}
 
 	protected SingleCoolDownConnector(IntSupplier maxCoolDown) {

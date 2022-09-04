@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
+import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -18,7 +18,8 @@ import net.minecraftforge.items.IItemHandler;
 public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<RetrieverItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit);
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit,
+			() -> getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
 
 	public RetrieverItemNodeBlockEntity(BlockEntityType<RetrieverItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

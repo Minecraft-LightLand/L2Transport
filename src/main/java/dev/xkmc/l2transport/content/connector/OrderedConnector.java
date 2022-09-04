@@ -28,7 +28,7 @@ public class OrderedConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public List<BlockPos> getConnected() {
+	public List<BlockPos> getVisibleConnection() {
 		return new ArrayList<>(set);
 	}
 
