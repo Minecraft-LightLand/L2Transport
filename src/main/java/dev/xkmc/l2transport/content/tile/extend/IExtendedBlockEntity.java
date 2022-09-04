@@ -37,11 +37,6 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 	}
 
 	@Override
-	default TooltipBuilder getTooltips() {
-		return new TooltipBuilder();
-	}
-
-	@Override
 	default boolean isTargetValid(BlockPos pos) {
 		return getLevel() != null && getLevel().getBlockEntity(pos) != null;
 	}

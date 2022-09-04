@@ -3,6 +3,9 @@ package dev.xkmc.l2transport.content.tile.extend;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.tile.client.TooltipType;
+import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -84,4 +87,12 @@ public class ExtendedBlockEntity extends BaseBlockEntity
 		return 256;//TODO configurable
 	}
 
+	@Override
+	public TooltipBuilder getTooltips() {
+		var ans = new TooltipBuilder();
+		if (target != null && !isTargetValid(target)) {
+			ans.add(TooltipType.DESC, LangData.INVALID.get());
+		}
+		return ans;
+	}
 }

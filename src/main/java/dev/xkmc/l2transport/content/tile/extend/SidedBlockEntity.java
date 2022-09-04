@@ -1,6 +1,7 @@
 package dev.xkmc.l2transport.content.tile.extend;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -44,6 +45,11 @@ public class SidedBlockEntity extends BlockEntity
 	@Override
 	public @Nullable BlockPos getTarget() {
 		return getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING));
+	}
+
+	@Override
+	public TooltipBuilder getTooltips() {
+		return new TooltipBuilder();
 	}
 
 }
