@@ -101,7 +101,7 @@ public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler,
 
 	@Override
 	public boolean isReady() {
-		return be.getConnector().isReady();
+		return be.isReady();
 	}
 
 }

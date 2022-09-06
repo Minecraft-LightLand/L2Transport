@@ -97,7 +97,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandl
 
 	@Override
 	public boolean isReady() {
-		return be.getConnector().isReady();
+		return be.isReady();
 	}
 
 }

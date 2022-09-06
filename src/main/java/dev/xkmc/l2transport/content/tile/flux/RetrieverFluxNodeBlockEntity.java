@@ -31,7 +31,7 @@ public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<Re
 
 	@Override
 	public void tick() {
-		if (level != null && !level.isClientSide() && getConnector().isReady()) {
+		if (level != null && !level.isClientSide() && isReady()) {
 			Direction facing = getBlockState().getValue(BlockStateProperties.FACING);
 			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);

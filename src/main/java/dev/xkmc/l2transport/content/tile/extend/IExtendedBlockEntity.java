@@ -3,7 +3,6 @@ package dev.xkmc.l2transport.content.tile.extend;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
 import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
-import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;

@@ -16,4 +16,8 @@ public interface INodeBlockEntity {
 
 	BlockPos getBlockPos();
 
+	default boolean isReady() {
+		return getConnector().isReady() && getLevel() != null && getLevel().hasNeighborSignal(getBlockPos());
+	}
+
 }

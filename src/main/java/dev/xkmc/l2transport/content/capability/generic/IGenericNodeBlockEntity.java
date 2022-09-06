@@ -10,4 +10,8 @@ public interface IGenericNodeBlockEntity extends INodeBlockEntity {
 
 	ICapabilityEntry<?> getCapType();
 
+	void setType(ICapabilityEntry<?> capType, long time);
+
+	long getLastTypeTime();
+
 }

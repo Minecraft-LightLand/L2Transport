@@ -19,4 +19,6 @@ public interface ICapabilityEntry<T> {
 	GenericHolder empty();
 
 	T parseHandler(NodalGenericHandler handler);
+
+	MutableComponent getTypeDesc();
 }

@@ -35,7 +35,7 @@ public record NodalGenericHandler(IGenericNodeBlockEntity be) implements Generic
 
 	@Override
 	public boolean isReady() {
-		return be.getConnector().isReady();
+		return be.isReady();
 	}
 
 	@Override

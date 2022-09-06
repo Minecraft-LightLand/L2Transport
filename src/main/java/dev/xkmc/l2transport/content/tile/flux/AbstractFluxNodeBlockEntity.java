@@ -1,16 +1,13 @@
 package dev.xkmc.l2transport.content.tile.flux;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.compat.energy.EnergyHolder;
-import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
-import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
-import dev.xkmc.l2transport.content.capability.generic.IGenericNodeBlockEntity;
-import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.l2transport.content.capability.generic.*;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -23,6 +20,12 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 		implements IGenericNodeBlockEntity, IRenderableNode {
 
 	protected final NodalGenericHandler genericHandler = new NodalGenericHandler(this);
+
+	@SerialClass.SerialField(toClient = true)
+	public ResourceLocation capType;
+
+	@SerialClass.SerialField
+	private long dirtyTime;
 
 	public AbstractFluxNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -40,7 +43,48 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 
 	@Override
 	public ICapabilityEntry<?> getCapType() {
-		return EnergyHolder.ENERGY;
+		return GenericCapabilityRegistry.getOrDefault(capType);
+	}
+
+	@Override
+	public void setType(ICapabilityEntry<?> type, long time) {
+		this.capType = type.id();
+		dirtyTime = time;
+		sync();
+		for (BlockPos targets : getConnector().getAvailableTarget()) {
+			if (level.getBlockEntity(targets) instanceof IGenericNodeBlockEntity node) {
+				ICapabilityEntry<?> t = node.getCapType();
+				if (t != type || time != node.getLastTypeTime()) {
+					node.setType(type, time);
+				}
+			}
+		}
+	}
+
+	@Override
+	public long getLastTypeTime() {
+		return dirtyTime;
+	}
+
+	@Override
+	public void tick() {
+		if (level != null && !level.isClientSide()) {
+			long maxCapTime = dirtyTime;
+			ICapabilityEntry<?> type = getCapType();
+			for (BlockPos targets : getConnector().getAvailableTarget()) {
+				if (level.getBlockEntity(targets) instanceof IGenericNodeBlockEntity node) {
+					ICapabilityEntry<?> t = node.getCapType();
+					if (t != type && node.getLastTypeTime() > maxCapTime) {
+						maxCapTime = node.getLastTypeTime();
+						type = t;
+					}
+				}
+			}
+			if (type != getCapType()) {
+				setType(type, maxCapTime);
+			}
+		}
+		super.tick();
 	}
 
 	@Override

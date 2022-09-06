@@ -52,4 +52,9 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 	public IEnergyStorage parseHandler(NodalGenericHandler handler) {
 		return new NodalEnergyHandler(handler);
 	}
+
+	@Override
+	public MutableComponent getTypeDesc() {
+		return Component.translatable("flux.forge.energy");
+	}
 }
