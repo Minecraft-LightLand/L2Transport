@@ -28,17 +28,17 @@ public interface IConnector extends NetworkType, IRenderableConnector {
 	<T> void addTooltips(TooltipBuilder list, IContentHolder<T> filter);
 
 	@Override
-	default boolean testConsumption(int avail, int c) {
+	default boolean testConsumption(long avail, long c) {
 		return true;
 	}
 
 	@Override
-	default boolean shouldContinue(int available, int consumed, int size) {
+	default boolean shouldContinue(long available, long consumed, long size) {
 		return provide(available, consumed, size) > 0;
 	}
 
 	@Override
-	default int provide(int available, int consumed, int size) {
+	default long provide(long available, long consumed, long size) {
 		return Math.max(0, available - consumed);
 	}
 

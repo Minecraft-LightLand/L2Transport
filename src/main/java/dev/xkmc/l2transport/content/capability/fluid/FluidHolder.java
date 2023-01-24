@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 public record FluidHolder(FluidStack stack) implements IContentHolder<FluidStack> {
 
 	@Override
-	public int getCount() {
+	public long getCount() {
 		return stack.getAmount();
 	}
 
@@ -17,10 +17,10 @@ public record FluidHolder(FluidStack stack) implements IContentHolder<FluidStack
 	}
 
 	@Override
-	public FluidStack getCopy(int count) {
+	public FluidStack getCopy(long count) {
 		if (count <= 0) return FluidStack.EMPTY;
 		FluidStack copy = stack.copy();
-		copy.setAmount(count);
+		copy.setAmount((int) count);
 		return copy;
 	}
 

@@ -8,7 +8,7 @@ public record EnergyWrapper(IEnergyStorage be) implements HandlerWrapper {
 
 	@Override
 	public int insert(GenericHolder token, boolean simulate) {
-		return be.receiveEnergy(token.amount(), simulate);
+		return be.receiveEnergy((int) token.amount(), simulate);
 	}
 
 	@Override

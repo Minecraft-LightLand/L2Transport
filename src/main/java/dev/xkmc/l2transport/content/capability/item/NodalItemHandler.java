@@ -28,7 +28,7 @@ public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler,
 
 	@Override
 	public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-		int consumed = TransportHandler.insert(this, new ItemHolder(stack), simulate);
+		long consumed = TransportHandler.insert(this, new ItemHolder(stack), simulate);
 		if (consumed == 0) {
 			return stack;
 		}
@@ -36,7 +36,7 @@ public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler,
 			return ItemStack.EMPTY;
 		}
 		ItemStack ans = stack.copy();
-		ans.shrink(consumed);
+		ans.shrink((int) consumed);
 		return ans;
 	}
 

@@ -13,12 +13,12 @@ public interface IContentToken<T> {
 	/**
 	 * get the remaining available content
 	 */
-	int getAvailable();
+	long getAvailable();
 
 	/**
 	 * deduct content from available. Can deduct more than available
 	 */
-	void consume(int count);
+	void consume(long count);
 
 	/**
 	 * get the remaining content

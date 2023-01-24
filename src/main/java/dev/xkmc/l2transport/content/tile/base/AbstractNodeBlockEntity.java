@@ -21,7 +21,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.Nullable;
 
 @SerialClass
-public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity<BE>> extends BaseBlockEntity
+public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity<BE>> extends ConnectionRenderBlockEntity
 		implements TickableBlockEntity, IRenderableNode, ILinkableNode, INodeBlockEntity {
 
 	public AbstractNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
@@ -29,9 +29,6 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	}
 
 	private boolean dirty = false;
-
-	@Nullable
-	private AABB compiledBox;
 
 	@Override
 	public void tick() {
@@ -91,23 +88,6 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 			ans.add(TooltipType.DESC, LangData.INVALID.get());
 		}
 		return ans;
-	}
-
-	@Override
-	public AABB getRenderBoundingBox() {
-		if (compiledBox == null) {
-			compiledBox = new AABB(getBlockPos());
-			for (BlockPos pos : getConnector().getVisibleConnection()) {
-				compiledBox = compiledBox.minmax(new AABB(pos));
-			}
-		}
-		return compiledBox;
-	}
-
-	@Override
-	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-		super.onDataPacket(net, pkt);
-		compiledBox = null;
 	}
 
 	@Override

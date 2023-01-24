@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 public record ErrorNode<T>(BlockPos pos) implements INetworkNode<T> {
 
 	@Override
-	public int getConsumed() {
+	public long getConsumed() {
 		return 0;
 	}
 

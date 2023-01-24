@@ -63,7 +63,7 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public boolean shouldContinue(int available, int consumed, int size) {
+	public boolean shouldContinue(long available, long consumed, long size) {
 		return consumed == 0 && super.shouldContinue(available, consumed, size);
 	}
 

@@ -10,7 +10,7 @@ public abstract class AbstractNodeTarget<T> implements INetworkNode<T> {
 
 	protected final BlockEntity be;
 	protected final IContentToken<T> token;
-	protected final int consumed;
+	protected final long consumed;
 
 	public AbstractNodeTarget(BlockEntity be, IContentToken<T> token, int consumed) {
 		this.be = be;
@@ -20,7 +20,7 @@ public abstract class AbstractNodeTarget<T> implements INetworkNode<T> {
 	}
 
 	@Override
-	public int getConsumed() {
+	public long getConsumed() {
 		return consumed;
 	}
 

@@ -7,7 +7,7 @@ public interface INetworkNode<T> {
 	/**
 	 * get count of content consumed by this node and its sub-node
 	 */
-	int getConsumed();
+	long getConsumed();
 
 	/**
 	 * refresh the cooldown of the node

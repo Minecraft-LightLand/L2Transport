@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 public record ItemHolder(ItemStack stack) implements IContentHolder<ItemStack> {
 
 	@Override
-	public int getCount() {
+	public long getCount() {
 		return stack.getCount();
 	}
 
@@ -18,10 +18,10 @@ public record ItemHolder(ItemStack stack) implements IContentHolder<ItemStack> {
 	}
 
 	@Override
-	public ItemStack getCopy(int count) {
+	public ItemStack getCopy(long count) {
 		if (count <= 0) return ItemStack.EMPTY;
 		ItemStack copy = stack.copy();
-		copy.setCount(count);
+		copy.setCount((int) count);
 		return copy;
 	}
 

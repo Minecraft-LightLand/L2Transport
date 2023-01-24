@@ -23,7 +23,7 @@ public class FluidNodeTarget extends AbstractNodeTarget<FluidStack> {
 
 	@Override
 	public void perform(RealToken<FluidStack> real) {
-		int drained = handler.fill(real.split(consumed), IFluidHandler.FluidAction.EXECUTE);
+		long drained = handler.fill(real.split(consumed), IFluidHandler.FluidAction.EXECUTE);
 		if (drained != consumed) {
 			real.gain(consumed - drained);
 			L2Transport.LOGGER.error("Mismatch behavior for fluid insertion at " + be);

@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import java.util.List;
 
 record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, IContentHolder<T> token,
-						int consumed) implements INetworkNode<T> {
+						long consumed) implements INetworkNode<T> {
 
 	public static <T> INetworkNode<T> empty(INodeHolder<T> node, IContentToken<T> token) {
 		return new BroadcastTree<>(node, List.of(), token.get(), 0);
@@ -15,7 +15,7 @@ record BroadcastTree<T>(INodeHolder<T> node, List<INetworkNode<T>> children, ICo
 		return new TreeBuilder<>(node, token);
 	}
 
-	public int getConsumed() {
+	public long getConsumed() {
 		return consumed;
 	}
 

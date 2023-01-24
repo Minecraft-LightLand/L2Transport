@@ -34,7 +34,7 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 	}
 
 	@Override
-	public MutableComponent getDesc(ResourceLocation id, int amount) {
+	public MutableComponent getDesc(ResourceLocation id, long amount) {
 		return Component.literal(amount + " ").append(Component.translatable("flux.forge.energy"));
 	}
 

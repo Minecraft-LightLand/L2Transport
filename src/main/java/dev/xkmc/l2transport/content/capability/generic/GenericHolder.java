@@ -5,10 +5,10 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public record GenericHolder(ICapabilityEntry<?> type, ResourceLocation id,
-							int amount) implements IContentHolder<GenericHolder> {
+							long amount) implements IContentHolder<GenericHolder> {
 
 	@Override
-	public int getCount() {
+	public long getCount() {
 		return amount;
 	}
 
@@ -18,7 +18,7 @@ public record GenericHolder(ICapabilityEntry<?> type, ResourceLocation id,
 	}
 
 	@Override
-	public GenericHolder getCopy(int count) {
+	public GenericHolder getCopy(long count) {
 		return new GenericHolder(type, id, count);
 	}
 

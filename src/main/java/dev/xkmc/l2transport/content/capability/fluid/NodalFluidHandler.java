@@ -38,7 +38,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandl
 
 	@Override
 	public int fill(FluidStack resource, FluidAction action) {
-		return TransportHandler.insert(this, new FluidHolder(resource), action.simulate());
+		return (int) TransportHandler.insert(this, new FluidHolder(resource), action.simulate());
 	}
 
 	@Override

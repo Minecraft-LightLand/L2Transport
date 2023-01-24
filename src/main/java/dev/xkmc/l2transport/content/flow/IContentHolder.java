@@ -11,7 +11,7 @@ public interface IContentHolder<T> {
 	/**
 	 * returns the original amount.
 	 */
-	int getCount();
+	long getCount();
 
 	/**
 	 * returns the original stack. Should not be modified
@@ -21,7 +21,7 @@ public interface IContentHolder<T> {
 	/**
 	 * returns a copy of the original stack.
 	 */
-	T getCopy(int count);
+	T getCopy(long count);
 
 	/**
 	 * returns the empty representation of the content type

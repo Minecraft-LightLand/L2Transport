@@ -11,7 +11,7 @@ class TreeBuilder<T> implements IContentToken<T> {
 	private final IContentToken<T> token;
 	private final List<INetworkNode<T>> children = new ArrayList<>();
 
-	private int consumed = 0, size;
+	private long consumed = 0, size;
 	private boolean valid = true;
 
 	TreeBuilder(INodeHolder<T> node, IContentToken<T> token) {
@@ -30,19 +30,19 @@ class TreeBuilder<T> implements IContentToken<T> {
 
 	public void append(TransportContext<T> ctx, INodeSupplier<T> factory) {
 		INetworkNode<T> node;
-		int avail = getAvailable();
+		long avail = getAvailable();
 		if (factory.isValid() && ctx.add(factory.getIdentifier())) {
 			node = factory.constructNode(ctx, this);
 		} else {
 			node = new ErrorNode<>(factory.getIdentifier());
 		}
-		int c = node.getConsumed();
+		long c = node.getConsumed();
 		valid &= type.testConsumption(avail, c);
 		children.add(node);
 	}
 
 	public INetworkNode<T> build() {
-		int val = 0;
+		long val = 0;
 		if (valid && token.getAvailable() >= consumed) {
 			token.consume(consumed);
 			val = consumed;
@@ -51,7 +51,7 @@ class TreeBuilder<T> implements IContentToken<T> {
 	}
 
 	@Override
-	public int getAvailable() {
+	public long getAvailable() {
 		return type.provide(token.getAvailable(), consumed, size);
 	}
 
@@ -61,7 +61,7 @@ class TreeBuilder<T> implements IContentToken<T> {
 	}
 
 	@Override
-	public void consume(int count) {
+	public void consume(long count) {
 		consumed += count;
 	}
 

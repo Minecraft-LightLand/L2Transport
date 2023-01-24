@@ -42,17 +42,17 @@ public class SyncedConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public boolean testConsumption(int avail, int c) {
+	public boolean testConsumption(long avail, long c) {
 		return avail == c;
 	}
 
 	@Override
-	public boolean shouldContinue(int available, int consumed, int size) {
+	public boolean shouldContinue(long available, long consumed, long size) {
 		return true;
 	}
 
 	@Override
-	public int provide(int available, int consumed, int size) {
+	public long provide(long available, long consumed, long size) {
 		return limit.getAsInt();
 	}
 

@@ -8,27 +8,27 @@ import dev.xkmc.l2transport.init.L2Transport;
 public class RealToken<T> {
 
 	private final IContentHolder<T> holder;
-	private int count;
+	private long count;
 
-	public RealToken(IContentHolder<T> holder, int count) {
+	public RealToken(IContentHolder<T> holder, long count) {
 		this.holder = holder;
 		this.count = count;
 	}
 
-	public T split(int consumed) {
+	public T split(long consumed) {
 		if (consumed > count) {
 			L2Transport.LOGGER.error("Consumes more than available. Consumed: " + consumed + ", Available: " + count + ", Content: " + holder.get());
 		}
-		int val = Math.min(consumed, count);
+		long val = Math.min(consumed, count);
 		count -= val;
 		return holder.getCopy(val);
 	}
 
-	public void gain(int remain) {
+	public void gain(long remain) {
 		count += remain;
 	}
 
-	public int getRemain() {
+	public long getRemain() {
 		return count;
 	}
 

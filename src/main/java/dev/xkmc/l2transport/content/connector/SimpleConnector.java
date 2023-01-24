@@ -57,7 +57,7 @@ public class SimpleConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public int provide(int available, int consumed, int size) {
+	public long provide(long available, long consumed, long size) {
 		return Math.min(super.provide(available, consumed, size), limit.getAsInt());
 	}
 

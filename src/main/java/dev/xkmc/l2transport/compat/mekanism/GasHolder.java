@@ -46,7 +46,7 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 	}
 
 	@Override
-	public MutableComponent getDesc(ResourceLocation id, int amount) {
+	public MutableComponent getDesc(ResourceLocation id, long amount) {
 		var gas = MekanismAPI.gasRegistry().getValue(id);
 		return (gas == null ? GasStack.EMPTY : new GasStack(gas, amount)).getTextComponent().copy();
 	}

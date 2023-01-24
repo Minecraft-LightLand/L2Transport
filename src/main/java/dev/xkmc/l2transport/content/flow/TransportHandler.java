@@ -13,7 +13,7 @@ public class TransportHandler {
 		return root.build();
 	}
 
-	public static <T> int insert(INodeHolder<T> node, IContentHolder<T> holder, boolean simulate) {
+	public static <T> long insert(INodeHolder<T> node, IContentHolder<T> holder, boolean simulate) {
 		TransportContext<T> ctx = new TransportContext<>(simulate);
 		IContentToken<T> token = new GenericToken<>(holder);
 		if (!node.isReady() || !node.isValid(holder)) {

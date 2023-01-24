@@ -6,7 +6,7 @@ import dev.xkmc.l2transport.content.flow.IContentToken;
 public class GenericToken<T> implements IContentToken<T> {
 
 	private final IContentHolder<T> holder;
-	private int count;
+	private long count;
 
 	public GenericToken(IContentHolder<T> holder) {
 		this.holder = holder;
@@ -19,12 +19,12 @@ public class GenericToken<T> implements IContentToken<T> {
 	}
 
 	@Override
-	public int getAvailable() {
+	public long getAvailable() {
 		return count;
 	}
 
 	@Override
-	public void consume(int val) {
+	public void consume(long val) {
 		count -= val;
 	}
 
