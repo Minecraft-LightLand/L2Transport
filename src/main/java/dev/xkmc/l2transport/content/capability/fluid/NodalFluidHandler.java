@@ -1,20 +1,13 @@
 package dev.xkmc.l2transport.content.capability.fluid;
 
 import dev.xkmc.l2transport.content.capability.base.FluidStackNode;
-import dev.xkmc.l2transport.content.capability.base.SimpleNodeSupplier;
 import dev.xkmc.l2transport.content.flow.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandler, FluidStackNode {
+public record NodalFluidHandler(IFluidNodeBlockEntity entity) implements IFluidHandler, FluidStackNode {
 
 	@Override
 	public int getTanks() {
@@ -28,12 +21,12 @@ public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandl
 
 	@Override
 	public int getTankCapacity(int tank) {
-		return be.getMaxTransfer();
+		return entity.getMaxTransfer();
 	}
 
 	@Override
 	public boolean isFluidValid(int slot, @NotNull FluidStack stack) {
-		return be.isFluidStackValid(stack);
+		return entity.isFluidStackValid(stack);
 	}
 
 	@Override
@@ -52,52 +45,8 @@ public record NodalFluidHandler(IFluidNodeBlockEntity be) implements IFluidHandl
 	}
 
 	@Override
-	public NetworkType getNetworkType() {
-		return be.getConnector();
-	}
-
-	@Override
 	public boolean isValid(IContentHolder<FluidStack> token) {
-		return be.isFluidStackValid(token.get());
-	}
-
-	@Override
-	public List<INodeSupplier<FluidStack>> getTargets() {
-		Level level = be.getLevel();
-		if (level == null) return List.of();
-		List<INodeSupplier<FluidStack>> ans = new ArrayList<>();
-		for (BlockPos pos : be.getConnector().getAvailableTarget()) {
-			BlockEntity target = level.getBlockEntity(pos);
-			if (target != null) {
-				var lazyCap = target.getCapability(ForgeCapabilities.FLUID_HANDLER);
-				if (lazyCap.resolve().isPresent()) {
-					var cap = lazyCap.resolve().get();
-					if (cap instanceof FluidStackNode node) {
-						ans.add(new SimpleNodeSupplier<>(pos, node.isReady(), (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token)));
-					} else {
-						ans.add(new SimpleNodeSupplier<>(pos, true, (ctx, token) -> new FluidNodeTarget(target, cap, token)));
-					}
-					continue;
-				}
-			}
-			ans.add(new SimpleNodeSupplier<>(pos, false, (ctx, token) -> new ErrorNode<>(pos)));
-		}
-		return ans;
-	}
-
-	@Override
-	public void refreshCoolDown(BlockPos target, boolean success, TransportContext<FluidStack> ctx) {
-		be.refreshCoolDown(target, success, ctx.simulate);
-	}
-
-	@Override
-	public BlockPos getIdentifier() {
-		return be.getBlockPos();
-	}
-
-	@Override
-	public boolean isReady() {
-		return be.isReady();
+		return entity.isFluidStackValid(token.get());
 	}
 
 }

@@ -95,6 +95,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		if (level == null) return false;
 		BlockEntity be = level.getBlockEntity(pos);
 		if (be == null) return false;
+		//FIXME fix direction
 		return be.getCapability(getValidTarget()).resolve().isPresent();
 	}
 

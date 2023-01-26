@@ -1,7 +1,15 @@
 package dev.xkmc.l2transport.content.flow;
 
+import dev.xkmc.l2transport.content.capability.base.ItemStackNode;
+import dev.xkmc.l2transport.content.capability.base.SimpleNodeSupplier;
+import dev.xkmc.l2transport.content.capability.item.ItemNodeTarget;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface INodeHolder<T> {

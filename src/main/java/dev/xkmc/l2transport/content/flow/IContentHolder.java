@@ -4,7 +4,7 @@ import net.minecraft.network.chat.MutableComponent;
 
 /**
  * Holder of content, such as ItemStack, FluidStack, Energy, Gas.
- * This should be immutable.
+ * This should entity immutable.
  */
 public interface IContentHolder<T> {
 
@@ -14,7 +14,7 @@ public interface IContentHolder<T> {
 	long getCount();
 
 	/**
-	 * returns the original stack. Should not be modified
+	 * returns the original stack. Should not entity modified
 	 */
 	T get();
 

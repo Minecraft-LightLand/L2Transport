@@ -45,6 +45,7 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 				if (be instanceof SidedBlockEntity) {
 					return LazyOptional.empty();
 				}
+				//FIXME fix direction
 				return be.getCapability(cap);
 			}
 		}

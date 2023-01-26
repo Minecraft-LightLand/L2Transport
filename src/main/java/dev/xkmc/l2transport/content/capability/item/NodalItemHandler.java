@@ -1,20 +1,13 @@
 package dev.xkmc.l2transport.content.capability.item;
 
 import dev.xkmc.l2transport.content.capability.base.ItemStackNode;
-import dev.xkmc.l2transport.content.capability.base.SimpleNodeSupplier;
-import dev.xkmc.l2transport.content.flow.*;
-import net.minecraft.core.BlockPos;
+import dev.xkmc.l2transport.content.flow.IContentHolder;
+import dev.xkmc.l2transport.content.flow.TransportHandler;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler, ItemStackNode {
+public record NodalItemHandler(IItemNodeBlockEntity entity) implements IItemHandler, ItemStackNode {
 
 	@Override
 	public int getSlots() {
@@ -52,56 +45,12 @@ public record NodalItemHandler(IItemNodeBlockEntity be) implements IItemHandler,
 
 	@Override
 	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-		return be.isItemStackValid(stack);
-	}
-
-	@Override
-	public NetworkType getNetworkType() {
-		return be.getConnector();
+		return entity.isItemStackValid(stack);
 	}
 
 	@Override
 	public boolean isValid(IContentHolder<ItemStack> token) {
-		return be.isItemStackValid(token.get());
-	}
-
-	@Override
-	public List<INodeSupplier<ItemStack>> getTargets() {
-		Level level = be.getLevel();
-		if (level == null) return List.of();
-		List<INodeSupplier<ItemStack>> ans = new ArrayList<>();
-		for (BlockPos pos : be.getConnector().getAvailableTarget()) {
-			BlockEntity target = level.getBlockEntity(pos);
-			if (target != null) {
-				var lazyCap = target.getCapability(ForgeCapabilities.ITEM_HANDLER);
-				if (lazyCap.resolve().isPresent()) {
-					var cap = lazyCap.resolve().get();
-					if (cap instanceof ItemStackNode node) {
-						ans.add(new SimpleNodeSupplier<>(pos, node.isReady(), (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token)));
-					} else {
-						ans.add(new SimpleNodeSupplier<>(pos, true, (ctx, token) -> new ItemNodeTarget(target, cap, token)));
-					}
-					continue;
-				}
-			}
-			ans.add(new SimpleNodeSupplier<>(pos, false, (ctx, token) -> new ErrorNode<>(pos)));
-		}
-		return ans;
-	}
-
-	@Override
-	public void refreshCoolDown(BlockPos target, boolean success, TransportContext<ItemStack> ctx) {
-		be.refreshCoolDown(target, success, ctx.simulate);
-	}
-
-	@Override
-	public BlockPos getIdentifier() {
-		return be.getBlockPos();
-	}
-
-	@Override
-	public boolean isReady() {
-		return be.isReady();
+		return entity.isItemStackValid(token.get());
 	}
 
 }
