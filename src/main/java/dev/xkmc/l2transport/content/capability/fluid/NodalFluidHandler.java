@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.content.capability.fluid;
 
 import dev.xkmc.l2transport.content.capability.base.FluidStackNode;
-import dev.xkmc.l2transport.content.flow.*;
-import net.minecraft.core.BlockPos;
+import dev.xkmc.l2transport.content.flow.IContentHolder;
+import dev.xkmc.l2transport.content.flow.TransportHandler;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;

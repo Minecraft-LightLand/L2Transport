@@ -32,7 +32,6 @@ public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateB
 		}
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof AbstractFluidNodeBlockEntity<?> rte) {
-			//FIXME fix direction
 			var stackCap = pl.getMainHandItem().getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
 			if (rte.filter.isEmpty()) {
 				if (stackCap.resolve().isPresent()) {
