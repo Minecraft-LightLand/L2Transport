@@ -5,6 +5,8 @@ import dev.xkmc.l2transport.content.capability.generic.*;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.upgrades.Upgrade;
+import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +31,7 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 
 	public AbstractFluxNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
+		flags.add(UpgradeFlag.THROUGH_PUT);
 	}
 
 	@Override
@@ -89,7 +92,11 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 
 	@Override
 	public int getMaxTransfer() {
-		return getCapType().getDefaultMax();
+		int cd = getCapType().getDefaultMax();
+		for (Upgrade u : getUpgrades()) {
+			cd = u.getMaxTransfer(cd);
+		}
+		return cd;
 	}
 
 	@Override

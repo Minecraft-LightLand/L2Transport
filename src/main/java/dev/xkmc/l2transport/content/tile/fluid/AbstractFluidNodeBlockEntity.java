@@ -7,6 +7,9 @@ import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.upgrades.Upgrade;
+import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
+import dev.xkmc.l2transport.init.data.ModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,6 +29,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	public AbstractFluidNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
+		flags.add(UpgradeFlag.THROUGH_PUT);
 	}
 
 	@SerialClass.SerialField(toClient = true)
@@ -38,7 +42,11 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	@Override
 	public int getMaxTransfer() {
-		return 8000;//TODO configurable
+		int cd = ModConfig.COMMON.defaultFluidPacket.get();
+		for (Upgrade u : getUpgrades()) {
+			cd = u.getMaxTransfer(cd);
+		}
+		return cd;
 	}
 
 	public FluidStack getFluid() {
@@ -72,7 +80,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	}
 
 	protected int getLimit() {
-		return getFluid().isEmpty() ? 1000 : getFluid().getAmount();//TODO configurable
+		return getFluid().isEmpty() ? getMaxTransfer() : getFluid().getAmount();
 	}
 
 }

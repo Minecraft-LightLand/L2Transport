@@ -6,7 +6,9 @@ import dev.xkmc.l2transport.content.tile.base.ConnectionRenderBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
+import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.init.data.LangData;
+import dev.xkmc.l2transport.init.data.ModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -85,7 +87,8 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 
 	@Override
 	public int getMaxDistanceSqr() {
-		return 256;//TODO configurable
+		int cd = ModConfig.COMMON.defaultNodeDistance.get();
+		return cd * cd;
 	}
 
 	@Override
