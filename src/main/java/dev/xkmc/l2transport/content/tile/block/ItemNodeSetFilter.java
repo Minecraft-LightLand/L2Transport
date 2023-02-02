@@ -5,6 +5,7 @@ import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
 import dev.xkmc.l2transport.content.tile.item.AbstractItemNodeBlockEntity;
 import dev.xkmc.l2transport.content.tools.ILinker;
+import dev.xkmc.l2transport.content.upgrades.UpgradeItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,6 +26,8 @@ public class ItemNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBl
 	@Override
 	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
 		if (pl.getMainHandItem().getItem() instanceof ILinker)
+			return InteractionResult.PASS;
+		if (pl.getMainHandItem().getItem() instanceof UpgradeItem)
 			return InteractionResult.PASS;
 		if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;

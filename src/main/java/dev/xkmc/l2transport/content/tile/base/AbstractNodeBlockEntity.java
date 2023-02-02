@@ -1,7 +1,10 @@
 package dev.xkmc.l2transport.content.tile.base;
 
+import dev.xkmc.l2library.block.BlockContainer;
 import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.util.annotation.ServerOnly;
+import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
@@ -14,25 +17,24 @@ import dev.xkmc.l2transport.init.data.ModConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SerialClass
 public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity<BE>> extends ConnectionRenderBlockEntity
-		implements TickableBlockEntity, IRenderableNode, ILinkableNode, INodeBlockEntity {
+		implements TickableBlockEntity, ILinkableNode, INodeBlockEntity, BlockContainer, IUpgradableBlock {
 
 	protected final Set<UpgradeFlag> flags = new HashSet<>();
 
 	@SerialClass.SerialField(toClient = true)
-	private final LinkedHashSet<Item> upgrades = new LinkedHashSet<>();
+	private final HashMap<UpgradeFlag, ItemStack> upgrades = new HashMap<>();
 
 	public AbstractNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -43,19 +45,27 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	// upgrade related
 
 	public List<Upgrade> getUpgrades() {
-		return upgrades.stream().map(e -> ((UpgradeItem) e).getUpgrade()).collect(Collectors.toList());
+		return upgrades.values().stream().map(e -> ((UpgradeItem) e.getItem()).getUpgrade()).collect(Collectors.toList());
 	}
 
-	public boolean addUpgrade(UpgradeItem item) {
-		//TODO upgrae add/remove mechanics
-		if (upgrades.contains(item)) {
-			return false;
+	public boolean acceptUpgrade(GenericItemStack<UpgradeItem> item) {
+		return flags.contains(item.item().getFlag());
+	}
+
+	@ServerOnly
+	public Optional<ItemStack> addUpgrade(GenericItemStack<UpgradeItem> item) {
+		if (!acceptUpgrade(item)) {
+			return Optional.empty();
 		}
-		if (!flags.contains(item.getFlag())) {
-			return false;
-		}
-		upgrades.add(item);
-		return true;
+		ItemStack ans = upgrades.put(item.item().getFlag(), item.stack());
+		if (ans == null) ans = ItemStack.EMPTY;
+		sync();
+		return Optional.of(ans);
+	}
+
+	@Override
+	public List<Container> getContainers() {
+		return List.of(new SimpleContainer(upgrades.values().toArray(ItemStack[]::new)));
 	}
 
 	// base functionality
@@ -126,6 +136,9 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		ans.add(TooltipType.NAME, Component.translatable(getBlockState().getBlock().getDescriptionId()).withStyle(ChatFormatting.YELLOW));
 		if (getConnector().getVisibleConnection().stream().anyMatch(e -> !isTargetValid(e))) {
 			ans.add(TooltipType.DESC, LangData.INVALID.get());
+		}
+		for(var e : getUpgrades()){
+			ans.add(TooltipType.UPGRADE, e.getDesc());
 		}
 		return ans;
 	}

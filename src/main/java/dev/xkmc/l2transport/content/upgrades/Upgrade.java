@@ -1,5 +1,7 @@
 package dev.xkmc.l2transport.content.upgrades;
 
+import net.minecraft.network.chat.MutableComponent;
+
 public abstract class Upgrade {
 
 	private final UpgradeFlag flag;
@@ -23,4 +25,7 @@ public abstract class Upgrade {
 	public int getMaxTransfer(int amount) {
 		return amount;
 	}
+
+	public abstract MutableComponent getDesc();
+
 }
