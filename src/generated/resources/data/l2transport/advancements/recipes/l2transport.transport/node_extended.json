@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_node_sided": {
+    "has_redstone_block": {
       "conditions": {
         "items": [
           {
             "items": [
-              "l2transport:node_sided"
+              "minecraft:redstone_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "l2transport:node_item_simple_from_node_sided_stonecutting"
+        "recipe": "l2transport:node_extended"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_node_sided",
+      "has_redstone_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "l2transport:node_item_simple_from_node_sided_stonecutting"
+      "l2transport:node_extended"
     ]
   }
 }

@@ -23,7 +23,7 @@ public record NodalGenericHandler(IGenericNodeBlockEntity entity) implements Gen
 
 	@Override
 	public List<INodeSupplier<GenericHolder>> getTargets() {
-		Level level = entity.getLevel();
+		Level level = entity.getThis().getLevel();
 		if (level == null) return List.of();
 		List<INodeSupplier<GenericHolder>> ans = new ArrayList<>();
 		for (BlockPos pos : entity.getConnector().getAvailableTarget()) {

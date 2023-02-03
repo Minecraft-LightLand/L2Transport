@@ -13,7 +13,6 @@
   "block.l2transport.node_item_retrieve": "物品提取节点",
   "block.l2transport.node_item_simple": "物品节点",
   "block.l2transport.node_item_synced": "物品节点-同步",
-  "block.l2transport.node_sided": "侧向扩展节点",
   "item.l2transport.clear": "连接清除手杖",
   "item.l2transport.linker": "连接手杖",
   "item.l2transport.rotate": "旋转手杖",
@@ -29,5 +28,7 @@
   "l2transport.info.filter": "过滤: %s",
   "l2transport.info.gated": "运输上限: %s",
   "l2transport.info.speed": "运输冷却: %s",
-  "l2transport.info.sync": "一次强制同步向所有目标运输 %s"
+  "l2transport.info.sync": "一次强制同步向所有目标运输 %s",
+  "item.l2transport.flux_filter": "Flux Filter",
+  "l2transport.connect.extended": "只连接一个目标的一个面。这个节点作为目标方块的面的映射，允许通过这个面的所有方块接口交互。"
 }

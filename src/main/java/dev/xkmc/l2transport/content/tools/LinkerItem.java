@@ -45,7 +45,7 @@ public class LinkerItem extends Item implements ILinker {
 			if (be != null) {
 				if (node.isTargetValid(ctx.getClickedPos())) {
 					if (!ctx.getLevel().isClientSide()) {
-						node.link(ctx.getClickedPos());
+						node.link(ctx.getClickedPos().immutable());
 						stack.removeTagKey(KEY_POS);
 					}
 					return InteractionResult.SUCCESS;

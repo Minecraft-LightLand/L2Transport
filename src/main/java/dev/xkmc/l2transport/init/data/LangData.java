@@ -20,7 +20,10 @@ public enum LangData {
 	SYNCED("connect.synced", "Connects to multiple targets. When receiving content, attempt to send the same amount to all target, and otherwise send no content. Send 1 by default, and when applying filter, send the same amount as the filter amount.", 0, ChatFormatting.GRAY),
 	ORDERED("connect.ordered", "Connects to multiple targets with different distance. Cannot connect to targets with the same distance. When receiving content, iterate through all targets in order of distance until all contents transferred.", 0, ChatFormatting.GRAY),
 	RETRIEVE("connect.receive", "Connects to only one target. Actively extracts content from attached block. When applying filter, it will only extract the amount the filter specified. It also acts as a simple node.", 0, ChatFormatting.GRAY),
-	INVALID("connect.invalid", "This node is connected to one or more invalid target. To remove unused connections, use validator wand to clear them.", 0, ChatFormatting.RED);
+	INVALID("connect.invalid", "This node is connected to one or more invalid target. To remove unused connections, use validator wand to clear them.", 0, ChatFormatting.RED),
+
+	EXTENDED("connect.extended", "Connects to only one target. This node acts as a shadow reference of the target's side, allowing all interfacing through that side of the target block.", 0, ChatFormatting.GRAY),
+	;
 
 
 	private final String id, def;

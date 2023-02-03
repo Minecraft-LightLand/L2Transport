@@ -22,7 +22,7 @@ public interface BaseNodeHolder<T, R> extends EntityNodeHolder<T> {
 	@Override
 	default List<INodeSupplier<T>> getTargets() {
 		INodeBlockEntity be = entity();
-		Level level = be.getLevel();
+		Level level = be.getThis().getLevel();
 		if (level == null) return List.of();
 		List<INodeSupplier<T>> ans = new ArrayList<>();
 		for (BlockPos pos : be.getConnector().getAvailableTarget()) {

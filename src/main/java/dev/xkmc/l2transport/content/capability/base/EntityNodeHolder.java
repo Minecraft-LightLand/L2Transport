@@ -11,7 +11,7 @@ public interface EntityNodeHolder<T> extends INodeHolder<T> {
 
 	@Override
 	default BlockPos getIdentifier() {
-		return entity().getBlockPos();
+		return entity().getThis().getBlockPos();
 	}
 
 	@Override

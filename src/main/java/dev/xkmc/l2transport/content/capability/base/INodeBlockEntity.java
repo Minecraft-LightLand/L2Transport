@@ -10,7 +10,7 @@ public interface INodeBlockEntity extends ITargetTraceable {
 	void refreshCoolDown(BlockPos target, boolean success, boolean simulate);
 
 	default boolean isReady() {
-		return getConnector().isReady() && getLevel() != null && getLevel().hasNeighborSignal(getBlockPos());
+		return getConnector().isReady() && getThis().getLevel() != null && !getThis().getLevel().hasNeighborSignal(getThis().getBlockPos());
 	}
 
 }

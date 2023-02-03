@@ -8,10 +8,12 @@ import dev.xkmc.l2transport.init.L2Transport;
 public class RealToken<T> {
 
 	private final IContentHolder<T> holder;
+	private final long original;
 	private long count;
 
 	public RealToken(IContentHolder<T> holder, long count) {
 		this.holder = holder;
+		this.original = count;
 		this.count = count;
 	}
 
@@ -28,8 +30,8 @@ public class RealToken<T> {
 		count += remain;
 	}
 
-	public long getRemain() {
-		return count;
+	public long getConsumed() {
+		return original - count;
 	}
 
 }

@@ -6,11 +6,13 @@ import dev.xkmc.l2transport.content.tile.base.ConnectionRenderBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
-import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.ModConfig;
+import dev.xkmc.l2transport.util.Holder;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,9 +25,8 @@ import org.jetbrains.annotations.Nullable;
 public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 		implements IExtendedBlockEntity, ILinkableNode, ITargetTraceable {
 
-	@Nullable
 	@SerialClass.SerialField(toClient = true)
-	public BlockPos target = null;
+	private Holder target = new Holder(null);
 
 	public ExtendedBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -38,13 +39,10 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 
 	@Override
 	public <C> LazyOptional<C> getCapabilityOneStep(Capability<C> cap) {
-		if (level != null && target != null) {
-			BlockEntity be = level.getBlockEntity(target);
+		if (level != null && getTarget() != null) {
+			BlockEntity be = level.getBlockEntity(getTarget());
 			if (be != null) {
-				if (be instanceof SidedBlockEntity) {
-					return LazyOptional.empty();
-				}
-				return getCapability(cap, target);
+				return getCapability(cap, getTarget());
 			}
 		}
 		return LazyOptional.empty();
@@ -53,7 +51,7 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 	@Nullable
 	@Override
 	public BlockPos getTarget() {
-		return target;
+		return target.t();
 	}
 
 	@Override
@@ -63,25 +61,25 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 
 	@Override
 	public void link(BlockPos pos) {
-		if (pos.equals(target) || pos.equals(getBlockPos())) {
-			target = null;
+		if (pos.equals(getTarget()) || pos.equals(getBlockPos())) {
+			target = new Holder(null);
 		} else {
-			target = pos;
+			target = new Holder(pos);
 		}
 		sync();
 	}
 
 	@Override
 	public void validate() {
-		if (target != null && !isTargetValid(target)) {
-			target = null;
+		if (getTarget() != null && !isTargetValid(getTarget())) {
+			target = new Holder(null);
 		}
 		sync();
 	}
 
 	@Override
 	public void removeAll() {
-		target = null;
+		target = new Holder(null);
 		sync();
 	}
 
@@ -94,7 +92,9 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 	@Override
 	public TooltipBuilder getTooltips() {
 		var ans = new TooltipBuilder();
-		if (target != null && !isTargetValid(target)) {
+		ans.add(TooltipType.NAME, Component.translatable(getBlockState().getBlock().getDescriptionId()).withStyle(ChatFormatting.YELLOW));
+		ans.add(TooltipType.DESC, LangData.EXTENDED.get());
+		if (getTarget() != null && !isTargetValid(getTarget())) {
 			ans.add(TooltipType.DESC, LangData.INVALID.get());
 		}
 		return ans;

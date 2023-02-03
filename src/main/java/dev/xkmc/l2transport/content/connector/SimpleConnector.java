@@ -5,6 +5,7 @@ import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.init.data.LangData;
+import dev.xkmc.l2transport.util.Holder;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,9 +16,8 @@ import java.util.function.Predicate;
 @SerialClass
 public class SimpleConnector extends SingleCoolDownConnector {
 
-	@Nullable
 	@SerialClass.SerialField(toClient = true)
-	public BlockPos pos = null;
+	private Holder pos = new Holder(null);
 
 	protected final IntSupplier limit;
 
@@ -28,22 +28,27 @@ public class SimpleConnector extends SingleCoolDownConnector {
 
 	@Override
 	public List<BlockPos> getVisibleConnection() {
-		return pos == null ? List.of() : List.of(pos);
+		return pos.t() == null ? List.of() : List.of(pos.t());
+	}
+
+	@Nullable
+	public BlockPos getPos() {
+		return pos.t();
 	}
 
 	@Override
 	public void link(BlockPos pos) {
-		if (this.pos != null && this.pos.equals(pos)) {
-			this.pos = null;
+		if (this.pos.t() != null && this.pos.t().equals(pos)) {
+			this.pos = new Holder(null);
 		} else {
-			this.pos = pos;
+			this.pos = new Holder(pos);
 		}
 	}
 
 	@Override
 	public void removeIf(Predicate<BlockPos> o) {
-		if (pos == null) return;
-		if (o.test(pos)) pos = null;
+		if (pos.t() == null) return;
+		if (o.test(pos.t())) pos = new Holder(null);
 	}
 
 	@Override

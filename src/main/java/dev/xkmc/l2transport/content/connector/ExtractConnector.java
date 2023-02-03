@@ -24,12 +24,12 @@ public class ExtractConnector extends SimpleConnector {
 
 	@Override
 	public List<BlockPos> getVisibleConnection() {
-		return pos == null ? List.of(target.get()) : List.of(pos, target.get());
+		return getPos() == null ? List.of(target.get()) : List.of(getPos(), target.get());
 	}
 
 	@Override
 	public List<BlockPos> getAvailableTarget() {
-		return pos == null ? List.of() : List.of(pos);
+		return getPos() == null ? List.of() : List.of(getPos());
 	}
 
 	@Override

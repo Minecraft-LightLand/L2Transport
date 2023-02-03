@@ -2,7 +2,7 @@
   "type": "minecraft:stonecutting",
   "count": 1,
   "ingredient": {
-    "item": "l2transport:node_sided"
+    "item": "l2transport:node_extended"
   },
   "result": "l2transport:node_flux_simple"
 }

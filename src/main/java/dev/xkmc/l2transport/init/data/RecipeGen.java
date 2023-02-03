@@ -24,11 +24,10 @@ public class RecipeGen {
 	private static final String currentFolder = "";
 
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
-		full(pvd, Items.REDSTONE_BLOCK, Items.IRON_INGOT, Items.COPPER_INGOT, LTBlocks.B_SIDED.get().asItem(), 16);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_ITEM_SIMPLE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUID_SIMPLE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_FLUX_SIMPLE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_SIDED.get()), LTBlocks.B_EXTENDED);
+		full(pvd, Items.REDSTONE_BLOCK, Items.IRON_INGOT, Items.COPPER_INGOT, LTBlocks.B_EXTENDED.get().asItem(), 16);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_ITEM_SIMPLE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_FLUID_SIMPLE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_FLUX_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_RETRIEVE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_ORDERED);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_DISTRIBUTE);

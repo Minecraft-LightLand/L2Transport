@@ -1,5 +1,6 @@
 package dev.xkmc.l2transport.content.capability.base;
 
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -10,17 +11,12 @@ import org.jetbrains.annotations.Nullable;
 
 public interface ITargetTraceable {
 
-	@Nullable
-	Level getLevel();
-
-	BlockPos getBlockPos();
-
 	default <T> LazyOptional<T> getCapability(Capability<T> cap, BlockPos pos) {
-		Level level = getLevel();
+		Level level = getThis().getLevel();
 		if (level != null) {
 			BlockEntity target = level.getBlockEntity(pos);
 			if (target != null) {
-				return target.getCapability(cap, getNearest(getBlockPos().subtract(pos)));
+				return target.getCapability(cap, getNearest(getThis().getBlockPos().subtract(pos)));
 			}
 		}
 		return LazyOptional.empty();
@@ -45,6 +41,10 @@ public interface ITargetTraceable {
 			}
 		}
 		return count == 1 ? ans : null;
+	}
+
+	default BlockEntity getThis() {
+		return Wrappers.cast(this);
 	}
 
 }
