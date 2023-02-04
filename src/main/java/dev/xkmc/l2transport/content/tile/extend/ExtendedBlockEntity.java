@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 @SerialClass
 public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
-		implements IExtendedBlockEntity, ILinkableNode, ITargetTraceable {
+		implements IExtendedBlockEntity, ILinkableNode {
 
 	@SerialClass.SerialField(toClient = true)
 	private Holder target = new Holder(null);

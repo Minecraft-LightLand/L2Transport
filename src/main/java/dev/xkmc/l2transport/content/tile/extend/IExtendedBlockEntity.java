@@ -1,10 +1,11 @@
 package dev.xkmc.l2transport.content.tile.extend;
 
+import dev.xkmc.l2library.util.code.Wrappers;
+import dev.xkmc.l2transport.content.capability.base.ITargetTraceable;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
 import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -14,12 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnector {
-
-	@Nullable
-	Level getLevel();
-
-	BlockPos getBlockPos();
+public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnector, ITargetTraceable {
 
 	@Nullable
 	BlockPos getTarget();
@@ -37,7 +33,7 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 
 	@Override
 	default boolean isTargetValid(BlockPos pos) {
-		return getLevel() != null && getLevel().getBlockEntity(pos) != null;
+		return getThis().getLevel() != null && getThis().getLevel().getBlockEntity(pos) != null;
 	}
 
 	@Override
@@ -59,12 +55,12 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 
 	static <C> LazyOptional<C> getCapabilityImpl(IExtendedBlockEntity self, Capability<C> cap) {
 		BlockPos pos = self.getTarget();
-		if (self.getLevel() != null && pos != null) {
-			BlockEntity be = self.getLevel().getBlockEntity(pos);
+		if (self.getThis().getLevel() != null && pos != null) {
+			BlockEntity be = self.getThis().getLevel().getBlockEntity(pos);
 			if (be != null) {
 				if (be instanceof IExtendedBlockEntity target) {
 					Set<BlockPos> set = new TreeSet<>();
-					set.add(self.getBlockPos());
+					set.add(self.getThis().getBlockPos());
 					set.add(pos);
 					return recursiveCap(target, cap, set);
 				}
@@ -75,10 +71,10 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 	}
 
 	static <C> LazyOptional<C> recursiveCap(IExtendedBlockEntity self, Capability<C> cap, Set<BlockPos> set) {
-		if (self.getLevel() != null) {
+		if (self.getThis().getLevel() != null) {
 			BlockPos pos = self.getTarget();
 			if (pos == null || set.contains(pos)) return LazyOptional.empty();
-			BlockEntity be = self.getLevel().getBlockEntity(pos);
+			BlockEntity be = self.getThis().getLevel().getBlockEntity(pos);
 			if (be != null) {
 				if (be instanceof IExtendedBlockEntity target) {
 					set.add(pos);
