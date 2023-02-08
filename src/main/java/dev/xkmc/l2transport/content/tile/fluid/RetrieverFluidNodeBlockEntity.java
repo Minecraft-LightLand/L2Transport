@@ -1,10 +1,12 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.capability.fluid.CauldronFluidHandler;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,6 +42,12 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
 					connector.performExtract(tryRetrieve(cap));
+					markDirty();
+				}
+			} else {
+				BlockState state = level.getBlockState(next);
+				if (state.is(Blocks.CAULDRON)) {
+					connector.performExtract(tryRetrieve(new CauldronFluidHandler(level, next, state)));
 					markDirty();
 				}
 			}

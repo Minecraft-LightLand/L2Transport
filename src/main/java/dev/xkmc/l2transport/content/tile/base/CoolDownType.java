@@ -22,7 +22,7 @@ public enum CoolDownType {
 	}
 
 	CoolDownType(float h, float s, float b, boolean isReversed) {
-		this(s, b, h, s, b, isReversed);
+		this(0, 0.5f, h, s, b, isReversed);
 	}
 
 	CoolDownType(float s0, float b0, float h1, float s1, float b1, boolean isReversed) {

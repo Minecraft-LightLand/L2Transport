@@ -41,7 +41,7 @@ public final class CauldronTarget implements INetworkNode<FluidStack> {
 
 	@Override
 	public void perform(RealToken<FluidStack> token) {
-		if (level.getBlockState(pos)!=Blocks.CAULDRON.defaultBlockState()){
+		if (level.getBlockState(pos) != Blocks.CAULDRON.defaultBlockState()) {
 			return;
 		}
 		token.split(FluidType.BUCKET_VOLUME);

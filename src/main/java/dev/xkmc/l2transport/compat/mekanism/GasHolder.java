@@ -9,7 +9,6 @@ import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
 import mekanism.common.capabilities.Capabilities;
 import mekanism.common.registries.MekanismItems;
-import mekanism.common.tags.MekanismTags;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;

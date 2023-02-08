@@ -42,7 +42,8 @@ public class LTItems {
 	public static final ItemEntry<ValidatorItem> VALIDATOR;
 	public static final ItemEntry<ClearItem> CLEAR;
 	public static final ItemEntry<FluxFilter> FLUX;
-	public static final ItemEntry<UpgradeItem> VALVE_UP, WATCH_UP, SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
+	public static final ItemEntry<UpgradeItem> VALVE_UP, WATCH_UP, DROP_UP, PLACE_UP,
+			SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
 
 	static {
 		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().defaultLang().register();
@@ -54,6 +55,8 @@ public class LTItems {
 		{
 			VALVE_UP = REGISTRATE.item("valve_upgrade", p -> new UpgradeItem(p, new ValveUpgrade())).register();
 			WATCH_UP = REGISTRATE.item("watch_upgrade", p -> new UpgradeItem(p, new WatchUpgrade())).register();
+			DROP_UP = REGISTRATE.item("drop_upgrade", p -> new UpgradeItem(p, new LevelDropUpgrade())).register();
+			PLACE_UP = REGISTRATE.item("place_upgrade", p -> new UpgradeItem(p, new LevelPlaceUpgrade())).register();
 			SPEED_UP_0 = REGISTRATE.item("speed_upgrade_0", p -> new UpgradeItem(p, new SpeedUpgrade(2))).register();
 			SPEED_UP_1 = REGISTRATE.item("speed_upgrade_1", p -> new UpgradeItem(p, new SpeedUpgrade(4))).register();
 			SPEED_UP_2 = REGISTRATE.item("speed_upgrade_2", p -> new UpgradeItem(p, new SpeedUpgrade(8))).register();

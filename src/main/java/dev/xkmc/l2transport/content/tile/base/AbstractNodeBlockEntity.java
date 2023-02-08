@@ -66,6 +66,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		ItemStack ans = upgrades.put(item.item().getFlag(), item.stack());
 		if (ans == null) ans = ItemStack.EMPTY;
 		sync();
+		ans.setCount(1);
 		return Optional.of(ans);
 	}
 
