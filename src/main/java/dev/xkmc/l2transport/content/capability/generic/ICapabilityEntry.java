@@ -2,6 +2,7 @@ package dev.xkmc.l2transport.content.capability.generic;
 
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 
 public interface ICapabilityEntry<T> {
@@ -21,4 +22,7 @@ public interface ICapabilityEntry<T> {
 	T parseHandler(NodalGenericHandler handler);
 
 	MutableComponent getTypeDesc();
+
+	ItemStack getIcon();
+
 }

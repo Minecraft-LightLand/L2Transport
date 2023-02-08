@@ -40,9 +40,13 @@ public interface BaseNodeHolder<T, R> extends EntityNodeHolder<T> {
 					continue;
 				}
 			}
-			ans.add(new SimpleNodeSupplier<>(pos, false, (ctx, token) -> new ErrorNode<>(pos)));
+			ans.add(new SimpleNodeSupplier<>(pos, false, (ctx, token) -> getWorldNode(pos, token)));
 		}
 		return ans;
+	}
+
+	default INetworkNode<T> getWorldNode(BlockPos pos, IContentToken<T> token) {
+		return new ErrorNode<>(pos);
 	}
 
 }

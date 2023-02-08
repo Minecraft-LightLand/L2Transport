@@ -12,6 +12,7 @@ import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -29,10 +30,17 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	public AbstractItemNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 		flags.add(UpgradeFlag.THROUGH_PUT);
+		flags.add(UpgradeFlag.LEVEL);
 	}
 
 	@SerialClass.SerialField(toClient = true)
 	public ItemStack filter = ItemStack.EMPTY;
+
+	@Override
+	public boolean isTargetValid(BlockPos pos) {
+		assert level != null;
+		return super.isTargetValid(pos) || level.getBlockState(pos).getBlock() == Blocks.COMPOSTER;
+	}
 
 	@Override
 	public Capability<?> getValidTarget() {

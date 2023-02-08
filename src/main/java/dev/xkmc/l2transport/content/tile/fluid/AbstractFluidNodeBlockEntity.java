@@ -1,17 +1,21 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.capability.fluid.FluidHolder;
 import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.upgrades.LevelDropUpgrade;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
+import dev.xkmc.l2transport.content.upgrades.UpgradeItem;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -30,6 +34,18 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	public AbstractFluidNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 		flags.add(UpgradeFlag.THROUGH_PUT);
+		flags.add(UpgradeFlag.LEVEL);
+	}
+
+	@Override
+	public boolean isTargetValid(BlockPos pos) {
+		assert level != null;
+		return super.isTargetValid(pos) || level.getBlockState(pos).is(BlockTags.CAULDRONS);
+	}
+
+	@Override
+	public boolean acceptUpgrade(GenericItemStack<UpgradeItem> item) {
+		return super.acceptUpgrade(item) && !(item.item().getUpgrade() instanceof LevelDropUpgrade);
 	}
 
 	@SerialClass.SerialField(toClient = true)

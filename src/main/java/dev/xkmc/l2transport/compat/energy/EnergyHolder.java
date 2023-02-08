@@ -7,6 +7,8 @@ import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -56,5 +58,10 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 	@Override
 	public MutableComponent getTypeDesc() {
 		return Component.translatable("flux.forge.energy");
+	}
+
+	@Override
+	public ItemStack getIcon() {
+		return Items.COAL.getDefaultInstance();
 	}
 }

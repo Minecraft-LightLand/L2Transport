@@ -29,6 +29,8 @@ public enum LangData {
 	UP_THROUGHPUT("upgrade.throughput", "Throughput: x%s", 1, ChatFormatting.GOLD),
 	UP_VALVE("upgrade.valve", "Disable when receiving redstone signal", 0, ChatFormatting.GOLD),
 	UP_WATCH("upgrade.watch", "Emit redstone signal when transfer succeed", 0, ChatFormatting.GOLD),
+	UP_ENTITY("upgrade.level", "Allow dropping contents in world", 0, ChatFormatting.GOLD),
+	UP_PLACE("upgrade.place", "Allow placing contents in world", 0, ChatFormatting.GOLD),
 	;
 
 

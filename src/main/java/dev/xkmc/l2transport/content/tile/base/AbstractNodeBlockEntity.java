@@ -10,8 +10,8 @@ import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.content.upgrades.*;
-import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.LTModConfig;
+import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -134,7 +134,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	public void link(BlockPos pos) {
 		if (pos.equals(getBlockPos()))
 			return;
-		getConnector().link(pos);
+		getConnector().link(pos.immutable());
 		sync();
 	}
 
@@ -167,8 +167,12 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 
 	@Override
 	public boolean isTargetValid(BlockPos pos) {
+		if (getUpgrade(UpgradeFlag.LEVEL) != null) {
+			return true;
+		}
 		return getCapability(getValidTarget(), pos).resolve().isPresent();
 	}
+
 
 	public abstract Capability<?> getValidTarget();
 

@@ -5,8 +5,8 @@ import dev.xkmc.l2transport.content.tile.base.ConnectionRenderBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
-import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.LTModConfig;
+import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.util.Holder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -63,7 +63,7 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 		if (pos.equals(getTarget()) || pos.equals(getBlockPos())) {
 			target = new Holder(null);
 		} else {
-			target = new Holder(pos);
+			target = new Holder(pos.immutable());
 		}
 		sync();
 	}

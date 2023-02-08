@@ -8,9 +8,12 @@ import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
 import mekanism.common.capabilities.Capabilities;
+import mekanism.common.registries.MekanismItems;
+import mekanism.common.tags.MekanismTags;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 
 public class GasHolder implements ICapabilityEntry<IGasHandler> {
@@ -71,4 +74,8 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 		return Component.translatable("flux.mekanism.gas");
 	}
 
+	@Override
+	public ItemStack getIcon() {
+		return MekanismItems.GAS_UPGRADE.getItemStack();
+	}
 }
