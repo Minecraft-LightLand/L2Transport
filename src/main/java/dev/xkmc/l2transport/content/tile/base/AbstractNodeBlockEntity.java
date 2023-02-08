@@ -9,9 +9,7 @@ import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
-import dev.xkmc.l2transport.content.upgrades.Upgrade;
-import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
-import dev.xkmc.l2transport.content.upgrades.UpgradeItem;
+import dev.xkmc.l2transport.content.upgrades.*;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.ModConfig;
 import net.minecraft.ChatFormatting;
@@ -22,8 +20,10 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -40,12 +40,18 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		super(type, pos, state);
 		flags.add(UpgradeFlag.COOL_DOWN);
 		flags.add(UpgradeFlag.DISTANCE);
+		flags.add(UpgradeFlag.REDSTONE);
 	}
 
 	// upgrade related
 
 	public List<Upgrade> getUpgrades() {
 		return upgrades.values().stream().map(e -> ((UpgradeItem) e.getItem()).getUpgrade()).collect(Collectors.toList());
+	}
+
+	@Nullable
+	public Upgrade getUpgrade(UpgradeFlag flag) {
+		return upgrades.containsKey(flag) ? ((UpgradeItem) upgrades.get(flag).getItem()).getUpgrade() : null;
 	}
 
 	public boolean acceptUpgrade(GenericItemStack<UpgradeItem> item) {
@@ -66,6 +72,14 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	@Override
 	public List<Container> getContainers() {
 		return List.of(new SimpleContainer(upgrades.values().toArray(ItemStack[]::new)));
+	}
+
+	public boolean isReady() {
+		if (!INodeBlockEntity.super.isReady()) return false;
+		if (level != null && getUpgrade(UpgradeFlag.REDSTONE) instanceof ValveUpgrade) {
+			return !level.hasNeighborSignal(getThis().getBlockPos());
+		}
+		return true;
 	}
 
 	// base functionality
@@ -95,6 +109,10 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	public final void refreshCoolDown(BlockPos target, boolean success, boolean simulate) {
 		getConnector().refreshCoolDown(target, success, simulate);
 		dirty = true;
+		if (level != null && !simulate && getUpgrade(UpgradeFlag.REDSTONE) instanceof WatchUpgrade) {
+			level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.TRIGGERED, true));
+			level.scheduleTick(getBlockPos(), getBlockState().getBlock(), 2);
+		}
 	}
 
 	// linkable
@@ -137,7 +155,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		if (getConnector().getVisibleConnection().stream().anyMatch(e -> !isTargetValid(e))) {
 			ans.add(TooltipType.DESC, LangData.INVALID.get());
 		}
-		for(var e : getUpgrades()){
+		for (var e : getUpgrades()) {
 			ans.add(TooltipType.UPGRADE, e.getDesc());
 		}
 		return ans;

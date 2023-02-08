@@ -2,6 +2,7 @@ package dev.xkmc.l2transport.content.tools;
 
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -22,7 +23,7 @@ public class RotateItem extends Item implements ILinker {
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext ctx) {
+	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockState state = ctx.getLevel().getBlockState(ctx.getClickedPos());
 		for (var prop : PROPS) {
 			if (state.hasProperty(prop)) {

@@ -3,11 +3,13 @@ package dev.xkmc.l2transport.init.registrate;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
+import dev.xkmc.l2library.block.type.BlockMethod;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2transport.content.tile.base.NodeBlockItem;
+import dev.xkmc.l2transport.content.tile.base.PowerTriggerBlockMethod;
 import dev.xkmc.l2transport.content.tile.block.*;
 import dev.xkmc.l2transport.content.tile.client.FluidNodeRenderer;
 import dev.xkmc.l2transport.content.tile.client.ItemNodeRenderer;
@@ -35,6 +37,8 @@ public class LTBlocks {
 	static {
 		L2Transport.REGISTRATE.creativeModeTab(() -> LTItems.TAB_MAIN);
 	}
+
+	private static final BlockMethod TRIGGER = new PowerTriggerBlockMethod();
 
 	public static final BlockEntry<DelegateBlock> B_EXTENDED,
 			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
@@ -79,29 +83,30 @@ public class LTBlocks {
 			TE_EXTENDED = L2Transport.REGISTRATE.blockEntity("node_extended", ExtendedBlockEntity::new)
 					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
 		}
+
 		{
 			B_ITEM_SIMPLE = L2Transport.REGISTRATE.block("node_item_simple",
-							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SIMPLE, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SIMPLE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
 
 			B_ITEM_ORDERED = L2Transport.REGISTRATE.block("node_item_ordered",
-							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.ORDERED, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.ORDERED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
 
 			B_ITEM_SYNCED = L2Transport.REGISTRATE.block("node_item_synced",
-							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SYNCED, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SYNCED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SYNCED)).build().register();
 
 			B_ITEM_DISTRIBUTE = L2Transport.REGISTRATE.block("node_item_distribute",
-							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.DISTRIBUTE, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.DISTRIBUTE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.DISTRIBUTE)).build().register();
 
 			B_ITEM_RETRIEVE = L2Transport.REGISTRATE.block("node_item_retrieve",
-							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
 
@@ -119,27 +124,27 @@ public class LTBlocks {
 		}
 		{
 			B_FLUID_SIMPLE = L2Transport.REGISTRATE.block("node_fluid_simple",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SIMPLE, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SIMPLE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
 
 			B_FLUID_ORDERED = L2Transport.REGISTRATE.block("node_fluid_ordered",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.ORDERED, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.ORDERED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
 
 			B_FLUID_SYNCED = L2Transport.REGISTRATE.block("node_fluid_synced",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SYNCED, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SYNCED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SYNCED)).build().register();
 
 			B_FLUID_DISTRIBUTE = L2Transport.REGISTRATE.block("node_fluid_distribute",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.DISTRIBUTE, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.DISTRIBUTE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.DISTRIBUTE)).build().register();
 
 			B_FLUID_RETRIEVE = L2Transport.REGISTRATE.block("node_fluid_retrieve",
-							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, BlockProxy.ALL_DIRECTION, FluidTransferBlock.RETRIEVE, ExtensionBlock.FILTER))
+							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, BlockProxy.ALL_DIRECTION, FluidTransferBlock.RETRIEVE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
 
@@ -157,17 +162,17 @@ public class LTBlocks {
 		}
 		{
 			B_FLUX_SIMPLE = L2Transport.REGISTRATE.block("node_flux_simple",
-							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.SIMPLE, ExtensionBlock.SIMPLE))
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.SIMPLE, ExtensionBlock.SIMPLE, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
 
 			B_FLUX_ORDERED = L2Transport.REGISTRATE.block("node_flux_ordered",
-							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.ORDERED, ExtensionBlock.SIMPLE))
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.ORDERED, ExtensionBlock.SIMPLE, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
 
 			B_FLUX_RETRIEVE = L2Transport.REGISTRATE.block("node_flux_retrieve",
-							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE, ExtensionBlock.SIMPLE))
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE, ExtensionBlock.SIMPLE, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
 

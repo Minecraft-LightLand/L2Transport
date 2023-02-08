@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "triggered=false": {
+      "model": "l2transport:block/node_flux_ordered"
+    },
+    "triggered=true": {
       "model": "l2transport:block/node_flux_ordered"
     }
   }

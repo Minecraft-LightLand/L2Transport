@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<RetrieverFluxNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit,
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getMaxTransfer,
 			() -> getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
 
 	public RetrieverFluxNodeBlockEntity(BlockEntityType<RetrieverFluxNodeBlockEntity> type, BlockPos pos, BlockState state) {

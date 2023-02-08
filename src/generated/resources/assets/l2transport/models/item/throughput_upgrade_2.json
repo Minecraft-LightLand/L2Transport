@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "l2transport:item/throughput_upgrade_2"
+  }
+}

@@ -50,7 +50,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 
 	protected void tryRetrieve(IItemHandler target) {
 		for (int i = 0; i < target.getSlots(); i++) {
-			ItemStack stack = target.extractItem(i, 64, true);
+			ItemStack stack = target.extractItem(i, getLimit(), true);
 			if (stack.isEmpty()) continue;
 			if (!getItem().isEmpty()) {
 				if (!isItemStackValid(stack)) continue;

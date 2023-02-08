@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2transport:throughput_upgrade_0_from_valve_upgrade_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_valve_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2transport:valve_upgrade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_valve_upgrade",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "l2transport:throughput_upgrade_0_from_valve_upgrade_stonecutting"
+    ]
+  }
+}

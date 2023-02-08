@@ -7,4 +7,6 @@ public interface IItemNodeBlockEntity extends INodeBlockEntity {
 
 	boolean isItemStackValid(ItemStack stack);
 
+	int getMaxTransfer();
+
 }

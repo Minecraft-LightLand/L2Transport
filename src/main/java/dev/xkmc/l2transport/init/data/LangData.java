@@ -23,6 +23,12 @@ public enum LangData {
 	INVALID("connect.invalid", "This node is connected to one or more invalid target. To remove unused connections, use validator wand to clear them.", 0, ChatFormatting.RED),
 
 	EXTENDED("connect.extended", "Connects to only one target. This node acts as a shadow reference of the target's side, allowing all interfacing through that side of the target block.", 0, ChatFormatting.GRAY),
+
+	UP_SPEED("upgrade.speed", "Transfer speed: x%s", 1, ChatFormatting.GOLD),
+	UP_DIST("upgrade.distance", "Connection distance: x%s", 1, ChatFormatting.GOLD),
+	UP_THROUGHPUT("upgrade.throughput", "Throughput: x%s", 1, ChatFormatting.GOLD),
+	UP_VALVE("upgrade.valve", "Disable when receiving redstone signal", 0, ChatFormatting.GOLD),
+	UP_WATCH("upgrade.watch", "Emit redstone signal when transfer succeed", 0, ChatFormatting.GOLD),
 	;
 
 

@@ -49,6 +49,17 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.VALIDATOR);
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.CLEAR);
 
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.VALVE_UP.get(), 16)::unlockedBy, Items.PAPER)
+				.pattern(" A ").pattern("ABA").pattern(" A ")
+				.define('A', Items.REDSTONE)
+				.define('B', Items.PAPER)
+				.save(pvd);
+
+		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.WATCH_UP);
+		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.DIST_UP_0);
+		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.SPEED_UP_0);
+		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.THR_UP_0);
+
 	}
 
 	private static ResourceLocation getID(Item item) {

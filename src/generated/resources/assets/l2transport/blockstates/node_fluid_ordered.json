@@ -1,9 +1,15 @@
 {
   "variants": {
-    "lit=false": {
+    "lit=false,triggered=false": {
       "model": "l2transport:block/node_fluid_ordered"
     },
-    "lit=true": {
+    "lit=false,triggered=true": {
+      "model": "l2transport:block/node_fluid_ordered"
+    },
+    "lit=true,triggered=false": {
+      "model": "l2transport:block/node_fluid_ordered_lit"
+    },
+    "lit=true,triggered=true": {
       "model": "l2transport:block/node_fluid_ordered_lit"
     }
   }

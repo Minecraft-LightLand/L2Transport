@@ -28,9 +28,8 @@ public class LinkerItem extends Item implements ILinker {
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext ctx) {
+	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
-		ItemStack stack = ctx.getItemInHand();
 		BlockEntity old = null;
 		BlockPos storedPos = getPos(stack);
 		if (storedPos != null) {

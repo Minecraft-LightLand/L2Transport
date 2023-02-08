@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SimpleFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<SimpleFluxNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SimpleConnector connector = new SimpleConnector(this::getMaxCoolDown, this::getLimit);
+	private final SimpleConnector connector = new SimpleConnector(this::getMaxCoolDown, this::getMaxTransfer);
 
 	public SimpleFluxNodeBlockEntity(BlockEntityType<SimpleFluxNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);

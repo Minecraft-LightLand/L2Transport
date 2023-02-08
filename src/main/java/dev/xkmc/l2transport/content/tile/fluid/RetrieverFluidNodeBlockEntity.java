@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<RetrieverFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit,
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getMaxTransfer,
 			() -> getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
 
 	public RetrieverFluidNodeBlockEntity(BlockEntityType<RetrieverFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {

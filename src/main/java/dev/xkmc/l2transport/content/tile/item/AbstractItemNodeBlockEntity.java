@@ -7,6 +7,9 @@ import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.upgrades.Upgrade;
+import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
+import dev.xkmc.l2transport.init.data.ModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +29,7 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 
 	public AbstractItemNodeBlockEntity(BlockEntityType<BE> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
+		flags.add(UpgradeFlag.THROUGH_PUT);
 	}
 
 	@SerialClass.SerialField(toClient = true)
@@ -55,6 +59,16 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	}
 
 	@Override
+	public int getMaxTransfer() {
+		int cd = 64;
+		for (Upgrade u : getUpgrades()) {
+			cd = u.getMaxTransfer(cd);
+		}
+		return cd;
+	}
+
+
+	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {
 		if (cap == ForgeCapabilities.ITEM_HANDLER) {
 			return itemHandler.cast();
@@ -67,7 +81,7 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	}
 
 	protected int getLimit() {
-		return getItem().isEmpty() ? 1 : getItem().getCount();
+		return getItem().isEmpty() ? getMaxTransfer() : getItem().getCount();
 	}
 
 }

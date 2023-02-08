@@ -42,7 +42,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	@Override
 	public int getMaxTransfer() {
-		int cd = ModConfig.COMMON.defaultFluidPacket.get();
+		int cd = getFluid().isEmpty() ? ModConfig.COMMON.defaultFluidPacket.get() : getFluid().getAmount();
 		for (Upgrade u : getUpgrades()) {
 			cd = u.getMaxTransfer(cd);
 		}
@@ -77,10 +77,6 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	protected NodalFluidHandler getHandler() {
 		return fluidHandler.resolve().get();
-	}
-
-	protected int getLimit() {
-		return getFluid().isEmpty() ? getMaxTransfer() : getFluid().getAmount();
 	}
 
 }

@@ -114,8 +114,4 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 		return super.getCapability(cap, side);
 	}
 
-	protected int getLimit() {
-		return getCapType().getDefaultMax();
-	}
-
 }

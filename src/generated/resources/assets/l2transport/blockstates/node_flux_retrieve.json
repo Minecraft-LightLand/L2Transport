@@ -1,21 +1,39 @@
 {
   "variants": {
-    "facing=down": {
+    "facing=down,triggered=false": {
       "model": "l2transport:block/node_flux_retrieve"
     },
-    "facing=east": {
+    "facing=down,triggered=true": {
       "model": "l2transport:block/node_flux_retrieve"
     },
-    "facing=north": {
+    "facing=east,triggered=false": {
       "model": "l2transport:block/node_flux_retrieve"
     },
-    "facing=south": {
+    "facing=east,triggered=true": {
       "model": "l2transport:block/node_flux_retrieve"
     },
-    "facing=up": {
+    "facing=north,triggered=false": {
       "model": "l2transport:block/node_flux_retrieve"
     },
-    "facing=west": {
+    "facing=north,triggered=true": {
+      "model": "l2transport:block/node_flux_retrieve"
+    },
+    "facing=south,triggered=false": {
+      "model": "l2transport:block/node_flux_retrieve"
+    },
+    "facing=south,triggered=true": {
+      "model": "l2transport:block/node_flux_retrieve"
+    },
+    "facing=up,triggered=false": {
+      "model": "l2transport:block/node_flux_retrieve"
+    },
+    "facing=up,triggered=true": {
+      "model": "l2transport:block/node_flux_retrieve"
+    },
+    "facing=west,triggered=false": {
+      "model": "l2transport:block/node_flux_retrieve"
+    },
+    "facing=west,triggered=true": {
       "model": "l2transport:block/node_flux_retrieve"
     }
   }
