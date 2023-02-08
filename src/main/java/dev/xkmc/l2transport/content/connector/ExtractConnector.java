@@ -3,8 +3,8 @@ package dev.xkmc.l2transport.content.connector;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.content.tile.base.CoolDownType;
-import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
-import dev.xkmc.l2transport.content.tile.client.TooltipType;
+import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.tile.client.overlay.TooltipType;
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.core.BlockPos;
 

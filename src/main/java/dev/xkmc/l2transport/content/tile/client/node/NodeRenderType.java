@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client;
+package dev.xkmc.l2transport.content.tile.client.node;
 
 public enum NodeRenderType {
 	ALL(true, true),

@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client;
+package dev.xkmc.l2transport.content.tile.client.node;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;

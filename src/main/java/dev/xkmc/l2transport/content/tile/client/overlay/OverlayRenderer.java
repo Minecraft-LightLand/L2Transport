@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client;
+package dev.xkmc.l2transport.content.tile.client.overlay;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.base.overlay.OverlayUtils;
@@ -26,9 +26,14 @@ public class OverlayRenderer extends GuiComponent implements IGuiOverlay {
 		BlockPos pos = ray.getBlockPos();
 		BlockEntity entity = player.level.getBlockEntity(pos);
 		if (entity instanceof IRenderableNode be) {
-			OverlayUtils util = new OverlayUtils(screenWidth, screenHeight);
+			OverlayUtils util = new OverlayUtils(screenWidth, screenHeight) {
+				@Override
+				public int getX(int w) {
+					return Math.max(16, (screenWidth / 2 - w) / 2);
+				}
+			};
 			util.renderLongText(gui, poseStack,
-					screenWidth / 2 + 16, -1, screenWidth / 2 - 32,
+					-1, -1, screenWidth / 2 - 32,
 					be.getTooltips().build());
 		}
 	}

@@ -2,12 +2,18 @@ package dev.xkmc.l2transport.content.upgrades;
 
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.tile.base.IUpgradableBlock;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class UpgradeItem extends Item {
 
@@ -27,7 +33,7 @@ public class UpgradeItem extends Item {
 	}
 
 	@Override
-	public InteractionResult useOn(UseOnContext ctx) {
+	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
 		Player player = ctx.getPlayer();
 		if (player != null && be instanceof IUpgradableBlock tile) {
@@ -49,4 +55,9 @@ public class UpgradeItem extends Item {
 		return super.useOn(ctx);
 	}
 
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(getUpgrade().getDesc());
+		super.appendHoverText(stack, level, list, flag);
+	}
 }

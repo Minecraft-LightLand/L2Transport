@@ -1,6 +1,9 @@
 package dev.xkmc.l2transport.init;
 
-import dev.xkmc.l2transport.content.tile.client.OverlayRenderer;
+import dev.xkmc.l2transport.content.tile.client.overlay.OverlayRenderer;
+import dev.xkmc.l2transport.content.tile.client.overlay.ToolSelection;
+import dev.xkmc.l2transport.events.ClientGeneralEvents;
+import dev.xkmc.l2transport.init.data.Keys;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -16,6 +19,7 @@ public class L2TransportClient {
 		bus.addListener(L2TransportClient::clientSetup);
 		bus.addListener(L2TransportClient::registerOverlays);
 		bus.addListener(L2TransportClient::registerKeys);
+		eventBus.register(ClientGeneralEvents.class);
 	}
 
 	@SubscribeEvent
@@ -30,9 +34,13 @@ public class L2TransportClient {
 	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlays(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "node_info", new OverlayRenderer());
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "tool_select", ToolSelection.INSTANCE);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public static void registerKeys(RegisterKeyMappingsEvent event) {
+		for (Keys key : Keys.values()) {
+			event.register(key.map);
+		}
 	}
 }

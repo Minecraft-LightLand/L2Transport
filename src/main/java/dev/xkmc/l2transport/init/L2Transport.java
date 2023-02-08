@@ -2,12 +2,15 @@ package dev.xkmc.l2transport.init;
 
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2library.serial.network.PacketHandler;
 import dev.xkmc.l2transport.compat.CompatHandler;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.RecipeGen;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
 import dev.xkmc.l2transport.init.registrate.LTItems;
+import dev.xkmc.l2transport.network.SetSelectedToServer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -17,6 +20,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkDirection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +31,9 @@ public class L2Transport {
 	public static final String MODID = "l2transport";
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
+
+	public static final PacketHandler HANDLER = new PacketHandler(new ResourceLocation(MODID, "main"), 1,
+			e -> e.create(SetSelectedToServer.class, NetworkDirection.PLAY_TO_SERVER));
 
 	private static void registerRegistrates(IEventBus bus) {
 		LTBlocks.register();

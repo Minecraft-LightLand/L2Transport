@@ -3,7 +3,7 @@ package dev.xkmc.l2transport.content.connector;
 import dev.xkmc.l2transport.content.flow.IContentHolder;
 import dev.xkmc.l2transport.content.flow.NetworkType;
 import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
-import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 
 import java.util.List;

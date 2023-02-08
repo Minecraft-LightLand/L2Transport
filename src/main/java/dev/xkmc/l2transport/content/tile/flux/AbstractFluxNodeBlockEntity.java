@@ -4,7 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.generic.*;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
-import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;

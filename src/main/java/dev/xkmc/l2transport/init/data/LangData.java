@@ -63,6 +63,9 @@ public enum LangData {
 			pvd.accept(lang.id, lang.def);
 		}
 		pvd.accept("itemGroup.l2transport.transport", "L2 Transport");
+		pvd.accept("key.categories.l2transport", "L2Transport Keys");
+		pvd.accept(Keys.UP.id, "Tool Select Up");
+		pvd.accept(Keys.DOWN.id, "Tool Select Down");
 	}
 
 }

@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client;
+package dev.xkmc.l2transport.content.tile.client.overlay;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

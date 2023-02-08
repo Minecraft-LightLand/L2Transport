@@ -45,10 +45,6 @@ public class RecipeGen {
 				.define('B', Items.COPPER_INGOT)
 				.save(pvd);
 
-		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.ROTATE);
-		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.VALIDATOR);
-		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.CLEAR);
-
 		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.VALVE_UP.get(), 4)::unlockedBy, Items.QUARTZ)
 				.pattern(" A ").pattern("ABA").pattern(" A ")
 				.define('A', Items.REDSTONE)

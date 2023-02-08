@@ -7,7 +7,7 @@ import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
-import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
+import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.upgrades.LevelDropUpgrade;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;

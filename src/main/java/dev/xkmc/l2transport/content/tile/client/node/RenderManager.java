@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client;
+package dev.xkmc.l2transport.content.tile.client.node;
 
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
