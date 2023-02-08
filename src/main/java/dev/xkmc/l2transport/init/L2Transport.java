@@ -4,7 +4,7 @@ import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2transport.compat.CompatHandler;
 import dev.xkmc.l2transport.init.data.LangData;
-import dev.xkmc.l2transport.init.data.ModConfig;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.init.data.RecipeGen;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
 import dev.xkmc.l2transport.init.registrate.LTItems;
@@ -50,7 +50,7 @@ public class L2Transport {
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> L2TransportClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates(bus);
 		registerForgeEvents();
-		ModConfig.init();
+		LTModConfig.init();
 	}
 
 	private static void setup(final FMLCommonSetupEvent event) {

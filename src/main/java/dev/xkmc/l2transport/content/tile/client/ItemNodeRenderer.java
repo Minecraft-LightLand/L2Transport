@@ -18,7 +18,7 @@ public class ItemNodeRenderer<T extends BlockEntity & IRenderableItemNode> exten
 	public void render(T entity, float partialTick, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
 		super.render(entity, partialTick, poseStack, source, light, overlay);
 		Level level = entity.getLevel();
-		if (level != null && !entity.getItem().isEmpty()) {
+		if (RenderManager.getRenderConfig(entity).renderFilters() && level != null && !entity.getItem().isEmpty()) {
 			RenderUtils.renderItemAbove(entity.getItem(), 0.5, level, partialTick, poseStack, source, light, overlay);
 		}
 	}

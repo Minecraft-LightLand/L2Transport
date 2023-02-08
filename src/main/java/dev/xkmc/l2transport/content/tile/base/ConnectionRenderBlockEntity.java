@@ -2,6 +2,7 @@ package dev.xkmc.l2transport.content.tile.base;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.tile.client.RenderManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -22,6 +23,8 @@ public abstract class ConnectionRenderBlockEntity extends BaseBlockEntity implem
 
 	@Override
 	public AABB getRenderBoundingBox() {
+		if (!RenderManager.getRenderConfig(this).renderLinks())
+			return new AABB(getBlockPos());
 		if (compiledBox == null) {
 			compiledBox = new AABB(getBlockPos());
 			for (BlockPos pos : getConnector().getVisibleConnection()) {

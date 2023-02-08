@@ -1,13 +1,12 @@
 package dev.xkmc.l2transport.content.tile.extend;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.capability.base.ITargetTraceable;
 import dev.xkmc.l2transport.content.tile.base.ConnectionRenderBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.init.data.LangData;
-import dev.xkmc.l2transport.init.data.ModConfig;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.util.Holder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -85,7 +84,7 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 
 	@Override
 	public int getMaxDistanceSqr() {
-		int cd = ModConfig.COMMON.defaultNodeDistance.get();
+		int cd = LTModConfig.COMMON.defaultNodeDistance.get();
 		return cd * cd;
 	}
 

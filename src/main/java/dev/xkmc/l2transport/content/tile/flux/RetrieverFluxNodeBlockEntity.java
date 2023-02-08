@@ -31,27 +31,29 @@ public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<Re
 
 	@Override
 	public void tick() {
-		if (level != null && !level.isClientSide() && isReady()) {
+		if (level != null && !level.isClientSide() && isReady() && connector.mayExtract()) {
 			Direction facing = getBlockState().getValue(BlockStateProperties.FACING);
 			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);
 			if (target != null) {
-				tryRetrieveTyped(getCapType(), target, facing);
+				connector.performExtract(tryRetrieveTyped(getCapType(), target, facing));
+				markDirty();
 			}
 
 		}
 		super.tick();
 	}
 
-	private <T> void tryRetrieveTyped(ICapabilityEntry<T> type, BlockEntity target, Direction facing) {
+	private <T> boolean tryRetrieveTyped(ICapabilityEntry<T> type, BlockEntity target, Direction facing) {
 		var lazyCap = target.getCapability(type.cap(), facing.getOpposite());
 		if (lazyCap.resolve().isPresent()) {
 			var cap = lazyCap.resolve().get();
-			tryRetrieve(type, cap);
+			return tryRetrieve(type, cap);
 		}
+		return false;
 	}
 
-	protected <T> void tryRetrieve(ICapabilityEntry<T> type, T target) {
+	protected <T> boolean tryRetrieve(ICapabilityEntry<T> type, T target) {
 		HandlerWrapper wrapper = type.parse(target);
 		HandlerWrapper self = type.parse(type.parseHandler(genericHandler));
 		for (int i = 0; i < wrapper.getSize(); i++) {
@@ -66,8 +68,9 @@ public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<Re
 			if (toInsert == 0) continue;
 			toExtract = wrapper.extract(i, toInsert, false);
 			self.insert(toExtract, false);
-			return;
+			return true;
 		}
+		return false;
 	}
 
 }

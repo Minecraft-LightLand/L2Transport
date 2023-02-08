@@ -49,10 +49,38 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.VALIDATOR);
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.CLEAR);
 
-		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.VALVE_UP.get(), 16)::unlockedBy, Items.PAPER)
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.VALVE_UP.get(), 4)::unlockedBy, Items.QUARTZ)
 				.pattern(" A ").pattern("ABA").pattern(" A ")
 				.define('A', Items.REDSTONE)
-				.define('B', Items.PAPER)
+				.define('B', Items.QUARTZ)
+				.save(pvd);
+
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.SPEED_UP_1.get(), 4)::unlockedBy, LTItems.SPEED_UP_0.get())
+				.pattern("ABA").pattern("BCB").pattern("ABA")
+				.define('C', Items.IRON_INGOT)
+				.define('A', Items.GLOWSTONE_DUST)
+				.define('B', LTItems.SPEED_UP_0.get())
+				.save(pvd);
+
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.SPEED_UP_2.get(), 4)::unlockedBy, LTItems.SPEED_UP_1.get())
+				.pattern("ABA").pattern("BCB").pattern("ABA")
+				.define('C', Items.GOLD_INGOT)
+				.define('A', Items.BLAZE_POWDER)
+				.define('B', LTItems.SPEED_UP_1.get())
+				.save(pvd);
+
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.THR_UP_1.get(), 4)::unlockedBy, LTItems.THR_UP_0.get())
+				.pattern("ABA").pattern("BCB").pattern("ABA")
+				.define('C', Items.IRON_INGOT)
+				.define('A', Items.GLOWSTONE_DUST)
+				.define('B', LTItems.THR_UP_0.get())
+				.save(pvd);
+
+		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.THR_UP_2.get(), 4)::unlockedBy, LTItems.THR_UP_1.get())
+				.pattern("ABA").pattern("BCB").pattern("ABA")
+				.define('C', Items.GOLD_INGOT)
+				.define('A', Items.BLAZE_POWDER)
+				.define('B', LTItems.THR_UP_1.get())
 				.save(pvd);
 
 		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.WATCH_UP);

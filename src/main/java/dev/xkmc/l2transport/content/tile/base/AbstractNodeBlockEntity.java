@@ -11,7 +11,7 @@ import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.client.TooltipType;
 import dev.xkmc.l2transport.content.upgrades.*;
 import dev.xkmc.l2transport.init.data.LangData;
-import dev.xkmc.l2transport.init.data.ModConfig;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -96,8 +96,12 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		getConnector().tick();
 	}
 
+	protected void markDirty() {
+		dirty = true;
+	}
+
 	public int getMaxCoolDown() {
-		int cd = ModConfig.COMMON.defaultCoolDown.get();
+		int cd = LTModConfig.COMMON.defaultCoolDown.get();
 		for (Upgrade u : getUpgrades()) {
 			cd = u.getMaxCoolDown(cd);
 		}
@@ -119,7 +123,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 
 	@Override
 	public int getMaxDistanceSqr() {
-		int cd = ModConfig.COMMON.defaultNodeDistance.get();
+		int cd = LTModConfig.COMMON.defaultNodeDistance.get();
 		for (Upgrade u : getUpgrades()) {
 			cd = u.getMaxDistance(cd);
 		}

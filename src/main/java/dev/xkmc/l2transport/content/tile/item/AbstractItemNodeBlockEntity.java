@@ -9,7 +9,6 @@ import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
-import dev.xkmc.l2transport.init.data.ModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

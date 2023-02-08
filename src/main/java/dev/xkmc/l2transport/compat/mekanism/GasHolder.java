@@ -27,7 +27,7 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 	}
 
 	public static GenericHolder parse(GasStack stack) {
-		return new GenericHolder(GAS, stack.getTypeRegistryName(), (int) stack.getAmount());
+		return new GenericHolder(GAS, stack.getTypeRegistryName(), stack.getAmount());
 	}
 
 	@Override

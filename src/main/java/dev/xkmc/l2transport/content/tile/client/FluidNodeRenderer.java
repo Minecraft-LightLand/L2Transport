@@ -19,7 +19,7 @@ public class FluidNodeRenderer<T extends BlockEntity & IRenderableFluidNode> ext
 	public void render(T entity, float partialTick, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
 		super.render(entity, partialTick, poseStack, source, light, overlay);
 		Level level = entity.getLevel();
-		if (level != null && !entity.getFluid().isEmpty()) {
+		if (RenderManager.getRenderConfig(entity).renderFilters() && level != null && !entity.getFluid().isEmpty()) {
 			VoxelShape shape = entity.getBlockState().getShape(level, entity.getBlockPos());
 			FluidRenderer.renderFluidBox(entity.getFluid(), shape.bounds().deflate(1e-3), source, poseStack, light, true);
 		}

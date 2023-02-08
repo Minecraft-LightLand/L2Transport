@@ -9,7 +9,7 @@ import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
 import dev.xkmc.l2transport.content.tile.client.TooltipBuilder;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
-import dev.xkmc.l2transport.init.data.ModConfig;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -42,7 +42,7 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	@Override
 	public int getMaxTransfer() {
-		int cd = getFluid().isEmpty() ? ModConfig.COMMON.defaultFluidPacket.get() : getFluid().getAmount();
+		int cd = getFluid().isEmpty() ? LTModConfig.COMMON.defaultFluidPacket.get() : getFluid().getAmount();
 		for (Upgrade u : getUpgrades()) {
 			cd = u.getMaxTransfer(cd);
 		}

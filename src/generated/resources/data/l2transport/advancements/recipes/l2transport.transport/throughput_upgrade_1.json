@@ -1,34 +1,34 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_quartz": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2transport:throughput_upgrade_1"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_throughput_upgrade_0": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:quartz"
+              "l2transport:throughput_upgrade_0"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "l2transport:valve_upgrade"
-      },
-      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_quartz",
+      "has_throughput_upgrade_0",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "l2transport:valve_upgrade"
+      "l2transport:throughput_upgrade_1"
     ]
   }
 }

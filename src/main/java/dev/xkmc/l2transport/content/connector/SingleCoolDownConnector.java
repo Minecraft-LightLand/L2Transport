@@ -15,7 +15,7 @@ public abstract class SingleCoolDownConnector implements IConnector {
 	private int coolDown;
 
 	@SerialClass.SerialField(toClient = true)
-	private final HashMap<BlockPos, CoolDownType> color = new HashMap<>();
+	protected final HashMap<BlockPos, CoolDownType> color = new HashMap<>();
 
 	private int simulatedCoolDown;
 

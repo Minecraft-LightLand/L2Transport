@@ -32,7 +32,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 
 	@Override
 	public void tick() {
-		if (level != null && !level.isClientSide() && isReady()) {
+		if (level != null && !level.isClientSide() && isReady() && connector.mayExtract()) {
 			Direction facing = getBlockState().getValue(BlockStateProperties.FACING);
 			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);
@@ -40,7 +40,8 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 				var lazyCap = target.getCapability(ForgeCapabilities.ITEM_HANDLER, facing.getOpposite());
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
-					tryRetrieve(cap);
+					connector.performExtract(tryRetrieve(cap));
+					markDirty();
 				}
 			}
 
@@ -48,7 +49,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 		super.tick();
 	}
 
-	protected void tryRetrieve(IItemHandler target) {
+	protected boolean tryRetrieve(IItemHandler target) {
 		for (int i = 0; i < target.getSlots(); i++) {
 			ItemStack stack = target.extractItem(i, getLimit(), true);
 			if (stack.isEmpty()) continue;
@@ -61,8 +62,9 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 			stack = target.extractItem(i, stack.getCount() - attempt.getCount(), false);
 			ItemStack leftover = getHandler().insertItem(0, stack, false);
 			drop(leftover);
-			return;
+			return true;
 		}
+		return false;
 	}
 
 	private void drop(ItemStack stack) {

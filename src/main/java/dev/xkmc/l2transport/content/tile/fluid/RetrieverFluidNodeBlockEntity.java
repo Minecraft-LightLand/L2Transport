@@ -31,7 +31,7 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 
 	@Override
 	public void tick() {
-		if (level != null && !level.isClientSide() && isReady()) {
+		if (level != null && !level.isClientSide() && isReady() && connector.mayExtract()) {
 			Direction facing = getBlockState().getValue(BlockStateProperties.FACING);
 			BlockPos next = getBlockPos().relative(facing);
 			BlockEntity target = level.getBlockEntity(next);
@@ -39,7 +39,8 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 				var lazyCap = target.getCapability(ForgeCapabilities.FLUID_HANDLER, facing.getOpposite());
 				if (lazyCap.resolve().isPresent()) {
 					var cap = lazyCap.resolve().get();
-					tryRetrieve(cap);
+					connector.performExtract(tryRetrieve(cap));
+					markDirty();
 				}
 			}
 
@@ -47,7 +48,7 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 		super.tick();
 	}
 
-	protected void tryRetrieve(IFluidHandler target) {
+	protected boolean tryRetrieve(IFluidHandler target) {
 		for (int i = 0; i < target.getTanks(); i++) {
 			FluidStack toDrain = target.drain(getMaxTransfer(), IFluidHandler.FluidAction.SIMULATE);
 			if (toDrain.isEmpty()) continue;
@@ -64,8 +65,9 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 			if (toFill == 0) continue;
 			toDrain = target.drain(toFill, IFluidHandler.FluidAction.EXECUTE);
 			getHandler().fill(toDrain, IFluidHandler.FluidAction.EXECUTE);
-			return;
+			return true;
 		}
+		return false;
 	}
 
 }

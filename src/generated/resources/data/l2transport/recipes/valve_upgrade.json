@@ -5,7 +5,7 @@
       "item": "minecraft:redstone"
     },
     "B": {
-      "item": "minecraft:paper"
+      "item": "minecraft:quartz"
     }
   },
   "pattern": [
@@ -14,7 +14,7 @@
     " A "
   ],
   "result": {
-    "count": 16,
+    "count": 4,
     "item": "l2transport:valve_upgrade"
   }
 }

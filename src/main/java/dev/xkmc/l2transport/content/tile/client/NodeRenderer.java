@@ -8,6 +8,7 @@ import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
 import dev.xkmc.l2transport.content.tools.ILinker;
 import dev.xkmc.l2transport.content.tools.LinkerItem;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -42,6 +43,13 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 
 	@Override
 	public void render(T entity, float partialTick, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
+		NodeRenderType type = RenderManager.getRenderConfig(entity);
+		if (type.renderLinks()) {
+			renderLinks(entity, partialTick, poseStack, source, light, overlay);
+		}
+	}
+
+	private void renderLinks(T entity, float partialTick, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
 		Level level = entity.getLevel();
 		long gameTime = level == null ? 0 : level.getGameTime();
 		float time = Math.floorMod(gameTime, 80L) + partialTick;
@@ -88,12 +96,12 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 	}
 
 	public boolean shouldRenderOffScreen(T entity) {
-		return true;
+		return RenderManager.getRenderConfig(entity).renderLinks();
 	}
 
 	@Override
 	public int getViewDistance() {
-		return 64;
+		return LTModConfig.CLIENT.renderRange.get();
 	}
 
 }

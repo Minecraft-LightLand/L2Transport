@@ -2,9 +2,24 @@ package dev.xkmc.l2transport.init.data;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 
-public class ModConfig {
+public class LTModConfig {
+
+	public static class Client {
+
+		public final ForgeConfigSpec.BooleanValue renderLinks;
+		public final ForgeConfigSpec.IntValue renderRange;
+
+		Client(ForgeConfigSpec.Builder builder) {
+			renderLinks = builder.comment("Render Links by default")
+					.define("renderLinks", true);
+			renderRange = builder.comment("Render Range")
+					.defineInRange("renderRange", 64, 0, 256);
+		}
+
+	}
 
 	public static class Common {
 
@@ -26,17 +41,25 @@ public class ModConfig {
 	public static final ForgeConfigSpec COMMON_SPEC;
 	public static final Common COMMON;
 
+	public static final ForgeConfigSpec CLIENT_SPEC;
+	public static final Client CLIENT;
+
 	static {
 		final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = specPair.getRight();
 		COMMON = specPair.getLeft();
+
+		final Pair<Client, ForgeConfigSpec> clientPair = new ForgeConfigSpec.Builder().configure(Client::new);
+		CLIENT_SPEC = clientPair.getRight();
+		CLIENT = clientPair.getLeft();
 	}
 
 	/**
 	 * Registers any relevant listeners for config
 	 */
 	public static void init() {
-		ModLoadingContext.get().registerConfig(net.minecraftforge.fml.config.ModConfig.Type.COMMON, ModConfig.COMMON_SPEC);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_SPEC);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_SPEC);
 	}
 
 

@@ -13,9 +13,15 @@ import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
 @SerialClass
-public class ExtractConnector extends SimpleConnector {
+public class ExtractConnector extends SimpleConnector implements IExtractor {
 
 	private final Supplier<BlockPos> target;
+
+	@SerialClass.SerialField(toClient = true)
+	private int extractCoolDown = 0;
+
+	@SerialClass.SerialField(toClient = true)
+	private CoolDownType extractColor = CoolDownType.GREY;
 
 	public ExtractConnector(IntSupplier max, IntSupplier limit, Supplier<BlockPos> target) {
 		super(max, limit);
@@ -34,12 +40,12 @@ public class ExtractConnector extends SimpleConnector {
 
 	@Override
 	public int getCoolDown(BlockPos pos) {
-		return pos.equals(target.get()) ? 0 : super.getCoolDown(pos);
+		return pos.equals(target.get()) ? Math.min(getMaxCoolDown(pos), extractCoolDown) : super.getCoolDown(pos);
 	}
 
 	@Override
 	public CoolDownType getType(BlockPos pos) {
-		return pos.equals(target.get()) ? CoolDownType.RETRIEVE : super.getType(pos);
+		return pos.equals(target.get()) ? extractColor : super.getType(pos);
 	}
 
 	@Override
@@ -52,6 +58,26 @@ public class ExtractConnector extends SimpleConnector {
 		}
 		list.add(TooltipType.STAT, LangData.INFO_SPEED.getLiteral(maxCoolDown.getAsInt() / 20f));
 		list.add(TooltipType.DESC, LangData.RETRIEVE.get());
+	}
+
+	public void performExtract(boolean success) {
+		extractCoolDown = getMaxCoolDown(target.get());
+		extractColor = success ? CoolDownType.RETRIEVE : CoolDownType.INVALID_RETRIEVE;
+	}
+
+	public boolean mayExtract() {
+		return extractCoolDown == 0;
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (extractCoolDown > 0) {
+			extractCoolDown--;
+			if (extractCoolDown == 0) {
+				extractColor = CoolDownType.GREY;
+			}
+		}
 	}
 
 }
