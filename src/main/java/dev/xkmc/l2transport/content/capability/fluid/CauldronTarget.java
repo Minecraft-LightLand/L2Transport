@@ -27,6 +27,9 @@ public final class CauldronTarget implements INetworkNode<FluidStack> {
 		canUse = (type == ForgeMod.WATER_TYPE.get() || type == ForgeMod.LAVA_TYPE.get()) &&
 				stack.getAvailable() >= FluidType.BUCKET_VOLUME &&
 				level.getBlockState(pos) == Blocks.CAULDRON.defaultBlockState();
+		if (canUse) {
+			stack.consume(FluidType.BUCKET_VOLUME);
+		}
 	}
 
 	@Override

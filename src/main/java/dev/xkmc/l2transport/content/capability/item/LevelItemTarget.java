@@ -14,16 +14,19 @@ public class LevelItemTarget implements INetworkNode<ItemStack> {
 	private final Level level;
 	private final BlockPos pos;
 	private final IContentToken<ItemStack> stack;
+	private final long consume;
 
 	public LevelItemTarget(Level level, BlockPos pos, IContentToken<ItemStack> stack) {
 		this.level = level;
 		this.pos = pos;
 		this.stack = stack;
+		this.consume = Math.min(stack.getAvailable(), stack.get().get().getMaxStackSize());
+		stack.consume(consume);
 	}
 
 	@Override
 	public long getConsumed() {
-		return Math.min(stack.getAvailable(), stack.get().get().getMaxStackSize());
+		return consume;
 	}
 
 	@Override

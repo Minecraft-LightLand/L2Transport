@@ -40,7 +40,7 @@ public interface ItemStackNode extends BaseNodeHolder<ItemStack, IItemHandler> {
 	default INetworkNode<ItemStack> getWorldNode(BlockPos pos, IContentToken<ItemStack> token) {
 		Level level = entity().getThis().getLevel();
 		assert level != null;
-		if (level.getBlockState(pos) == Blocks.COMPOSTER.defaultBlockState()) {
+		if (level.getBlockState(pos).getBlock() == Blocks.COMPOSTER) {
 			return new ComposterTarget(level, pos, token);
 		}
 		var upgrade = entity().getUpgrade(UpgradeFlag.LEVEL);

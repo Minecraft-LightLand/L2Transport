@@ -5,6 +5,7 @@ import dev.xkmc.l2transport.content.flow.INetworkNode;
 import dev.xkmc.l2transport.content.flow.RealToken;
 import dev.xkmc.l2transport.content.flow.TransportContext;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -21,12 +22,12 @@ public class ComposterTarget implements INetworkNode<ItemStack> {
 		this.level = level;
 		this.pos = pos;
 		BlockState state = level.getBlockState(pos);
-		if (state.getBlock() == Blocks.COMPOSTER) {
-			var c = ((ComposterBlock) state.getBlock()).getContainer(state, level, pos);
-			consumed = c.canPlaceItem(0, stack.get().get()) ? 1 : 0;
+		if (stack.getAvailable() > 0 && state.getBlock() == Blocks.COMPOSTER) {
+			consumed = state.getValue(ComposterBlock.LEVEL) < 7 ? 1 : 0;
 		} else {
 			consumed = 0;
 		}
+		stack.consume(consumed);
 	}
 
 	@Override
@@ -45,7 +46,10 @@ public class ComposterTarget implements INetworkNode<ItemStack> {
 		if (state.getBlock() == Blocks.COMPOSTER) {
 			var c = ((ComposterBlock) state.getBlock()).getContainer(state, level, pos);
 			ItemStack item = token.split(1);
-			c.setItem(0, item);
+			BlockState next = ComposterBlock.insertItem(state, (ServerLevel) level, item, pos);
+			if (next != state) {
+				level.setBlockAndUpdate(pos, next);
+			}
 			if (item.getCount() > 0) {
 				token.gain(item.getCount());
 			}

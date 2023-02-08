@@ -27,13 +27,14 @@ public class LevelBlockTarget implements INetworkNode<ItemStack> {
 		this.pos = pos;
 		this.stack = stack;
 		boolean consume = false;
-		if (stack.get().get().getItem() instanceof BlockItem bi) {
+		if (stack.getAvailable() > 0 && stack.get().get().getItem() instanceof BlockItem bi) {
 			BlockHitResult hit = new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, false);
 			BlockPlaceContext ctx = new BlockPlaceContext(level, null, InteractionHand.MAIN_HAND, stack.get().get(), hit);
 			if (level.getBlockState(pos).canBeReplaced(ctx)) {
 				BlockState state = bi.getBlock().getStateForPlacement(ctx);
 				if (state != null) {
 					consume = true;
+					stack.consume(1);
 				}
 			}
 		}

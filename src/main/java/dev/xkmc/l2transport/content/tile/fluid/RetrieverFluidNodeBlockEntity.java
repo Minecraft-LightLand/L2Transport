@@ -6,7 +6,7 @@ import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,7 +46,7 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 				}
 			} else {
 				BlockState state = level.getBlockState(next);
-				if (state.is(Blocks.CAULDRON)) {
+				if (state.is(BlockTags.CAULDRONS)) {
 					connector.performExtract(tryRetrieve(new CauldronFluidHandler(level, next, state)));
 					markDirty();
 				}

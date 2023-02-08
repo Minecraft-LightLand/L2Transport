@@ -1,9 +1,7 @@
 package dev.xkmc.l2transport.content.tools;
 
 import dev.xkmc.l2library.util.nbt.NBTObj;
-import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
-import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionResult;
@@ -43,21 +41,12 @@ public class LinkerItem extends Item implements ILinker {
 			}
 		}
 		if (old instanceof ILinkableNode node) {
-			if (be != null) {
-				if (node.isTargetValid(ctx.getClickedPos())) {
-					if (!ctx.getLevel().isClientSide()) {
-						node.link(ctx.getClickedPos());
-						stack.removeTagKey(KEY_POS);
-					}
-					return InteractionResult.SUCCESS;
-				}
-			}
-			if (old instanceof INodeBlockEntity nbe) {
-				if (nbe.getUpgrade(UpgradeFlag.LEVEL) != null) {
-					node.link(ctx.getClickedPos().relative(ctx.getClickedFace()));
+			if (node.isTargetValid(ctx.getClickedPos())) {
+				if (!ctx.getLevel().isClientSide()) {
+					node.link(ctx.getClickedPos());
 					stack.removeTagKey(KEY_POS);
-					return InteractionResult.SUCCESS;
 				}
+				return InteractionResult.SUCCESS;
 			}
 		}
 		if (be instanceof ILinkableNode) {

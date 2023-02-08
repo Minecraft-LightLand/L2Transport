@@ -5,6 +5,7 @@ import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.WorldlyContainerHolder;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 @SerialClass
 public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<RetrieverItemNodeBlockEntity> {
@@ -43,6 +46,13 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 					connector.performExtract(tryRetrieve(cap));
 					markDirty();
 				}
+			} else {
+				BlockState state = level.getBlockState(next);
+				if (state.getBlock() instanceof WorldlyContainerHolder holder) {
+					var c = holder.getContainer(state, level, next);
+					connector.performExtract(tryRetrieve(new InvWrapper(c)));
+					markDirty();
+				}
 			}
 
 		}
@@ -61,6 +71,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 			if (attempt.getCount() == stack.getCount()) continue;
 			stack = target.extractItem(i, stack.getCount() - attempt.getCount(), false);
 			ItemStack leftover = getHandler().insertItem(0, stack, false);
+			leftover = ItemHandlerHelper.insertItemStacked(target, leftover, false);
 			drop(leftover);
 			return true;
 		}

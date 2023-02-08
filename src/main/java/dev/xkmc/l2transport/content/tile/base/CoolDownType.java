@@ -35,6 +35,9 @@ public enum CoolDownType {
 	}
 
 	public void setColor(float percentage, HSBConsumer consumer) {
+		if (this == INVALID) {
+			percentage = 1;
+		}
 		float sat = Mth.lerp(percentage, s0, s1);
 		float bright = Mth.lerp(percentage, b0, b1);
 		consumer.setColor(h1, sat, bright);

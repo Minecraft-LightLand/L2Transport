@@ -40,7 +40,7 @@ public interface BaseNodeHolder<T, R> extends EntityNodeHolder<T> {
 					continue;
 				}
 			}
-			ans.add(new SimpleNodeSupplier<>(pos, false, (ctx, token) -> getWorldNode(pos, token)));
+			ans.add(new SimpleNodeSupplier<>(pos, true, (ctx, token) -> getWorldNode(pos, token)));
 		}
 		return ans;
 	}
