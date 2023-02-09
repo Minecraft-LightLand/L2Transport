@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tools;
+package dev.xkmc.l2transport.content.items.tools;
 
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;

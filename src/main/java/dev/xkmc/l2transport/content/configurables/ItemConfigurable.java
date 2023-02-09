@@ -40,6 +40,7 @@ public class ItemConfigurable extends BaseConfigurable implements IConfigurableF
 
 	public void clearFilter() {
 		filter = ItemStack.EMPTY;
+		setMaxTransfer(-1);
 	}
 
 	public boolean hasNoFilter() {
@@ -48,6 +49,7 @@ public class ItemConfigurable extends BaseConfigurable implements IConfigurableF
 
 	public void setSimpleFilter(ItemStack copy) {
 		filter = copy;
+		setMaxTransfer(-1);
 	}
 
 	public boolean canQuickSetCount(ItemStack stack) {

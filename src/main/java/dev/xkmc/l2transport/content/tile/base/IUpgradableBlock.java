@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.tile.base;
 
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
-import dev.xkmc.l2transport.content.upgrades.UpgradeItem;
+import dev.xkmc.l2transport.content.items.upgrades.UpgradeItem;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Optional;

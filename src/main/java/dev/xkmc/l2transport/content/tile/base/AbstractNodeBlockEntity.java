@@ -9,7 +9,7 @@ import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.client.overlay.TooltipType;
 import dev.xkmc.l2transport.content.connector.IConnector;
-import dev.xkmc.l2transport.content.upgrades.*;
+import dev.xkmc.l2transport.content.items.upgrades.*;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -75,6 +75,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		for (var stack : ans) {
 			stack.setCount(1);
 		}
+		upgrades.clear();
 		return ans;
 	}
 
@@ -173,8 +174,8 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		if (getConnector().getVisibleConnection().stream().anyMatch(e -> !isTargetValid(e))) {
 			ans.add(TooltipType.DESC, LangData.INVALID.get());
 		}
-		for (var e : getUpgrades()) {
-			ans.add(TooltipType.UPGRADE, e.getDesc());
+		for (var e : upgrades.values()) {
+			ans.add(TooltipType.UPGRADE, e.getHoverName().copy().withStyle(ChatFormatting.GOLD));
 		}
 		return ans;
 	}

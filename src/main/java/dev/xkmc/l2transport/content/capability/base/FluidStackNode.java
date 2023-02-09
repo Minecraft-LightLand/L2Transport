@@ -7,7 +7,7 @@ import dev.xkmc.l2transport.content.flow.ErrorNode;
 import dev.xkmc.l2transport.content.flow.IContentToken;
 import dev.xkmc.l2transport.content.flow.INetworkNode;
 import dev.xkmc.l2transport.content.flow.INodeHolder;
-import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
+import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;

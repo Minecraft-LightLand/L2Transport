@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2transport.content.tools;
+package dev.xkmc.l2transport.content.items.upgrades;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

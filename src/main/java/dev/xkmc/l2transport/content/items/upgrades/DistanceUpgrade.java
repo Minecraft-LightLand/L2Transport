@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.upgrades;
+package dev.xkmc.l2transport.content.items.upgrades;
 
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.network.chat.MutableComponent;

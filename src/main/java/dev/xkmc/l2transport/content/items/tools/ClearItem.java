@@ -1,5 +1,6 @@
-package dev.xkmc.l2transport.content.tools;
+package dev.xkmc.l2transport.content.items.tools;
 
+import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -7,9 +8,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class ValidatorItem extends Item implements ILinker {
+public class ClearItem extends Item implements ILinker {
 
-	public ValidatorItem(Properties properties) {
+	public ClearItem(Properties properties) {
 		super(properties.stacksTo(1));
 	}
 
@@ -18,7 +19,10 @@ public class ValidatorItem extends Item implements ILinker {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
 		if (be instanceof ILinkableNode node) {
 			if (!ctx.getLevel().isClientSide()) {
-				node.validate();
+				node.removeAll();
+				if (ctx.getPlayer() != null && be instanceof AbstractNodeBlockEntity<?> xbe) {
+					xbe.popUpgrade().forEach(ctx.getPlayer().getInventory()::placeItemBackInInventory);
+				}
 			}
 			return InteractionResult.SUCCESS;
 		}

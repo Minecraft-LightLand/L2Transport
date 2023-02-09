@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.client.node;
 
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
-import dev.xkmc.l2transport.content.tools.ILinker;
+import dev.xkmc.l2transport.content.items.tools.ILinker;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 
 public class RenderManager {

@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.upgrades;
+package dev.xkmc.l2transport.content.items.upgrades;
 
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.tile.base.IUpgradableBlock;
@@ -47,7 +47,8 @@ public class UpgradeItem extends Item {
 			var opt = tile.addUpgrade(gen);
 			if (opt.isPresent()) {
 				ItemStack ans = opt.get();
-				ctx.getItemInHand().shrink(1);
+				if (!player.getAbilities().instabuild)
+					ctx.getItemInHand().shrink(1);
 				player.getInventory().placeItemBackInInventory(ans);
 			}
 			return InteractionResult.SUCCESS;

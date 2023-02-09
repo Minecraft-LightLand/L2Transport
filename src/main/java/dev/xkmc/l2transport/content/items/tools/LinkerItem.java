@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tools;
+package dev.xkmc.l2transport.content.items.tools;
 
 import dev.xkmc.l2library.util.nbt.NBTObj;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;

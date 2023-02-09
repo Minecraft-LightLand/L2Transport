@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.configurables;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
-import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
+import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 
 @SerialClass
 public abstract class BaseConfigurable {

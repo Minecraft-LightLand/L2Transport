@@ -1,7 +1,7 @@
 package dev.xkmc.l2transport.init;
 
 import dev.xkmc.l2transport.content.client.overlay.OverlayRenderer;
-import dev.xkmc.l2transport.content.client.overlay.ToolSelection;
+import dev.xkmc.l2transport.content.client.overlay.ToolSelectionOverlay;
 import dev.xkmc.l2transport.events.ClientGeneralEvents;
 import dev.xkmc.l2transport.init.data.Keys;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,7 +34,7 @@ public class L2TransportClient {
 	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlays(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "node_info", new OverlayRenderer());
-		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "tool_select", ToolSelection.INSTANCE);
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "tool_select", ToolSelectionOverlay.INSTANCE);
 	}
 
 	@OnlyIn(Dist.CLIENT)

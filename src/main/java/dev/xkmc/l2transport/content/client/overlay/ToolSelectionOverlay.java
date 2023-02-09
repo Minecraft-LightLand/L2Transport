@@ -5,8 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.TextBox;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2transport.content.tools.ILinker;
-import dev.xkmc.l2transport.content.tools.ToolSelectionHelper;
+import dev.xkmc.l2transport.content.items.select.ItemSelector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
@@ -16,17 +15,19 @@ import net.minecraftforge.client.gui.overlay.ForgeGui;
 
 import java.util.List;
 
-public class ToolSelection extends SelectionSideBar {
+public class ToolSelectionOverlay extends SelectionSideBar {
 
-	public static final ToolSelection INSTANCE = new ToolSelection();
+	public static final ToolSelectionOverlay INSTANCE = new ToolSelectionOverlay();
 
-	private ToolSelection() {
+	private ToolSelectionOverlay() {
 		super(40, 3);
 	}
 
 	@Override
 	public Pair<List<ItemStack>, Integer> getItems() {
-		return Pair.of(ToolSelectionHelper.LIST, ToolSelectionHelper.getIndex(Proxy.getClientPlayer()));
+		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+		assert sel != null;
+		return Pair.of(sel.getList(), sel.getIndex(Proxy.getClientPlayer()));
 	}
 
 	@Override
@@ -43,7 +44,9 @@ public class ToolSelection extends SelectionSideBar {
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return 0;
-		return ToolSelectionHelper.getIndex(player);
+		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+		if (sel == null) return 0;
+		return sel.getIndex(player);
 	}
 
 	@Override
@@ -51,9 +54,7 @@ public class ToolSelection extends SelectionSideBar {
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		//if (!player.isShiftKeyDown()) return false;
-		return player.getMainHandItem().getItem() instanceof ILinker l1 && l1.toolSelect() ||
-				player.getOffhandItem().getItem() instanceof ILinker l2 && l2.toolSelect();
+		return ItemSelector.getSelection(player) != null;
 	}
 
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
@@ -91,7 +92,9 @@ public class ToolSelection extends SelectionSideBar {
 	}
 
 	protected int getYOffset(int height) {
-		return height / 2 - 9 * ToolSelectionHelper.LIST.size() + 1;
+		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+		assert sel != null;
+		return height / 2 - 9 * sel.getList().size() + 1;
 	}
 
 }

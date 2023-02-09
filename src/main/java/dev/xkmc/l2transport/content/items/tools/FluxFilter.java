@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tools;
+package dev.xkmc.l2transport.content.items.tools;
 
 import dev.xkmc.l2transport.content.capability.generic.GenericCapabilityRegistry;
 import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;

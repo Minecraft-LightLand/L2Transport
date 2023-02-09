@@ -1,8 +1,8 @@
 package dev.xkmc.l2transport.init.registrate;
 
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
-import dev.xkmc.l2transport.content.tools.*;
-import dev.xkmc.l2transport.content.upgrades.*;
+import dev.xkmc.l2transport.content.items.tools.*;
+import dev.xkmc.l2transport.content.items.upgrades.*;
 import dev.xkmc.l2transport.init.L2Transport;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;

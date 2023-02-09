@@ -6,7 +6,7 @@ import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
 import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
-import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
+import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

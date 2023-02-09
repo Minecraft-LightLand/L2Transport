@@ -1,17 +1,17 @@
-package dev.xkmc.l2transport.content.upgrades;
+package dev.xkmc.l2transport.content.items.upgrades;
 
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.network.chat.MutableComponent;
 
-public class LevelPlaceUpgrade extends Upgrade {
+public class LevelDropUpgrade extends Upgrade {
 
-	public LevelPlaceUpgrade() {
+	public LevelDropUpgrade() {
 		super(UpgradeFlag.LEVEL);
 	}
 
 	@Override
 	public MutableComponent getDesc() {
-		return LangData.UP_PLACE.get();
+		return LangData.UP_ENTITY.get();
 	}
 
 }
