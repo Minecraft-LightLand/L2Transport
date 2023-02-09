@@ -21,12 +21,12 @@ public record NodalFluidHandler(IFluidNodeBlockEntity entity) implements IFluidH
 
 	@Override
 	public int getTankCapacity(int tank) {
-		return entity.getMaxTransfer();
+		return (int) entity.getConfig().getMaxTransfer();
 	}
 
 	@Override
 	public boolean isFluidValid(int slot, @NotNull FluidStack stack) {
-		return entity.isFluidStackValid(stack);
+		return entity.getConfig().isFluidStackValid(stack);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity entity) implements IFluidH
 
 	@Override
 	public boolean isValid(IContentHolder<FluidStack> token) {
-		return entity.isFluidStackValid(token.get());
+		return entity.getConfig().isFluidStackValid(token.get());
 	}
 
 }

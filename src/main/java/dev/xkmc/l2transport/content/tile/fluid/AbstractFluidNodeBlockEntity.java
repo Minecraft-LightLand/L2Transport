@@ -7,7 +7,7 @@ import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableFluidNode;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.upgrades.LevelDropUpgrade;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
@@ -48,38 +48,19 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 		return super.acceptUpgrade(item) && !(item.item().getUpgrade() instanceof LevelDropUpgrade);
 	}
 
-	@SerialClass.SerialField(toClient = true)
-	public FluidStack filter = FluidStack.EMPTY;
-
 	@Override
 	public Capability<?> getValidTarget() {
 		return ForgeCapabilities.FLUID_HANDLER;
 	}
 
-	@Override
-	public int getMaxTransfer() {
-		int cd = getFluid().isEmpty() ? LTModConfig.COMMON.defaultFluidPacket.get() : getFluid().getAmount();
-		for (Upgrade u : getUpgrades()) {
-			cd = u.getMaxTransfer(cd);
-		}
-		return cd;
-	}
-
 	public FluidStack getFluid() {
-		return filter;
-	}
-
-	public final boolean isFluidStackValid(FluidStack stack) {
-		if (filter.isEmpty()) {
-			return true;
-		}
-		return stack.isFluidEqual(filter);
+		return getConfig().getDisplayFluid();
 	}
 
 	@Override
 	public TooltipBuilder getTooltips() {
 		var ans = super.getTooltips();
-		getConnector().addTooltips(ans, new FluidHolder(getFluid()));
+		getConnector().addTooltips(ans, getConfig());
 		return ans;
 	}
 

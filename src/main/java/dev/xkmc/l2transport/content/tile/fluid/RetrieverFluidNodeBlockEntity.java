@@ -2,6 +2,8 @@ package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.fluid.CauldronFluidHandler;
+import dev.xkmc.l2transport.content.configurables.ConfigConnectorType;
+import dev.xkmc.l2transport.content.configurables.FluidConfigurable;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
@@ -19,7 +21,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<RetrieverFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getMaxTransfer,
+	private final FluidConfigurable config = new FluidConfigurable(ConfigConnectorType.EXTRACT, this);
+
+	@SerialClass.SerialField(toClient = true)
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, config,
 			() -> getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
 
 	public RetrieverFluidNodeBlockEntity(BlockEntityType<RetrieverFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
@@ -29,6 +34,11 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 	@Override
 	public IConnector getConnector() {
 		return connector;
+	}
+
+	@Override
+	public FluidConfigurable getConfig() {
+		return config;
 	}
 
 	@Override
@@ -58,12 +68,10 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 
 	protected boolean tryRetrieve(IFluidHandler target) {
 		for (int i = 0; i < target.getTanks(); i++) {
-			FluidStack toDrain = target.drain(getMaxTransfer(), IFluidHandler.FluidAction.SIMULATE);
+			FluidStack toDrain = target.drain((int) getConfig().getMaxTransfer(), IFluidHandler.FluidAction.SIMULATE);
 			if (toDrain.isEmpty()) continue;
-			if (!getFluid().isEmpty()) {
-				if (!isFluidStackValid(toDrain)) continue;
-				if (toDrain.getAmount() < getFluid().getAmount()) continue;
-			}
+			if (!getConfig().isFluidStackValid(toDrain)) continue;
+			if (!getConfig().allowExtract(toDrain.getAmount())) continue;
 			int toFill = getHandler().fill(toDrain, IFluidHandler.FluidAction.SIMULATE);
 			if (toFill == 0) continue;
 			while (toFill != toDrain.getAmount()) {

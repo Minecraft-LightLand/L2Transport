@@ -1,12 +1,10 @@
 package dev.xkmc.l2transport.content.capability.item;
 
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
-import net.minecraft.world.item.ItemStack;
+import dev.xkmc.l2transport.content.configurables.ItemConfigurable;
 
 public interface IItemNodeBlockEntity extends INodeBlockEntity {
 
-	boolean isItemStackValid(ItemStack stack);
-
-	int getMaxTransfer();
+	ItemConfigurable getConfig();
 
 }

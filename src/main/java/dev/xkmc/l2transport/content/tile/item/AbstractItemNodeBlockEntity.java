@@ -2,12 +2,10 @@ package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.item.IItemNodeBlockEntity;
-import dev.xkmc.l2transport.content.capability.item.ItemHolder;
 import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
-import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,9 +31,6 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 		flags.add(UpgradeFlag.LEVEL);
 	}
 
-	@SerialClass.SerialField(toClient = true)
-	public ItemStack filter = ItemStack.EMPTY;
-
 	@Override
 	public boolean isTargetValid(BlockPos pos) {
 		assert level != null;
@@ -48,32 +43,15 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	}
 
 	public ItemStack getItem() {
-		return filter;
-	}
-
-	public final boolean isItemStackValid(ItemStack stack) {
-		if (filter.isEmpty()) {
-			return true;
-		}
-		return stack.getItem() == filter.getItem();
+		return getConfig().getDisplayItem();
 	}
 
 	@Override
 	public TooltipBuilder getTooltips() {
 		var ans = super.getTooltips();
-		getConnector().addTooltips(ans, new ItemHolder(getItem()));
+		getConnector().addTooltips(ans, getConfig());
 		return ans;
 	}
-
-	@Override
-	public int getMaxTransfer() {
-		int cd = 64;
-		for (Upgrade u : getUpgrades()) {
-			cd = u.getMaxTransfer(cd);
-		}
-		return cd;
-	}
-
 
 	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {
@@ -85,10 +63,6 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 
 	protected NodalItemHandler getHandler() {
 		return itemHandler.resolve().get();
-	}
-
-	protected int getLimit() {
-		return getItem().isEmpty() ? getMaxTransfer() : getItem().getCount();
 	}
 
 }

@@ -7,6 +7,8 @@ import net.minecraft.resources.ResourceLocation;
 public record GenericHolder(ICapabilityEntry<?> type, ResourceLocation id,
 							long amount) implements IContentHolder<GenericHolder> {
 
+	public static final ResourceLocation EMPTY_ID = new ResourceLocation("empty");
+
 	@Override
 	public long getCount() {
 		return amount;

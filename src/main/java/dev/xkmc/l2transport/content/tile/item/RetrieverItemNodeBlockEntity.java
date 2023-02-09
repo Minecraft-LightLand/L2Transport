@@ -1,6 +1,8 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.configurables.ConfigConnectorType;
+import dev.xkmc.l2transport.content.configurables.ItemConfigurable;
 import dev.xkmc.l2transport.content.connector.ExtractConnector;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
@@ -21,7 +23,10 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<RetrieverItemNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, this::getLimit,
+	private final ItemConfigurable config = new ItemConfigurable(ConfigConnectorType.EXTRACT, this);
+
+	@SerialClass.SerialField(toClient = true)
+	private final ExtractConnector connector = new ExtractConnector(this::getMaxCoolDown, config,
 			() -> getBlockPos().relative(getBlockState().getValue(BlockStateProperties.FACING)));
 
 	public RetrieverItemNodeBlockEntity(BlockEntityType<RetrieverItemNodeBlockEntity> type, BlockPos pos, BlockState state) {
@@ -31,6 +36,11 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 	@Override
 	public IConnector getConnector() {
 		return connector;
+	}
+
+	@Override
+	public ItemConfigurable getConfig() {
+		return config;
 	}
 
 	@Override
@@ -61,12 +71,10 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 
 	protected boolean tryRetrieve(IItemHandler target) {
 		for (int i = 0; i < target.getSlots(); i++) {
-			ItemStack stack = target.extractItem(i, getLimit(), true);
+			ItemStack stack = target.extractItem(i, (int) getConfig().getMaxTransfer(), true);
 			if (stack.isEmpty()) continue;
-			if (!getItem().isEmpty()) {
-				if (!isItemStackValid(stack)) continue;
-				if (stack.getCount() < getItem().getCount()) continue;
-			}
+			if (!getConfig().isItemStackValid(stack)) continue;
+			if (!getConfig().allowExtract(stack.getCount())) continue;
 			ItemStack attempt = getHandler().insertItem(0, stack, true);
 			if (attempt.getCount() == stack.getCount()) continue;
 			stack = target.extractItem(i, stack.getCount() - attempt.getCount(), false);

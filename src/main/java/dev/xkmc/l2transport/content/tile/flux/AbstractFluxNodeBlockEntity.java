@@ -4,7 +4,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.generic.*;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.upgrades.Upgrade;
 import dev.xkmc.l2transport.content.upgrades.UpgradeFlag;
 import net.minecraft.core.BlockPos;
@@ -37,11 +37,6 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 	@Override
 	public Capability<?> getValidTarget() {
 		return getCapType().cap();
-	}
-
-	@Override
-	public boolean isContentValid(GenericHolder stack) {
-		return stack.type() == getCapType();
 	}
 
 	@Override
@@ -91,18 +86,9 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 	}
 
 	@Override
-	public int getMaxTransfer() {
-		int cd = getCapType().getDefaultMax();
-		for (Upgrade u : getUpgrades()) {
-			cd = u.getMaxTransfer(cd);
-		}
-		return cd;
-	}
-
-	@Override
 	public TooltipBuilder getTooltips() {
 		var ans = super.getTooltips();
-		getConnector().addTooltips(ans, getCapType().empty());
+		getConnector().addTooltips(ans, getConfig());
 		return ans;
 	}
 

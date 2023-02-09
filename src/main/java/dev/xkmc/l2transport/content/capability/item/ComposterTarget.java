@@ -23,7 +23,8 @@ public class ComposterTarget implements INetworkNode<ItemStack> {
 		this.pos = pos;
 		BlockState state = level.getBlockState(pos);
 		if (stack.getAvailable() > 0 && state.getBlock() == Blocks.COMPOSTER) {
-			consumed = state.getValue(ComposterBlock.LEVEL) < 7 ? 1 : 0;
+			consumed = ComposterBlock.COMPOSTABLES.containsKey(stack.get().get().getItem()) &&
+					state.getValue(ComposterBlock.LEVEL) < 7 ? 1 : 0;
 		} else {
 			consumed = 0;
 		}

@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client.overlay;
+package dev.xkmc.l2transport.content.client.overlay;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
@@ -36,14 +36,13 @@ public class ToolSelection extends SelectionSideBar {
 
 	@Override
 	public boolean onCenter() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return 0;
-		if (!player.isShiftKeyDown()) return 0;
 		return ToolSelectionHelper.getIndex(player);
 	}
 
@@ -53,8 +52,8 @@ public class ToolSelection extends SelectionSideBar {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
 		//if (!player.isShiftKeyDown()) return false;
-		return player.getMainHandItem().getItem() instanceof ILinker ||
-				player.getOffhandItem().getItem() instanceof ILinker;
+		return player.getMainHandItem().getItem() instanceof ILinker l1 && l1.toolSelect() ||
+				player.getOffhandItem().getItem() instanceof ILinker l2 && l2.toolSelect();
 	}
 
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
@@ -69,17 +68,14 @@ public class ToolSelection extends SelectionSideBar {
 			Font font = gui.getMinecraft().font;
 			int dx = this.getXOffset(width);
 			int dy = this.getYOffset(height);
-			boolean shift = Minecraft.getInstance().options.keyShift.isDown();
 			for (int i = 0; i < list.size(); ++i) {
 				ItemStack stack = list.get(i);
 				int y = 18 * i + dy;
-				this.renderSelection(dx, y, shift ? 127 : 64, this.isAvailable(stack), selected == i);
+				this.renderSelection(dx, y, 64, this.isAvailable(stack), selected == i);
 				if (this.ease_time == this.max_ease) {
-					boolean onCenter = this.onCenter();
-					TextBox box = new TextBox(width, height, onCenter ? 0 : 2, 1, onCenter ? dx + 22 : dx - 6, y + 8, -1);
+					TextBox box = new TextBox(width, height, 0, 1, dx + 22, y + 8, -1);
 					box.renderLongText(gui, poseStack, List.of(stack.getHoverName()));
 				}
-
 				if (!stack.isEmpty()) {
 					renderer.renderAndDecorateItem(stack, dx, y);
 					renderer.renderGuiItemDecorations(font, stack, dx, y);
@@ -87,6 +83,15 @@ public class ToolSelection extends SelectionSideBar {
 			}
 
 		}
+	}
+
+	protected int getXOffset(int width) {
+		float progress = (this.max_ease - this.ease_time) / this.max_ease;
+		return this.onCenter() ? width / 2 - 54 - 1 - Math.round(progress * (float) width / 2.0F) : 2 - Math.round(progress * 20.0F);
+	}
+
+	protected int getYOffset(int height) {
+		return height / 2 - 9 * ToolSelectionHelper.LIST.size() + 1;
 	}
 
 }

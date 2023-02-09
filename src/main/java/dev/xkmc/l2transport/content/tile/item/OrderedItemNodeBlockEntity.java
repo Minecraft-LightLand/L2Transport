@@ -1,6 +1,8 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.configurables.ConfigConnectorType;
+import dev.xkmc.l2transport.content.configurables.ItemConfigurable;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.OrderedConnector;
 import net.minecraft.core.BlockPos;
@@ -9,6 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 @SerialClass
 public class OrderedItemNodeBlockEntity extends AbstractItemNodeBlockEntity<OrderedItemNodeBlockEntity> {
+
+	@SerialClass.SerialField(toClient = true)
+	private final ItemConfigurable config = new ItemConfigurable(ConfigConnectorType.ORDERED, this);
 
 	@SerialClass.SerialField(toClient = true)
 	private final OrderedConnector connector = new OrderedConnector(this, this::getMaxCoolDown);
@@ -21,4 +26,10 @@ public class OrderedItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Orde
 	public IConnector getConnector() {
 		return connector;
 	}
+
+	@Override
+	public ItemConfigurable getConfig() {
+		return config;
+	}
+
 }

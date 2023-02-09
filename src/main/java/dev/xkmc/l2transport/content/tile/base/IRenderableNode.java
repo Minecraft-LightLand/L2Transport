@@ -1,6 +1,6 @@
 package dev.xkmc.l2transport.content.tile.base;
 
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 
 public interface IRenderableNode {

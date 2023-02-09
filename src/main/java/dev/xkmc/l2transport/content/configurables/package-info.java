@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2transport.content.tile.client.node;
+package dev.xkmc.l2transport.content.configurables;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

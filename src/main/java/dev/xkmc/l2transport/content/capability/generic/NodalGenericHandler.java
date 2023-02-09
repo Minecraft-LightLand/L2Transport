@@ -18,7 +18,7 @@ public record NodalGenericHandler(IGenericNodeBlockEntity entity) implements Gen
 
 	@Override
 	public boolean isValid(IContentHolder<GenericHolder> token) {
-		return entity.isContentValid(token.get());
+		return entity.getConfig().isContentValid(token.get());
 	}
 
 	@Override

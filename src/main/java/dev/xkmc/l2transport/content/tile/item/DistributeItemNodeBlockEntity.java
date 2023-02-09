@@ -1,6 +1,8 @@
 package dev.xkmc.l2transport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.configurables.ConfigConnectorType;
+import dev.xkmc.l2transport.content.configurables.ItemConfigurable;
 import dev.xkmc.l2transport.content.connector.DistributeConnector;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import net.minecraft.core.BlockPos;
@@ -9,6 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 @SerialClass
 public class DistributeItemNodeBlockEntity extends AbstractItemNodeBlockEntity<DistributeItemNodeBlockEntity> {
+
+	@SerialClass.SerialField(toClient = true)
+	private final ItemConfigurable config = new ItemConfigurable(ConfigConnectorType.DISTRIBUTE, this);
 
 	@SerialClass.SerialField(toClient = true)
 	private final DistributeConnector connector = new DistributeConnector(this::getMaxCoolDown);
@@ -20,5 +25,10 @@ public class DistributeItemNodeBlockEntity extends AbstractItemNodeBlockEntity<D
 	@Override
 	public IConnector getConnector() {
 		return connector;
+	}
+
+	@Override
+	public ItemConfigurable getConfig() {
+		return config;
 	}
 }

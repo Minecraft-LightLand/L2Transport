@@ -1,4 +1,4 @@
-// 1.19.2	2023-02-08T13:33:16.800279	Registrate Provider for l2transport [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-08T14:44:00.76666	Registrate Provider for l2transport [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 25c14a0771cf93de676d4acc2feebe6484b96c4a assets/l2transport/blockstates/node_extended.json
 3bdc8dfd26c66e1fd6f8c40c264dff68c9d7d9f6 assets/l2transport/blockstates/node_fluid_distribute.json
 c0c82f03581020dddb709b3b0be341184c9f9ec6 assets/l2transport/blockstates/node_fluid_ordered.json
@@ -13,8 +13,8 @@ a5d8475c8fc0760db00bc061c6ee50177a4b9267 assets/l2transport/blockstates/node_flu
 fc7312b4a517b5d8d30271d1809c6c222f52c709 assets/l2transport/blockstates/node_item_retrieve.json
 17cc6f6f687c44ef756c9a98fa299db898cc60aa assets/l2transport/blockstates/node_item_simple.json
 eb83f4539c44fa8cda5b299c892369dc8274a921 assets/l2transport/blockstates/node_item_synced.json
-8bbd26ed4409f24fe9f5b821b2abe4bcd3bf4116 assets/l2transport/lang/en_ud.json
-2855cb9efd4c35dbe52f462cd0ac5a2893a7f3c7 assets/l2transport/lang/en_us.json
+8276550cb4b07de4c75ff763dbd62a6faa398cbd assets/l2transport/lang/en_ud.json
+867420568135816de4a4d817db0cc502701574f0 assets/l2transport/lang/en_us.json
 8bfd890d777e037c2558a0e4ba589ebcb455653a assets/l2transport/models/block/node_extended.json
 b9b9bb1f0452d1be839db83497bde59c87d6b0e6 assets/l2transport/models/block/node_fluid_distribute.json
 0db8d02271dae3ae842e120bbde50b454958f4b5 assets/l2transport/models/block/node_fluid_distribute_lit.json
@@ -40,6 +40,7 @@ bb11aba3a452c561bf0dbaa3ce8f339796187c22 assets/l2transport/models/block/node_it
 e5c71c7a07dd3e1219b55533fc032b0f5b3df025 assets/l2transport/models/block/node_item_synced.json
 7d6867ad6b32665848306a59ee18ed5f90e5129b assets/l2transport/models/block/node_item_synced_lit.json
 377babd77ed62d8b089adb0d46e81990c54c5c80 assets/l2transport/models/item/clear.json
+d903a020207a05dcbd2b1e015f099c9bcb6801ce assets/l2transport/models/item/configurator.json
 5d2c1b8301aed1af8de4bba3c90b1c2e03fe795f assets/l2transport/models/item/distance_upgrade_0.json
 9824522b45b79cbd5e400699e630239d6c4e3aae assets/l2transport/models/item/drop_upgrade.json
 23f19a75d41b055a05c21e46ed4fec1f59aaa68e assets/l2transport/models/item/flux_filter.json

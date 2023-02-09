@@ -4,6 +4,7 @@ import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
 import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
 import dev.xkmc.l2transport.content.tile.fluid.AbstractFluidNodeBlockEntity;
+import dev.xkmc.l2transport.content.tile.item.AbstractItemNodeBlockEntity;
 import dev.xkmc.l2transport.content.tools.ILinker;
 import dev.xkmc.l2transport.content.upgrades.UpgradeItem;
 import net.minecraft.core.BlockPos;
@@ -36,15 +37,21 @@ public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateB
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof AbstractFluidNodeBlockEntity<?> rte) {
 			var stackCap = pl.getMainHandItem().getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
-			if (rte.filter.isEmpty()) {
-				if (stackCap.resolve().isPresent()) {
-					rte.filter = stackCap.resolve().get().getFluidInTank(0);
+			if (stackCap.resolve().isPresent()) {
+				FluidStack stack = stackCap.resolve().get().getFluidInTank(0);
+				if (rte.getConfig().hasNoFilter()) {
+					rte.getConfig().setSimpleFilter(stack);
 					level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, true));
+					return InteractionResult.SUCCESS;
 				}
-			} else {
-				rte.filter = FluidStack.EMPTY;
-				level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, false));
+				if (rte.getConfig().canQuickSetCount(stack)) {
+					rte.getConfig().setMaxTransfer(stack.getAmount());
+					rte.markDirty();
+					return InteractionResult.SUCCESS;
+				}
 			}
+			rte.getConfig().clearFilter();
+			level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, false));
 		}
 		return InteractionResult.SUCCESS;
 	}

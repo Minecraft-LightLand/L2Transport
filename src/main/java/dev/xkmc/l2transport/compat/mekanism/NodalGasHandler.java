@@ -25,12 +25,12 @@ public record NodalGasHandler(NodalGenericHandler node) implements IGasHandler {
 
 	@Override
 	public long getTankCapacity(int i) {
-		return node().entity().getMaxTransfer();
+		return node().entity().getConfig().getMaxTransfer();
 	}
 
 	@Override
 	public boolean isValid(int i, GasStack stack) {
-		return node().entity().isContentValid(GasHolder.parse(stack));
+		return node().entity().getConfig().isContentValid(GasHolder.parse(stack));
 	}
 
 	@Override

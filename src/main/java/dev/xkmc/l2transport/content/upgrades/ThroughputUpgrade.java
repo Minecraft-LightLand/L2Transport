@@ -13,7 +13,7 @@ public class ThroughputUpgrade extends Upgrade {
 	}
 
 	@Override
-	public int getMaxTransfer(int cd) {
+	public long getMaxTransfer(long cd) {
 		return cd * throughput;
 	}
 

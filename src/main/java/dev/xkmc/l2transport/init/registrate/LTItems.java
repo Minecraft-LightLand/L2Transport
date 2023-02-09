@@ -41,6 +41,7 @@ public class LTItems {
 	public static final ItemEntry<RotateItem> ROTATE;
 	public static final ItemEntry<ValidatorItem> VALIDATOR;
 	public static final ItemEntry<ClearItem> CLEAR;
+	public static final ItemEntry<ConfiguratorItem> CONFIG;
 	public static final ItemEntry<FluxFilter> FLUX;
 	public static final ItemEntry<UpgradeItem> VALVE_UP, WATCH_UP, DROP_UP, PLACE_UP,
 			SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
@@ -50,6 +51,7 @@ public class LTItems {
 		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().defaultLang().register();
 		VALIDATOR = REGISTRATE.item("validator", ValidatorItem::new).defaultModel().defaultLang().register();
 		CLEAR = REGISTRATE.item("clear", ClearItem::new).defaultModel().defaultLang().register();
+		CONFIG = REGISTRATE.item("configurator", ConfiguratorItem::new).defaultModel().defaultLang().register();
 		FLUX = REGISTRATE.item("flux_filter", FluxFilter::new).defaultModel().defaultLang().register();
 
 		{

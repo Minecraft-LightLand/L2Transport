@@ -1,7 +1,7 @@
 package dev.xkmc.l2transport.init;
 
-import dev.xkmc.l2transport.content.tile.client.overlay.OverlayRenderer;
-import dev.xkmc.l2transport.content.tile.client.overlay.ToolSelection;
+import dev.xkmc.l2transport.content.client.overlay.OverlayRenderer;
+import dev.xkmc.l2transport.content.client.overlay.ToolSelection;
 import dev.xkmc.l2transport.events.ClientGeneralEvents;
 import dev.xkmc.l2transport.init.data.Keys;
 import net.minecraftforge.api.distmarker.Dist;

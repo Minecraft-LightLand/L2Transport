@@ -1,6 +1,6 @@
 package dev.xkmc.l2transport.events;
 
-import dev.xkmc.l2transport.content.tile.client.overlay.ToolSelection;
+import dev.xkmc.l2transport.content.client.overlay.ToolSelection;
 import dev.xkmc.l2transport.content.tools.ToolSelectionHelper;
 import dev.xkmc.l2transport.init.data.Keys;
 import net.minecraftforge.api.distmarker.Dist;

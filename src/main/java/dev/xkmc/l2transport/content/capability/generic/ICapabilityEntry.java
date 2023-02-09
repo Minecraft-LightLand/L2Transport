@@ -13,6 +13,8 @@ public interface ICapabilityEntry<T> {
 
 	HandlerWrapper parse(T t);
 
+	MutableComponent getKindDesc(ResourceLocation id);
+
 	MutableComponent getDesc(ResourceLocation id, long amount);
 
 	int getDefaultMax();

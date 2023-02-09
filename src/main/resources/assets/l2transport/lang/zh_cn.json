@@ -48,5 +48,9 @@
   "l2transport.upgrade.speed": "运输速率: x%s",
   "l2transport.upgrade.throughput": "运输上限: x%s",
   "l2transport.upgrade.valve": "接收红石信号时禁用节点",
-  "l2transport.upgrade.watch": "物品流通时发送红石信号"
+  "l2transport.upgrade.watch": "物品流通时发送红石信号",
+  "key.categories.l2transport": "莱特兰物流-按键",
+  "key.l2backpack.down": "手杖选择-下",
+  "key.l2backpack.up": "手杖选择-上",
+  "item.l2transport.configurator": "配置手杖"
 }

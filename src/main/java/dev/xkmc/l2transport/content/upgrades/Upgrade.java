@@ -22,7 +22,7 @@ public abstract class Upgrade {
 		return distSqr;
 	}
 
-	public int getMaxTransfer(int amount) {
+	public long getMaxTransfer(long amount) {
 		return amount;
 	}
 

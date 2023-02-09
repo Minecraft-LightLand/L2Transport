@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2transport.content.tile.client.overlay;
+package dev.xkmc.l2transport.content.client.node;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

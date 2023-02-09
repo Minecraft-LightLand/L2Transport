@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client.node;
+package dev.xkmc.l2transport.content.client.node;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.util.math.RenderUtils;

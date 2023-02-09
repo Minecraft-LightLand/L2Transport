@@ -1,9 +1,13 @@
-package dev.xkmc.l2transport.content.tile.client.overlay;
+package dev.xkmc.l2transport.content.client.overlay;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeMap;
 
 public class TooltipBuilder {
 
@@ -14,6 +18,6 @@ public class TooltipBuilder {
 	}
 
 	public List<Component> build() {
-		return map.values().stream().flatMap(Collection::stream).toList();
+		return map.entrySet().stream().filter(e -> Screen.hasShiftDown() || e.getKey() != TooltipType.DESC).flatMap(e -> e.getValue().stream()).toList();
 	}
 }

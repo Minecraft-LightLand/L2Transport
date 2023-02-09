@@ -1,6 +1,8 @@
 package dev.xkmc.l2transport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2transport.content.configurables.ConfigConnectorType;
+import dev.xkmc.l2transport.content.configurables.FluidConfigurable;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.SyncedConnector;
 import net.minecraft.core.BlockPos;
@@ -11,7 +13,10 @@ import net.minecraft.world.level.block.state.BlockState;
 public class SyncedFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<SyncedFluidNodeBlockEntity> {
 
 	@SerialClass.SerialField(toClient = true)
-	private final SyncedConnector connector = new SyncedConnector(this::getMaxCoolDown, this::getMaxTransfer);
+	private final FluidConfigurable config = new FluidConfigurable(ConfigConnectorType.SYNC, this);
+
+	@SerialClass.SerialField(toClient = true)
+	private final SyncedConnector connector = new SyncedConnector(this::getMaxCoolDown, config);
 
 	public SyncedFluidNodeBlockEntity(BlockEntityType<SyncedFluidNodeBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -22,4 +27,8 @@ public class SyncedFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<Syn
 		return connector;
 	}
 
+	@Override
+	public FluidConfigurable getConfig() {
+		return config;
+	}
 }

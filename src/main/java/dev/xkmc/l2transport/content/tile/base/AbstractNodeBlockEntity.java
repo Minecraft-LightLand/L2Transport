@@ -6,9 +6,9 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.client.overlay.TooltipType;
 import dev.xkmc.l2transport.content.connector.IConnector;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipType;
 import dev.xkmc.l2transport.content.upgrades.*;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.init.data.LangData;
@@ -70,6 +70,14 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		return Optional.of(ans);
 	}
 
+	public List<ItemStack> popUpgrade() {
+		var ans = new ArrayList<>(upgrades.values());
+		for (var stack : ans) {
+			stack.setCount(1);
+		}
+		return ans;
+	}
+
 	@Override
 	public List<Container> getContainers() {
 		return List.of(new SimpleContainer(upgrades.values().toArray(ItemStack[]::new)));
@@ -85,20 +93,25 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 
 	// base functionality
 
-	private boolean dirty = false;
+	private boolean needUpdate = false;
+	private boolean needSync = false;
 
 	@Override
 	public void tick() {
-		if (level != null && !level.isClientSide && dirty) {
+		if (level != null && !level.isClientSide && needUpdate) {
 			getConnector().perform();
+			needUpdate = false;
+			needSync = true;
+		}
+		if (level != null && !level.isClientSide && needSync) {
 			sync();
-			dirty = false;
+			needSync = false;
 		}
 		getConnector().tick();
 	}
 
-	protected void markDirty() {
-		dirty = true;
+	public void markDirty() {
+		needSync = true;
 	}
 
 	public int getMaxCoolDown() {
@@ -113,7 +126,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 
 	public final void refreshCoolDown(BlockPos target, boolean success, boolean simulate) {
 		getConnector().refreshCoolDown(target, success, simulate);
-		dirty = true;
+		needUpdate = true;
 		if (level != null && !simulate && getUpgrade(UpgradeFlag.REDSTONE) instanceof WatchUpgrade) {
 			level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.TRIGGERED, true));
 			level.scheduleTick(getBlockPos(), getBlockState().getBlock(), 2);

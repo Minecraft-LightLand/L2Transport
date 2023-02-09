@@ -19,7 +19,8 @@ public class ToolSelectionHelper {
 			LTItems.LINKER.asStack(),
 			LTItems.VALIDATOR.asStack(),
 			LTItems.CLEAR.asStack(),
-			LTItems.ROTATE.asStack());
+			LTItems.ROTATE.asStack(),
+			LTItems.CONFIG.asStack());
 
 	@ServerOnly
 	public static void swap(Player sender, int index) {

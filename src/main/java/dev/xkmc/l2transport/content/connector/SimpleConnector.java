@@ -1,9 +1,10 @@
 package dev.xkmc.l2transport.content.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.flow.IContentHolder;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipBuilder;
-import dev.xkmc.l2transport.content.tile.client.overlay.TooltipType;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.client.overlay.TooltipType;
+import dev.xkmc.l2transport.content.configurables.BaseConfigurable;
+import dev.xkmc.l2transport.content.configurables.IConfigurableFilter;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.util.Holder;
 import net.minecraft.core.BlockPos;
@@ -19,11 +20,11 @@ public class SimpleConnector extends SingleCoolDownConnector {
 	@SerialClass.SerialField(toClient = true)
 	private Holder pos = new Holder(null);
 
-	protected final IntSupplier limit;
+	protected final BaseConfigurable config;
 
-	public SimpleConnector(IntSupplier max, IntSupplier limit) {
+	public SimpleConnector(IntSupplier max, BaseConfigurable config) {
 		super(max);
-		this.limit = limit;
+		this.config = config;
 	}
 
 	@Override
@@ -52,10 +53,10 @@ public class SimpleConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public <T> void addTooltips(TooltipBuilder list, IContentHolder<T> filter) {
-		if (filter.getCount() > 0) {
-			list.add(TooltipType.FILTER, LangData.INFO_FILTER.get(filter.getDesc()));
-			list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(filter.getCount()));
+	public <T> void addTooltips(TooltipBuilder list, IConfigurableFilter filter) {
+		if (filter.shouldDisplay()) {
+			list.add(TooltipType.FILTER, LangData.INFO_FILTER.get(filter.getFilterDesc()));
+			list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(filter.getMaxTransfer()));
 		}
 		list.add(TooltipType.STAT, LangData.INFO_SPEED.getLiteral(maxCoolDown.getAsInt() / 20f));
 		list.add(TooltipType.DESC, LangData.SIMPLE.get());
@@ -63,7 +64,7 @@ public class SimpleConnector extends SingleCoolDownConnector {
 
 	@Override
 	public long provide(long available, long consumed, long size) {
-		return Math.min(super.provide(available, consumed, size), limit.getAsInt());
+		return Math.min(config.getMaxTransfer(), super.provide(available, consumed, size));
 	}
 
 }

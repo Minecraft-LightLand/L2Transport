@@ -25,24 +25,30 @@ public class ItemNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBl
 
 	@Override
 	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
-		if (pl.getMainHandItem().getItem() instanceof ILinker)
+		ItemStack stack = pl.getMainHandItem();
+		if (stack.getItem() instanceof ILinker)
 			return InteractionResult.PASS;
-		if (pl.getMainHandItem().getItem() instanceof UpgradeItem)
+		if (stack.getItem() instanceof UpgradeItem)
 			return InteractionResult.PASS;
 		if (level.isClientSide()) {
 			return InteractionResult.SUCCESS;
 		}
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof AbstractItemNodeBlockEntity<?> rte) {
-			if (rte.filter.isEmpty()) {
-				if (!pl.getMainHandItem().isEmpty()) {
-					rte.filter = pl.getMainHandItem().copy();
+			if (rte.getConfig().hasNoFilter()) {
+				if (!stack.isEmpty()) {
+					rte.getConfig().setSimpleFilter(stack.copy());
 					level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, true));
+					return InteractionResult.SUCCESS;
 				}
-			} else {
-				rte.filter = ItemStack.EMPTY;
-				level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, false));
 			}
+			if (!stack.isEmpty() && rte.getConfig().canQuickSetCount(stack)) {
+				rte.getConfig().setMaxTransfer(stack.getCount());
+				rte.markDirty();
+				return InteractionResult.SUCCESS;
+			}
+			rte.getConfig().clearFilter();
+			level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, false));
 		}
 		return InteractionResult.SUCCESS;
 	}

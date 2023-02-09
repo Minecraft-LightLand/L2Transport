@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.tile.client.overlay;
+package dev.xkmc.l2transport.content.client.overlay;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.base.overlay.OverlayUtils;
@@ -16,6 +16,8 @@ import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 public class OverlayRenderer extends GuiComponent implements IGuiOverlay {
 
+	public static final int MARGIN = 24;
+
 	@Override
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
 		if (Minecraft.getInstance().screen != null) return;
@@ -26,14 +28,9 @@ public class OverlayRenderer extends GuiComponent implements IGuiOverlay {
 		BlockPos pos = ray.getBlockPos();
 		BlockEntity entity = player.level.getBlockEntity(pos);
 		if (entity instanceof IRenderableNode be) {
-			OverlayUtils util = new OverlayUtils(screenWidth, screenHeight) {
-				@Override
-				public int getX(int w) {
-					return Math.max(16, (screenWidth / 2 - w) / 2);
-				}
-			};
+			OverlayUtils util = new OverlayUtils(screenWidth, screenHeight);
 			util.renderLongText(gui, poseStack,
-					-1, -1, screenWidth / 2 - 32,
+					screenWidth / 2 + MARGIN, -1, (screenWidth) / 2 - MARGIN * 2,
 					be.getTooltips().build());
 		}
 	}

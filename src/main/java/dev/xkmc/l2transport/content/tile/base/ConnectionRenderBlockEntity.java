@@ -2,7 +2,7 @@ package dev.xkmc.l2transport.content.tile.base;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.tile.client.node.RenderManager;
+import dev.xkmc.l2transport.content.client.node.RenderManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
