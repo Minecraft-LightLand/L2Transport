@@ -73,7 +73,7 @@ public class RetrieverItemNodeBlockEntity extends AbstractItemNodeBlockEntity<Re
 		for (int i = 0; i < target.getSlots(); i++) {
 			ItemStack stack = target.extractItem(i, (int) getConfig().getMaxTransfer(), true);
 			if (stack.isEmpty()) continue;
-			if (!getConfig().isItemStackValid(stack)) continue;
+			if (!getConfig().isStackValid(stack)) continue;
 			if (!getConfig().allowExtract(stack.getCount())) continue;
 			ItemStack attempt = getHandler().insertItem(0, stack, true);
 			if (attempt.getCount() == stack.getCount()) continue;

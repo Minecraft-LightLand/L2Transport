@@ -70,7 +70,7 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 		for (int i = 0; i < target.getTanks(); i++) {
 			FluidStack toDrain = target.drain((int) getConfig().getMaxTransfer(), IFluidHandler.FluidAction.SIMULATE);
 			if (toDrain.isEmpty()) continue;
-			if (!getConfig().isFluidStackValid(toDrain)) continue;
+			if (!getConfig().isStackValid(toDrain)) continue;
 			if (!getConfig().allowExtract(toDrain.getAmount())) continue;
 			int toFill = getHandler().fill(toDrain, IFluidHandler.FluidAction.SIMULATE);
 			if (toFill == 0) continue;

@@ -2,14 +2,18 @@ package dev.xkmc.l2transport.content.configurables;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.item.IItemNodeBlockEntity;
+import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SerialClass
-public class ItemConfigurable extends BaseConfigurable implements IConfigurableFilter {
+public class ItemConfigurable extends CommonConfigurable<ItemStack> {
 
 	@SerialClass.SerialField(toClient = true)
-	private ItemStack filter = ItemStack.EMPTY;
+	private final ArrayList<ItemStack> filters = new ArrayList<>();
 
 	@SerialClass.SerialField(toClient = true)
 	protected boolean match_tag = false;
@@ -18,42 +22,37 @@ public class ItemConfigurable extends BaseConfigurable implements IConfigurableF
 		super(type, node);
 	}
 
-	public boolean isItemStackValid(ItemStack stack) {
-		if (filter.isEmpty()) return true;
-		if (match_tag) return ItemStack.isSameItemSameTags(stack, filter);
-		return stack.getItem() == filter.getItem();
+	@Override
+	protected List<ItemStack> getFilters() {
+		return filters;
+	}
+
+	protected boolean match(ItemStack stack) {
+		for (ItemStack filter : filters) {
+			if (stack.getItem() == filter.getItem()) {
+				if (match_tag) {
+					if (ItemStack.isSameItemSameTags(stack, filter)) {
+						return true;
+					}
+				} else {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public ItemStack getDisplayItem() {
-		return filter;
+		return filters.size() == 1 ? filters.get(0) : ItemStack.EMPTY;
 	}
 
-	@Override
 	public MutableComponent getFilterDesc() {
-		return filter.getHoverName().copy();
-	}
-
-	@Override
-	public boolean shouldDisplay() {
-		return !filter.isEmpty();
-	}
-
-	public void clearFilter() {
-		filter = ItemStack.EMPTY;
-		setMaxTransfer(-1);
-	}
-
-	public boolean hasNoFilter() {
-		return filter.isEmpty();
-	}
-
-	public void setSimpleFilter(ItemStack copy) {
-		filter = copy;
-		setMaxTransfer(-1);
+		return filters.size() == 1 ? filters.get(0).getHoverName().copy() : LangData.CONFIG_FILTER.get();
 	}
 
 	public boolean canQuickSetCount(ItemStack stack) {
-		return type.canSetCount() && shouldDisplay() && filter.getItem() == stack.getItem();
+		if (isLocked()) return false;
+		return type.canSetCount() && shouldDisplay() && filters.size() == 1 && filters.get(0).getItem() == stack.getItem();
 	}
 
 	@Override

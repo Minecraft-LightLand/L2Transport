@@ -176,6 +176,15 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		}
 		for (var e : upgrades.values()) {
 			ans.add(TooltipType.UPGRADE, e.getHoverName().copy().withStyle(ChatFormatting.GOLD));
+			if (ans.hasShiftDown()) {
+				ans.add(TooltipType.UPGRADE, ((UpgradeItem) e.getItem()).getUpgrade().getDesc().withStyle(ChatFormatting.DARK_GREEN));
+			}
+		}
+		if (!ans.hasShiftDown()) {
+			ans.add(TooltipType.STAT, LangData.INFO_SPEED.getLiteral(getMaxCoolDown() / 20f));
+			getConfig().addTooltips(ans);
+		} else {
+			ans.add(TooltipType.DESC, getConfig().getType().getDesc());
 		}
 		return ans;
 	}

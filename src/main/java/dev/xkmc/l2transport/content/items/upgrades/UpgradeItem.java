@@ -2,6 +2,7 @@ package dev.xkmc.l2transport.content.items.upgrades;
 
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.tile.base.IUpgradableBlock;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -58,7 +59,7 @@ public class UpgradeItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(getUpgrade().getDesc());
+		list.add(getUpgrade().getDesc().withStyle(ChatFormatting.GRAY));
 		super.appendHoverText(stack, level, list, flag);
 	}
 }

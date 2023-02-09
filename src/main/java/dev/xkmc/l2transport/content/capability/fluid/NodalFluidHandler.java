@@ -26,7 +26,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity entity) implements IFluidH
 
 	@Override
 	public boolean isFluidValid(int slot, @NotNull FluidStack stack) {
-		return entity.getConfig().isFluidStackValid(stack);
+		return entity.getConfig().isStackValid(stack);
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public record NodalFluidHandler(IFluidNodeBlockEntity entity) implements IFluidH
 
 	@Override
 	public boolean isValid(IContentHolder<FluidStack> token) {
-		return entity.getConfig().isFluidStackValid(token.get());
+		return entity.getConfig().isStackValid(token.get());
 	}
 
 }

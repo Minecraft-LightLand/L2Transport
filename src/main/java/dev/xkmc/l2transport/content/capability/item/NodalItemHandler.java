@@ -45,12 +45,12 @@ public record NodalItemHandler(IItemNodeBlockEntity entity) implements IItemHand
 
 	@Override
 	public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-		return entity.getConfig().isItemStackValid(stack);
+		return entity.getConfig().isStackValid(stack);
 	}
 
 	@Override
 	public boolean isValid(IContentHolder<ItemStack> token) {
-		return entity.getConfig().isItemStackValid(token.get());
+		return entity.getConfig().isStackValid(token.get());
 	}
 
 }

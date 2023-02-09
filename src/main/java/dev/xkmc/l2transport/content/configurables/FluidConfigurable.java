@@ -3,56 +3,55 @@ package dev.xkmc.l2transport.content.configurables;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.init.data.LTModConfig;
+import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SerialClass
-public class FluidConfigurable extends BaseConfigurable implements IConfigurableFilter {
+public class FluidConfigurable extends CommonConfigurable<FluidStack> {
 
 	@SerialClass.SerialField(toClient = true)
-	private FluidStack filter = FluidStack.EMPTY;
-
-	@SerialClass.SerialField(toClient = true)
-	protected boolean match_tag = false;
+	private final ArrayList<FluidStack> filters = new ArrayList<>();
 
 	public FluidConfigurable(ConfigConnectorType type, IFluidNodeBlockEntity node) {
 		super(type, node);
 	}
 
-	public boolean isFluidStackValid(FluidStack stack) {
-		if (filter.isEmpty()) return true;
-		if (match_tag) return stack.isFluidEqual(filter);
-		return stack.getFluid() == filter.getFluid();
+	@Override
+	protected List<FluidStack> getFilters() {
+		return filters;
+	}
+
+	protected boolean match(FluidStack stack) {
+		for (FluidStack filter : filters) {
+			if (stack.getFluid() == filter.getFluid()) {
+				if (match_tag) {
+					if (stack.isFluidEqual(filter)) {
+						return true;
+					}
+				} else {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public FluidStack getDisplayFluid() {
-		return filter;
+		return filters.size() == 1 ? filters.get(0) : FluidStack.EMPTY;
 	}
 
 	@Override
 	public MutableComponent getFilterDesc() {
-		return filter.getDisplayName().copy();
-	}
-
-	@Override
-	public boolean shouldDisplay() {
-		return !filter.isEmpty();
-	}
-
-	public void clearFilter() {
-		filter = FluidStack.EMPTY;
-	}
-
-	public boolean hasNoFilter() {
-		return filter.isEmpty();
-	}
-
-	public void setSimpleFilter(FluidStack copy) {
-		filter = copy;
+		return filters.size() == 1 ? filters.get(0).getDisplayName().copy() : LangData.CONFIG_FILTER.get();
 	}
 
 	public boolean canQuickSetCount(FluidStack stack) {
-		return type.canSetCount() && shouldDisplay() && filter.getFluid() == stack.getFluid();
+		if (isLocked()) return false;
+		return type.canSetCount() && shouldDisplay() && filters.size() == 1 && filters.get(0).getFluid() == stack.getFluid();
 	}
 
 	@Override

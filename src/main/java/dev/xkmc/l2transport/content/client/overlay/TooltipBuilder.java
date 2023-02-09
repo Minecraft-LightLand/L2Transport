@@ -1,6 +1,6 @@
 package dev.xkmc.l2transport.content.client.overlay;
 
-import net.minecraft.client.gui.screens.Screen;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -18,6 +18,11 @@ public class TooltipBuilder {
 	}
 
 	public List<Component> build() {
-		return map.entrySet().stream().filter(e -> Screen.hasShiftDown() || e.getKey() != TooltipType.DESC).flatMap(e -> e.getValue().stream()).toList();
+		return map.entrySet().stream().flatMap(e -> e.getValue().stream()).toList();
 	}
+
+	public boolean hasShiftDown() {
+		return Proxy.getClientPlayer().isShiftKeyDown();
+	}
+
 }

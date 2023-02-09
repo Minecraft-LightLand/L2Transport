@@ -1,10 +1,6 @@
 package dev.xkmc.l2transport.content.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
-import dev.xkmc.l2transport.content.client.overlay.TooltipType;
-import dev.xkmc.l2transport.content.configurables.IConfigurableFilter;
-import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;
@@ -65,15 +61,6 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	@Override
 	public boolean shouldContinue(long available, long consumed, long size) {
 		return consumed == 0 && super.shouldContinue(available, consumed, size);
-	}
-
-	@Override
-	public <T> void addTooltips(TooltipBuilder list, IConfigurableFilter filter) {
-		if (filter.shouldDisplay()) {
-			list.add(TooltipType.FILTER, LangData.INFO_FILTER.get(filter.getFilterDesc()));
-		}
-		list.add(TooltipType.STAT, LangData.INFO_SPEED.getLiteral(maxCoolDown.getAsInt() / 20f));
-		list.add(TooltipType.DESC, LangData.DISTRIBUTE.get());
 	}
 
 }

@@ -1,7 +1,5 @@
 package dev.xkmc.l2transport.content.connector;
 
-import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
-import dev.xkmc.l2transport.content.configurables.IConfigurableFilter;
 import dev.xkmc.l2transport.content.flow.NetworkType;
 import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
 import net.minecraft.core.BlockPos;
@@ -24,8 +22,6 @@ public interface IConnector extends NetworkType, IRenderableConnector {
 	boolean isReady();
 
 	void refreshCoolDown(BlockPos target, boolean success, boolean simulate);
-
-	<T> void addTooltips(TooltipBuilder list, IConfigurableFilter filter);
 
 	@Override
 	default boolean testConsumption(long avail, long c) {

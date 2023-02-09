@@ -3,7 +3,6 @@ package dev.xkmc.l2transport.content.tile.item;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.item.IItemNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.item.NodalItemHandler;
-import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableItemNode;
@@ -44,13 +43,6 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 
 	public ItemStack getItem() {
 		return getConfig().getDisplayItem();
-	}
-
-	@Override
-	public TooltipBuilder getTooltips() {
-		var ans = super.getTooltips();
-		getConnector().addTooltips(ans, getConfig());
-		return ans;
 	}
 
 	@Override

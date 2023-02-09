@@ -4,7 +4,6 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.l2transport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.fluid.NodalFluidHandler;
-import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.items.upgrades.LevelDropUpgrade;
 import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 import dev.xkmc.l2transport.content.items.upgrades.UpgradeItem;
@@ -52,13 +51,6 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 
 	public FluidStack getFluid() {
 		return getConfig().getDisplayFluid();
-	}
-
-	@Override
-	public TooltipBuilder getTooltips() {
-		var ans = super.getTooltips();
-		getConnector().addTooltips(ans, getConfig());
-		return ans;
 	}
 
 	@Override

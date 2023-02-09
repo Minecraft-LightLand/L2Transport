@@ -59,13 +59,13 @@ public class LTItems {
 			WATCH_UP = REGISTRATE.item("watch_upgrade", p -> new UpgradeItem(p, new WatchUpgrade())).register();
 			DROP_UP = REGISTRATE.item("drop_upgrade", p -> new UpgradeItem(p, new LevelDropUpgrade())).register();
 			PLACE_UP = REGISTRATE.item("place_upgrade", p -> new UpgradeItem(p, new LevelPlaceUpgrade())).register();
-			SPEED_UP_0 = REGISTRATE.item("speed_upgrade_0", p -> new UpgradeItem(p, new SpeedUpgrade(2))).register();
-			SPEED_UP_1 = REGISTRATE.item("speed_upgrade_1", p -> new UpgradeItem(p, new SpeedUpgrade(4))).register();
-			SPEED_UP_2 = REGISTRATE.item("speed_upgrade_2", p -> new UpgradeItem(p, new SpeedUpgrade(8))).register();
-			DIST_UP_0 = REGISTRATE.item("distance_upgrade_0", p -> new UpgradeItem(p, new DistanceUpgrade(2))).register();
-			THR_UP_0 = REGISTRATE.item("throughput_upgrade_0", p -> new UpgradeItem(p, new ThroughputUpgrade(4))).register();
-			THR_UP_1 = REGISTRATE.item("throughput_upgrade_1", p -> new UpgradeItem(p, new ThroughputUpgrade(16))).register();
-			THR_UP_2 = REGISTRATE.item("throughput_upgrade_2", p -> new UpgradeItem(p, new ThroughputUpgrade(64))).register();
+			SPEED_UP_0 = REGISTRATE.item("speed_upgrade_0", p -> new UpgradeItem(p, new SpeedUpgrade(2))).lang("Speed Upgrade I").register();
+			SPEED_UP_1 = REGISTRATE.item("speed_upgrade_1", p -> new UpgradeItem(p, new SpeedUpgrade(4))).lang("Speed Upgrade II").register();
+			SPEED_UP_2 = REGISTRATE.item("speed_upgrade_2", p -> new UpgradeItem(p, new SpeedUpgrade(8))).lang("Speed Upgrade III").register();
+			DIST_UP_0 = REGISTRATE.item("distance_upgrade_0", p -> new UpgradeItem(p, new DistanceUpgrade(2))).lang("Distance Upgrade").register();
+			THR_UP_0 = REGISTRATE.item("throughput_upgrade_0", p -> new UpgradeItem(p, new ThroughputUpgrade(4))).lang("Throughput Upgrade I").register();
+			THR_UP_1 = REGISTRATE.item("throughput_upgrade_1", p -> new UpgradeItem(p, new ThroughputUpgrade(16))).lang("Throughput Upgrade II").register();
+			THR_UP_2 = REGISTRATE.item("throughput_upgrade_2", p -> new UpgradeItem(p, new ThroughputUpgrade(64))).lang("Throughput Upgrade III").register();
 
 		}
 	}

@@ -38,7 +38,6 @@
   "l2transport.connect.simple": "只连接一个目标。加入过滤时，只允许过滤器指定的内容通过，且数量不能超过过滤器指定的量。",
   "l2transport.connect.synced": "连接多个目标。收到内容时，试图向所有目标发送相同量的内容，不成功则拒绝发送。 可通过过滤器指定一次发送的量。",
   "l2transport.info.extract": "一次提取 %s",
-  "l2transport.info.filter": "过滤: %s",
   "l2transport.info.gated": "运输上限: %s",
   "l2transport.info.speed": "运输冷却: %s",
   "l2transport.info.sync": "一次强制同步向所有目标运输 %s",
@@ -52,5 +51,10 @@
   "key.categories.l2transport": "莱特兰物流-按键",
   "key.l2backpack.down": "手杖选择-下",
   "key.l2backpack.up": "手杖选择-上",
-  "item.l2transport.configurator": "配置手杖"
+  "item.l2transport.configurator": "配置手杖",
+  "l2transport.config.filter": "复杂过滤器",
+  "l2transport.config.lock": "过滤器已锁定",
+  "l2transport.config.tag": "匹配NBT标签",
+  "l2transport.info.blacklist": "过滤黑名单: %s",
+  "l2transport.info.whitelist": "过滤白名单: %s"
 }

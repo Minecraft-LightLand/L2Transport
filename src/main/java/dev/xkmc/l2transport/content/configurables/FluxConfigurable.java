@@ -7,7 +7,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 @SerialClass
-public class FluxConfigurable extends BaseConfigurable implements IConfigurableFilter {
+public class FluxConfigurable extends BaseConfigurable {
 
 	private final IGenericNodeBlockEntity generic;
 
