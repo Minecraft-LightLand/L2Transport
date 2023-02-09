@@ -1,10 +1,10 @@
 package dev.xkmc.l2transport.content.connector;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.configurables.BaseConfigurable;
-import dev.xkmc.l2transport.content.configurables.IConfigurableFilter;
 import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.client.overlay.TooltipType;
+import dev.xkmc.l2transport.content.configurables.BaseConfigurable;
+import dev.xkmc.l2transport.content.configurables.IConfigurableFilter;
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.core.BlockPos;
 

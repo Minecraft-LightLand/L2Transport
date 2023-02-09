@@ -12,7 +12,7 @@ public class FluxConfigurable extends BaseConfigurable implements IConfigurableF
 	private final IGenericNodeBlockEntity generic;
 
 	@SerialClass.SerialField(toClient = true)
-	private ResourceLocation filter = GenericHolder.EMPTY_ID;
+	private final ResourceLocation filter = GenericHolder.EMPTY_ID;
 
 	public FluxConfigurable(ConfigConnectorType type, IGenericNodeBlockEntity node) {
 		super(type, node);

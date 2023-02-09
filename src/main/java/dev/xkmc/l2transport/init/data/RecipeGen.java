@@ -88,6 +88,8 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.DIST_UP_0);
 		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.SPEED_UP_0);
 		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.THR_UP_0);
+		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.DROP_UP);
+		pvd.stonecutting(DataIngredient.items(LTItems.VALVE_UP.get()), LTItems.PLACE_UP);
 
 	}
 

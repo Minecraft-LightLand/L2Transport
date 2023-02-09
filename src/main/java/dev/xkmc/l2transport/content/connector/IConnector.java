@@ -1,9 +1,9 @@
 package dev.xkmc.l2transport.content.connector;
 
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.configurables.IConfigurableFilter;
 import dev.xkmc.l2transport.content.flow.NetworkType;
 import dev.xkmc.l2transport.content.tile.base.IRenderableConnector;
-import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import net.minecraft.core.BlockPos;
 
 import java.util.List;

@@ -11,12 +11,15 @@ public class LTModConfig {
 
 		public final ForgeConfigSpec.BooleanValue renderLinks;
 		public final ForgeConfigSpec.IntValue renderRange;
+		public final ForgeConfigSpec.BooleanValue requireShift;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			renderLinks = builder.comment("Render Links by default")
 					.define("renderLinks", true);
 			renderRange = builder.comment("Render Range")
 					.defineInRange("renderRange", 64, 0, 256);
+			requireShift = builder.comment("Render Selection only when pressing shift")
+					.define("requireShift", false);
 		}
 
 	}

@@ -31,17 +31,20 @@ public class ItemSelector {
 		return null;
 	}
 
+	public final int index;
 	private final List<ItemStack> list;
-	private Predicate<Item> predicate;
+	private final Predicate<Item> predicate;
 
 	public ItemSelector(Predicate<Item> predicate, ItemStack... stacks) {
 		this.predicate = predicate;
 		list = List.of(stacks);
+		index = LIST.size();
 		LIST.add(this);
 	}
 
 	public ItemSelector(ItemStack... stacks) {
 		list = List.of(stacks);
+		index = LIST.size();
 		LIST.add(this);
 		this.predicate = e -> getList().stream().anyMatch(x -> e == x.getItem());
 	}
@@ -51,9 +54,13 @@ public class ItemSelector {
 		index = (index + list.size()) % list.size();
 		if (index < 0) return;
 		if (predicate.test(sender.getMainHandItem().getItem())) {
-			sender.setItemInHand(InteractionHand.MAIN_HAND, list.get(index).copy());
+			ItemStack stack = list.get(index).copy();
+			stack.setCount(sender.getMainHandItem().getCount());
+			sender.setItemInHand(InteractionHand.MAIN_HAND, stack);
 		} else if (predicate.test(sender.getOffhandItem().getItem())) {
-			sender.setItemInHand(InteractionHand.OFF_HAND, list.get(index).copy());
+			ItemStack stack = list.get(index).copy();
+			stack.setCount(sender.getOffhandItem().getCount());
+			sender.setItemInHand(InteractionHand.OFF_HAND, stack);
 		}
 	}
 

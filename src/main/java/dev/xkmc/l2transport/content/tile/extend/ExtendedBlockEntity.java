@@ -1,10 +1,10 @@
 package dev.xkmc.l2transport.content.tile.extend;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2transport.content.tile.base.ConnectionRenderBlockEntity;
-import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.l2transport.content.client.overlay.TooltipType;
+import dev.xkmc.l2transport.content.tile.base.ConnectionRenderBlockEntity;
+import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.util.Holder;

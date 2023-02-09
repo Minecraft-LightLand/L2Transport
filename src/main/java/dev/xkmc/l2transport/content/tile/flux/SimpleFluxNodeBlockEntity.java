@@ -2,7 +2,6 @@ package dev.xkmc.l2transport.content.tile.flux;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.configurables.ConfigConnectorType;
-import dev.xkmc.l2transport.content.configurables.FluidConfigurable;
 import dev.xkmc.l2transport.content.configurables.FluxConfigurable;
 import dev.xkmc.l2transport.content.connector.IConnector;
 import dev.xkmc.l2transport.content.connector.SimpleConnector;

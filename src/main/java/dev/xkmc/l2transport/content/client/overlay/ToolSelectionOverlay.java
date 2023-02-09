@@ -6,6 +6,7 @@ import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.TextBox;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2transport.content.items.select.ItemSelector;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
@@ -46,7 +47,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 		if (player == null) return 0;
 		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
 		if (sel == null) return 0;
-		return sel.getIndex(player);
+		return sel.index * 100 + sel.getIndex(player);
 	}
 
 	@Override
@@ -54,6 +55,11 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
+		if (LTModConfig.CLIENT.requireShift.get()) {
+			if (!player.isShiftKeyDown()) {
+				return false;
+			}
+		}
 		return ItemSelector.getSelection(player) != null;
 	}
 

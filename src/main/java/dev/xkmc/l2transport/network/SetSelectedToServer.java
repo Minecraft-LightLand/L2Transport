@@ -10,27 +10,27 @@ import net.minecraftforge.network.NetworkEvent.Context;
 @SerialClass
 public class SetSelectedToServer extends SerialPacketBase {
 
-    @SerialField
-    private int slot;
+	@SerialField
+	private int slot;
 
-    /**
-     * @deprecated
-     */
-    @Deprecated
-    public SetSelectedToServer() {
-    }
+	/**
+	 * @deprecated
+	 */
+	@Deprecated
+	public SetSelectedToServer() {
+	}
 
-    public SetSelectedToServer(int slot) {
-        this.slot = slot;
-    }
+	public SetSelectedToServer(int slot) {
+		this.slot = slot;
+	}
 
-    public void handle(Context ctx) {
-        Player sender = ctx.getSender();
-        if (sender != null) {
-            ItemSelector sel = ItemSelector.getSelection(sender);
-            if (sel != null)
-                sel.swap(sender, slot);
-        }
-    }
+	public void handle(Context ctx) {
+		Player sender = ctx.getSender();
+		if (sender != null) {
+			ItemSelector sel = ItemSelector.getSelection(sender);
+			if (sel != null)
+				sel.swap(sender, slot);
+		}
+	}
 
 }

@@ -4,7 +4,7 @@ public interface ILinker {
 
 	boolean storesPos();
 
-	default boolean toolSelect(){
+	default boolean toolSelect() {
 		return true;
 	}
 }
