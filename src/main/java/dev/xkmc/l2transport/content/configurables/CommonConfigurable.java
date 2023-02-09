@@ -34,7 +34,7 @@ public abstract class CommonConfigurable<T> extends BaseConfigurable {
 	public void clearFilter() {
 		if (isLocked()) return;
 		getFilters().clear();
-		setMaxTransfer(-1);
+		setTransferLimit(-1);
 		whitelist = true;
 	}
 

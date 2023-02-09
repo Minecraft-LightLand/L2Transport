@@ -44,7 +44,7 @@ public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateB
 					return InteractionResult.SUCCESS;
 				}
 				if (rte.getConfig().canQuickSetCount(stack)) {
-					rte.getConfig().setMaxTransfer(stack.getAmount());
+					rte.getConfig().setTransferLimit(stack.getAmount());
 					rte.markDirty();
 					return InteractionResult.SUCCESS;
 				}

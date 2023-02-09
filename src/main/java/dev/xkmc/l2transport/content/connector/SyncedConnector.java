@@ -50,7 +50,7 @@ public class SyncedConnector extends SingleCoolDownConnector {
 
 	@Override
 	public long provide(long available, long consumed, long size) {
-		return config.getMaxTransfer();
+		return config.getFixedTransfer();
 	}
 
 }

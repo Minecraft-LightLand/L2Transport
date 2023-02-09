@@ -43,7 +43,7 @@ public class ItemNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBl
 				}
 			}
 			if (!stack.isEmpty() && rte.getConfig().canQuickSetCount(stack)) {
-				rte.getConfig().setMaxTransfer(stack.getCount());
+				rte.getConfig().setTransferLimit(stack.getCount());
 				rte.markDirty();
 				return InteractionResult.SUCCESS;
 			}

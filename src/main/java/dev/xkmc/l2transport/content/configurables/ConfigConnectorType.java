@@ -4,18 +4,17 @@ import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.network.chat.MutableComponent;
 
 public enum ConfigConnectorType {
-	SIMPLE(LangData.SIMPLE, LangData.INFO_GATED, true),
-	EXTRACT(LangData.RETRIEVE, LangData.INFO_EXTRACT, true),
-	DISTRIBUTE(LangData.DISTRIBUTE, LangData.INFO_GATED, false),
-	ORDERED(LangData.ORDERED, LangData.INFO_GATED, false),
-	SYNC(LangData.SYNCED, LangData.INFO_SYNC, true);
+	SIMPLE(LangData.SIMPLE, true),
+	EXTRACT(LangData.RETRIEVE, true),
+	DISTRIBUTE(LangData.DISTRIBUTE, false),
+	ORDERED(LangData.ORDERED, false),
+	SYNC(LangData.SYNCED, true);
 
 	private final boolean canSetCount;
-	private final LangData lang, info;
+	private final LangData lang;
 
-	ConfigConnectorType(LangData lang, LangData info, boolean canSetCount) {
+	ConfigConnectorType(LangData lang, boolean canSetCount) {
 		this.lang = lang;
-		this.info = info;
 		this.canSetCount = canSetCount;
 	}
 
@@ -27,7 +26,4 @@ public enum ConfigConnectorType {
 		return lang.get();
 	}
 
-	public LangData getInfo() {
-		return info;
-	}
 }

@@ -39,20 +39,44 @@ public abstract class BaseConfigurable {
 		return max_transfer <= 0 ? max : Math.min(max, max_transfer);
 	}
 
-	public void setMaxTransfer(int count) {
+	public long getFixedTransfer() {
+		if (type == ConfigConnectorType.EXTRACT) {
+			if (max_transfer <= 0) return 0;
+			return getMaxTransfer();
+		}
+		if (type == ConfigConnectorType.SYNC) {
+			if (max_transfer <= 0) return 1;
+			return getMaxTransfer();
+		}
+		return 0;
+	}
+
+	public void setTransferLimit(int count) {
 		if (locked) return;
 		max_transfer = count;
 	}
 
 	public boolean allowExtract(long count) {
-		return type != ConfigConnectorType.EXTRACT || max_transfer <= 0 ? count <= getMaxTransfer() : count >= max_transfer;
+		return max_transfer <= 0 ? count <= getMaxTransfer() : count == max_transfer;
 	}
 
 	public void addTooltips(TooltipBuilder list) {
 		if (shouldDisplay()) {
 			list.add(TooltipType.FILTER, (whitelist ? LangData.INFO_WHITELIST : LangData.INFO_BLACKLIST).get(getFilterDesc()));
 		}
-		list.add(TooltipType.GATE, type.getInfo().getLiteral(getMaxTransfer()));
+		long max = getMaxTransfer();
+		if (type == ConfigConnectorType.EXTRACT) {
+			long min = getFixedTransfer();
+			if (min > 0) {
+				list.add(TooltipType.GATE, LangData.INFO_EXTRACT.getLiteral(min));
+			} else {
+				list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(max));
+			}
+		} else if (type == ConfigConnectorType.SYNC) {
+			list.add(TooltipType.GATE, LangData.INFO_SYNC.getLiteral(getFixedTransfer()));
+		} else {
+			list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(max));
+		}
 		if (locked) {
 			list.add(TooltipType.NAME, LangData.CONFIG_LOCK.get());
 		}
@@ -73,4 +97,5 @@ public abstract class BaseConfigurable {
 	public ConfigConnectorType getType() {
 		return type;
 	}
+
 }

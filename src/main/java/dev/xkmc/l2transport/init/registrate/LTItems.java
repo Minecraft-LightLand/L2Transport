@@ -44,7 +44,7 @@ public class LTItems {
 	public static final ItemEntry<ConfiguratorItem> CONFIG;
 	public static final ItemEntry<FluxFilter> FLUX;
 	public static final ItemEntry<UpgradeItem> VALVE_UP, WATCH_UP, DROP_UP, PLACE_UP,
-			SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
+			SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, SPEED_UP_INF, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
 
 	static {
 		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().defaultLang().register();
@@ -62,11 +62,11 @@ public class LTItems {
 			SPEED_UP_0 = REGISTRATE.item("speed_upgrade_0", p -> new UpgradeItem(p, new SpeedUpgrade(2))).lang("Speed Upgrade I").register();
 			SPEED_UP_1 = REGISTRATE.item("speed_upgrade_1", p -> new UpgradeItem(p, new SpeedUpgrade(4))).lang("Speed Upgrade II").register();
 			SPEED_UP_2 = REGISTRATE.item("speed_upgrade_2", p -> new UpgradeItem(p, new SpeedUpgrade(8))).lang("Speed Upgrade III").register();
+			SPEED_UP_INF = REGISTRATE.item("speed_upgrade_inf", p -> new UpgradeItem(p, new SpeedUpgrade(80))).lang("Speed Upgrade Infinity").register();
 			DIST_UP_0 = REGISTRATE.item("distance_upgrade_0", p -> new UpgradeItem(p, new DistanceUpgrade(2))).lang("Distance Upgrade").register();
 			THR_UP_0 = REGISTRATE.item("throughput_upgrade_0", p -> new UpgradeItem(p, new ThroughputUpgrade(4))).lang("Throughput Upgrade I").register();
 			THR_UP_1 = REGISTRATE.item("throughput_upgrade_1", p -> new UpgradeItem(p, new ThroughputUpgrade(16))).lang("Throughput Upgrade II").register();
 			THR_UP_2 = REGISTRATE.item("throughput_upgrade_2", p -> new UpgradeItem(p, new ThroughputUpgrade(64))).lang("Throughput Upgrade III").register();
-
 		}
 	}
 
