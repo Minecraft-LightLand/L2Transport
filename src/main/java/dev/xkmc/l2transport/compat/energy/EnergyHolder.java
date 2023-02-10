@@ -4,6 +4,7 @@ import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
 import dev.xkmc.l2transport.content.capability.generic.HandlerWrapper;
 import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
 import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.l2transport.content.configurables.NumericConfigurator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -69,4 +70,10 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 	public ItemStack getIcon() {
 		return Items.COAL.getDefaultInstance();
 	}
+
+	@Override
+	public NumericConfigurator getScale() {
+		return new NumericConfigurator("FE", 0, 10);
+	}
+
 }

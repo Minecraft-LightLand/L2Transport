@@ -26,4 +26,14 @@ public enum ConfigConnectorType {
 		return lang.get();
 	}
 
+	public int getMinFilter() {
+		return this == EXTRACT ? 0 : 1;
+	}
+
+	public MutableComponent getFilterDesc() {
+		if (this == EXTRACT) return LangData.INFO_EXTRACT.get("");
+		if (this == SYNC) return LangData.INFO_SYNC.get("");
+		return LangData.INFO_GATED.get("");
+	}
+
 }

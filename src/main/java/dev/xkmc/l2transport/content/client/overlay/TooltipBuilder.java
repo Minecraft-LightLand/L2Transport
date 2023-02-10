@@ -1,6 +1,5 @@
 package dev.xkmc.l2transport.content.client.overlay;
 
-import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -22,7 +21,7 @@ public class TooltipBuilder {
 	}
 
 	public boolean hasShiftDown() {
-		return Proxy.getClientPlayer().isShiftKeyDown();
+		return ShiftManager.isAlternate();
 	}
 
 }

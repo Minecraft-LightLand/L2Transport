@@ -1,6 +1,7 @@
 package dev.xkmc.l2transport.init;
 
-import dev.xkmc.l2transport.content.client.overlay.OverlayRenderer;
+import dev.xkmc.l2transport.content.client.overlay.NodeInfoOverlay;
+import dev.xkmc.l2transport.content.client.overlay.NumberSetOverlay;
 import dev.xkmc.l2transport.content.client.overlay.ToolSelectionOverlay;
 import dev.xkmc.l2transport.events.ClientGeneralEvents;
 import dev.xkmc.l2transport.init.data.Keys;
@@ -33,7 +34,8 @@ public class L2TransportClient {
 
 	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlays(RegisterGuiOverlaysEvent event) {
-		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "node_info", new OverlayRenderer());
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "node_info", new NodeInfoOverlay());
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "number_adjust", new NumberSetOverlay());
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "tool_select", ToolSelectionOverlay.INSTANCE);
 	}
 

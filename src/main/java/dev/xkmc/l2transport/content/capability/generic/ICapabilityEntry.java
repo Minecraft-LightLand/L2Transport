@@ -1,5 +1,6 @@
 package dev.xkmc.l2transport.content.capability.generic;
 
+import dev.xkmc.l2transport.content.configurables.NumericConfigurator;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -26,5 +27,7 @@ public interface ICapabilityEntry<T> {
 	MutableComponent getTypeDesc();
 
 	ItemStack getIcon();
+
+	NumericConfigurator getScale();
 
 }

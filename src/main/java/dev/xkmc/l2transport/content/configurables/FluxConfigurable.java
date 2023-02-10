@@ -21,7 +21,7 @@ public class FluxConfigurable extends BaseConfigurable {
 
 	@Override
 	public MutableComponent getFilterDesc() {
-		return generic.getCapType().getDesc(filter, getMaxTransfer());
+		return generic.getCapType().getKindDesc(filter);
 	}
 
 	@Override
@@ -37,6 +37,11 @@ public class FluxConfigurable extends BaseConfigurable {
 	public boolean isContentValid(GenericHolder parse) {
 		if (parse.type() != generic.getCapType()) return false;
 		return !shouldDisplay() || parse.id().equals(filter);
+	}
+
+	@Override
+	public NumericAdjustor getTransferConfig() {
+		return new NumericAdjustor(generic.getCapType().getScale(), this);
 	}
 
 }

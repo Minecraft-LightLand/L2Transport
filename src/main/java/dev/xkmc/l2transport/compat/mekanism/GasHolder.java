@@ -4,6 +4,7 @@ import dev.xkmc.l2transport.content.capability.generic.GenericHolder;
 import dev.xkmc.l2transport.content.capability.generic.HandlerWrapper;
 import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
 import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.l2transport.content.configurables.NumericConfigurator;
 import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
@@ -83,4 +84,10 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 	public ItemStack getIcon() {
 		return MekanismItems.GAS_UPGRADE.getItemStack();
 	}
+
+	@Override
+	public NumericConfigurator getScale() {
+		return new NumericConfigurator("B", -1, 10);
+	}
+
 }

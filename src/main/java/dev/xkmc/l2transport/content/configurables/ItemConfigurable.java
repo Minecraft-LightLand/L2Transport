@@ -60,4 +60,9 @@ public class ItemConfigurable extends CommonConfigurable<ItemStack> {
 		return 64;
 	}
 
+	@Override
+	public NumericAdjustor getTransferConfig() {
+		return new NumericAdjustor(NumericConfigurator.ITEM, this);
+	}
+
 }

@@ -14,20 +14,27 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
-public class OverlayRenderer extends GuiComponent implements IGuiOverlay {
+import javax.annotation.Nullable;
+
+public class NodeInfoOverlay extends GuiComponent implements IGuiOverlay {
 
 	public static final int MARGIN = 24;
 
+	@Nullable
+	public static BlockEntity getTarget() {
+		if (Minecraft.getInstance().screen != null) return null;
+		LocalPlayer player = Proxy.getClientPlayer();
+		if (player == null) return null;
+		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getReachDistance());
+		if (ray.getType() != HitResult.Type.BLOCK) return null;
+		BlockPos pos = ray.getBlockPos();
+		return player.level.getBlockEntity(pos);
+	}
+
 	@Override
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
-		if (Minecraft.getInstance().screen != null) return;
-		LocalPlayer player = Proxy.getClientPlayer();
-		if (player == null) return;
-		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getReachDistance());
-		if (ray.getType() != HitResult.Type.BLOCK) return;
-		BlockPos pos = ray.getBlockPos();
-		BlockEntity entity = player.level.getBlockEntity(pos);
-		if (entity instanceof IRenderableNode be) {
+		if (NumberSetOverlay.isScreenOn()) return;
+		if (getTarget() instanceof IRenderableNode be) {
 			OverlayUtils util = new OverlayUtils(screenWidth, screenHeight);
 			util.renderLongText(gui, poseStack,
 					screenWidth / 2 + MARGIN, -1, (screenWidth) / 2 - MARGIN * 2,

@@ -5,13 +5,12 @@ import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.network.PacketHandler;
 import dev.xkmc.l2transport.compat.CompatHandler;
 import dev.xkmc.l2transport.content.items.select.ItemSelector;
-import dev.xkmc.l2transport.content.items.tools.ILinker;
-import dev.xkmc.l2transport.content.items.upgrades.UpgradeItem;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.RecipeGen;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
 import dev.xkmc.l2transport.init.registrate.LTItems;
+import dev.xkmc.l2transport.network.SetNumberToServer;
 import dev.xkmc.l2transport.network.SetSelectedToServer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -36,7 +35,9 @@ public class L2Transport {
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
 	public static final PacketHandler HANDLER = new PacketHandler(new ResourceLocation(MODID, "main"), 1,
-			e -> e.create(SetSelectedToServer.class, NetworkDirection.PLAY_TO_SERVER));
+			e -> e.create(SetSelectedToServer.class, NetworkDirection.PLAY_TO_SERVER),
+			e -> e.create(SetNumberToServer.class, NetworkDirection.PLAY_TO_SERVER)
+	);
 
 	private static void registerRegistrates(IEventBus bus) {
 		LTBlocks.register();
@@ -65,14 +66,14 @@ public class L2Transport {
 
 	private static void setup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			new ItemSelector(e -> e instanceof ILinker,
+			new ItemSelector(
 					LTItems.LINKER.asStack(),
 					LTItems.VALIDATOR.asStack(),
 					LTItems.CLEAR.asStack(),
 					LTItems.ROTATE.asStack(),
 					LTItems.CONFIG.asStack());
 
-			new ItemSelector(e -> e instanceof UpgradeItem,
+			new ItemSelector(
 					LTItems.VALVE_UP.asStack(),
 					LTItems.WATCH_UP.asStack(),
 					LTItems.SPEED_UP_0.asStack(),

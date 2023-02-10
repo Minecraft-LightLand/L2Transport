@@ -59,4 +59,9 @@ public class FluidConfigurable extends CommonConfigurable<FluidStack> {
 		return LTModConfig.COMMON.defaultFluidPacket.get();
 	}
 
+	@Override
+	public NumericAdjustor getTransferConfig() {
+		return new NumericAdjustor(NumericConfigurator.FLUID, this);
+	}
+
 }

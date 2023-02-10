@@ -52,11 +52,12 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 
 	@Override
 	public boolean isScreenOn() {
+		if (NumberSetOverlay.isScreenOn()) return false;
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
 		if (LTModConfig.CLIENT.requireShift.get()) {
-			if (!player.isShiftKeyDown()) {
+			if (!ShiftManager.isAlternate()) {
 				return false;
 			}
 		}

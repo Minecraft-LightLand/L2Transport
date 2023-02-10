@@ -23,6 +23,8 @@ public abstract class BaseConfigurable {
 	@SerialClass.SerialField(toClient = true)
 	protected boolean whitelist = true;
 
+	private long display_transfer = -1;
+
 	public BaseConfigurable(ConfigConnectorType type, INodeBlockEntity node) {
 		this.type = type;
 		this.node = node;
@@ -30,12 +32,17 @@ public abstract class BaseConfigurable {
 
 	protected abstract int getTypeDefaultMax();
 
-	public long getMaxTransfer() {
+	long getMaxFilter() {
 		long max = getTypeDefaultMax();
 		var up = node.getUpgrade(UpgradeFlag.THROUGH_PUT);
 		if (up != null) {
 			max = up.getMaxTransfer(max);
 		}
+		return max;
+	}
+
+	public long getMaxTransfer() {
+		long max = getMaxFilter();
 		return max_transfer <= 0 ? max : Math.min(max, max_transfer);
 	}
 
@@ -51,7 +58,7 @@ public abstract class BaseConfigurable {
 		return 0;
 	}
 
-	public void setTransferLimit(int count) {
+	public void setTransferLimit(long count) {
 		if (locked) return;
 		max_transfer = count;
 	}
@@ -98,4 +105,13 @@ public abstract class BaseConfigurable {
 		return type;
 	}
 
+	public abstract NumericAdjustor getTransferConfig();
+
+	long getTransferDisplay() {
+		return display_transfer >= 0 ? display_transfer : max_transfer;
+	}
+
+	public void setTransferLimitDisplay(long targetValue) {
+		display_transfer = targetValue;
+	}
 }
