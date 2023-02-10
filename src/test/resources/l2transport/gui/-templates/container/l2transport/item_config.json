@@ -1,0 +1,32 @@
+{
+  "side": [
+	"filter_on",
+	"match_on",
+	"lock_on"
+  ],
+  "comp": {
+	"grid": {
+	  "sprite": "slot",
+	  "x": 16,
+	  "y": 0,
+	  "rx": 9,
+	  "ry": 2
+	},
+	"filter": {
+	  "sprite": "filter_off",
+	  "x": 16,
+	  "y": 40
+	},
+	"match": {
+	  "sprite": "match_off",
+	  "x": 52,
+	  "y": 40
+	},
+	"lock": {
+	  "sprite": "lock_off",
+	  "x": 160,
+	  "y": 40
+	}
+  },
+  "isContainer": true
+}

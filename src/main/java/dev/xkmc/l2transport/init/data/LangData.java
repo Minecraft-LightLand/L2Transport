@@ -36,6 +36,11 @@ public enum LangData {
 	CONFIG_FILTER("config.filter", "Complex Filter", 0, null),
 	CONFIG_TAG("config.tag", "Match tag", 0, ChatFormatting.LIGHT_PURPLE),
 	CONFIG_LOCK("config.lock", "Filter Locked", 0, ChatFormatting.LIGHT_PURPLE),
+
+	UI_LOCK("screen.lock", "Lock", 0, null),
+	UI_WHITELIST("screen.whitelist", "Whitelist", 0, null),
+	UI_BLACKLIST("screen.blacklist", "Blacklist", 0, null),
+	UI_MATCH_TAG("screen.match_tag", "Match NBT", 0, null),
 	;
 
 

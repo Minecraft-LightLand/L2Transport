@@ -7,6 +7,9 @@ import dev.xkmc.l2transport.content.client.overlay.TooltipType;
 import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.MenuProvider;
+
+import javax.annotation.Nullable;
 
 @SerialClass
 public abstract class BaseConfigurable {
@@ -113,5 +116,10 @@ public abstract class BaseConfigurable {
 
 	public void setTransferLimitDisplay(long targetValue) {
 		display_transfer = targetValue;
+	}
+
+	@Nullable
+	public MenuProvider getMenu() {
+		return null;
 	}
 }

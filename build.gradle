@@ -121,6 +121,7 @@ dependencies {
     runtimeOnly fg.deobf('curse.maven:badpackets-615134:3903799')
     runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
     implementation fg.deobf('curse.maven:mekanism-268560:3954410')
+    implementation fg.deobf('curse.maven:create-328085:4174330')
 
 }
 
