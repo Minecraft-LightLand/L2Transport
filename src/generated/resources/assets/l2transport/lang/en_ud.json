@@ -66,5 +66,10 @@
   "l2transport.upgrade.speed": "%sx :pǝǝds ɹǝɟsuɐɹ⟘",
   "l2transport.upgrade.throughput": "%sx :ʇndɥbnoɹɥ⟘",
   "l2transport.upgrade.valve": "ןɐubıs ǝuoʇspǝɹ buıʌıǝɔǝɹ uǝɥʍ ǝןqɐsıᗡ",
-  "l2transport.upgrade.watch": "pǝǝɔɔns ɹǝɟsuɐɹʇ uǝɥʍ ןɐubıs ǝuoʇspǝɹ ʇıɯƎ"
+  "l2transport.upgrade.watch": "pǝǝɔɔns ɹǝɟsuɐɹʇ uǝɥʍ ןɐubıs ǝuoʇspǝɹ ʇıɯƎ",
+  "l2transport.wand.clear": "˙sǝpɐɹbdn ןןɐ ɹɐǝןɔ oʇ ǝpou ɐ ʞɔıןɔ ʇɥbıᴚ-ʇɟıɥS ˙sʞuıן ןןɐ ɹɐǝןɔ oʇ ǝpou ɐ ʞɔıןɔ ʇɥbıᴚ",
+  "l2transport.wand.config": "˙ʎɐןɹǝʌo ɹoʇɔǝןǝs ɯǝʇı ǝɥʇ ǝsn uɐɔ noʎ ʇɐɥʇ os ǝןqɐsıp oʇ ʇןⱯ ɹo ʇɟıɥS ssǝɹԀ ˙nuǝɯ bıɟuoɔ ɹǝʇןıɟ pǝɔuɐʌpɐ uǝdo oʇ ǝpou ʞɔıןɔ ʇɥbıᴚ ˙ʇıɯıן ɹǝɟsuɐɹʇ ɹǝʇןɐ oʇ ןןoɹɔs ɹo sʎǝʞ uoıʇɔǝɹıp ssǝɹԀ",
+  "l2transport.wand.link": "˙ʞuıןun oʇ ǝpou pǝʞuıן ʎpɐǝɹןɐ uɐ ʞɔıןɔ ʇɥbıᴚ ˙ʇןɐɥ oʇ ɟןǝsʇı ǝpou ǝɥʇ ʞɔıןɔ ʇɥbıᴚ ˙ʞuıן oʇ ʞɔoןq ɹǝɥʇouɐ ʞɔıןɔ ʇɥbıᴚ ˙buıʞuıן ʇɹɐʇs oʇ ǝpou ɐ ʞɔıןɔ ʇɥbıᴚ",
+  "l2transport.wand.rotate": "˙ʞɔıʇs bnqǝp oʇ ɹɐןıɯıs sʞɹoM ˙ǝʇɐʇoɹ oʇ ʞɔoןq ɐ ʞɔıןɔ ʇɥbıᴚ",
+  "l2transport.wand.validate": "˙sʞuıן pıןɐʌuı ןןɐ ǝʌoɯǝɹ oʇ ǝpou ɐ ʞɔıןɔ ʇɥbıᴚ"
 }

@@ -56,7 +56,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 		if (Minecraft.getInstance().screen != null) return false;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return false;
-		if (LTModConfig.CLIENT.requireShift.get()) {
+		if (LTModConfig.CLIENT.selectionDisplayRequireShift.get()) {
 			if (!ShiftManager.isAlternate()) {
 				return false;
 			}

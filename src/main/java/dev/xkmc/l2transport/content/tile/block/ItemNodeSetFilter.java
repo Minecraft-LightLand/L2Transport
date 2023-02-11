@@ -35,6 +35,9 @@ public class ItemNodeSetFilter implements OnClickBlockMethod, CreateBlockStateBl
 		}
 		BlockEntity te = level.getBlockEntity(pos);
 		if (te instanceof AbstractItemNodeBlockEntity<?> rte) {
+			if (rte.getConfig().isLocked()) {
+				return InteractionResult.FAIL;
+			}
 			if (rte.getConfig().hasNoFilter()) {
 				if (!stack.isEmpty()) {
 					rte.getConfig().setSimpleFilter(stack.copy());

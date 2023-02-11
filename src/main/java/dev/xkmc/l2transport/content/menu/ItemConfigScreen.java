@@ -69,7 +69,7 @@ public class ItemConfigScreen extends BaseConfigScreen<ItemConfigMenu> {
 		for (int y = 0; y < rect.ry; y++) {
 			for (int x = 0; x < rect.rx; x++) {
 				int id = y * rect.rx + x;
-				ans.add(new Target(rect.x + x * rect.w + 1, rect.y + y * rect.h + 1, 16, 16, stack -> addGhost(id, stack)));
+				ans.add(new Target(rect.x + x * rect.w + leftPos, rect.y + y * rect.h + topPos, 16, 16, stack -> addGhost(id, stack)));
 			}
 		}
 		return ans;

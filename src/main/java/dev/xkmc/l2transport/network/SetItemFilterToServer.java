@@ -15,7 +15,8 @@ public class SetItemFilterToServer extends SerialPacketBase {
 	@SerialClass.SerialField
 	private int slot;
 
-	private SetItemFilterToServer() {
+	@Deprecated
+	public SetItemFilterToServer() {
 
 	}
 

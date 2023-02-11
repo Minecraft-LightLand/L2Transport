@@ -78,7 +78,8 @@ public class ItemSelector {
 	@OnlyIn(Dist.CLIENT)
 	public void move(int i) {
 		int index = getIndex(Proxy.getClientPlayer());
-		index = (index + list.size() + i) % list.size();
+		while (i < 0) i += list.size();
+		index = (index + i) % list.size();
 		L2Transport.HANDLER.toServer(new SetSelectedToServer(index));
 	}
 

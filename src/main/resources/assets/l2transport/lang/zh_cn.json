@@ -66,5 +66,10 @@
   "l2transport.screen.match_tag": "匹配物品和NBT。点击切换至只匹配物品",
   "l2transport.screen.whitelist": "使用白名单。点击切换至黑名单",
   "l2transport.screen.match_item": "匹配物品。点击启用匹配NBT",
-  "l2transport.screen.unlock": "未锁定。点击锁定，防止在GUI以外修改过滤器"
+  "l2transport.screen.unlock": "未锁定。点击锁定，防止在GUI以外修改过滤器",
+  "l2transport.wand.clear": "右键节点清除所有连接。蹲下右键节点清除所有升级。",
+  "l2transport.wand.config": "按方向键或者滚滚轮来设置单次传送数量。右键节点打开高级过滤配置。按shift或者alt禁用数量设置界面，启用手杖选择界面。",
+  "l2transport.wand.link": "右键节点开始连接。右键另一个方块设置连接。右键节点本身取消。右键已存在的目标删除连接。",
+  "l2transport.wand.rotate": "右键方块旋转方块。",
+  "l2transport.wand.validate": "右键节点清除所有不成立的连接。"
 }

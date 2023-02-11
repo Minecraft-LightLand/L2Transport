@@ -18,9 +18,10 @@ public class ClearItem extends Item implements ILinker {
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
 		if (be instanceof ILinkableNode node) {
-			if (!ctx.getLevel().isClientSide()) {
-				node.removeAll();
-				if (ctx.getPlayer() != null && be instanceof AbstractNodeBlockEntity<?> xbe) {
+			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
+				if (!ctx.getPlayer().isShiftKeyDown())
+					node.removeAll();
+				else if (be instanceof AbstractNodeBlockEntity<?> xbe) {
 					xbe.popUpgrade().forEach(ctx.getPlayer().getInventory()::placeItemBackInInventory);
 				}
 			}

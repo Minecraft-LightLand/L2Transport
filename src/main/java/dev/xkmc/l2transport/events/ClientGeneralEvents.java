@@ -6,6 +6,7 @@ import dev.xkmc.l2transport.content.client.overlay.ToolSelectionOverlay;
 import dev.xkmc.l2transport.content.configurables.NumericAdjustor;
 import dev.xkmc.l2transport.content.items.select.ItemSelector;
 import dev.xkmc.l2transport.init.data.Keys;
+import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -36,6 +37,42 @@ public class ClientGeneralEvents {
 			} else if (event.getKey() == Keys.DOWN.map.getKey().getValue() && event.getAction() == 1) {
 				sel.move(1);
 			}
+		}
+	}
+
+	private static double scroll;
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void scrollEvent(InputEvent.MouseScrollingEvent event) {
+		double scroll_tick = LTModConfig.CLIENT.scrollTick.get();
+		double delta = event.getScrollDelta();
+		scroll += delta;
+		int diff = 0;
+		if (scroll > scroll_tick) {
+			diff = (int) Math.floor(scroll / scroll_tick);
+			scroll -= diff * scroll_tick;
+		} else if (scroll < -scroll_tick) {
+			diff = -(int) Math.floor(-scroll / scroll_tick);
+			scroll -= diff * scroll_tick;
+		}
+		if (NumberSetOverlay.isScreenOn()) {
+			while (diff > 0) {
+				NumberSetOverlay.up();
+				diff--;
+			}
+			while (diff < 0) {
+				NumberSetOverlay.down();
+				diff++;
+			}
+			event.setCanceled(true);
+		} else if (ToolSelectionOverlay.INSTANCE.isScreenOn() &&
+				(!LTModConfig.CLIENT.selectionScrollRequireShift.get() ||
+						Proxy.getClientPlayer().isShiftKeyDown())) {
+			ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+			if (sel == null) return;
+			sel.move(diff);
+			event.setCanceled(true);
 		}
 	}
 

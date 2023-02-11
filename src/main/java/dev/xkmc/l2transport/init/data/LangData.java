@@ -43,6 +43,12 @@ public enum LangData {
 	UI_BLACKLIST("screen.blacklist", "Using blacklist. Click to switch to whitelist.", 0, null),
 	UI_MATCH_ITEM("screen.match_item", "Match item only. Click to match NBT.", 0, null),
 	UI_MATCH_TAG("screen.match_tag", "Match item and NBT. Click to match item only.", 0, null),
+
+	WAND_LINK("wand.link", "Right click a node to start linking. Right click another block to link. Right click the node itself to halt. Right click an already linked node to unlink.", 0, ChatFormatting.GRAY),
+	WAND_VALIDATE("wand.validate", "Right click a node to remove all invalid links.", 0, ChatFormatting.GRAY),
+	WAND_CLEAR("wand.clear", "Right click a node to clear all links. Shift-Right click a node to clear all upgrades.", 0, ChatFormatting.GRAY),
+	WAND_ROTATE("wand.rotate", "Right click a block to rotate. Works similar to debug stick.", 0, ChatFormatting.GRAY),
+	WAND_CONFIG("wand.config", "Press direction keys or scroll to alter transfer limit. Right click node to open advanced filter config menu. Press Shift or Alt to disable so that you can use the item selector overlay.", 0, ChatFormatting.GRAY),
 	;
 
 
