@@ -10,6 +10,7 @@ import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.data.RecipeGen;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
 import dev.xkmc.l2transport.init.registrate.LTItems;
+import dev.xkmc.l2transport.init.registrate.LTMenus;
 import dev.xkmc.l2transport.network.SetNumberToServer;
 import dev.xkmc.l2transport.network.SetSelectedToServer;
 import net.minecraft.resources.ResourceLocation;
@@ -42,6 +43,7 @@ public class L2Transport {
 	private static void registerRegistrates(IEventBus bus) {
 		LTBlocks.register();
 		LTItems.register();
+		LTMenus.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		CompatHandler.register();
 	}

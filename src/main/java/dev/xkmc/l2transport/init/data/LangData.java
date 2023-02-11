@@ -37,10 +37,12 @@ public enum LangData {
 	CONFIG_TAG("config.tag", "Match tag", 0, ChatFormatting.LIGHT_PURPLE),
 	CONFIG_LOCK("config.lock", "Filter Locked", 0, ChatFormatting.LIGHT_PURPLE),
 
-	UI_LOCK("screen.lock", "Lock", 0, null),
-	UI_WHITELIST("screen.whitelist", "Whitelist", 0, null),
-	UI_BLACKLIST("screen.blacklist", "Blacklist", 0, null),
-	UI_MATCH_TAG("screen.match_tag", "Match NBT", 0, null),
+	UI_UNLOCKED("screen.unlock", "Unlocked. Click to lock filter outside of GUI.", 0, null),
+	UI_LOCKED("screen.lock", "Locked. Click to unlock.", 0, null),
+	UI_WHITELIST("screen.whitelist", "Using whitelist. Click to switch to blacklist.", 0, null),
+	UI_BLACKLIST("screen.blacklist", "Using blacklist. Click to switch to whitelist.", 0, null),
+	UI_MATCH_ITEM("screen.match_item", "Match item only. Click to match NBT.", 0, null),
+	UI_MATCH_TAG("screen.match_tag", "Match item and NBT. Click to match item only.", 0, null),
 	;
 
 

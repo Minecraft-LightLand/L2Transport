@@ -3,6 +3,8 @@ package organize;
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import organize.sub.AssetMisc;
+import organize.sub.DataMisc;
 import organize.sub.LangFileOrganizer;
 
 import java.io.File;
@@ -31,6 +33,8 @@ public abstract class ResourceOrganizer {
 
 	public static void main(String[] args) throws Exception {
 		new LangFileOrganizer();
+		new DataMisc();
+		new AssetMisc();
 		File f = new File("./src/test/resources");
 		for (File fi : f.listFiles()) {
 			MODID = fi.getName();

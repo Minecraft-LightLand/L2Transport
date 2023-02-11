@@ -59,5 +59,12 @@
   "l2transport.upgrade.speed": "运输速率: x%s",
   "l2transport.upgrade.throughput": "运输上限: x%s",
   "l2transport.upgrade.valve": "接收红石信号时禁用节点",
-  "l2transport.upgrade.watch": "物品流通时发送红石信号"
+  "l2transport.upgrade.watch": "物品流通时发送红石信号",
+  "container.l2transport.item_config": "物品过滤",
+  "l2transport.screen.blacklist": "使用黑名单。点击切换至白名单",
+  "l2transport.screen.lock": "锁定过滤器，防止在GUI以外修改",
+  "l2transport.screen.match_tag": "匹配物品和NBT。点击切换至只匹配物品",
+  "l2transport.screen.whitelist": "使用白名单。点击切换至黑名单",
+  "l2transport.screen.match_item": "匹配物品。点击启用匹配NBT",
+  "l2transport.screen.unlock": "未锁定。点击锁定，防止在GUI以外修改过滤器"
 }

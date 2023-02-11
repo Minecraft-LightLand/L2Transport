@@ -21,11 +21,11 @@ public class FluidConfigurable extends CommonConfigurable<FluidStack> {
 	}
 
 	@Override
-	protected List<FluidStack> getFilters() {
+	public List<FluidStack> getFilters() {
 		return filters;
 	}
 
-	protected boolean match(FluidStack stack) {
+	public boolean internalMatch(FluidStack stack) {
 		for (FluidStack filter : filters) {
 			if (stack.getFluid() == filter.getFluid()) {
 				if (match_tag) {

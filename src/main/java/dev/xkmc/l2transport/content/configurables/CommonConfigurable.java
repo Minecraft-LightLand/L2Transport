@@ -18,13 +18,13 @@ public abstract class CommonConfigurable<T> extends BaseConfigurable {
 	@SerialClass.SerialField(toClient = true)
 	protected boolean match_tag = false;
 
-	protected abstract List<T> getFilters();
+	public abstract List<T> getFilters();
 
-	protected abstract boolean match(T stack);
+	public abstract boolean internalMatch(T stack);
 
 	public boolean isStackValid(T stack) {
 		if (getFilters().isEmpty()) return true;
-		return match(stack) == whitelist;
+		return internalMatch(stack) == whitelist;
 	}
 
 	public boolean shouldDisplay() {
@@ -54,6 +54,10 @@ public abstract class CommonConfigurable<T> extends BaseConfigurable {
 		if (match_tag) {
 			list.add(TooltipType.FILTER, LangData.CONFIG_TAG.get());
 		}
+	}
+
+	public ToggleConfig getToggleConfig() {
+		return new ToggleConfig(this);
 	}
 
 }

@@ -21,19 +21,65 @@ public abstract class BaseConfigurable {
 	private long max_transfer = -1;
 
 	@SerialClass.SerialField(toClient = true)
-	private boolean locked = false;
+	boolean locked = false;
 
 	@SerialClass.SerialField(toClient = true)
 	protected boolean whitelist = true;
 
 	private long display_transfer = -1;
+	protected boolean in_use = false;
 
 	public BaseConfigurable(ConfigConnectorType type, INodeBlockEntity node) {
 		this.type = type;
 		this.node = node;
 	}
 
+	public INodeBlockEntity getNode() {
+		return node;
+	}
+
+	public ConfigConnectorType getType() {
+		return type;
+	}
+
+	public void addTooltips(TooltipBuilder list) {
+		if (shouldDisplay()) {
+			list.add(TooltipType.FILTER, (whitelist ? LangData.INFO_WHITELIST : LangData.INFO_BLACKLIST).get(getFilterDesc()));
+		}
+		long max = getMaxTransfer();
+		if (type == ConfigConnectorType.EXTRACT) {
+			long min = getFixedTransfer();
+			if (min > 0) {
+				list.add(TooltipType.GATE, LangData.INFO_EXTRACT.getLiteral(min));
+			} else {
+				list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(max));
+			}
+		} else if (type == ConfigConnectorType.SYNC) {
+			list.add(TooltipType.GATE, LangData.INFO_SYNC.getLiteral(getFixedTransfer()));
+		} else {
+			list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(max));
+		}
+		if (locked) {
+			list.add(TooltipType.NAME, LangData.CONFIG_LOCK.get());
+		}
+	}
+
+	public abstract NumericAdjustor getTransferConfig();
+
+	public abstract MutableComponent getFilterDesc();
+
+	@Nullable
+	public MenuProvider getMenu() {
+		return null;
+	}
+
 	protected abstract int getTypeDefaultMax();
+
+	public abstract boolean shouldDisplay();
+
+	public boolean allowExtract(long count) {
+		return max_transfer <= 0 ? count <= getMaxTransfer() : count == max_transfer;
+	}
 
 	long getMaxFilter() {
 		long max = getTypeDefaultMax();
@@ -66,49 +112,9 @@ public abstract class BaseConfigurable {
 		max_transfer = count;
 	}
 
-	public boolean allowExtract(long count) {
-		return max_transfer <= 0 ? count <= getMaxTransfer() : count == max_transfer;
-	}
-
-	public void addTooltips(TooltipBuilder list) {
-		if (shouldDisplay()) {
-			list.add(TooltipType.FILTER, (whitelist ? LangData.INFO_WHITELIST : LangData.INFO_BLACKLIST).get(getFilterDesc()));
-		}
-		long max = getMaxTransfer();
-		if (type == ConfigConnectorType.EXTRACT) {
-			long min = getFixedTransfer();
-			if (min > 0) {
-				list.add(TooltipType.GATE, LangData.INFO_EXTRACT.getLiteral(min));
-			} else {
-				list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(max));
-			}
-		} else if (type == ConfigConnectorType.SYNC) {
-			list.add(TooltipType.GATE, LangData.INFO_SYNC.getLiteral(getFixedTransfer()));
-		} else {
-			list.add(TooltipType.GATE, LangData.INFO_GATED.getLiteral(max));
-		}
-		if (locked) {
-			list.add(TooltipType.NAME, LangData.CONFIG_LOCK.get());
-		}
-	}
-
-	public abstract MutableComponent getFilterDesc();
-
-	public abstract boolean shouldDisplay();
-
 	public boolean isLocked() {
-		return locked;
+		return locked || in_use;
 	}
-
-	public void setLocked(boolean locked) {
-		this.locked = locked;
-	}
-
-	public ConfigConnectorType getType() {
-		return type;
-	}
-
-	public abstract NumericAdjustor getTransferConfig();
 
 	long getTransferDisplay() {
 		return display_transfer >= 0 ? display_transfer : max_transfer;
@@ -118,8 +124,13 @@ public abstract class BaseConfigurable {
 		display_transfer = targetValue;
 	}
 
-	@Nullable
-	public MenuProvider getMenu() {
-		return null;
+	public boolean isInUse() {
+		return in_use;
 	}
+
+	public void setInUse(boolean use) {
+		in_use = use;
+	}
+
+
 }

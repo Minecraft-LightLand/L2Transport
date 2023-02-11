@@ -66,11 +66,13 @@ public class LTBlocks {
 	static {
 
 		DelegateBlockProperties NOLIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-				.noOcclusion().lightLevel(bs -> 7)
+				.noOcclusion().noCollission()
+				.lightLevel(bs -> 7)
 				.isRedstoneConductor((a, b, c) -> false));
 
 		DelegateBlockProperties LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-				.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
+				.noOcclusion().noCollission()
+				.lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
 				.isRedstoneConductor((a, b, c) -> false));
 
 		{
