@@ -11,6 +11,7 @@ import dev.xkmc.l2transport.init.data.RecipeGen;
 import dev.xkmc.l2transport.init.registrate.LTBlocks;
 import dev.xkmc.l2transport.init.registrate.LTItems;
 import dev.xkmc.l2transport.init.registrate.LTMenus;
+import dev.xkmc.l2transport.network.SetFluidFilterToServer;
 import dev.xkmc.l2transport.network.SetItemFilterToServer;
 import dev.xkmc.l2transport.network.SetNumberToServer;
 import dev.xkmc.l2transport.network.SetSelectedToServer;
@@ -39,7 +40,8 @@ public class L2Transport {
 	public static final PacketHandler HANDLER = new PacketHandler(new ResourceLocation(MODID, "main"), 1,
 			e -> e.create(SetSelectedToServer.class, NetworkDirection.PLAY_TO_SERVER),
 			e -> e.create(SetNumberToServer.class, NetworkDirection.PLAY_TO_SERVER),
-			e -> e.create(SetItemFilterToServer.class, NetworkDirection.PLAY_TO_SERVER)
+			e -> e.create(SetItemFilterToServer.class, NetworkDirection.PLAY_TO_SERVER),
+			e -> e.create(SetFluidFilterToServer.class, NetworkDirection.PLAY_TO_SERVER)
 	);
 
 	private static void registerRegistrates(IEventBus bus) {

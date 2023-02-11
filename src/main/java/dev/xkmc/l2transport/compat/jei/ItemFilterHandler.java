@@ -1,7 +1,8 @@
 package dev.xkmc.l2transport.compat.jei;
 
 import dev.xkmc.l2library.util.code.Wrappers;
-import dev.xkmc.l2transport.content.menu.ItemConfigScreen;
+import dev.xkmc.l2transport.content.menu.filter.ItemConfigScreen;
+import dev.xkmc.l2transport.content.menu.ghost.ItemTarget;
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +21,7 @@ public class ItemFilterHandler implements IGhostIngredientHandler<ItemConfigScre
 
 	}
 
-	public record RTarget(ItemConfigScreen.Target target) implements Target<ItemStack> {
+	public record RTarget(ItemTarget target) implements Target<ItemStack> {
 
 		@Override
 		public Rect2i getArea() {

@@ -1,9 +1,9 @@
-package dev.xkmc.l2transport.content.menu;
+package dev.xkmc.l2transport.content.menu.filter;
 
 import dev.xkmc.l2library.base.menu.PredSlot;
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2transport.content.capability.base.INodeBlockEntity;
-import dev.xkmc.l2transport.content.configurables.BaseConfigurable;
+import dev.xkmc.l2transport.content.configurables.CommonConfigurable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -65,7 +65,7 @@ public abstract class BaseConfigMenu<T extends BaseConfigMenu<T>> extends Abstra
 		this.sprite.getSlot(name, (x, y) -> new PredSlot(this.container, this.added++, x, y, pred), (n, i, j, s) -> addSlot(s));
 	}
 
-	protected abstract BaseConfigurable getConfig();
+	protected abstract CommonConfigurable<?> getConfig();
 
 	protected abstract ItemStack getSlotContent(int slot);
 
@@ -123,6 +123,17 @@ public abstract class BaseConfigMenu<T extends BaseConfigMenu<T>> extends Abstra
 		super.removed(player);
 	}
 
+	@Override
+	public boolean clickMenuButton(Player player, int btn) {
+		if (btn == 0)
+			getConfig().getToggleConfig().toggleBlacklist();
+		if (btn == 1)
+			getConfig().getToggleConfig().toggleTagMatch();
+		if (btn == 2)
+			getConfig().getToggleConfig().toggleLocked();
+		return true;
+	}
+
 	protected void updateBlock() {
 		if (inventory.player.level.isClientSide)
 			return;
@@ -136,6 +147,5 @@ public abstract class BaseConfigMenu<T extends BaseConfigMenu<T>> extends Abstra
 			getConfig().getNode().markDirty();
 		}
 	}
-
 
 }

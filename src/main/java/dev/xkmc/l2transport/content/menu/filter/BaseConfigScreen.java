@@ -1,22 +1,32 @@
-package dev.xkmc.l2transport.content.menu;
+package dev.xkmc.l2transport.content.menu.filter;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2transport.content.configurables.ToggleConfig;
+import dev.xkmc.l2transport.content.menu.ghost.ItemTarget;
 import dev.xkmc.l2transport.init.L2Transport;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.network.SetItemFilterToServer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
-public class ItemConfigScreen extends BaseConfigScreen<ItemConfigMenu> {
+public abstract class BaseConfigScreen<T extends BaseConfigMenu<T>> extends AbstractContainerScreen<T> {
 
-	public ItemConfigScreen(ItemConfigMenu cont, Inventory plInv, Component title) {
+	public BaseConfigScreen(T cont, Inventory plInv, Component title) {
 		super(cont, plInv, title);
+		this.imageHeight = this.menu.sprite.getHeight();
+		this.inventoryLabelY = this.menu.sprite.getPlInvY() - 11;
+	}
+
+	public void render(PoseStack stack, int mx, int my, float partial) {
+		super.render(stack, mx, my, partial);
+		this.renderTooltip(stack, mx, my);
 	}
 
 	@Override
@@ -63,13 +73,23 @@ public class ItemConfigScreen extends BaseConfigScreen<ItemConfigMenu> {
 		super.renderTooltip(poseStack, mx, my);
 	}
 
-	public List<Target> getTargets() {
-		List<Target> ans = new ArrayList<>();
+	protected boolean click(int btn) {
+		if (this.menu.clickMenuButton(Proxy.getClientPlayer(), btn)) {
+			assert Minecraft.getInstance().gameMode != null;
+			Minecraft.getInstance().gameMode.handleInventoryButtonClick(this.menu.containerId, btn);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<ItemTarget> getTargets() {
+		List<ItemTarget> ans = new ArrayList<>();
 		var rect = menu.sprite.getComp("grid");
 		for (int y = 0; y < rect.ry; y++) {
 			for (int x = 0; x < rect.rx; x++) {
 				int id = y * rect.rx + x;
-				ans.add(new Target(rect.x + x * rect.w + leftPos, rect.y + y * rect.h + topPos, 16, 16, stack -> addGhost(id, stack)));
+				ans.add(new ItemTarget(rect.x + x * rect.w + leftPos, rect.y + y * rect.h + topPos, 16, 16, stack -> addGhost(id, stack)));
 			}
 		}
 		return ans;
@@ -78,10 +98,6 @@ public class ItemConfigScreen extends BaseConfigScreen<ItemConfigMenu> {
 	public void addGhost(int ind, ItemStack stack) {
 		menu.setSlotContent(ind, stack);
 		L2Transport.HANDLER.toServer(new SetItemFilterToServer(ind, stack));
-	}
-
-	public record Target(int x, int y, int w, int h, Consumer<ItemStack> con) {
-
 	}
 
 }

@@ -1,4 +1,4 @@
-package dev.xkmc.l2transport.content.configurables;
+package dev.xkmc.l2transport.content.menu.container;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

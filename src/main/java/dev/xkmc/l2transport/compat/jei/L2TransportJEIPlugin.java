@@ -1,6 +1,7 @@
 package dev.xkmc.l2transport.compat.jei;
 
-import dev.xkmc.l2transport.content.menu.ItemConfigScreen;
+import dev.xkmc.l2transport.content.menu.filter.FluidConfigScreen;
+import dev.xkmc.l2transport.content.menu.filter.ItemConfigScreen;
 import dev.xkmc.l2transport.init.L2Transport;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -20,6 +21,7 @@ public class L2TransportJEIPlugin implements IModPlugin {
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
 		registration.addGhostIngredientHandler(ItemConfigScreen.class, new ItemFilterHandler());
+		registration.addGhostIngredientHandler(FluidConfigScreen.class, new FluidFilterHandler());
 	}
 
 }

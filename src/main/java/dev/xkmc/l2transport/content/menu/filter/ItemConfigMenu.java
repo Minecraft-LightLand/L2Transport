@@ -1,19 +1,19 @@
-package dev.xkmc.l2transport.content.menu;
+package dev.xkmc.l2transport.content.menu.filter;
 
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2library.util.code.Wrappers;
 import dev.xkmc.l2transport.content.configurables.ItemConfigurable;
+import dev.xkmc.l2transport.content.menu.ghost.IItemConfigMenu;
 import dev.xkmc.l2transport.init.L2Transport;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 
-public class ItemConfigMenu extends BaseConfigMenu<ItemConfigMenu> {
+public class ItemConfigMenu extends BaseConfigMenu<ItemConfigMenu> implements IItemConfigMenu {
 
 	public static final SpriteManager MANAGER = new SpriteManager(L2Transport.MODID, "item_config");
 	public static final int SIZE = 18;
@@ -65,17 +65,6 @@ public class ItemConfigMenu extends BaseConfigMenu<ItemConfigMenu> {
 			return;
 		getConfig().getFilters().remove(slot);
 		updateBlock();
-	}
-
-	@Override
-	public boolean clickMenuButton(Player player, int btn) {
-		if (btn == 0)
-			getConfig().getToggleConfig().toggleBlacklist();
-		if (btn == 1)
-			getConfig().getToggleConfig().toggleTagMatch();
-		if (btn == 2)
-			getConfig().getToggleConfig().toggleLocked();
-		return true;
 	}
 
 }

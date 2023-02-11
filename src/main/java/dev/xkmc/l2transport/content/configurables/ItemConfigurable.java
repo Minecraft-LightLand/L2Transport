@@ -2,7 +2,8 @@ package dev.xkmc.l2transport.content.configurables;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2transport.content.capability.item.IItemNodeBlockEntity;
-import dev.xkmc.l2transport.content.menu.ItemConfigMenu;
+import dev.xkmc.l2transport.content.menu.container.ReadOnlyContainer;
+import dev.xkmc.l2transport.content.menu.filter.ItemConfigMenu;
 import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.registrate.LTMenus;
 import net.minecraft.network.chat.Component;
