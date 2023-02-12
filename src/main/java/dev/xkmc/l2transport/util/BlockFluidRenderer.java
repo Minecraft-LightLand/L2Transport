@@ -26,7 +26,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 
 @OnlyIn(Dist.CLIENT)
-public class FluidRenderer extends RenderStateShard {
+public class BlockFluidRenderer extends RenderStateShard {
 
 	private static final RenderType FLUID = RenderType.create(L2Transport.MODID + ":fluid",
 			DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
@@ -81,7 +81,7 @@ public class FluidRenderer extends RenderStateShard {
 
 	public static void renderStillTiledFace(Direction dir, float left, float down, float right, float up,
 											float depth, VertexConsumer builder, PoseStack ms, int light, int color, TextureAtlasSprite texture) {
-		FluidRenderer.renderTiledFace(dir, left, down, right, up, depth, builder, ms, light, color, texture, 1);
+		BlockFluidRenderer.renderTiledFace(dir, left, down, right, up, depth, builder, ms, light, color, texture, 1);
 	}
 
 	public static void renderTiledFace(Direction dir, float left, float down, float right, float up,
@@ -168,7 +168,7 @@ public class FluidRenderer extends RenderStateShard {
 				.endVertex();
 	}
 
-	public FluidRenderer(String p_110161_, Runnable p_110162_, Runnable p_110163_) {
+	public BlockFluidRenderer(String p_110161_, Runnable p_110162_, Runnable p_110163_) {
 		super(p_110161_, p_110162_, p_110163_);
 	}
 

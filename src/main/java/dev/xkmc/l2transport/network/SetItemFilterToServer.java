@@ -33,4 +33,5 @@ public class SetItemFilterToServer extends SerialPacketBase {
 			menu.setSlotContent(slot, stack);
 		}
 	}
+
 }

@@ -79,6 +79,13 @@ public class FluidConfigurable extends CommonConfigurable<FluidStack> implements
 		return slot < 0 || slot >= filters.size() ? FluidStack.EMPTY : filters.get(slot);
 	}
 
+	@Nullable
+	@Override
+	public MenuProvider getMenu() {
+		if (in_use) return null;
+		return this;
+	}
+
 	@Override
 	public int getContainerSize() {
 		return FluidConfigMenu.SIZE;

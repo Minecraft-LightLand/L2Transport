@@ -44,6 +44,8 @@ public class ItemConfigMenu extends BaseConfigMenu<ItemConfigMenu> implements II
 		} else if (getConfig().getItem(slot).isEmpty()) {
 			tryAddContent(stack);
 		} else {
+			stack = stack.copy();
+			stack.setCount(1);
 			if (getConfig().internalMatch(stack)) return;
 			getConfig().getFilters().set(slot, stack);
 			updateBlock();
@@ -53,6 +55,8 @@ public class ItemConfigMenu extends BaseConfigMenu<ItemConfigMenu> implements II
 	@Override
 	protected void tryAddContent(ItemStack stack) {
 		if (getConfig().getFilters().size() < ItemConfigMenu.SIZE) {
+			stack = stack.copy();
+			stack.setCount(1);
 			if (getConfig().internalMatch(stack)) return;
 			getConfig().getFilters().add(stack);
 			updateBlock();

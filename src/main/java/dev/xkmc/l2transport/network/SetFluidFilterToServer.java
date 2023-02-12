@@ -33,4 +33,5 @@ public class SetFluidFilterToServer extends SerialPacketBase {
 			menu.setSlotContent(slot, stack);
 		}
 	}
+
 }

@@ -3,16 +3,17 @@ package dev.xkmc.l2transport.content.menu.filter;
 import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2library.util.code.Wrappers;
 import dev.xkmc.l2transport.content.configurables.FluidConfigurable;
-import dev.xkmc.l2transport.content.menu.container.DummyFluidContainer;
 import dev.xkmc.l2transport.content.menu.container.FluidContainer;
 import dev.xkmc.l2transport.content.menu.ghost.IFluidConfigMenu;
 import dev.xkmc.l2transport.content.menu.ghost.IItemConfigMenu;
+import dev.xkmc.l2transport.content.tile.fluid.AbstractFluidNodeBlockEntity;
 import dev.xkmc.l2transport.init.L2Transport;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -23,11 +24,15 @@ public class FluidConfigMenu extends BaseConfigMenu<FluidConfigMenu> implements 
 
 	public static FluidConfigMenu fromNetwork(MenuType<FluidConfigMenu> type, int wid, Inventory plInv, FriendlyByteBuf buf) {
 		BlockPos pos = buf.readBlockPos();
-		return new FluidConfigMenu(type, wid, plInv, new DummyFluidContainer(SIZE), pos);
+		BlockEntity be = plInv.player.level.getBlockEntity(pos);
+		assert be != null;
+		AbstractFluidNodeBlockEntity<?> node = Wrappers.cast(be);
+		return new FluidConfigMenu(type, wid, plInv, node.getConfig(), pos);
 	}
 
 	public FluidConfigMenu(MenuType<FluidConfigMenu> type, int wid, Inventory plInv, FluidContainer container, BlockPos pos) {
 		super(type, wid, plInv, MANAGER, container, pos);
+		addSlot("grid", e -> true);
 	}
 
 	protected FluidConfigurable getConfig() {

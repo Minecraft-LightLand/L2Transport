@@ -71,5 +71,6 @@
   "l2transport.wand.config": "按方向键或者滚滚轮来设置单次传送数量。右键节点打开高级过滤配置。按shift或者alt禁用数量设置界面，启用手杖选择界面。",
   "l2transport.wand.link": "右键节点开始连接。右键另一个方块设置连接。右键节点本身取消。右键已存在的目标删除连接。",
   "l2transport.wand.rotate": "右键方块旋转方块。",
-  "l2transport.wand.validate": "右键节点清除所有不成立的连接。"
+  "l2transport.wand.validate": "右键节点清除所有不成立的连接。",
+  "container.l2transport.fluid_config": "流体过滤"
 }
