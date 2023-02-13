@@ -15,6 +15,7 @@ public enum LangData {
 	INFO_EXTRACT("info.extract", "Extract in %s", 1, ChatFormatting.AQUA),
 	INFO_SPEED("info.speed", "Transfer cool down: %s", 1, ChatFormatting.AQUA),
 	INFO_SYNC("info.sync", "Force transfer %s to all targets", 1, ChatFormatting.AQUA),
+	INFO_FLUX("info.flux", "Transmitting %s", 1, ChatFormatting.AQUA),
 
 	SIMPLE("connect.simple", "Connects to only one target. When adding filter, only allow content matching filter to pass, and gate content amount to the filter amount.", 0, ChatFormatting.GRAY),
 	DISTRIBUTE("connect.distribute", "Connects to multiple targets. When receiving content, iterate through all targets until finding one valid target. Only send to 1 target, and start from the next one next time.", 0, ChatFormatting.GRAY),
@@ -86,6 +87,10 @@ public enum LangData {
 		pvd.accept(Keys.DOWN.id, "Select Down");
 		pvd.accept(Keys.LEFT.id, "Select Left");
 		pvd.accept(Keys.RIGHT.id, "Select Right");
+
+		pvd.accept("flux.forge.energy", "Energy (FE)");
+		pvd.accept("flux.mekanism.gas", "Gas (Mekanism)");
+
 	}
 
 }

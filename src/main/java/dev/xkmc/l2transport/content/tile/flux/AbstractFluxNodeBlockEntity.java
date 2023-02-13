@@ -5,6 +5,8 @@ import dev.xkmc.l2transport.content.capability.generic.GenericCapabilityRegistry
 import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
 import dev.xkmc.l2transport.content.capability.generic.IGenericNodeBlockEntity;
 import dev.xkmc.l2transport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.l2transport.content.client.overlay.TooltipBuilder;
+import dev.xkmc.l2transport.content.client.overlay.TooltipType;
 import dev.xkmc.l2transport.content.items.upgrades.UpgradeFlag;
 import dev.xkmc.l2transport.content.tile.base.AbstractNodeBlockEntity;
 import dev.xkmc.l2transport.content.tile.base.IRenderableNode;
@@ -84,6 +86,13 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 			}
 		}
 		super.tick();
+	}
+
+	@Override
+	public TooltipBuilder getTooltips() {
+		TooltipBuilder ans = super.getTooltips();
+		ans.add(TooltipType.NAME, getCapType().getTypeDesc());
+		return ans;
 	}
 
 	@Override

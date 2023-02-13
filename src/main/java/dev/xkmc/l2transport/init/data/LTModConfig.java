@@ -74,5 +74,4 @@ public class LTModConfig {
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_SPEC);
 	}
 
-
 }

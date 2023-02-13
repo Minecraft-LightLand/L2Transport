@@ -5,7 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2library.base.overlay.SelectionSideBar;
 import dev.xkmc.l2library.base.overlay.TextBox;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2transport.content.items.select.ItemSelector;
+import dev.xkmc.l2transport.content.items.select.IItemSelector;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -26,7 +26,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 
 	@Override
 	public Pair<List<ItemStack>, Integer> getItems() {
-		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+		IItemSelector sel = IItemSelector.getSelection(Proxy.getClientPlayer());
 		assert sel != null;
 		return Pair.of(sel.getList(), sel.getIndex(Proxy.getClientPlayer()));
 	}
@@ -45,7 +45,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 	public int getSignature() {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return 0;
-		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+		IItemSelector sel = IItemSelector.getSelection(Proxy.getClientPlayer());
 		if (sel == null) return 0;
 		return sel.index * 100 + sel.getIndex(player);
 	}
@@ -61,7 +61,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 				return false;
 			}
 		}
-		return ItemSelector.getSelection(player) != null;
+		return IItemSelector.getSelection(player) != null;
 	}
 
 	public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int width, int height) {
@@ -99,7 +99,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 	}
 
 	protected int getYOffset(int height) {
-		ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+		IItemSelector sel = IItemSelector.getSelection(Proxy.getClientPlayer());
 		assert sel != null;
 		return height / 2 - 9 * sel.getList().size() + 1;
 	}

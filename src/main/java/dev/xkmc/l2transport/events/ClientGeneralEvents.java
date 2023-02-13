@@ -4,7 +4,7 @@ import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2transport.content.client.overlay.NumberSetOverlay;
 import dev.xkmc.l2transport.content.client.overlay.ToolSelectionOverlay;
 import dev.xkmc.l2transport.content.configurables.NumericAdjustor;
-import dev.xkmc.l2transport.content.items.select.ItemSelector;
+import dev.xkmc.l2transport.content.items.select.IItemSelector;
 import dev.xkmc.l2transport.init.data.Keys;
 import dev.xkmc.l2transport.init.data.LTModConfig;
 import net.minecraft.client.Minecraft;
@@ -30,7 +30,7 @@ public class ClientGeneralEvents {
 				NumberSetOverlay.right();
 			}
 		} else if (ToolSelectionOverlay.INSTANCE.isScreenOn()) {
-			ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+			IItemSelector sel = IItemSelector.getSelection(Proxy.getClientPlayer());
 			if (sel == null) return;
 			if (event.getKey() == Keys.UP.map.getKey().getValue() && event.getAction() == 1) {
 				sel.move(-1);
@@ -69,7 +69,7 @@ public class ClientGeneralEvents {
 		} else if (ToolSelectionOverlay.INSTANCE.isScreenOn() &&
 				(!LTModConfig.CLIENT.selectionScrollRequireShift.get() ||
 						Proxy.getClientPlayer().isShiftKeyDown())) {
-			ItemSelector sel = ItemSelector.getSelection(Proxy.getClientPlayer());
+			IItemSelector sel = IItemSelector.getSelection(Proxy.getClientPlayer());
 			if (sel == null) return;
 			sel.move(diff);
 			event.setCanceled(true);

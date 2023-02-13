@@ -3,7 +3,7 @@ package dev.xkmc.l2transport.network;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.SerialClass.SerialField;
 import dev.xkmc.l2library.serial.network.SerialPacketBase;
-import dev.xkmc.l2transport.content.items.select.ItemSelector;
+import dev.xkmc.l2transport.content.items.select.IItemSelector;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent.Context;
 
@@ -27,7 +27,7 @@ public class SetSelectedToServer extends SerialPacketBase {
 	public void handle(Context ctx) {
 		Player sender = ctx.getSender();
 		if (sender != null) {
-			ItemSelector sel = ItemSelector.getSelection(sender);
+			IItemSelector sel = IItemSelector.getSelection(sender);
 			if (sel != null)
 				sel.swap(sender, slot);
 		}

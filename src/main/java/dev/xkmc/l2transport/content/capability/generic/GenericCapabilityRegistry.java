@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -29,11 +30,7 @@ public class GenericCapabilityRegistry {
 		return id == null || !CAPABILITIES.containsKey(id) ? CAPABILITIES.firstEntry().getValue() : CAPABILITIES.get(id);
 	}
 
-	public static ResourceLocation next(@Nullable ResourceLocation id) {
-		if (id == null) return CAPABILITIES.firstKey();
-		ResourceLocation ans = CAPABILITIES.higherKey(id);
-		if (ans == null) return CAPABILITIES.firstKey();
-		return ans;
+	public static int indexOf(ICapabilityEntry<?> entry) {
+		return new ArrayList<>(values()).indexOf(entry);
 	}
-
 }

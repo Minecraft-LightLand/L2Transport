@@ -17,7 +17,7 @@
   "item.l2transport.configurator": "配置手杖",
   "item.l2transport.distance_upgrade_0": "距离升级",
   "item.l2transport.drop_upgrade": "物品丢出升级",
-  "item.l2transport.flux_filter": "Flux Filter",
+  "item.l2transport.flux_filter": "通量配置手杖",
   "item.l2transport.linker": "连接手杖",
   "item.l2transport.place_upgrade": "世界放置升级",
   "item.l2transport.rotate": "旋转手杖",
@@ -72,5 +72,8 @@
   "l2transport.wand.link": "右键节点开始连接。右键另一个方块设置连接。右键节点本身取消。右键已存在的目标删除连接。",
   "l2transport.wand.rotate": "右键方块旋转方块。",
   "l2transport.wand.validate": "右键节点清除所有不成立的连接。",
-  "container.l2transport.fluid_config": "流体过滤"
+  "container.l2transport.fluid_config": "流体过滤",
+  "flux.forge.energy": "能量 (FE)",
+  "flux.mekanism.gas": "气体 (Mekanism)",
+  "l2transport.info.flux": "传输类型：%s"
 }
