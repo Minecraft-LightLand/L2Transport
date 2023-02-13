@@ -3,6 +3,7 @@ package dev.xkmc.l2transport.content.items.tools;
 import dev.xkmc.l2transport.content.capability.generic.GenericCapabilityRegistry;
 import dev.xkmc.l2transport.content.capability.generic.ICapabilityEntry;
 import dev.xkmc.l2transport.content.capability.generic.IGenericNodeBlockEntity;
+import dev.xkmc.l2transport.init.data.LangData;
 import dev.xkmc.l2transport.init.registrate.LTItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
@@ -11,10 +12,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class FluxFilter extends Item implements ILinker {
@@ -61,4 +65,10 @@ public class FluxFilter extends Item implements ILinker {
 	public Component getName(ItemStack stack) {
 		return super.getName(stack).copy().append(" - ").append(get(stack).getTypeDesc());
 	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.WAND_FLUX.get());
+	}
+
 }

@@ -50,6 +50,7 @@ public enum LangData {
 	WAND_CLEAR("wand.clear", "Right click a node to clear all links. Shift-Right click a node to clear all upgrades.", 0, ChatFormatting.GRAY),
 	WAND_ROTATE("wand.rotate", "Right click a block to rotate. Works similar to debug stick.", 0, ChatFormatting.GRAY),
 	WAND_CONFIG("wand.config", "Press direction keys or scroll to alter transfer limit. Right click node to open advanced filter config menu. Press Shift or Alt to disable so that you can use the item selector overlay.", 0, ChatFormatting.GRAY),
+	WAND_FLUX("wand.flux", "Select the flux type, and right click a node to set the flux type. When multiple nodes are connected, all connected nodes will be set to the same flux type altogether.", 0, ChatFormatting.GRAY),
 	;
 
 

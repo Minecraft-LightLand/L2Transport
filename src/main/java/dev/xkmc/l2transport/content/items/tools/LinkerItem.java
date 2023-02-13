@@ -2,14 +2,20 @@ package dev.xkmc.l2transport.content.items.tools;
 
 import dev.xkmc.l2library.util.nbt.NBTObj;
 import dev.xkmc.l2transport.content.tile.base.ILinkableNode;
+import dev.xkmc.l2transport.init.data.LangData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class LinkerItem extends Item implements ILinker {
 
@@ -56,6 +62,11 @@ public class LinkerItem extends Item implements ILinker {
 			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.WAND_LINK.get());
 	}
 
 	@Override

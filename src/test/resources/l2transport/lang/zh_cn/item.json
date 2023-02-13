@@ -1,0 +1,38 @@
+{
+  "block.l2transport": {
+	"node_extended": "远程扩展节点",
+	"node_fluid_distribute": "流体节点-顺序遍历",
+	"node_fluid_ordered": "流体节点-优先遍历",
+	"node_fluid_retrieve": "流体提取节点",
+	"node_fluid_simple": "流体节点",
+	"node_fluid_synced": "流体节点-同步",
+	"node_flux_ordered": "通量节点-优先遍历",
+	"node_flux_retrieve": "通量提取节点",
+	"node_flux_simple": "通量节点",
+	"node_item_distribute": "物品节点-顺序遍历",
+	"node_item_ordered": "物品节点-优先遍历",
+	"node_item_retrieve": "物品提取节点",
+	"node_item_simple": "物品节点",
+	"node_item_synced": "物品节点-同步"
+  },
+  "item.l2transport": {
+	"linker": "连接手杖",
+	"validator": "验证手杖",
+	"clear": "清除手杖",
+	"rotate": "旋转手杖",
+	"configurator": "配置手杖",
+	"flux_filter": "通量配置手杖",
+	"valve_upgrade": "红石管控升级",
+	"watch_upgrade": "红石监视升级",
+	"drop_upgrade": "物品丢出升级",
+	"place_upgrade": "世界放置升级",
+	"distance_upgrade_0": "距离升级",
+	"speed_upgrade_0": "速度升级 I",
+	"speed_upgrade_1": "速度升级 II",
+	"speed_upgrade_2": "速度升级 III",
+	"speed_upgrade_inf": "速度升级 无限",
+	"throughput_upgrade_0": "流量升级 I",
+	"throughput_upgrade_1": "流量升级 II",
+	"throughput_upgrade_2": "流量升级 III"
+  }
+}
