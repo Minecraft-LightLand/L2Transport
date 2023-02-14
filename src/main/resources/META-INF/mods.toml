@@ -2,27 +2,27 @@ modLoader="javafml"
 loaderVersion="[42,)"
 license="All rights reserved"
 [[mods]]
-modId="l2transport"
+modId="lasertransport"
 version="${file.jarVersion}" #mandatory
-displayName="L2 Transport" #mandatory
-logoFile="l2transport.png" #optional
+displayName="Laser Transport" #mandatory
+logoFile="lasertransport.png" #optional
 credits="Thanks for this example mod goes to Java" #optional
 authors="Love, Cheese and small house plants" #optional
 description='''
 '''
-[[dependencies.l2transport]]
+[[dependencies.lasertransport]]
     modId="forge"
     mandatory=true
     versionRange="[42.0.0,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.l2transport]]
+[[dependencies.lasertransport]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19.1,1.20)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.l2transport]]
+[[dependencies.lasertransport]]
     modId="l2library"
     mandatory=true
     versionRange="[1.7.0,)"

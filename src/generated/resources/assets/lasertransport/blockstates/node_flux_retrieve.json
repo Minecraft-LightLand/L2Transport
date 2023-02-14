@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "facing=down,triggered=false": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=down,triggered=true": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=east,triggered=false": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=east,triggered=true": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=north,triggered=false": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=north,triggered=true": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=south,triggered=false": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=south,triggered=true": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=up,triggered=false": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=up,triggered=true": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=west,triggered=false": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    },
+    "facing=west,triggered=true": {
+      "model": "lasertransport:block/node_flux_retrieve"
+    }
+  }
+}

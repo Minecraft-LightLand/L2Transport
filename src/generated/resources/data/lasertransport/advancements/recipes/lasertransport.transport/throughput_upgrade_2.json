@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lasertransport:throughput_upgrade_2"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_throughput_upgrade_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lasertransport:throughput_upgrade_1"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_throughput_upgrade_1",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lasertransport:throughput_upgrade_2"
+    ]
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "l2transport:node_item_simple"
-  },
-  "result": "l2transport:node_item_synced"
-}

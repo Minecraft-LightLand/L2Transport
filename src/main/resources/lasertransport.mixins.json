@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "dev.xkmc.lasertransport.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "lasertransport.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

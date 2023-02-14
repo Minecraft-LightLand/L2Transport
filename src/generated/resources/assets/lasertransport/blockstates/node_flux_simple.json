@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "triggered=false": {
+      "model": "lasertransport:block/node_flux_simple"
+    },
+    "triggered=true": {
+      "model": "lasertransport:block/node_flux_simple"
+    }
+  }
+}

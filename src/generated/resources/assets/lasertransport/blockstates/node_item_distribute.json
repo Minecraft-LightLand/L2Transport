@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,triggered=false": {
+      "model": "lasertransport:block/node_item_distribute"
+    },
+    "lit=false,triggered=true": {
+      "model": "lasertransport:block/node_item_distribute"
+    },
+    "lit=true,triggered=false": {
+      "model": "lasertransport:block/node_item_distribute_lit"
+    },
+    "lit=true,triggered=true": {
+      "model": "lasertransport:block/node_item_distribute_lit"
+    }
+  }
+}

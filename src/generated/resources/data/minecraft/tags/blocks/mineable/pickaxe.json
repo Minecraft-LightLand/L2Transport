@@ -1,18 +1,18 @@
 {
   "values": [
-    "l2transport:node_extended",
-    "l2transport:node_item_simple",
-    "l2transport:node_item_ordered",
-    "l2transport:node_item_synced",
-    "l2transport:node_item_distribute",
-    "l2transport:node_item_retrieve",
-    "l2transport:node_fluid_simple",
-    "l2transport:node_fluid_ordered",
-    "l2transport:node_fluid_synced",
-    "l2transport:node_fluid_distribute",
-    "l2transport:node_fluid_retrieve",
-    "l2transport:node_flux_simple",
-    "l2transport:node_flux_ordered",
-    "l2transport:node_flux_retrieve"
+    "lasertransport:node_extended",
+    "lasertransport:node_item_simple",
+    "lasertransport:node_item_ordered",
+    "lasertransport:node_item_synced",
+    "lasertransport:node_item_distribute",
+    "lasertransport:node_item_retrieve",
+    "lasertransport:node_fluid_simple",
+    "lasertransport:node_fluid_ordered",
+    "lasertransport:node_fluid_synced",
+    "lasertransport:node_fluid_distribute",
+    "lasertransport:node_fluid_retrieve",
+    "lasertransport:node_flux_simple",
+    "lasertransport:node_flux_ordered",
+    "lasertransport:node_flux_retrieve"
   ]
 }

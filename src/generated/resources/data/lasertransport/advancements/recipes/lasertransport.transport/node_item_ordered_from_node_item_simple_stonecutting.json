@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_node_item_simple": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lasertransport:node_item_simple"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lasertransport:node_item_ordered_from_node_item_simple_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_node_item_simple",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lasertransport:node_item_ordered_from_node_item_simple_stonecutting"
+    ]
+  }
+}

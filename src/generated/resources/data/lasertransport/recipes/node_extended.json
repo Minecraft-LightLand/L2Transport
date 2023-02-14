@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "minecraft:redstone_block"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "S": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "CSC",
+    "SAS",
+    "CSC"
+  ],
+  "result": {
+    "count": 16,
+    "item": "lasertransport:node_extended"
+  }
+}

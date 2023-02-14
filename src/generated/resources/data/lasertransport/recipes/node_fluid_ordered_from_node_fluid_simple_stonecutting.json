@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "lasertransport:node_fluid_simple"
+  },
+  "result": "lasertransport:node_fluid_ordered"
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,triggered=false": {
+      "model": "lasertransport:block/node_fluid_synced"
+    },
+    "lit=false,triggered=true": {
+      "model": "lasertransport:block/node_fluid_synced"
+    },
+    "lit=true,triggered=false": {
+      "model": "lasertransport:block/node_fluid_synced_lit"
+    },
+    "lit=true,triggered=true": {
+      "model": "lasertransport:block/node_fluid_synced_lit"
+    }
+  }
+}

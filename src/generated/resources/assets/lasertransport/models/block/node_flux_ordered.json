@@ -1,0 +1,7 @@
+{
+  "parent": "lasertransport:block/node_small",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "lasertransport:block/node/flux/ordered"
+  }
+}

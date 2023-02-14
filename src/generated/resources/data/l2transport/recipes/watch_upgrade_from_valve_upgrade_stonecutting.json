@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "l2transport:valve_upgrade"
-  },
-  "result": "l2transport:watch_upgrade"
-}

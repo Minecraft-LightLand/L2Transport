@@ -22,7 +22,7 @@ import java.util.Map;
 public class GUIGenerator {
 
     public static void main(String[] args) throws Exception {
-        new GUIGenerator("l2transport").gen();
+        new GUIGenerator("lasertransport").gen();
     }
 
     private class Comp {
