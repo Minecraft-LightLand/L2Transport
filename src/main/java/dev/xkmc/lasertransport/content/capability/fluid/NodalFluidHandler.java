@@ -31,7 +31,10 @@ public record NodalFluidHandler(IFluidNodeBlockEntity entity) implements IFluidH
 
 	@Override
 	public int fill(FluidStack resource, FluidAction action) {
-		return (int) TransportHandler.insert(this, new FluidHolder(resource), action.simulate());
+		long max = Math.min(resource.getAmount(), entity.getConfig().getMaxTransfer());
+		FluidStack copy = resource.copy();
+		copy.setAmount((int) max);
+		return (int) TransportHandler.insert(this, new FluidHolder(copy), action.simulate());
 	}
 
 	@Override

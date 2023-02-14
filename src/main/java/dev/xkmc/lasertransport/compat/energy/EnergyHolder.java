@@ -68,7 +68,7 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 
 	@Override
 	public ItemStack getIcon() {
-		return Items.COAL.getDefaultInstance();
+		return Items.FURNACE.getDefaultInstance();
 	}
 
 	@Override

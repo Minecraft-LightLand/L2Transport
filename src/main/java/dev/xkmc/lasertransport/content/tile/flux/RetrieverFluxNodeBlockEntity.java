@@ -67,11 +67,11 @@ public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<Re
 		HandlerWrapper wrapper = type.parse(target);
 		HandlerWrapper self = type.parse(type.parseHandler(genericHandler));
 		for (int i = 0; i < wrapper.getSize(); i++) {
-			GenericHolder toExtract = wrapper.extract(i, (int) getConfig().getMaxTransfer(), true);
+			GenericHolder toExtract = wrapper.extract(i, getConfig().getMaxTransfer(), true);
 			if (toExtract.amount() == 0) continue;
 			if (!getConfig().isContentValid(toExtract)) continue;
 			if (!getConfig().allowExtract(toExtract.getCount())) continue;
-			int toInsert = self.insert(toExtract, true);
+			long toInsert = self.insert(toExtract, true);
 			if (toInsert == 0) continue;
 			while (toInsert != toExtract.amount()) {
 				toExtract = wrapper.extract(i, toInsert, true);

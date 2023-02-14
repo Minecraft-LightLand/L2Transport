@@ -7,13 +7,13 @@ import net.minecraftforge.energy.IEnergyStorage;
 public record EnergyWrapper(IEnergyStorage be) implements HandlerWrapper {
 
 	@Override
-	public int insert(GenericHolder token, boolean simulate) {
+	public long insert(GenericHolder token, boolean simulate) {
 		return be.receiveEnergy((int) token.amount(), simulate);
 	}
 
 	@Override
-	public GenericHolder extract(int slot, int max, boolean b) {
-		return EnergyHolder.ENERGY.empty().getCopy(be.extractEnergy(max, true));
+	public GenericHolder extract(int slot, long max, boolean b) {
+		return EnergyHolder.ENERGY.empty().getCopy(be.extractEnergy((int) max, true));
 	}
 
 	@Override

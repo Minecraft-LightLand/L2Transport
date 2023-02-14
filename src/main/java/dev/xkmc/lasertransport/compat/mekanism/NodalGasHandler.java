@@ -35,8 +35,14 @@ public record NodalGasHandler(NodalGenericHandler node) implements IGasHandler {
 
 	@Override
 	public GasStack insertChemical(int i, GasStack stack, Action action) {
-		long insert = TransportHandler.insert(node, GasHolder.parse(stack), action.simulate());
-		return insert == 0 ? GasStack.EMPTY : new GasStack(stack.getType(), insert);
+		long max = Math.min(stack.getAmount(), node.entity().getConfig().getMaxTransfer());
+		GasStack copy = stack.copy();
+		copy.setAmount(max);
+		long insert = TransportHandler.insert(node, GasHolder.parse(copy), action.simulate());
+		long remain = max - insert;
+		GasStack ans = stack.copy();
+		ans.setAmount(remain);
+		return remain == 0 ? GasStack.EMPTY : ans;
 	}
 
 	@Override

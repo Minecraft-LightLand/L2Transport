@@ -12,7 +12,7 @@ public abstract class AbstractNodeTarget<T> implements INetworkNode<T> {
 	protected final IContentToken<T> token;
 	protected final long consumed;
 
-	public AbstractNodeTarget(BlockEntity be, IContentToken<T> token, int consumed) {
+	public AbstractNodeTarget(BlockEntity be, IContentToken<T> token, long consumed) {
 		this.be = be;
 		this.token = token;
 		this.consumed = consumed;

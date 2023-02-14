@@ -21,7 +21,9 @@ public record NodalItemHandler(IItemNodeBlockEntity entity) implements IItemHand
 
 	@Override
 	public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-		long consumed = TransportHandler.insert(this, new ItemHolder(stack), simulate);
+		ItemStack copy = stack.copy();
+		copy.setCount((int) Math.min(stack.getCount(), entity.getConfig().getMaxTransfer()));
+		long consumed = TransportHandler.insert(this, new ItemHolder(copy), simulate);
 		if (consumed == 0) {
 			return stack;
 		}

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class GenericNodeTarget extends AbstractNodeTarget<GenericHolder> {
 
-	private static int computeConsumption(HandlerWrapper handler, IContentToken<GenericHolder> token) {
+	private static long computeConsumption(HandlerWrapper handler, IContentToken<GenericHolder> token) {
 		return handler.insert(token.get().get(), true);
 	}
 
@@ -21,7 +21,7 @@ public class GenericNodeTarget extends AbstractNodeTarget<GenericHolder> {
 
 	@Override
 	public void perform(RealToken<GenericHolder> real) {
-		int drained = handler.insert(real.split(consumed), false);
+		long drained = handler.insert(real.split(consumed), false);
 		if (drained != consumed) {
 			real.gain(consumed - drained);
 			LaserTransport.LOGGER.error("Mismatch behavior for content insertion at " + be);

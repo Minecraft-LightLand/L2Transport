@@ -8,7 +8,8 @@ public record NodalEnergyHandler(NodalGenericHandler node) implements IEnergySto
 
 	@Override
 	public int receiveEnergy(int maxReceive, boolean simulate) {
-		return (int) TransportHandler.insert(node, EnergyHolder.ENERGY.empty().getCopy(maxReceive), simulate);
+		long max = Math.min(maxReceive, node.entity().getConfig().getMaxTransfer());
+		return (int) TransportHandler.insert(node, EnergyHolder.ENERGY.empty().getCopy(max), simulate);
 	}
 
 	@Override

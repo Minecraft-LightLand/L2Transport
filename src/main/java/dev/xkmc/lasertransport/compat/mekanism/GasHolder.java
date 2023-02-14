@@ -9,6 +9,7 @@ import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
 import mekanism.common.capabilities.Capabilities;
+import mekanism.common.registries.MekanismBlocks;
 import mekanism.common.registries.MekanismItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -82,7 +83,7 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 
 	@Override
 	public ItemStack getIcon() {
-		return MekanismItems.GAS_UPGRADE.getItemStack();
+		return MekanismBlocks.BASIC_CHEMICAL_TANK.getItemStack();
 	}
 
 	@Override
