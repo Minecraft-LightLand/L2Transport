@@ -22,10 +22,6 @@ public class GenericCapabilityRegistry {
 		return CAPABILITIES.values();
 	}
 
-	public static <T> Optional<ICapabilityEntry<T>> getCapType(Capability<T> cap) {
-		return Wrappers.cast(values().stream().filter(t -> t.cap() == cap).findFirst());
-	}
-
 	public static ICapabilityEntry<?> getOrDefault(@Nullable ResourceLocation id) {
 		return id == null || !CAPABILITIES.containsKey(id) ? CAPABILITIES.firstEntry().getValue() : CAPABILITIES.get(id);
 	}

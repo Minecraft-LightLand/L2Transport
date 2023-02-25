@@ -1,12 +1,13 @@
 package dev.xkmc.lasertransport.compat.mekanism;
 
+import dev.xkmc.lasertransport.content.capability.generic.INodeHandlerWrapper;
 import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.lasertransport.content.flow.TransportHandler;
 import mekanism.api.Action;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
 
-public record NodalGasHandler(NodalGenericHandler node) implements IGasHandler {
+public record NodalGasHandler(NodalGenericHandler node) implements INodeHandlerWrapper, IGasHandler {
 
 	@Override
 	public int getTanks() {

@@ -4,6 +4,8 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.lasertransport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.lasertransport.content.capability.fluid.NodalFluidHandler;
+import dev.xkmc.lasertransport.content.capability.generic.ForgeCapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.items.upgrades.LevelDropUpgrade;
 import dev.xkmc.lasertransport.content.items.upgrades.UpgradeFlag;
 import dev.xkmc.lasertransport.content.items.upgrades.UpgradeItem;
@@ -45,8 +47,8 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	}
 
 	@Override
-	public Capability<?> getValidTarget() {
-		return ForgeCapabilities.FLUID_HANDLER;
+	public ICapabilityHolder<?> getValidTarget() {
+		return new ForgeCapabilityHolder<>(ForgeCapabilities.FLUID_HANDLER);
 	}
 
 	public FluidStack getFluid() {

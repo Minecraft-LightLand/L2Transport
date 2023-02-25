@@ -1,21 +1,16 @@
 package dev.xkmc.lasertransport.compat.mekanism;
 
-import dev.xkmc.lasertransport.content.capability.generic.GenericHolder;
-import dev.xkmc.lasertransport.content.capability.generic.HandlerWrapper;
-import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
-import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.lasertransport.content.capability.generic.*;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
 import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
 import mekanism.common.capabilities.Capabilities;
 import mekanism.common.registries.MekanismBlocks;
-import mekanism.common.registries.MekanismItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
 
 public class GasHolder implements ICapabilityEntry<IGasHandler> {
 
@@ -40,8 +35,8 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 	}
 
 	@Override
-	public Capability<IGasHandler> cap() {
-		return Capabilities.GAS_HANDLER;
+	public ICapabilityHolder<IGasHandler> cap() {
+		return new ForgeCapabilityHolder<>(Capabilities.GAS_HANDLER);
 	}
 
 	@Override

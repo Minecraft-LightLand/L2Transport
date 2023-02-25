@@ -1,6 +1,8 @@
 package dev.xkmc.lasertransport.content.tile.item;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.lasertransport.content.capability.generic.ForgeCapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.item.IItemNodeBlockEntity;
 import dev.xkmc.lasertransport.content.capability.item.NodalItemHandler;
 import dev.xkmc.lasertransport.content.items.upgrades.UpgradeFlag;
@@ -37,8 +39,8 @@ public abstract class AbstractItemNodeBlockEntity<BE extends AbstractItemNodeBlo
 	}
 
 	@Override
-	public Capability<?> getValidTarget() {
-		return ForgeCapabilities.ITEM_HANDLER;
+	public ICapabilityHolder<?> getValidTarget() {
+		return new ForgeCapabilityHolder<>(ForgeCapabilities.ITEM_HANDLER);
 	}
 
 	public ItemStack getItem() {

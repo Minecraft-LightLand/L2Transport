@@ -1,10 +1,11 @@
 package dev.xkmc.lasertransport.compat.energy;
 
+import dev.xkmc.lasertransport.content.capability.generic.INodeHandlerWrapper;
 import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.lasertransport.content.flow.TransportHandler;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public record NodalEnergyHandler(NodalGenericHandler node) implements IEnergyStorage {
+public record NodalEnergyHandler(NodalGenericHandler node) implements INodeHandlerWrapper, IEnergyStorage {
 
 	@Override
 	public int receiveEnergy(int maxReceive, boolean simulate) {

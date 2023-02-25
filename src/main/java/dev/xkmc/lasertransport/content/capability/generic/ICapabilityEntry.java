@@ -4,13 +4,12 @@ import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
 
 public interface ICapabilityEntry<T> {
 
 	ResourceLocation id();
 
-	Capability<T> cap();
+	ICapabilityHolder<T> cap();
 
 	HandlerWrapper parse(T t);
 
@@ -22,6 +21,9 @@ public interface ICapabilityEntry<T> {
 
 	GenericHolder empty();
 
+	/**
+	 * be sure to return an instance of INodeHandlerWrapper
+	 */
 	T parseHandler(NodalGenericHandler handler);
 
 	MutableComponent getTypeDesc();

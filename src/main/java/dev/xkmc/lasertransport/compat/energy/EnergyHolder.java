@@ -1,16 +1,12 @@
 package dev.xkmc.lasertransport.compat.energy;
 
-import dev.xkmc.lasertransport.content.capability.generic.GenericHolder;
-import dev.xkmc.lasertransport.content.capability.generic.HandlerWrapper;
-import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
-import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.lasertransport.content.capability.generic.*;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.energy.IEnergyStorage;
 
@@ -27,8 +23,8 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 	}
 
 	@Override
-	public Capability<IEnergyStorage> cap() {
-		return ForgeCapabilities.ENERGY;
+	public ICapabilityHolder<IEnergyStorage> cap() {
+		return new ForgeCapabilityHolder<>(ForgeCapabilities.ENERGY);
 	}
 
 	@Override

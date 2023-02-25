@@ -1,10 +1,7 @@
 package dev.xkmc.lasertransport.content.tile.flux;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lasertransport.content.capability.generic.GenericCapabilityRegistry;
-import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
-import dev.xkmc.lasertransport.content.capability.generic.IGenericNodeBlockEntity;
-import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.lasertransport.content.capability.generic.*;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;
 import dev.xkmc.lasertransport.content.items.upgrades.UpgradeFlag;
@@ -38,7 +35,7 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 	}
 
 	@Override
-	public Capability<?> getValidTarget() {
+	public ICapabilityHolder<?> getValidTarget() {
 		return getCapType().cap();
 	}
 
@@ -97,7 +94,7 @@ public abstract class AbstractFluxNodeBlockEntity<BE extends AbstractFluxNodeBlo
 
 	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {
-		if (cap == getCapType().cap()) {
+		if (getCapType().cap().is(cap)) {
 			return LazyOptional.of(() -> getCapType().parseHandler(genericHandler)).cast();
 		}
 		return super.getCapability(cap, side);

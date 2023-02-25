@@ -6,6 +6,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.lasertransport.content.capability.base.INodeBlockEntity;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;
 import dev.xkmc.lasertransport.content.connector.IConnector;
@@ -21,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -194,10 +194,10 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		if (getUpgrade(UpgradeFlag.LEVEL) != null) {
 			return true;
 		}
-		return getCapability(getValidTarget(), pos).resolve().isPresent();
+		return getValidTarget().getHolder(this, pos).isPresent();
 	}
 
 
-	public abstract Capability<?> getValidTarget();
+	public abstract ICapabilityHolder<?> getValidTarget();
 
 }

@@ -43,10 +43,11 @@ public record NodalGenericHandler(IGenericNodeBlockEntity entity) implements Gen
 
 	@Nullable
 	private <T> INodeSupplier<GenericHolder> parseTarget(BlockEntity target, ICapabilityEntry<T> capType, BlockPos pos) {
-		var lazyCap = entity.getCapability(capType.cap(), pos);
-		if (lazyCap.resolve().isPresent()) {
-			var cap = lazyCap.resolve().get();
-			if (cap instanceof GenericNode node) {
+		var lazyCap = capType.cap().getHolder(entity, pos);
+		if (lazyCap.isPresent()) {
+			var cap = lazyCap.get();
+			if (cap instanceof INodeHandlerWrapper wrapper) {
+				var node = wrapper.node();
 				return new SimpleNodeSupplier<>(pos, node.isReady(), (ctx, token) -> TransportHandler.broadcastRecursive(ctx, node, token));
 			} else {
 				return new SimpleNodeSupplier<>(pos, true, (ctx, token) -> new GenericNodeTarget(target, capType.parse(cap), token));
