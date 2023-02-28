@@ -1,6 +1,9 @@
 package dev.xkmc.lasertransport.content.tile.extend;
 
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.wrapper.IFakeCapabilityTile;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;
 import dev.xkmc.lasertransport.content.tile.base.ConnectionRenderBlockEntity;
@@ -22,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 @SerialClass
 public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
-		implements IExtendedBlockEntity, ILinkableNode {
+		implements IExtendedBlockEntity, ILinkableNode, IFakeCapabilityTile {
 
 	@SerialClass.SerialField(toClient = true)
 	private Holder target = new Holder(null);
@@ -33,15 +36,20 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 
 	@Override
 	public @NotNull <C> LazyOptional<C> getCapability(@NotNull Capability<C> cap, @Nullable Direction side) {
+		return IExtendedBlockEntity.getCapabilityImpl(this, new ForgeCapabilityHolder<>(cap));
+	}
+
+	@Override
+	public <C> LazyOptional<C> getCapability(@NotNull ICapabilityHolder<C> cap) {
 		return IExtendedBlockEntity.getCapabilityImpl(this, cap);
 	}
 
 	@Override
-	public <C> LazyOptional<C> getCapabilityOneStep(Capability<C> cap) {
+	public <C> LazyOptional<C> getCapabilityOneStep(ICapabilityHolder<C> cap) {
 		if (level != null && getTarget() != null) {
 			BlockEntity be = level.getBlockEntity(getTarget());
 			if (be != null) {
-				return getCapability(cap, getTarget());
+				return cap.getHolder(this, getTarget());
 			}
 		}
 		return LazyOptional.empty();

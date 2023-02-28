@@ -1,5 +1,6 @@
 package dev.xkmc.lasertransport.content.capability.generic;
 
+import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;

@@ -1,7 +1,10 @@
 package dev.xkmc.lasertransport.compat.energy;
 
 import dev.xkmc.lasertransport.content.capability.generic.*;
+import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
+import dev.xkmc.lasertransport.init.data.LangData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -34,12 +37,12 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 
 	@Override
 	public MutableComponent getKindDesc(ResourceLocation id) {
-		return Component.translatable("flux.forge.energy");
+		return LangData.FLUX_ENERGY.get();
 	}
 
 	@Override
 	public MutableComponent getDesc(ResourceLocation id, long amount) {
-		return Component.literal(amount + " ").append(Component.translatable("flux.forge.energy"));
+		return Component.literal(amount + " ").append(LangData.FLUX_ENERGY.get());
 	}
 
 	@Override
@@ -59,7 +62,7 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 
 	@Override
 	public MutableComponent getTypeDesc() {
-		return Component.translatable("flux.forge.energy");
+		return LangData.FLUX_ENERGY.get();
 	}
 
 	@Override

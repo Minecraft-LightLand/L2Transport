@@ -1,6 +1,7 @@
 package dev.xkmc.lasertransport.content.tile.extend;
 
 import dev.xkmc.lasertransport.content.capability.base.ITargetTraceable;
+import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.tile.base.CoolDownType;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableConnector;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableNode;
@@ -50,9 +51,9 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 		return CoolDownType.GREEN;
 	}
 
-	<C> LazyOptional<C> getCapabilityOneStep(Capability<C> cap);
+	<C> LazyOptional<C> getCapabilityOneStep(ICapabilityHolder<C> cap);
 
-	static <C> LazyOptional<C> getCapabilityImpl(IExtendedBlockEntity self, Capability<C> cap) {
+	static <C> LazyOptional<C> getCapabilityImpl(IExtendedBlockEntity self, ICapabilityHolder<C> cap) {
 		BlockPos pos = self.getTarget();
 		if (self.getThis().getLevel() != null && pos != null) {
 			BlockEntity be = self.getThis().getLevel().getBlockEntity(pos);
@@ -69,7 +70,7 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 		return LazyOptional.empty();
 	}
 
-	static <C> LazyOptional<C> recursiveCap(IExtendedBlockEntity self, Capability<C> cap, Set<BlockPos> set) {
+	static <C> LazyOptional<C> recursiveCap(IExtendedBlockEntity self, ICapabilityHolder<C> cap, Set<BlockPos> set) {
 		if (self.getThis().getLevel() != null) {
 			BlockPos pos = self.getTarget();
 			if (pos == null || set.contains(pos)) return LazyOptional.empty();

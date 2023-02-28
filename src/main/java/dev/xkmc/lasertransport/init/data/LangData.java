@@ -51,6 +51,10 @@ public enum LangData {
 	WAND_ROTATE("wand.rotate", "Right click a block to rotate. Shift right click to rotate in the other direction.", 0, ChatFormatting.GRAY),
 	WAND_CONFIG("wand.config", "Press direction keys or scroll to alter transfer limit. Right click node to open advanced filter config menu. Press Shift or Alt to disable so that you can use the item selector overlay.", 0, ChatFormatting.GRAY),
 	WAND_FLUX("wand.flux", "Select the flux type, and right click a node to set the flux type. When multiple nodes are connected, all connected nodes will be set to the same flux type altogether.", 0, ChatFormatting.GRAY),
+
+	FLUX_ENERGY("flux.forge.energy", "Energy (FE)", 0, null),
+	FLUX_GAS("flux.mekanism.gas", "Gas (Mekanism)", 0, null),
+	FLUX_SOURCE("flux.ars_nouveau.source", "Source (Ars Nouveau)", 0, null),
 	;
 
 
@@ -88,9 +92,6 @@ public enum LangData {
 		pvd.accept(Keys.DOWN.id, "Select Down");
 		pvd.accept(Keys.LEFT.id, "Select Left");
 		pvd.accept(Keys.RIGHT.id, "Select Right");
-
-		pvd.accept("flux.forge.energy", "Energy (FE)");
-		pvd.accept("flux.mekanism.gas", "Gas (Mekanism)");
 
 	}
 

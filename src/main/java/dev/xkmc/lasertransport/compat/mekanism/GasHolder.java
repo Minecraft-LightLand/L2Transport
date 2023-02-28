@@ -1,7 +1,10 @@
 package dev.xkmc.lasertransport.compat.mekanism;
 
 import dev.xkmc.lasertransport.content.capability.generic.*;
+import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
+import dev.xkmc.lasertransport.init.data.LangData;
 import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasHandler;
@@ -73,7 +76,7 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 
 	@Override
 	public MutableComponent getTypeDesc() {
-		return Component.translatable("flux.mekanism.gas");
+		return LangData.FLUX_GAS.get();
 	}
 
 	@Override

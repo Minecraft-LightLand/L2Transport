@@ -56,8 +56,8 @@ public class RetrieverFluxNodeBlockEntity extends AbstractFluxNodeBlockEntity<Re
 
 	private <T> boolean tryRetrieveTyped(ICapabilityEntry<T> type, BlockEntity target, Direction facing) {
 		var lazyCap = type.cap().getLeafHolder(target, facing.getOpposite());
-		if (lazyCap.isPresent()) {
-			var cap = lazyCap.get();
+		if (lazyCap.resolve().isPresent()) {
+			var cap = lazyCap.resolve().get();
 			return tryRetrieve(type, cap);
 		}
 		return false;

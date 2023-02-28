@@ -6,7 +6,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.lasertransport.content.capability.base.INodeBlockEntity;
-import dev.xkmc.lasertransport.content.capability.generic.ICapabilityHolder;
+import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;
 import dev.xkmc.lasertransport.content.connector.IConnector;
@@ -194,7 +194,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		if (getUpgrade(UpgradeFlag.LEVEL) != null) {
 			return true;
 		}
-		return getValidTarget().getHolder(this, pos).isPresent();
+		return getValidTarget().getHolder(this, pos).resolve().isPresent();
 	}
 
 
