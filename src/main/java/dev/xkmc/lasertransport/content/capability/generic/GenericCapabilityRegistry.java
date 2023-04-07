@@ -1,13 +1,10 @@
 package dev.xkmc.lasertransport.content.capability.generic;
 
-import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.capabilities.Capability;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.TreeMap;
 
 public class GenericCapabilityRegistry {

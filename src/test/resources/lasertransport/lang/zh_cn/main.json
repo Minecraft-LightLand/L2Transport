@@ -11,11 +11,13 @@
 	"fluid_config": "流体过滤",
 	"item_config": "物品过滤"
   },
-  "flux": {
-	"forge.energy": "能量 (FE)",
-	"mekanism.gas": "气体 (Mekanism)"
-  },
   "lasertransport": {
+	"flux": {
+	  "forge.energy": "能量 (FE)",
+	  "mekanism.gas": "气体 (通用机械)",
+	  "ars_nouveau.source": "魔源 (新生魔艺)",
+	  "botania.mana": "魔力 (植物魔法)"
+	},
 	"config": {
 	  "filter": "复杂过滤器",
 	  "lock": "过滤器已锁定",

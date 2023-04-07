@@ -124,6 +124,7 @@ dependencies {
     implementation fg.deobf('curse.maven:create-328085:4174330')
     implementation fg.deobf('curse.maven:ars-nouveau-401955:4391866')
     implementation fg.deobf('curse.maven:botania-225643:4371117')
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.2-76")
 
 }
 

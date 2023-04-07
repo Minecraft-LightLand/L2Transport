@@ -1,7 +1,10 @@
 package dev.xkmc.lasertransport.content.tile.flux;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lasertransport.content.capability.generic.*;
+import dev.xkmc.lasertransport.content.capability.generic.GenericCapabilityRegistry;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
+import dev.xkmc.lasertransport.content.capability.generic.IGenericNodeBlockEntity;
+import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.IFakeCapabilityTile;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;

@@ -1,6 +1,9 @@
 package dev.xkmc.lasertransport.compat.energy;
 
-import dev.xkmc.lasertransport.content.capability.generic.*;
+import dev.xkmc.lasertransport.content.capability.generic.GenericHolder;
+import dev.xkmc.lasertransport.content.capability.generic.HandlerWrapper;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
+import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
@@ -67,7 +70,7 @@ public class EnergyHolder implements ICapabilityEntry<IEnergyStorage> {
 
 	@Override
 	public ItemStack getIcon() {
-		return Items.FURNACE.getDefaultInstance();
+		return Items.FURNACE.getDefaultInstance().setHoverName(getTypeDesc());
 	}
 
 	@Override

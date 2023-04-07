@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO move to library
 public abstract class IItemSelector {
 
 	private static final List<IItemSelector> LIST = new ArrayList<>();
@@ -64,5 +65,9 @@ public abstract class IItemSelector {
 	}
 
 	public abstract List<ItemStack> getList();
+
+	public List<ItemStack> getDisplayList() {
+		return getList();
+	}
 
 }

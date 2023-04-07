@@ -21,7 +21,7 @@ public record FakeCapabilityHolder<T>(Class<T> cls) implements ICapabilityHolder
 				return tile.getCapability(this);
 			}
 			if (cls.isInstance(target)) {
-				return LazyOptional.of(Wrappers.cast(target));
+				return LazyOptional.of(() -> Wrappers.cast(target));
 			}
 		}
 		return LazyOptional.empty();
@@ -29,7 +29,7 @@ public record FakeCapabilityHolder<T>(Class<T> cls) implements ICapabilityHolder
 
 	@Override
 	public LazyOptional<T> getLeafHolder(BlockEntity target, Direction opposite) {
-		return cls.isInstance(target) ? LazyOptional.of(Wrappers.cast(target)) : LazyOptional.empty();
+		return cls.isInstance(target) ? LazyOptional.of(() -> Wrappers.cast(target)) : LazyOptional.empty();
 	}
 
 	@Override

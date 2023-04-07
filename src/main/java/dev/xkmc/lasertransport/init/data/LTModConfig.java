@@ -18,7 +18,7 @@ public class LTModConfig {
 
 		Client(ForgeConfigSpec.Builder builder) {
 			renderLinks = builder.comment("Render Links by default")
-					.define("renderLinks", true);
+					.define("renderLinks", false);
 			renderRange = builder.comment("Render Range")
 					.defineInRange("renderRange", 64, 0, 256);
 			selectionDisplayRequireShift = builder.comment("Render Selection only when pressing shift")

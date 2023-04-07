@@ -55,6 +55,7 @@ public enum LangData {
 	FLUX_ENERGY("flux.forge.energy", "Energy (FE)", 0, null),
 	FLUX_GAS("flux.mekanism.gas", "Gas (Mekanism)", 0, null),
 	FLUX_SOURCE("flux.ars_nouveau.source", "Source (Ars Nouveau)", 0, null),
+	FLUX_MANA("flux.botania.mana", "Mana (Botania)", 0, null),
 	;
 
 

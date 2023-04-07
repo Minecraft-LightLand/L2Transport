@@ -28,7 +28,7 @@ public class ToolSelectionOverlay extends SelectionSideBar {
 	public Pair<List<ItemStack>, Integer> getItems() {
 		IItemSelector sel = IItemSelector.getSelection(Proxy.getClientPlayer());
 		assert sel != null;
-		return Pair.of(sel.getList(), sel.getIndex(Proxy.getClientPlayer()));
+		return Pair.of(sel.getDisplayList(), sel.getIndex(Proxy.getClientPlayer()));
 	}
 
 	@Override

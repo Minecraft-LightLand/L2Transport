@@ -1,6 +1,7 @@
 package dev.xkmc.lasertransport.content.items.select;
 
 import dev.xkmc.lasertransport.content.capability.generic.GenericCapabilityRegistry;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
 import dev.xkmc.lasertransport.content.items.tools.FluxFilter;
 import dev.xkmc.lasertransport.init.registrate.LTItems;
 import net.minecraft.world.entity.player.Player;
@@ -34,4 +35,10 @@ public class FluxSelector extends IItemSelector {
 	public List<ItemStack> getList() {
 		return GenericCapabilityRegistry.values().stream().map(FluxFilter::of).toList();
 	}
+
+	@Override
+	public List<ItemStack> getDisplayList() {
+		return GenericCapabilityRegistry.values().stream().map(ICapabilityEntry::getIcon).toList();
+	}
+
 }

@@ -7,7 +7,6 @@ import dev.xkmc.lasertransport.content.tile.base.IRenderableConnector;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
 

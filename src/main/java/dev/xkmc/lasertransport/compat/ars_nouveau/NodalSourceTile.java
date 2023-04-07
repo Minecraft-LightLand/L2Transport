@@ -3,6 +3,7 @@ package dev.xkmc.lasertransport.compat.ars_nouveau;
 import com.hollingsworth.arsnouveau.api.source.ISourceTile;
 import dev.xkmc.lasertransport.content.capability.generic.INodeHandlerWrapper;
 import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
+import dev.xkmc.lasertransport.content.flow.TransportHandler;
 
 public record NodalSourceTile(NodalGenericHandler node) implements INodeHandlerWrapper, ISourceTile {
 
@@ -38,6 +39,7 @@ public record NodalSourceTile(NodalGenericHandler node) implements INodeHandlerW
 
 	@Override
 	public int addSource(int i) {
+		TransportHandler.insert(node, SourceHolder.SOURCE.empty().getCopy(i), false);
 		return 0;
 	}
 

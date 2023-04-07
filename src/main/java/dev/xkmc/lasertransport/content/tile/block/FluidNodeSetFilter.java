@@ -39,11 +39,13 @@ public class FluidNodeSetFilter implements OnClickBlockMethod, CreateBlockStateB
 			if (stackCap.resolve().isPresent()) {
 				FluidStack stack = stackCap.resolve().get().getFluidInTank(0);
 				if (rte.getConfig().hasNoFilter()) {
-					rte.getConfig().setSimpleFilter(stack);
-					level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, true));
-					return InteractionResult.SUCCESS;
+					if (!stack.isEmpty()) {
+						rte.getConfig().setSimpleFilter(stack);
+						level.setBlockAndUpdate(pos, state.setValue(BlockStateProperties.LIT, true));
+						return InteractionResult.SUCCESS;
+					}
 				}
-				if (rte.getConfig().canQuickSetCount(stack)) {
+				if (!stack.isEmpty() && rte.getConfig().canQuickSetCount(stack)) {
 					rte.getConfig().setTransferLimit(stack.getAmount());
 					rte.markDirty();
 					return InteractionResult.SUCCESS;

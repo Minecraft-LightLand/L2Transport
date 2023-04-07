@@ -1,6 +1,9 @@
 package dev.xkmc.lasertransport.compat.mekanism;
 
-import dev.xkmc.lasertransport.content.capability.generic.*;
+import dev.xkmc.lasertransport.content.capability.generic.GenericHolder;
+import dev.xkmc.lasertransport.content.capability.generic.HandlerWrapper;
+import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
+import dev.xkmc.lasertransport.content.capability.generic.NodalGenericHandler;
 import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.configurables.NumericConfigurator;
@@ -81,7 +84,7 @@ public class GasHolder implements ICapabilityEntry<IGasHandler> {
 
 	@Override
 	public ItemStack getIcon() {
-		return MekanismBlocks.BASIC_CHEMICAL_TANK.getItemStack();
+		return MekanismBlocks.BASIC_CHEMICAL_TANK.getItemStack().setHoverName(getTypeDesc());
 	}
 
 	@Override

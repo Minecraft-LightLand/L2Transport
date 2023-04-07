@@ -19,6 +19,7 @@ public class ClientGeneralEvents {
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void keyEvent(InputEvent.Key event) {
+		if (Minecraft.getInstance().level == null) return;
 		if (NumberSetOverlay.isScreenOn()) {
 			if (event.getKey() == Keys.UP.map.getKey().getValue() && event.getAction() == 1) {
 				NumberSetOverlay.up();
