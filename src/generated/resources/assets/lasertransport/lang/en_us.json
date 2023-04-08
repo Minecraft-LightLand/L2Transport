@@ -1,4 +1,5 @@
 {
+  "block.lasertransport.item_holder": "Item Holder",
   "block.lasertransport.node_extended": "Node Extended",
   "block.lasertransport.node_fluid_distribute": "Node Fluid Distribute",
   "block.lasertransport.node_fluid_ordered": "Node Fluid Ordered",
@@ -42,6 +43,7 @@
   "lasertransport.config.filter": "Complex Filter",
   "lasertransport.config.lock": "Filter Locked",
   "lasertransport.config.tag": "Match tag",
+  "lasertransport.connect.craft_side": "TODO",
   "lasertransport.connect.distribute": "Connects to multiple targets. When receiving content, iterate through all targets until finding one valid target. Only send to 1 target, and start from the next one next time.",
   "lasertransport.connect.extended": "Connects to only one target. This node acts as a shadow reference of the target's side, allowing all interfacing through that side of the target block.",
   "lasertransport.connect.invalid": "This node is connected to one or more invalid target. To remove unused connections, use validator wand to clear them.",

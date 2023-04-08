@@ -8,9 +8,12 @@ import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import dev.xkmc.lasertransport.content.client.node.CraftNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.FluidNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.ItemNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.NodeRenderer;
+import dev.xkmc.lasertransport.content.craft.CraftNodeBlock;
+import dev.xkmc.lasertransport.content.craft.ItemHolderBlockEntity;
 import dev.xkmc.lasertransport.content.tile.base.NodeBlockItem;
 import dev.xkmc.lasertransport.content.tile.base.PowerTriggerBlockMethod;
 import dev.xkmc.lasertransport.content.tile.block.*;
@@ -43,7 +46,7 @@ public class LTBlocks {
 	public static final BlockEntry<DelegateBlock> B_EXTENDED,
 			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
 			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE,
-			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE;
+			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE, B_CRAFT_SIDE;
 
 	public static final BlockEntityEntry<ExtendedBlockEntity> TE_EXTENDED;
 
@@ -63,6 +66,8 @@ public class LTBlocks {
 	public static final BlockEntityEntry<OrderedFluxNodeBlockEntity> TE_FLUX_ORDERED;
 	public static final BlockEntityEntry<RetrieverFluxNodeBlockEntity> TE_FLUX_RETRIEVE;
 
+	public static final BlockEntityEntry<ItemHolderBlockEntity> TE_CRAFT_SIDE;
+
 	static {
 
 		DelegateBlockProperties NOLIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
@@ -73,6 +78,11 @@ public class LTBlocks {
 		DelegateBlockProperties LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
 				.noOcclusion().noCollission()
 				.lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
+				.isRedstoneConductor((a, b, c) -> false));
+
+		DelegateBlockProperties FULL_LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
+				.noOcclusion().noCollission()
+				.lightLevel(bs -> 15)
 				.isRedstoneConductor((a, b, c) -> false));
 
 		{
@@ -184,6 +194,21 @@ public class LTBlocks {
 					.validBlock(B_FLUX_ORDERED).renderer(() -> NodeRenderer::new).register();
 			TE_FLUX_RETRIEVE = LaserTransport.REGISTRATE.blockEntity("node_flux_retrieve", RetrieverFluxNodeBlockEntity::new)
 					.validBlock(B_FLUX_RETRIEVE).renderer(() -> NodeRenderer::new).register();
+		}
+		{
+			B_CRAFT_SIDE = LaserTransport.REGISTRATE.block("item_holder",
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, CraftNodeBlock.CLICK, CraftNodeBlock.SIDE))
+					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
+							.withExistingParent(ctx.getName(), "block/cube_all")
+							.texture("all", new ResourceLocation(LaserTransport.MODID, "block/node/" + ctx.getName()))
+							.renderType("cutout")))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang()
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_SIDE)).build()
+					.register();
+
+			TE_CRAFT_SIDE = LaserTransport.REGISTRATE.blockEntity("item_holder", ItemHolderBlockEntity::new)
+					.validBlock(B_CRAFT_SIDE).renderer(() -> CraftNodeRenderer::new).register();
 		}
 	}
 

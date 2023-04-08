@@ -13,6 +13,7 @@
     "lasertransport:node_fluid_retrieve",
     "lasertransport:node_flux_simple",
     "lasertransport:node_flux_ordered",
-    "lasertransport:node_flux_retrieve"
+    "lasertransport:node_flux_retrieve",
+    "lasertransport:item_holder"
   ]
 }

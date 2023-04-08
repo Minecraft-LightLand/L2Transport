@@ -1,4 +1,5 @@
 {
+  "block.lasertransport.item_holder": "ɹǝpןoH ɯǝʇI",
   "block.lasertransport.node_extended": "pǝpuǝʇxƎ ǝpoN",
   "block.lasertransport.node_fluid_distribute": "ǝʇnqıɹʇsıᗡ pınןℲ ǝpoN",
   "block.lasertransport.node_fluid_ordered": "pǝɹǝpɹO pınןℲ ǝpoN",
@@ -42,6 +43,7 @@
   "lasertransport.config.filter": "ɹǝʇןıℲ xǝןdɯoƆ",
   "lasertransport.config.lock": "pǝʞɔoꞀ ɹǝʇןıℲ",
   "lasertransport.config.tag": "bɐʇ ɥɔʇɐW",
+  "lasertransport.connect.craft_side": "OᗡO⟘",
   "lasertransport.connect.distribute": "˙ǝɯıʇ ʇxǝu ǝuo ʇxǝu ǝɥʇ ɯoɹɟ ʇɹɐʇs puɐ 'ʇǝbɹɐʇ Ɩ oʇ puǝs ʎןuO ˙ʇǝbɹɐʇ pıןɐʌ ǝuo buıpuıɟ ןıʇun sʇǝbɹɐʇ ןןɐ ɥbnoɹɥʇ ǝʇɐɹǝʇı 'ʇuǝʇuoɔ buıʌıǝɔǝɹ uǝɥM ˙sʇǝbɹɐʇ ǝןdıʇןnɯ oʇ sʇɔǝuuoƆ",
   "lasertransport.connect.extended": "˙ʞɔoןq ʇǝbɹɐʇ ǝɥʇ ɟo ǝpıs ʇɐɥʇ ɥbnoɹɥʇ buıɔɐɟɹǝʇuı ןןɐ buıʍoןןɐ 'ǝpıs s,ʇǝbɹɐʇ ǝɥʇ ɟo ǝɔuǝɹǝɟǝɹ ʍopɐɥs ɐ sɐ sʇɔɐ ǝpou sıɥ⟘ ˙ʇǝbɹɐʇ ǝuo ʎןuo oʇ sʇɔǝuuoƆ",
   "lasertransport.connect.invalid": "˙ɯǝɥʇ ɹɐǝןɔ oʇ puɐʍ ɹoʇɐpıןɐʌ ǝsn 'suoıʇɔǝuuoɔ pǝsnun ǝʌoɯǝɹ o⟘ ˙ʇǝbɹɐʇ pıןɐʌuı ǝɹoɯ ɹo ǝuo oʇ pǝʇɔǝuuoɔ sı ǝpou sıɥ⟘",
