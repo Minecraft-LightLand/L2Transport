@@ -19,7 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 @SerialClass
-public class ItemHolderBlockEntity extends BaseBlockEntity implements DelaySyncBlockEntity, TickableBlockEntity, BlockContainer {
+public class ItemHolderBlockEntity extends BaseBlockEntity implements
+		IItemHolderNode, DelaySyncBlockEntity, TickableBlockEntity, BlockContainer {
 
 	@SerialClass.SerialField(toClient = true)
 	public final ItemInventory items = new ItemInventory(this);
@@ -52,8 +53,18 @@ public class ItemHolderBlockEntity extends BaseBlockEntity implements DelaySyncB
 	}
 
 	@Override
+	public ItemInventory getHolder() {
+		return items;
+	}
+
+	@Override
 	public List<Container> getContainers() {
 		return List.of(new SimpleContainer(items.getStackInSlot(0)));
+	}
+
+	@Override
+	public boolean canInsert() {
+		return true;
 	}
 
 }

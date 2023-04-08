@@ -13,9 +13,9 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@SerialClass.SerialField(toClient = true)
 	public Stack stack = new Stack(ItemStack.EMPTY);
 
-	private final DelaySyncBlockEntity be;
+	private final IItemHolderNode be;
 
-	public ItemInventory(DelaySyncBlockEntity be) {
+	public ItemInventory(IItemHolderNode be) {
 		this.be = be;
 	}
 
@@ -39,6 +39,7 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@NotNull
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+		if (!be.canInsert()) return stack;
 		if (this.stack.stack().isEmpty()) {
 			if (!simulate) {
 				this.stack = new Stack(stack);

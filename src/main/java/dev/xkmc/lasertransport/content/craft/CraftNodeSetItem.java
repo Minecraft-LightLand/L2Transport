@@ -20,19 +20,19 @@ public class CraftNodeSetItem implements OnClickBlockMethod {
 		if (hand.getItem() instanceof ILinker)
 			return InteractionResult.PASS;
 		BlockEntity be = level.getBlockEntity(blockPos);
-		if (be instanceof ItemHolderBlockEntity node) {
-			ItemStack stack = node.items.getStackInSlot(0);
+		if (be instanceof IItemHolderNode node) {
+			ItemStack stack = node.getHolder().getStackInSlot(0);
 			if (stack.isEmpty()) {
 				if (!hand.isEmpty()) {
 					if (!level.isClientSide()) {
 						ItemStack copy = hand.copy();
-						hand.setCount(node.items.insertItem(0, copy, false).getCount());
+						hand.setCount(node.getHolder().insertItem(0, copy, false).getCount());
 					}
 					return InteractionResult.SUCCESS;
 				}
 			} else {
 				if (!level.isClientSide()) {
-					ItemStack extracted = node.items.extractItem(0, 64, false);
+					ItemStack extracted = node.getHolder().extractItem(0, stack.getMaxStackSize(), false);
 					player.getInventory().placeItemBackInInventory(extracted);
 				}
 				return InteractionResult.SUCCESS;
