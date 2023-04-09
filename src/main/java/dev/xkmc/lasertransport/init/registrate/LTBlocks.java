@@ -12,8 +12,11 @@ import dev.xkmc.lasertransport.content.client.node.CraftNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.FluidNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.ItemNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.NodeRenderer;
-import dev.xkmc.lasertransport.content.craft.CraftNodeBlock;
-import dev.xkmc.lasertransport.content.craft.ItemHolderBlockEntity;
+import dev.xkmc.lasertransport.content.craft.block.ItemHolderNodeBlock;
+import dev.xkmc.lasertransport.content.craft.model.BlockGenerator;
+import dev.xkmc.lasertransport.content.craft.tile.CraftCoreBlockEntity;
+import dev.xkmc.lasertransport.content.craft.tile.CraftSideBlockEntity;
+import dev.xkmc.lasertransport.content.craft.tile.ItemHolderBlockEntity;
 import dev.xkmc.lasertransport.content.tile.base.NodeBlockItem;
 import dev.xkmc.lasertransport.content.tile.base.PowerTriggerBlockMethod;
 import dev.xkmc.lasertransport.content.tile.block.*;
@@ -46,7 +49,7 @@ public class LTBlocks {
 	public static final BlockEntry<DelegateBlock> B_EXTENDED,
 			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
 			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE,
-			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE, B_CRAFT_SIDE;
+			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE, B_ITEM_HOLDER, B_CRAFT_SIDE, B_CRAFT_CORE;
 
 	public static final BlockEntityEntry<ExtendedBlockEntity> TE_EXTENDED;
 
@@ -66,7 +69,9 @@ public class LTBlocks {
 	public static final BlockEntityEntry<OrderedFluxNodeBlockEntity> TE_FLUX_ORDERED;
 	public static final BlockEntityEntry<RetrieverFluxNodeBlockEntity> TE_FLUX_RETRIEVE;
 
-	public static final BlockEntityEntry<ItemHolderBlockEntity> TE_CRAFT_SIDE;
+	public static final BlockEntityEntry<ItemHolderBlockEntity> TE_ITEM_HOLDER;
+	public static final BlockEntityEntry<CraftSideBlockEntity> TE_CRAFT_SIDE;
+	public static final BlockEntityEntry<CraftCoreBlockEntity> TE_CRAFT_CORE;
 
 	static {
 
@@ -196,19 +201,41 @@ public class LTBlocks {
 					.validBlock(B_FLUX_RETRIEVE).renderer(() -> NodeRenderer::new).register();
 		}
 		{
-			B_CRAFT_SIDE = LaserTransport.REGISTRATE.block("item_holder",
-							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, CraftNodeBlock.CLICK, CraftNodeBlock.SIDE))
+			B_ITEM_HOLDER = LaserTransport.REGISTRATE.block("item_holder",
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, ItemHolderNodeBlock.CLICK, ItemHolderNodeBlock.HOLDER))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
 							.withExistingParent(ctx.getName(), "block/cube_all")
 							.texture("all", new ResourceLocation(LaserTransport.MODID, "block/node/" + ctx.getName()))
 							.renderType("cutout")))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang()
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.ITEM_HOLDER)).build()
+					.register();
+
+			B_CRAFT_SIDE = LaserTransport.REGISTRATE.block("craft_ingredient_holder",
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, ItemHolderNodeBlock.CLICK, ItemHolderNodeBlock.UPDATE, ItemHolderNodeBlock.CONN_SIDE, ItemHolderNodeBlock.SIDE))
+					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd).generate(ItemHolderNodeBlock.ORIENTATION_SIDE, true))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang()
 					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_SIDE)).build()
 					.register();
 
-			TE_CRAFT_SIDE = LaserTransport.REGISTRATE.blockEntity("item_holder", ItemHolderBlockEntity::new)
+			B_CRAFT_CORE = LaserTransport.REGISTRATE.block("craft_result_holder",
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, ItemHolderNodeBlock.CLICK, ItemHolderNodeBlock.UPDATE, ItemHolderNodeBlock.CONN_CORE, ItemHolderNodeBlock.CORE))
+					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd).generate(ItemHolderNodeBlock.ORIENTATION_CORE, false))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang()
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_CORE)).build()
+					.register();
+
+			TE_ITEM_HOLDER = LaserTransport.REGISTRATE.blockEntity("item_holder", ItemHolderBlockEntity::new)
+					.validBlock(B_ITEM_HOLDER).renderer(() -> CraftNodeRenderer::new).register();
+
+			TE_CRAFT_SIDE = LaserTransport.REGISTRATE.blockEntity("craft_ingredient_holder", CraftSideBlockEntity::new)
 					.validBlock(B_CRAFT_SIDE).renderer(() -> CraftNodeRenderer::new).register();
+
+			TE_CRAFT_CORE = LaserTransport.REGISTRATE.blockEntity("craft_result_holder", CraftCoreBlockEntity::new)
+					.validBlock(B_CRAFT_CORE).renderer(() -> CraftNodeRenderer::new).register();
 		}
 	}
 
@@ -225,6 +252,7 @@ public class LTBlocks {
 					.renderType("cutout")).build();
 		});
 	}
+
 
 	public static void register() {
 	}

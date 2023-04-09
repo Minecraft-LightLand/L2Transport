@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.lasertransport.content.craft;
+package dev.xkmc.lasertransport.content.craft.model;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

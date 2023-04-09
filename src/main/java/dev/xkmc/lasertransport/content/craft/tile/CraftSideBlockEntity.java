@@ -1,4 +1,4 @@
-package dev.xkmc.lasertransport.content.craft;
+package dev.xkmc.lasertransport.content.craft.tile;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lasertransport.util.Holder;
@@ -10,12 +10,10 @@ import net.minecraft.world.level.block.state.BlockState;
 public class CraftSideBlockEntity extends ItemHolderBlockEntity {
 
 	@SerialClass.SerialField(toClient = true)
-	private Holder target;
+	public Holder target = new Holder(null);
 
 	public CraftSideBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
-
-	
 
 }

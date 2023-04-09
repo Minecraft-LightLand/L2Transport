@@ -14,6 +14,8 @@
     "lasertransport:node_flux_simple",
     "lasertransport:node_flux_ordered",
     "lasertransport:node_flux_retrieve",
-    "lasertransport:item_holder"
+    "lasertransport:item_holder",
+    "lasertransport:craft_ingredient_holder",
+    "lasertransport:craft_result_holder"
   ]
 }

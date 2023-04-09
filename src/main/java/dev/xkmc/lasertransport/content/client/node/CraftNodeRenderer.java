@@ -2,7 +2,7 @@ package dev.xkmc.lasertransport.content.client.node;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.util.math.RenderUtils;
-import dev.xkmc.lasertransport.content.craft.ItemHolderBlockEntity;
+import dev.xkmc.lasertransport.content.craft.tile.ItemHolderBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

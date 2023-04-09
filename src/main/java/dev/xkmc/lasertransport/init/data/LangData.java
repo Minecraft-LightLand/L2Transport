@@ -25,7 +25,10 @@ public enum LangData {
 	INVALID("connect.invalid", "This node is connected to one or more invalid target. To remove unused connections, use validator wand to clear them.", 0, ChatFormatting.RED),
 
 	EXTENDED("connect.extended", "Connects to only one target. This node acts as a shadow reference of the target's side, allowing all interfacing through that side of the target block.", 0, ChatFormatting.GRAY),
-	CRAFT_SIDE("connect.craft_side", "Holds one stack of item. Does not accept new items when it already has items, regardless if they may merge.", 0, ChatFormatting.GRAY),
+	ITEM_HOLDER("connect.item_holder", "Holds one stack of item. Does not accept new items when it already has items, regardless if they may merge.", 0, ChatFormatting.GRAY),
+	CRAFT_SIDE("connect.craft_ingredient_holder", "TODO", 0, ChatFormatting.GRAY),
+	CRAFT_CORE("connect.craft_result_holder", "TODO", 0, ChatFormatting.GRAY),
+
 
 	UP_SPEED("upgrade.speed", "Transfer speed: x%s", 1, null),
 	UP_DIST("upgrade.distance", "Connection distance: x%s", 1, null),

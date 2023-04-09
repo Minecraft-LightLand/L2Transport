@@ -1,4 +1,4 @@
-package dev.xkmc.lasertransport.content.craft;
+package dev.xkmc.lasertransport.content.craft.tile;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.BlockContainer;

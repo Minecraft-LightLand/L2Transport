@@ -1,6 +1,7 @@
-package dev.xkmc.lasertransport.content.craft;
+package dev.xkmc.lasertransport.content.craft.block;
 
 import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
+import dev.xkmc.lasertransport.content.craft.tile.IItemHolderNode;
 import dev.xkmc.lasertransport.content.items.tools.ILinker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class CraftNodeSetItem implements OnClickBlockMethod {
+public class ItemHolderSetItem implements OnClickBlockMethod {
 
 	@Override
 	public InteractionResult onClick(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {

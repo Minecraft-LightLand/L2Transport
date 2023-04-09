@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "lasertransport:block/node/craft/result/bottom",
+    "side": "lasertransport:block/node/craft/result/side",
+    "top": "lasertransport:block/node/craft/result/front_9"
+  }
+}
