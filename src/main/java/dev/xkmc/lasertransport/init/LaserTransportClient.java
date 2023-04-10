@@ -1,17 +1,20 @@
 package dev.xkmc.lasertransport.init;
 
+import dev.xkmc.lasertransport.content.client.overlay.CraftTooltipOverlay;
 import dev.xkmc.lasertransport.content.client.overlay.NodeInfoOverlay;
 import dev.xkmc.lasertransport.content.client.overlay.NumberSetOverlay;
 import dev.xkmc.lasertransport.content.client.overlay.ToolSelectionOverlay;
+import dev.xkmc.lasertransport.content.client.tooltip.ClientCraftTooltip;
+import dev.xkmc.lasertransport.content.client.tooltip.CraftTooltip;
 import dev.xkmc.lasertransport.events.ClientGeneralEvents;
 import dev.xkmc.lasertransport.init.data.Keys;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class LaserTransportClient {
@@ -20,10 +23,10 @@ public class LaserTransportClient {
 		bus.addListener(LaserTransportClient::clientSetup);
 		bus.addListener(LaserTransportClient::registerOverlays);
 		bus.addListener(LaserTransportClient::registerKeys);
+		bus.addListener(LaserTransportClient::registerTooltip);
 		eventBus.register(ClientGeneralEvents.class);
 	}
 
-	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent event) {
 		registerItemProperties();
 	}
@@ -35,6 +38,7 @@ public class LaserTransportClient {
 	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlays(RegisterGuiOverlaysEvent event) {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "node_info", new NodeInfoOverlay());
+		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "craft_tooltip", new CraftTooltipOverlay());
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "number_adjust", new NumberSetOverlay());
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "tool_select", ToolSelectionOverlay.INSTANCE);
 	}
@@ -44,5 +48,10 @@ public class LaserTransportClient {
 		for (Keys key : Keys.values()) {
 			event.register(key.map);
 		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent event) {
+		event.register(CraftTooltip.class, ClientCraftTooltip::new);
 	}
 }

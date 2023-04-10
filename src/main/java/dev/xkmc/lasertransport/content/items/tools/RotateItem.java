@@ -1,6 +1,8 @@
 package dev.xkmc.lasertransport.content.items.tools;
 
+import dev.xkmc.lasertransport.content.craft.tile.CraftCoreBlockEntity;
 import dev.xkmc.lasertransport.init.data.LangData;
+import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -34,6 +36,14 @@ public class RotateItem extends Item implements ILinker {
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockState state = ctx.getLevel().getBlockState(ctx.getClickedPos());
 		int dir = ctx.getPlayer() != null && ctx.getPlayer().isShiftKeyDown() ? -1 : 1;
+		if (state.is(LTBlocks.B_CRAFT_CORE.get())) {
+			if (!ctx.getLevel().isClientSide()) {
+				if (ctx.getLevel().getBlockEntity(ctx.getClickedPos()) instanceof CraftCoreBlockEntity be) {
+					be.generateScanInfo(true);
+				}
+			}
+			return InteractionResult.SUCCESS;
+		}
 		for (var prop : PROPS) {
 			if (state.hasProperty(prop)) {
 				if (!ctx.getLevel().isClientSide()) {

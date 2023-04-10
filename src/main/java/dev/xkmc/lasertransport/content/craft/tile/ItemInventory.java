@@ -1,17 +1,18 @@
 package dev.xkmc.lasertransport.content.craft.tile;
 
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lasertransport.util.Stack;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 
 @SerialClass
 public class ItemInventory implements IItemHandlerModifiable {
 
 	@SerialClass.SerialField(toClient = true)
-	public Stack stack = new Stack(ItemStack.EMPTY);
+	public ArrayList<ItemStack> list = new ArrayList<>();
 
 	private final IItemHolderNode be;
 
@@ -21,7 +22,13 @@ public class ItemInventory implements IItemHandlerModifiable {
 
 	@Override
 	public void setStackInSlot(int slot, ItemStack stack) {
-		this.stack = new Stack(stack);
+		list.clear();
+		list.add(stack);
+		be.markDirty();
+	}
+
+	public void forceAdd(ItemStack stack) {
+		list.add(stack);
 		be.markDirty();
 	}
 
@@ -33,16 +40,16 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@NotNull
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return stack.stack();
+		return slot < 0 || slot >= list.size() ? ItemStack.EMPTY : list.get(slot);
 	}
 
 	@NotNull
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 		if (!be.canInsert()) return stack;
-		if (this.stack.stack().isEmpty()) {
+		if (list.isEmpty()) {
 			if (!simulate) {
-				this.stack = new Stack(stack);
+				list.add(stack);
 				be.markDirty();
 			}
 			return ItemStack.EMPTY;
@@ -53,15 +60,18 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@NotNull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		if (!this.stack.stack().isEmpty()) {
-			int count = this.stack.stack().getCount();
+		if (!list.isEmpty()) {
+			int count = list.get(0).getCount();
 			int max = Math.min(Math.max(0, amount), count);
 			if (max == 0) {
 				return ItemStack.EMPTY;
 			}
-			ItemStack copy = this.stack.stack().copy();
+			ItemStack copy = this.list.get(0).copy();
 			if (!simulate) {
-				this.stack.stack().shrink(max);
+				list.get(0).shrink(max);
+				if (list.get(0).isEmpty()) {
+					list.remove(0);
+				}
 				be.markDirty();
 			}
 			copy.setCount(max);
