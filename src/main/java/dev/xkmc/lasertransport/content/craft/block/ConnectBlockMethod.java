@@ -8,6 +8,7 @@ import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -19,6 +20,16 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 public record ConnectBlockMethod(IntegerProperty prop) implements
 		CreateBlockStateBlockMethod, PlacementBlockMethod, MirrorRotateBlockMethod, ShapeUpdateBlockMethod {
 
+	public static Orientation connect(Level level, BlockPos pos, Direction facing) {
+		Orientation ori = Orientation.of(facing);
+		for (Direction dire : ori.sides) {
+			if (connectTo(level.getBlockState(pos.relative(dire)))) {
+				ori = ori.toggle(dire);
+			}
+		}
+		return ori;
+	}
+
 	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(prop);
 	}
@@ -27,12 +38,7 @@ public record ConnectBlockMethod(IntegerProperty prop) implements
 		if (prop == ItemHolderNodeBlock.ORIENTATION_SIDE) {
 			return def.setValue(prop, Orientation.size() - 1);
 		}
-		Orientation ori = Orientation.of(context.getNearestLookingDirection().getOpposite());
-		for (Direction dire : ori.sides) {
-			if (connectTo(context.getLevel().getBlockState(context.getClickedPos().relative(dire)))) {
-				ori = ori.toggle(dire);
-			}
-		}
+		Orientation ori = connect(context.getLevel(), context.getClickedPos(), context.getNearestLookingDirection().getOpposite());
 		return def.setValue(prop, ori.ordinal);
 	}
 

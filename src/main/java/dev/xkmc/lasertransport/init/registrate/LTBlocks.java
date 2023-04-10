@@ -202,7 +202,9 @@ public class LTBlocks {
 		}
 		{
 			B_ITEM_HOLDER = LaserTransport.REGISTRATE.block("item_holder",
-							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, ItemHolderNodeBlock.CLICK, ItemHolderNodeBlock.HOLDER))
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT,
+									ItemHolderNodeBlock.SET, ItemHolderNodeBlock.TAKE,
+									ItemHolderNodeBlock.HOLDER))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
 							.withExistingParent(ctx.getName(), "block/cube_all")
 							.texture("all", new ResourceLocation(LaserTransport.MODID, "block/node/" + ctx.getName()))
@@ -213,16 +215,23 @@ public class LTBlocks {
 					.register();
 
 			B_CRAFT_SIDE = LaserTransport.REGISTRATE.block("craft_ingredient_holder",
-							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, ItemHolderNodeBlock.CLICK, ItemHolderNodeBlock.UPDATE, ItemHolderNodeBlock.CONN_SIDE, ItemHolderNodeBlock.SIDE))
-					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd).generate(ItemHolderNodeBlock.ORIENTATION_SIDE, true))
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT,
+									ItemHolderNodeBlock.SET, ItemHolderNodeBlock.TAKE,
+									ItemHolderNodeBlock.UPDATE, ItemHolderNodeBlock.CONN_SIDE,
+									ItemHolderNodeBlock.SIDE))
+					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
+							.generate(ItemHolderNodeBlock.ORIENTATION_SIDE, true))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang()
 					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_SIDE)).build()
 					.register();
 
 			B_CRAFT_CORE = LaserTransport.REGISTRATE.block("craft_result_holder",
-							(p) -> DelegateBlock.newBaseBlock(FULL_LIT, ItemHolderNodeBlock.CLICK, ItemHolderNodeBlock.UPDATE, ItemHolderNodeBlock.CONN_CORE, ItemHolderNodeBlock.CORE))
-					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd).generate(ItemHolderNodeBlock.ORIENTATION_CORE, false))
+							(p) -> DelegateBlock.newBaseBlock(FULL_LIT,
+									ItemHolderNodeBlock.TAKE, ItemHolderNodeBlock.UPDATE,
+									ItemHolderNodeBlock.CONN_CORE, ItemHolderNodeBlock.CORE))
+					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
+							.generate(ItemHolderNodeBlock.ORIENTATION_CORE, false))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang()
 					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_CORE)).build()
