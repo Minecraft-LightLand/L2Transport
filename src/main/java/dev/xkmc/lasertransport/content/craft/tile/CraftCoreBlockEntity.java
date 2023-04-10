@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 
 	@SerialClass.SerialField(toClient = true)
-	private ArrayList<BlockPos> targets = new ArrayList<>();
+	private final ArrayList<BlockPos> targets = new ArrayList<>();
 
 	@SerialClass.SerialField
 	private boolean shouldRevalidate = false;

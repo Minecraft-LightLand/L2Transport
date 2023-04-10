@@ -10,7 +10,7 @@ public enum FaceType {
 	EMPTY(15),
 	NO_RIGHT(2), HORIZONTAL(10), NO_BOTTOM_RIGHT(6), LEFT_ONLY(7);
 
-	private static final Direction[] DEFAULT_FACE = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
+	private static final Direction[] DEFAULT_FACE = {Direction.UP, Direction.WEST, Direction.DOWN, Direction.EAST};
 
 	private final int select;
 
@@ -19,11 +19,21 @@ public enum FaceType {
 	}
 
 	public Orientation toOrientation() {
-		Orientation base = Orientation.of(Direction.UP);
+		Orientation base = Orientation.of(Direction.NORTH);
 		for (int i = 0; i < 4; i++) {
 			if ((select & (1 << i)) == 0) continue;
 			base = base.toggle(DEFAULT_FACE[i]);
 		}
 		return base;
 	}
+
+	public boolean open(Direction dire) {
+		for (int i = 0; i < 4; i++) {
+			if (DEFAULT_FACE[i] == dire) {
+				return (select & (1 << i)) != 0;
+			}
+		}
+		return false;
+	}
+
 }

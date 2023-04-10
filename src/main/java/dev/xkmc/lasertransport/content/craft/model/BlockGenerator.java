@@ -4,24 +4,14 @@ import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.lasertransport.content.craft.block.Orientation;
+import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 public class BlockGenerator {
-
-	private static Orientation.IRotate rotate(int y, int x) {
-		return dire -> {
-			for (int i = 0; i < y; i++) {
-				dire = dire.getClockWise(Direction.Axis.Y);
-			}
-			for (int i = 0; i < x; i++) {
-				dire = dire.getClockWise(Direction.Axis.X);
-			}
-			return dire;
-		};
-	}
 
 	private final DataGenContext<Block, DelegateBlock> ctx;
 	private final RegistrateBlockstateProvider pvd;
@@ -31,11 +21,18 @@ public class BlockGenerator {
 		this.ctx = ctx;
 		this.pvd = pvd;
 		String texture = "block/node/craft/" + ctx.getName().split("_")[1];
+		ResourceLocation side = pvd.modLoc(texture + "/side");
+		ResourceLocation empty = pvd.modLoc("block/node/empty");
 		for (int i = 0; i < FaceType.values().length; i++) {
-			files[i] = pvd.models().cubeBottomTop(ctx.getName() + "_type_" + i,
-							pvd.modLoc(texture + "/side"),
-							pvd.modLoc(texture + "/bottom"),
-							pvd.modLoc(texture + "/front_" + i))
+			FaceType type = FaceType.values()[i];
+			files[i] = pvd.models().withExistingParent(ctx.getName() + "_type_" + i,
+							pvd.modLoc("block/craft_base"))
+					.texture("north", pvd.modLoc(texture + "/front_" + i))
+					.texture("south", pvd.modLoc(texture + "/bottom"))
+					.texture("up", type.open(Direction.UP) ? empty : side)
+					.texture("down", type.open(Direction.DOWN) ? empty : side)
+					.texture("east", type.open(Direction.EAST) ? empty : side)
+					.texture("west", type.open(Direction.WEST) ? empty : side)
 					.renderType("cutout");
 		}
 	}
@@ -43,15 +40,15 @@ public class BlockGenerator {
 	public void generate(IntegerProperty prop, boolean extra) {
 		var builder = pvd.getMultipartBuilder(ctx.getEntry());
 		boolean[] gen = new boolean[6 * 16];
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				for (FaceType t : FaceType.values()) {
-					int orient = t.toOrientation().ordinal;
-					orient = Orientation.rotate(orient, rotate(i, j));
-					if (gen[orient]) continue;
-					gen[orient] = true;
-					builder.part().modelFile(files[t.ordinal()]).rotationY(90 * i).rotationX(90 * j)
-							.addModel().condition(prop, orient).end();
+		for (FaceType t : FaceType.values()) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 0; j < 4; j++) {
+					Orientation.IRotate rotate = BlockModelRotation.by(90 * i, 90 * j).actualRotation()::rotate;
+					Orientation orient = Orientation.rotate(t.toOrientation(), rotate);
+					if (gen[orient.ordinal]) continue;
+					gen[orient.ordinal] = true;
+					builder.part().modelFile(files[t.ordinal()]).rotationX(90 * i).rotationY(90 * j)
+							.addModel().condition(prop, orient.ordinal).end();
 				}
 			}
 		}

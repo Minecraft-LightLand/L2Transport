@@ -5,6 +5,51 @@
         "model": "lasertransport:block/craft_result_holder_type_0"
       },
       "when": {
+        "orientation": "32"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_0",
+        "y": 90
+      },
+      "when": {
+        "orientation": "80"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_0",
+        "y": 180
+      },
+      "when": {
+        "orientation": "48"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_0",
+        "y": 270
+      },
+      "when": {
+        "orientation": "64"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_0",
+        "x": 90
+      },
+      "when": {
+        "orientation": "0"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_0",
+        "x": 270
+      },
+      "when": {
         "orientation": "16"
       }
     },
@@ -13,12 +58,221 @@
         "model": "lasertransport:block/craft_result_holder_type_1"
       },
       "when": {
+        "orientation": "34"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "y": 90
+      },
+      "when": {
+        "orientation": "82"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "y": 180
+      },
+      "when": {
+        "orientation": "50"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "y": 270
+      },
+      "when": {
+        "orientation": "66"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 90
+      },
+      "when": {
+        "orientation": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "orientation": "72"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "orientation": "2"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "orientation": "84"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 180
+      },
+      "when": {
+        "orientation": "49"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "orientation": "65"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "orientation": "33"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "orientation": "81"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 270
+      },
+      "when": {
+        "orientation": "18"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 270,
+        "y": 90
+      },
+      "when": {
+        "orientation": "88"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
         "orientation": "17"
       }
     },
     {
       "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_1",
+        "x": 270,
+        "y": 270
+      },
+      "when": {
+        "orientation": "68"
+      }
+    },
+    {
+      "apply": {
         "model": "lasertransport:block/craft_result_holder_type_2"
+      },
+      "when": {
+        "orientation": "35"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "y": 90
+      },
+      "when": {
+        "orientation": "83"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "y": 180
+      },
+      "when": {
+        "orientation": "51"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "y": 270
+      },
+      "when": {
+        "orientation": "67"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "x": 90
+      },
+      "when": {
+        "orientation": "3"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "orientation": "76"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "orientation": "92"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_2",
+        "x": 270
       },
       "when": {
         "orientation": "19"
@@ -29,7 +283,151 @@
         "model": "lasertransport:block/craft_result_holder_type_3"
       },
       "when": {
+        "orientation": "38"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "y": 90
+      },
+      "when": {
+        "orientation": "86"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "y": 180
+      },
+      "when": {
+        "orientation": "58"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "y": 270
+      },
+      "when": {
+        "orientation": "74"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 90
+      },
+      "when": {
+        "orientation": "5"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "orientation": "73"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "orientation": "10"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "orientation": "85"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 180
+      },
+      "when": {
+        "orientation": "53"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "orientation": "69"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "orientation": "41"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "orientation": "89"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 270
+      },
+      "when": {
+        "orientation": "22"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 270,
+        "y": 90
+      },
+      "when": {
+        "orientation": "90"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
         "orientation": "25"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_3",
+        "x": 270,
+        "y": 270
+      },
+      "when": {
+        "orientation": "70"
       }
     },
     {
@@ -37,12 +435,201 @@
         "model": "lasertransport:block/craft_result_holder_type_4"
       },
       "when": {
+        "orientation": "46"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "y": 90
+      },
+      "when": {
+        "orientation": "94"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "y": 180
+      },
+      "when": {
+        "orientation": "62"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "y": 270
+      },
+      "when": {
+        "orientation": "78"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 90
+      },
+      "when": {
+        "orientation": "13"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "orientation": "75"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "orientation": "14"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "orientation": "87"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 180
+      },
+      "when": {
+        "orientation": "61"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "orientation": "77"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "orientation": "45"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "orientation": "93"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 270
+      },
+      "when": {
+        "orientation": "30"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 270,
+        "y": 90
+      },
+      "when": {
+        "orientation": "91"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
         "orientation": "29"
       }
     },
     {
       "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_4",
+        "x": 270,
+        "y": 270
+      },
+      "when": {
+        "orientation": "71"
+      }
+    },
+    {
+      "apply": {
         "model": "lasertransport:block/craft_result_holder_type_5"
+      },
+      "when": {
+        "orientation": "47"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_5",
+        "y": 90
+      },
+      "when": {
+        "orientation": "95"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_5",
+        "y": 180
+      },
+      "when": {
+        "orientation": "63"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_5",
+        "y": 270
+      },
+      "when": {
+        "orientation": "79"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_5",
+        "x": 90
+      },
+      "when": {
+        "orientation": "15"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_5",
+        "x": 270
       },
       "when": {
         "orientation": "31"
@@ -53,12 +640,105 @@
         "model": "lasertransport:block/craft_result_holder_type_6"
       },
       "when": {
+        "orientation": "36"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "y": 180
+      },
+      "when": {
+        "orientation": "56"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "x": 90
+      },
+      "when": {
+        "orientation": "4"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "orientation": "8"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "x": 180
+      },
+      "when": {
+        "orientation": "52"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "orientation": "40"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "x": 270
+      },
+      "when": {
+        "orientation": "20"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_6",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
         "orientation": "24"
       }
     },
     {
       "apply": {
         "model": "lasertransport:block/craft_result_holder_type_7"
+      },
+      "when": {
+        "orientation": "44"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_7",
+        "y": 180
+      },
+      "when": {
+        "orientation": "60"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_7",
+        "x": 90
+      },
+      "when": {
+        "orientation": "12"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_7",
+        "x": 270
       },
       "when": {
         "orientation": "28"
@@ -69,6 +749,72 @@
         "model": "lasertransport:block/craft_result_holder_type_8"
       },
       "when": {
+        "orientation": "37"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "y": 180
+      },
+      "when": {
+        "orientation": "57"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "x": 90
+      },
+      "when": {
+        "orientation": "6"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "orientation": "9"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "x": 180
+      },
+      "when": {
+        "orientation": "54"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "orientation": "42"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "x": 270
+      },
+      "when": {
+        "orientation": "21"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_8",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
         "orientation": "26"
       }
     },
@@ -77,274 +823,13 @@
         "model": "lasertransport:block/craft_result_holder_type_9"
       },
       "when": {
-        "orientation": "27"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_0",
-        "x": 90
-      },
-      "when": {
-        "orientation": "32"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_1",
-        "x": 90
-      },
-      "when": {
-        "orientation": "33"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_2",
-        "x": 90
-      },
-      "when": {
-        "orientation": "35"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_3",
-        "x": 90
-      },
-      "when": {
-        "orientation": "41"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_4",
-        "x": 90
-      },
-      "when": {
-        "orientation": "45"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_5",
-        "x": 90
-      },
-      "when": {
-        "orientation": "47"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 90
-      },
-      "when": {
-        "orientation": "40"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_7",
-        "x": 90
-      },
-      "when": {
-        "orientation": "44"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 90
-      },
-      "when": {
-        "orientation": "42"
+        "orientation": "39"
       }
     },
     {
       "apply": {
         "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 90
-      },
-      "when": {
-        "orientation": "43"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_0",
-        "x": 180
-      },
-      "when": {
-        "orientation": "0"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_1",
-        "x": 180
-      },
-      "when": {
-        "orientation": "2"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_2",
-        "x": 180
-      },
-      "when": {
-        "orientation": "3"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_3",
-        "x": 180
-      },
-      "when": {
-        "orientation": "10"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_4",
-        "x": 180
-      },
-      "when": {
-        "orientation": "14"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_5",
-        "x": 180
-      },
-      "when": {
-        "orientation": "15"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 180
-      },
-      "when": {
-        "orientation": "8"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_7",
-        "x": 180
-      },
-      "when": {
-        "orientation": "12"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 180
-      },
-      "when": {
-        "orientation": "9"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 180
-      },
-      "when": {
-        "orientation": "11"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_0",
-        "x": 270
-      },
-      "when": {
-        "orientation": "48"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_1",
-        "x": 270
-      },
-      "when": {
-        "orientation": "50"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_2",
-        "x": 270
-      },
-      "when": {
-        "orientation": "51"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_3",
-        "x": 270
-      },
-      "when": {
-        "orientation": "58"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_4",
-        "x": 270
-      },
-      "when": {
-        "orientation": "62"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_5",
-        "x": 270
-      },
-      "when": {
-        "orientation": "63"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 270
-      },
-      "when": {
-        "orientation": "56"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_7",
-        "x": 270
-      },
-      "when": {
-        "orientation": "60"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 270
-      },
-      "when": {
-        "orientation": "57"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 270
+        "y": 180
       },
       "when": {
         "orientation": "59"
@@ -352,203 +837,8 @@
     },
     {
       "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "y": 90
-      },
-      "when": {
-        "orientation": "18"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "y": 90
-      },
-      "when": {
-        "orientation": "22"
-      }
-    },
-    {
-      "apply": {
         "model": "lasertransport:block/craft_result_holder_type_9",
-        "y": 90
-      },
-      "when": {
-        "orientation": "30"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "orientation": "34"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "orientation": "38"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 90,
-        "y": 90
-      },
-      "when": {
-        "orientation": "46"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 180,
-        "y": 90
-      },
-      "when": {
-        "orientation": "1"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 180,
-        "y": 90
-      },
-      "when": {
-        "orientation": "5"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 180,
-        "y": 90
-      },
-      "when": {
-        "orientation": "13"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 270,
-        "y": 90
-      },
-      "when": {
-        "orientation": "49"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 270,
-        "y": 90
-      },
-      "when": {
-        "orientation": "53"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 270,
-        "y": 90
-      },
-      "when": {
-        "orientation": "61"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "y": 180
-      },
-      "when": {
-        "orientation": "20"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "y": 180
-      },
-      "when": {
-        "orientation": "21"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "y": 180
-      },
-      "when": {
-        "orientation": "23"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "orientation": "36"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "orientation": "37"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 90,
-        "y": 180
-      },
-      "when": {
-        "orientation": "39"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 180,
-        "y": 180
-      },
-      "when": {
-        "orientation": "4"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 180,
-        "y": 180
-      },
-      "when": {
-        "orientation": "6"
-      }
-    },
-    {
-      "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_9",
-        "x": 180,
-        "y": 180
+        "x": 90
       },
       "when": {
         "orientation": "7"
@@ -556,22 +846,40 @@
     },
     {
       "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_6",
-        "x": 270,
+        "model": "lasertransport:block/craft_result_holder_type_9",
+        "x": 90,
         "y": 180
       },
       "when": {
-        "orientation": "52"
+        "orientation": "11"
       }
     },
     {
       "apply": {
-        "model": "lasertransport:block/craft_result_holder_type_8",
-        "x": 270,
+        "model": "lasertransport:block/craft_result_holder_type_9",
+        "x": 180
+      },
+      "when": {
+        "orientation": "55"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_9",
+        "x": 180,
         "y": 180
       },
       "when": {
-        "orientation": "54"
+        "orientation": "43"
+      }
+    },
+    {
+      "apply": {
+        "model": "lasertransport:block/craft_result_holder_type_9",
+        "x": 270
+      },
+      "when": {
+        "orientation": "23"
       }
     },
     {
@@ -581,7 +889,7 @@
         "y": 180
       },
       "when": {
-        "orientation": "55"
+        "orientation": "27"
       }
     }
   ]

@@ -1,9 +1,12 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "lasertransport:block/craft_base",
   "render_type": "minecraft:cutout",
   "textures": {
-    "bottom": "lasertransport:block/node/craft/result/bottom",
-    "side": "lasertransport:block/node/craft/result/side",
-    "top": "lasertransport:block/node/craft/result/front_9"
+    "down": "lasertransport:block/node/empty",
+    "east": "lasertransport:block/node/craft/result/side",
+    "north": "lasertransport:block/node/craft/result/front_9",
+    "south": "lasertransport:block/node/craft/result/bottom",
+    "up": "lasertransport:block/node/empty",
+    "west": "lasertransport:block/node/empty"
   }
 }

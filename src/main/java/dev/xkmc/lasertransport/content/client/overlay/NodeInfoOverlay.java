@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2library.base.overlay.OverlayUtils;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
-import dev.xkmc.lasertransport.content.tile.base.IRenderableNode;
 import dev.xkmc.lasertransport.content.tile.base.ITooltipNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;

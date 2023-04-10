@@ -46,8 +46,11 @@ public class Orientation {
 	}
 
 	public static int rotate(int value, IRotate rot) {
-		Orientation o = VALUES[value];
-		if (!o.connected) return o.ordinal;
+		return rotate(VALUES[value], rot).ordinal;
+	}
+
+	public static Orientation rotate(Orientation o, IRotate rot) {
+		if (!o.connected) return o;
 		Direction newFront = rot.rotate(o.facing);
 		Orientation base = VALUES[newFront.ordinal() * 16];
 		for (int i = 0; i < 4; i++) {
@@ -55,7 +58,7 @@ public class Orientation {
 				base = base.toggle(rot.rotate(o.sides[i]));
 			}
 		}
-		return base.ordinal;
+		return base;
 	}
 
 	public final int ordinal;
