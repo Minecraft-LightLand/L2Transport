@@ -24,8 +24,16 @@ public record ConnectBlockMethod(IntegerProperty prop) implements
 	}
 
 	public BlockState getStateForPlacement(BlockState def, BlockPlaceContext context) {
-		return prop == ItemHolderNodeBlock.ORIENTATION_SIDE ? def.setValue(prop, Orientation.VALUES.length - 1) :
-				def.setValue(prop, Orientation.of(context.getClickedFace().getOpposite()));
+		if (prop == ItemHolderNodeBlock.ORIENTATION_SIDE) {
+			return def.setValue(prop, Orientation.size() - 1);
+		}
+		Orientation ori = Orientation.of(context.getNearestLookingDirection().getOpposite());
+		for (Direction dire : ori.sides) {
+			if (connectTo(context.getLevel().getBlockState(context.getClickedPos().relative(dire)))) {
+				ori = ori.toggle(dire);
+			}
+		}
+		return def.setValue(prop, ori.ordinal);
 	}
 
 	public BlockState rotate(BlockState state, Rotation rot) {
@@ -38,12 +46,16 @@ public record ConnectBlockMethod(IntegerProperty prop) implements
 
 	@Override
 	public BlockState updateShape(Block block, BlockState current, BlockState self, Direction dire, BlockState other, LevelAccessor level, BlockPos selfPos, BlockPos otherPos) {
-		Orientation orientation = Orientation.VALUES[current.getValue(prop)];
+		Orientation orientation = Orientation.from(current.getValue(prop));
 		if (!orientation.connected || dire.getAxis() == orientation.facing.getAxis())
 			return current;
-		if (orientation.isConnected(dire) == (self.is(LTBlocks.B_CRAFT_CORE.get()) || self.is(LTBlocks.B_CRAFT_SIDE.get())))
+		if (orientation.isConnected(dire) == connectTo(other))
 			return current;
 		return current.setValue(prop, orientation.toggle(dire).ordinal);
+	}
+
+	private static boolean connectTo(BlockState bs) {
+		return bs.is(LTBlocks.B_CRAFT_CORE.get()) || bs.is(LTBlocks.B_CRAFT_SIDE.get());
 	}
 
 }

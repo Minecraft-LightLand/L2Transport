@@ -11,31 +11,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 
 public class BlockGenerator {
 
-	// 1: top, 2: right, 4: bottom, 8: left
-	private enum Type {
-		FULL(0), EMPTY(15),
-		NO_TOP(1), VERTICAL(5), NO_TOP_RIGHT(3), BOTTOM_ONLY(11),
-		NO_RIGHT(2), HORIZONTAL(10), NO_BOTTOM_RIGHT(6), LEFT_ONLY(7);
-
-		private final int select;
-
-		Type(int select) {
-			this.select = select;
-		}
-
-
-		public Orientation toOrientation() {
-			Orientation base = Orientation.VALUES[Orientation.of(Direction.UP)];
-			for (int i = 0; i < 4; i++) {
-				if ((select & (1 << i)) == 0) continue;
-				base = base.toggle(DEFAULT_FACE[i]);
-			}
-			return base;
-		}
-	}
-
-	private static final Direction[] DEFAULT_FACE = {Direction.NORTH, Direction.WEST, Direction.SOUTH, Direction.EAST};
-
 	private static Orientation.IRotate rotate(int y, int x) {
 		return dire -> {
 			for (int i = 0; i < y; i++) {
@@ -50,14 +25,13 @@ public class BlockGenerator {
 
 	private final DataGenContext<Block, DelegateBlock> ctx;
 	private final RegistrateBlockstateProvider pvd;
-	private final ModelFile[] files = new ModelFile[Type.values().length];
-	private final ModelFile[] back = new ModelFile[6];
+	private final ModelFile[] files = new ModelFile[FaceType.values().length];
 
 	public BlockGenerator(DataGenContext<Block, DelegateBlock> ctx, RegistrateBlockstateProvider pvd) {
 		this.ctx = ctx;
 		this.pvd = pvd;
 		String texture = "block/node/craft/" + ctx.getName().split("_")[1];
-		for (int i = 0; i < Type.values().length; i++) {
+		for (int i = 0; i < FaceType.values().length; i++) {
 			files[i] = pvd.models().cubeBottomTop(ctx.getName() + "_type_" + i,
 							pvd.modLoc(texture + "/side"),
 							pvd.modLoc(texture + "/bottom"),
@@ -71,7 +45,7 @@ public class BlockGenerator {
 		boolean[] gen = new boolean[6 * 16];
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
-				for (Type t : Type.values()) {
+				for (FaceType t : FaceType.values()) {
 					int orient = t.toOrientation().ordinal;
 					orient = Orientation.rotate(orient, rotate(i, j));
 					if (gen[orient]) continue;

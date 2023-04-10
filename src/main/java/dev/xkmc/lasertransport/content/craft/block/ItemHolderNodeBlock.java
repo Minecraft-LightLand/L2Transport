@@ -14,8 +14,8 @@ public class ItemHolderNodeBlock {
 	public static final BlockEntityBlockMethod<CraftSideBlockEntity> SIDE = new BlockEntityBlockMethodImpl<>(LTBlocks.TE_CRAFT_SIDE, CraftSideBlockEntity.class);
 	public static final BlockEntityBlockMethod<CraftCoreBlockEntity> CORE = new BlockEntityBlockMethodImpl<>(LTBlocks.TE_CRAFT_CORE, CraftCoreBlockEntity.class);
 
-	public static final IntegerProperty ORIENTATION_SIDE = IntegerProperty.create("orientation", 0, Orientation.VALUES.length - 1);
-	public static final IntegerProperty ORIENTATION_CORE = IntegerProperty.create("orientation", 0, Orientation.VALUES.length - 2);
+	public static final IntegerProperty ORIENTATION_SIDE = IntegerProperty.create("orientation", 0, Orientation.size() - 1);
+	public static final IntegerProperty ORIENTATION_CORE = IntegerProperty.create("orientation", 0, Orientation.size() - 2);
 
 	public static final ItemHolderSetItem CLICK = new ItemHolderSetItem();
 	public static final CraftRestructureDetector UPDATE = new CraftRestructureDetector();

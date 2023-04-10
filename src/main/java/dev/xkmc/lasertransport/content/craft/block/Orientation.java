@@ -1,8 +1,6 @@
 package dev.xkmc.lasertransport.content.craft.block;
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ public class Orientation {
 
 	}
 
-	public static final Orientation[] VALUES;
+	private static final Orientation[] VALUES;
 
 	static {
 		VALUES = new Orientation[6 * 16 + 1];
@@ -35,8 +33,16 @@ public class Orientation {
 		VALUES[ind] = new Orientation(ind);
 	}
 
-	public static int of(Direction front) {
-		return front.ordinal() * 16;
+	public static int size() {
+		return VALUES.length;
+	}
+
+	public static Orientation from(int value) {
+		return VALUES[value];
+	}
+
+	public static Orientation of(Direction front) {
+		return VALUES[front.ordinal() * 16];
 	}
 
 	public static int rotate(int value, IRotate rot) {
