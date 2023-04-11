@@ -44,6 +44,7 @@ public class BlockGenerator {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
 					Orientation.IRotate rotate = BlockModelRotation.by(90 * i, 90 * j).actualRotation()::rotate;
+					//FIXME something is wrong here
 					Orientation orient = Orientation.rotate(t.toOrientation(), rotate);
 					if (gen[orient.ordinal]) continue;
 					gen[orient.ordinal] = true;
