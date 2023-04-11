@@ -4,7 +4,6 @@ import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
 import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.lasertransport.content.craft.block.Orientation;
-import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -43,9 +42,7 @@ public class BlockGenerator {
 		for (FaceType t : FaceType.values()) {
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < 4; j++) {
-					Orientation.IRotate rotate = BlockModelRotation.by(90 * i, 90 * j).actualRotation()::rotate;
-					//FIXME something is wrong here
-					Orientation orient = Orientation.rotate(t.toOrientation(), rotate);
+					Orientation orient = Orientation.rotate(t.toOrientation(), new RotationHelper(i, j));
 					if (gen[orient.ordinal]) continue;
 					gen[orient.ordinal] = true;
 					builder.part().modelFile(files[t.ordinal()]).rotationX(90 * i).rotationY(90 * j)
