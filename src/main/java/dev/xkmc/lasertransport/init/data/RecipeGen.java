@@ -39,6 +39,9 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUID_SIMPLE.get()), LTBlocks.B_FLUID_SYNCED);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUX_SIMPLE.get()), LTBlocks.B_FLUX_RETRIEVE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUX_SIMPLE.get()), LTBlocks.B_FLUX_ORDERED);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_HOLDER.get()), LTBlocks.B_CRAFT_SIDE);
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_HOLDER.get()), LTBlocks.B_CRAFT_CORE);
+		pvd.stonecutting(DataIngredient.items(Items.PAPER), LTItems.FILLER);
 
 		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.LINKER.get())::unlockedBy, Items.COPPER_INGOT)
 				.pattern(" AB").pattern(" BB").pattern("B  ")

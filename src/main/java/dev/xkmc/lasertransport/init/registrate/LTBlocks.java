@@ -86,8 +86,7 @@ public class LTBlocks {
 				.isRedstoneConductor((a, b, c) -> false));
 
 		DelegateBlockProperties FULL_LIT = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
-				.noOcclusion().noCollission()
-				.lightLevel(bs -> 15)
+				.noOcclusion().lightLevel(bs -> 15)
 				.isRedstoneConductor((a, b, c) -> false));
 
 		{
