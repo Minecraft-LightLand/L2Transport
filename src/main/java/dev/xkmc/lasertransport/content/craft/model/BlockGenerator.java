@@ -25,8 +25,8 @@ public class BlockGenerator {
 		for (int i = 0; i < FaceType.values().length; i++) {
 			FaceType type = FaceType.values()[i];
 			files[i] = pvd.models().withExistingParent(ctx.getName() + "_type_" + i,
-							pvd.modLoc("block/craft_base"))
-					.texture("north", pvd.modLoc(texture + "/front_" + i))
+							pvd.modLoc("block/craft_base" + (type.alt ? "_alt" : "")))
+					.texture("north", pvd.modLoc(texture + "/front_" + type.id))
 					.texture("south", pvd.modLoc(texture + "/bottom"))
 					.texture("up", type.open(Direction.UP) ? empty : side)
 					.texture("down", type.open(Direction.DOWN) ? empty : side)

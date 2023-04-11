@@ -5,17 +5,26 @@ import net.minecraft.core.Direction;
 
 // 1: top, 2: right, 4: bottom, 8: left
 public enum FaceType {
-	FULL(0),
-	NO_TOP(1), VERTICAL(5), NO_TOP_RIGHT(3), BOTTOM_ONLY(11),
-	EMPTY(15),
-	NO_RIGHT(2), HORIZONTAL(10), NO_BOTTOM_RIGHT(6), LEFT_ONLY(7);
+	FULL(0, 0, false),
+	NO_TOP(1, 1, false),
+	VERTICAL(2, 5, false),
+	NO_TOP_RIGHT(3, 3, false),
+	BOTTOM_ONLY(4, 11, false),
+	EMPTY(5, 15, false),
+	NO_RIGHT(1, 2, true),
+	HORIZONTAL(2, 10, true),
+	NO_BOTTOM_RIGHT(3, 6, true),
+	LEFT_ONLY(4, 7, true);
 
 	private static final Direction[] DEFAULT_FACE = {Direction.UP, Direction.WEST, Direction.DOWN, Direction.EAST};
 
-	private final int select;
+	public final int id, select;
+	public final boolean alt;
 
-	FaceType(int select) {
+	FaceType(int id, int select, boolean alt) {
+		this.id = id;
 		this.select = select;
+		this.alt = alt;
 	}
 
 	public Orientation toOrientation() {

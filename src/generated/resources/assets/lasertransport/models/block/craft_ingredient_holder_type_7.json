@@ -1,10 +1,10 @@
 {
-  "parent": "lasertransport:block/craft_base",
+  "parent": "lasertransport:block/craft_base_alt",
   "render_type": "minecraft:cutout",
   "textures": {
     "down": "lasertransport:block/node/craft/ingredient/side",
     "east": "lasertransport:block/node/empty",
-    "north": "lasertransport:block/node/craft/ingredient/front_7",
+    "north": "lasertransport:block/node/craft/ingredient/front_2",
     "south": "lasertransport:block/node/craft/ingredient/bottom",
     "up": "lasertransport:block/node/craft/ingredient/side",
     "west": "lasertransport:block/node/empty"
