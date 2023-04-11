@@ -6,6 +6,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @SerialClass
@@ -35,6 +36,10 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@Override
 	public int getSlots() {
 		return 1;
+	}
+
+	public List<ItemStack> getAll(){
+		return list;
 	}
 
 	@NotNull

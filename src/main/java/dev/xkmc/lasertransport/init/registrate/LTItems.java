@@ -47,12 +47,12 @@ public class LTItems {
 			SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, SPEED_UP_INF, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
 
 	static {
-		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().defaultLang().register();
-		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().defaultLang().register();
-		VALIDATOR = REGISTRATE.item("validator", ValidatorItem::new).defaultModel().defaultLang().register();
-		CLEAR = REGISTRATE.item("clear", ClearItem::new).defaultModel().defaultLang().register();
-		CONFIG = REGISTRATE.item("configurator", ConfiguratorItem::new).defaultModel().defaultLang().register();
-		FLUX = REGISTRATE.item("flux_filter", FluxFilter::new).defaultModel().defaultLang().register();
+		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().lang("Linker Wand").register();
+		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().lang("Rotate Wand").register();
+		VALIDATOR = REGISTRATE.item("validator", ValidatorItem::new).defaultModel().lang("Validate Wand").register();
+		CLEAR = REGISTRATE.item("clear", ClearItem::new).defaultModel().lang("Clear Wand").register();
+		CONFIG = REGISTRATE.item("configurator", ConfiguratorItem::new).defaultModel().lang("Configuration Wand").register();
+		FLUX = REGISTRATE.item("flux_filter", FluxFilter::new).defaultModel().lang("Flux Select Wand").register();
 
 		{
 			VALVE_UP = REGISTRATE.item("valve_upgrade", p -> new UpgradeItem(p, new ValveUpgrade())).register();

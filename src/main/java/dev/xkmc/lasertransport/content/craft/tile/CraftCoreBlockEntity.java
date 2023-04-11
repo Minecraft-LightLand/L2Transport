@@ -1,12 +1,12 @@
 package dev.xkmc.lasertransport.content.craft.tile;
 
 import com.mojang.datafixers.util.Either;
-import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lasertransport.content.client.tooltip.CraftTooltip;
 import dev.xkmc.lasertransport.content.craft.block.ConnectBlockMethod;
 import dev.xkmc.lasertransport.content.craft.block.ItemHolderNodeBlock;
 import dev.xkmc.lasertransport.content.craft.block.Orientation;
+import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
+import dev.xkmc.lasertransport.content.craft.logic.DelegatedCraftContainer;
 import dev.xkmc.lasertransport.content.craft.logic.ScanInfo;
 import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import dev.xkmc.lasertransport.util.Holder;
@@ -14,10 +14,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SerialClass
 public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
@@ -29,7 +34,10 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 	private ScanInfo info = ScanInfo.dummy(Direction.NORTH);
 
 	@SerialClass.SerialField
-	private boolean shouldRevalidate = true;
+	private boolean shouldRevalidate = true, shouldCraft = false;
+
+	@Nullable
+	private CraftingRecipe recipe;
 
 	public CraftCoreBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -42,7 +50,19 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 			if (level != null && !level.isClientSide())
 				revalidate();
 		}
+		if (shouldCraft) {
+			shouldCraft = false;
+			if (level != null && !level.isClientSide) {
+				tryCraft();
+			}
+		}
 		super.tick();
+	}
+
+	@Override
+	public void markDirty() {
+		shouldCraft = true;
+		super.markDirty();
 	}
 
 	@Override
@@ -67,7 +87,7 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 
 	private void revalidate() {
 		assert level != null;
-		var scanned = scan();
+		var scanned = ScanInfo.scan(level, getBlockPos(), getOrientation());
 		if (!scanned.getSecond().isEmpty()) {
 			for (BlockPos pos : scanned.getSecond()) {
 				level.destroyBlock(pos, true);
@@ -106,35 +126,6 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 		return Orientation.from(getBlockState().getValue(ItemHolderNodeBlock.ORIENTATION_CORE));
 	}
 
-	private Pair<TreeSet<BlockPos>, TreeSet<BlockPos>> scan() {
-		assert level != null;
-		Orientation o = getOrientation();
-		Queue<BlockPos> queue = new ArrayDeque<>();
-		TreeSet<BlockPos> list = new TreeSet<>();
-		TreeSet<BlockPos> error = new TreeSet<>();
-		TreeSet<BlockPos> visited = new TreeSet<>();
-		visited.add(getBlockPos());
-		queue.add(getBlockPos());
-		while (queue.size() > 0) {
-			BlockPos current = queue.poll();
-			for (Direction dire : o.sides) {
-				BlockPos next = current.relative(dire);
-				if (visited.contains(next)) continue;
-				visited.add(next);
-				BlockState state = level.getBlockState(next);
-				if (state.getBlock() == LTBlocks.B_CRAFT_CORE.get()) {
-					queue.add(next);
-					error.add(next);
-				}
-				if (state.getBlock() == LTBlocks.B_CRAFT_SIDE.get()) {
-					queue.add(next);
-					list.add(next);
-				}
-			}
-		}
-		return Pair.of(list, error);
-	}
-
 	public void generateScanInfo(boolean rotate) {
 		Direction y_neg = info.y_neg();
 		Direction facing = getOrientation().facing;
@@ -151,9 +142,49 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 	public List<Either<Component, TooltipComponent>> getTooltip() {
 		List<Either<Component, TooltipComponent>> ans = new ArrayList<>();
 		if (level != null) {
-			CraftTooltip tooltip = info.compost(level, getBlockPos(), targets);
+			CraftGrid tooltip = info.compost(level, getBlockPos(), targets);
 			ans.add(Either.right(tooltip));
 		}
 		return ans;
 	}
+
+	public void tryCraft() {
+		assert level != null;
+		if (!items.getStackInSlot(0).isEmpty()) return;
+		DelegatedCraftContainer cont = new DelegatedCraftContainer(info.compost(level, getBlockPos(), targets));
+		if (cont.isEmpty()) return;
+		if (recipe != null) {
+			if (recipe.matches(cont, level)) {
+				assemble(recipe, cont);
+				return;
+			}
+		}
+		var opt = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, cont, level);
+		if (opt.isPresent()) {
+			recipe = opt.get();
+			assemble(recipe, cont);
+		}
+	}
+
+	private void assemble(CraftingRecipe recipe, DelegatedCraftContainer cont) {
+		assert level != null;
+		ItemStack stack = recipe.assemble(cont);
+		List<ItemStack> remainder = new ArrayList<>();
+		remainder.add(stack);
+		for (BlockPos pos : targets) {
+			if (level.getBlockEntity(pos) instanceof CraftSideBlockEntity be) {
+				ItemStack consume = be.items.extractItem(0, cont.min, false);
+				if (!consume.isEmpty()) {
+					ItemStack remain = consume.getCraftingRemainingItem();
+					remainder.add(remain);
+				}
+			}
+		}
+		for (ItemStack result : remainder) {
+			ItemStack toAdd = result.copy();
+			toAdd.setCount(result.getCount() * cont.min);
+			items.forceAdd(toAdd);
+		}
+	}
+
 }

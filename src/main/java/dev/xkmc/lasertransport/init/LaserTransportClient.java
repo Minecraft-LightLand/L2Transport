@@ -4,8 +4,8 @@ import dev.xkmc.lasertransport.content.client.overlay.CraftTooltipOverlay;
 import dev.xkmc.lasertransport.content.client.overlay.NodeInfoOverlay;
 import dev.xkmc.lasertransport.content.client.overlay.NumberSetOverlay;
 import dev.xkmc.lasertransport.content.client.overlay.ToolSelectionOverlay;
-import dev.xkmc.lasertransport.content.client.tooltip.ClientCraftTooltip;
-import dev.xkmc.lasertransport.content.client.tooltip.CraftTooltip;
+import dev.xkmc.lasertransport.content.client.overlay.ClientCraftTooltip;
+import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
 import dev.xkmc.lasertransport.events.ClientGeneralEvents;
 import dev.xkmc.lasertransport.init.data.Keys;
 import net.minecraftforge.api.distmarker.Dist;
@@ -52,6 +52,6 @@ public class LaserTransportClient {
 
 	@OnlyIn(Dist.CLIENT)
 	public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent event) {
-		event.register(CraftTooltip.class, ClientCraftTooltip::new);
+		event.register(CraftGrid.class, ClientCraftTooltip::new);
 	}
 }

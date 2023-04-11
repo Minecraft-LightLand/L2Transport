@@ -1,8 +1,9 @@
-package dev.xkmc.lasertransport.content.client.tooltip;
+package dev.xkmc.lasertransport.content.client.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Matrix4f;
+import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
 import dev.xkmc.lasertransport.content.craft.logic.CraftSlotType;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
@@ -14,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public record ClientCraftTooltip(CraftTooltip items) implements ClientTooltipComponent {
+public record ClientCraftTooltip(CraftGrid items) implements ClientTooltipComponent {
 
 	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/gui/container/bundle.png");
 

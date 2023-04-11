@@ -16,4 +16,14 @@ public class CraftSideBlockEntity extends ItemHolderBlockEntity {
 		super(type, pos, state);
 	}
 
+	@Override
+	public void markDirty() {
+		if (target.t() != null && level != null && !level.isClientSide()) {
+			if (level.getBlockEntity(target.t()) instanceof CraftCoreBlockEntity be) {
+				be.markDirty();
+			}
+		}
+		super.markDirty();
+	}
+
 }

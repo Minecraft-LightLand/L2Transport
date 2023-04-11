@@ -36,6 +36,7 @@ public class ClearItem extends Item implements ILinker {
 					var list = xbe.popUpgrade();
 					if (list.size() > 0) {
 						list.forEach(ctx.getPlayer().getInventory()::placeItemBackInInventory);
+						xbe.markDirty();
 						return InteractionResult.SUCCESS;
 					}
 				}

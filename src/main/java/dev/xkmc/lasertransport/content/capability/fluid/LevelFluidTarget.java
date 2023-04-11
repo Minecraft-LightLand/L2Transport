@@ -24,7 +24,8 @@ public final class LevelFluidTarget implements INetworkNode<FluidStack> {
 		type = stack1.getFluid();
 		canUse = type.getFluidType().canBePlacedInLevel(level, pos, stack.get().get()) &&
 				stack.getAvailable() >= FluidType.BUCKET_VOLUME &&
-				level.getBlockState(pos).canBeReplaced(type);
+				level.getBlockState(pos).canBeReplaced(type) &&
+				level.getFluidState(pos).getType() != type;
 		if (canUse) {
 			stack.consume(FluidType.BUCKET_VOLUME);
 		}

@@ -1,14 +1,16 @@
 package dev.xkmc.lasertransport.content.craft.logic;
 
-import dev.xkmc.lasertransport.content.client.tooltip.CraftTooltip;
+import com.mojang.datafixers.util.Pair;
+import dev.xkmc.lasertransport.content.craft.block.Orientation;
 import dev.xkmc.lasertransport.content.craft.tile.CraftSideBlockEntity;
+import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public record ScanInfo(int count, Direction facing, Direction y_neg, int dx, int dy, int w, int h) {
 
@@ -43,7 +45,34 @@ public record ScanInfo(int count, Direction facing, Direction y_neg, int dx, int
 		return new ScanInfo(0, facing, facing.getAxis() == Direction.Axis.Y ? Direction.NORTH : Direction.UP, 0, 0, 1, 1);
 	}
 
-	public CraftTooltip compost(Level level, BlockPos self, ArrayList<BlockPos> targets) {
+	public static Pair<TreeSet<BlockPos>, TreeSet<BlockPos>> scan(Level level, BlockPos self, Orientation o) {
+		Queue<BlockPos> queue = new ArrayDeque<>();
+		TreeSet<BlockPos> list = new TreeSet<>();
+		TreeSet<BlockPos> error = new TreeSet<>();
+		TreeSet<BlockPos> visited = new TreeSet<>();
+		visited.add(self);
+		queue.add(self);
+		while (queue.size() > 0) {
+			BlockPos current = queue.poll();
+			for (Direction dire : o.sides) {
+				BlockPos next = current.relative(dire);
+				if (visited.contains(next)) continue;
+				visited.add(next);
+				BlockState state = level.getBlockState(next);
+				if (state.getBlock() == LTBlocks.B_CRAFT_CORE.get()) {
+					queue.add(next);
+					error.add(next);
+				}
+				if (state.getBlock() == LTBlocks.B_CRAFT_SIDE.get()) {
+					queue.add(next);
+					list.add(next);
+				}
+			}
+		}
+		return Pair.of(list, error);
+	}
+
+	public CraftGrid compost(Level level, BlockPos self, ArrayList<BlockPos> targets) {
 		Direction x_neg = ScanInfo.getXAxis(facing, y_neg);
 		CraftItemSlot[][] tooltip = new CraftItemSlot[h][w];
 		for (int i = 0; i < h; i++) {
@@ -62,6 +91,7 @@ public record ScanInfo(int count, Direction facing, Direction y_neg, int dx, int
 			}
 			tooltip[y - dy][x - dx] = new CraftItemSlot(CraftSlotType.ITEM, stack);
 		}
-		return new CraftTooltip(h, w, tooltip);
+		return new CraftGrid(h, w, tooltip);
 	}
+
 }
