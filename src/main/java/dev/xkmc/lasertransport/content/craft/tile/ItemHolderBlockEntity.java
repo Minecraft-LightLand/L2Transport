@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -59,7 +60,7 @@ public class ItemHolderBlockEntity extends BaseBlockEntity implements
 
 	@Override
 	public List<Container> getContainers() {
-		return List.of(new SimpleContainer(items.getStackInSlot(0)));
+		return List.of(new SimpleContainer(items.getAll().toArray(ItemStack[]::new)));
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class DelegatedCraftContainer extends CraftingContainer {
 			for (var ar : arr) {
 				empty &= ar.stack().isEmpty();
 				int count = ar.stack().getCount();
-				min = count < 0 ? min : min < 0 ? count : Math.min(count, min);
+				min = count == 0 ? min : min < 0 ? count : Math.min(count, min);
 			}
 		}
 		this.isEmpty = empty;

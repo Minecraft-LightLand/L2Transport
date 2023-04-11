@@ -29,11 +29,12 @@ public class CraftNodeRenderer<T extends ItemHolderBlockEntity> implements Block
 				for (int k = 0; k < edge; k++) {
 					ItemStack stack = list.get(ind);
 					ind++;
-					if (stack.isEmpty()) continue;
-					poseStack.pushPose();
-					poseStack.translate((k + 0.5) / edge, (i + 0.5) / edge, (j + 0.5) / edge);
-					RenderUtils.renderItemAbove(stack, 0.5, level, partialTick, poseStack, source, light, overlay);
-					poseStack.popPose();
+					if (!stack.isEmpty()) {
+						poseStack.pushPose();
+						poseStack.translate((k + 0.5) / edge - 0.5, (i + 0.5) / edge - 0.5, (j + 0.5) / edge - 0.5);
+						RenderUtils.renderItemAbove(stack, 0.5, level, partialTick, poseStack, source, light, overlay);
+						poseStack.popPose();
+					}
 					if (ind >= list.size()) return;
 				}
 			}

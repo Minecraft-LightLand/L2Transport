@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class ItemHolderSetItem implements OnClickBlockMethod {
+public record ItemHolderSetItem(boolean defaultOne) implements OnClickBlockMethod {
 
 	@Override
 	public InteractionResult onClick(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
@@ -28,7 +28,10 @@ public class ItemHolderSetItem implements OnClickBlockMethod {
 				if (!hand.isEmpty()) {
 					if (!level.isClientSide()) {
 						ItemStack copy = hand.copy();
-						hand.setCount(node.getHolder().insertItem(0, copy, false).getCount());
+						if (defaultOne()) {
+							copy.setCount(1);
+						}
+						hand.shrink(copy.getCount() - node.getHolder().insertItem(0, copy, false).getCount());
 					}
 					return InteractionResult.SUCCESS;
 				}

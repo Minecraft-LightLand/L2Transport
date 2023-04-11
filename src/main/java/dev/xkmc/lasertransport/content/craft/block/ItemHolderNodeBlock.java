@@ -17,8 +17,10 @@ public class ItemHolderNodeBlock {
 	public static final IntegerProperty ORIENTATION_SIDE = IntegerProperty.create("orientation", 0, Orientation.size() - 1);
 	public static final IntegerProperty ORIENTATION_CORE = IntegerProperty.create("orientation", 0, Orientation.size() - 2);
 
-	public static final ItemHolderSetItem SET = new ItemHolderSetItem();
+	public static final ItemHolderSetItem SET_ONE = new ItemHolderSetItem(true);
+	public static final ItemHolderSetItem SET_ALL = new ItemHolderSetItem(false);
 	public static final ItemHolderTakeItem TAKE = new ItemHolderTakeItem();
+	public static final RemoveDestroyMethod REMOVE = new RemoveDestroyMethod();
 	public static final CraftRestructureDetector UPDATE = new CraftRestructureDetector();
 	public static final ConnectBlockMethod CONN_SIDE = new ConnectBlockMethod(ORIENTATION_SIDE);
 	public static final ConnectBlockMethod CONN_CORE = new ConnectBlockMethod(ORIENTATION_CORE);

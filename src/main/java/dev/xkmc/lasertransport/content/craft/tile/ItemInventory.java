@@ -24,12 +24,14 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@Override
 	public void setStackInSlot(int slot, ItemStack stack) {
 		list.clear();
-		list.add(stack);
+		if (!stack.isEmpty())
+			list.add(stack);
 		be.markDirty();
 	}
 
 	public void forceAdd(ItemStack stack) {
-		list.add(stack);
+		if (!stack.isEmpty())
+			list.add(stack);
 		be.markDirty();
 	}
 
@@ -38,7 +40,7 @@ public class ItemInventory implements IItemHandlerModifiable {
 		return 1;
 	}
 
-	public List<ItemStack> getAll(){
+	public List<ItemStack> getAll() {
 		return list;
 	}
 
@@ -54,7 +56,8 @@ public class ItemInventory implements IItemHandlerModifiable {
 		if (!be.canInsert()) return stack;
 		if (list.isEmpty()) {
 			if (!simulate) {
-				list.add(stack);
+				if (!stack.isEmpty())
+					list.add(stack);
 				be.markDirty();
 			}
 			return ItemStack.EMPTY;

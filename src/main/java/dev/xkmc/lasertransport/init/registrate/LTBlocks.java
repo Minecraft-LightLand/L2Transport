@@ -203,7 +203,8 @@ public class LTBlocks {
 		{
 			B_ITEM_HOLDER = LaserTransport.REGISTRATE.block("item_holder",
 							(p) -> DelegateBlock.newBaseBlock(FULL_LIT,
-									ItemHolderNodeBlock.SET, ItemHolderNodeBlock.TAKE,
+									ItemHolderNodeBlock.SET_ALL,
+									ItemHolderNodeBlock.TAKE,
 									ItemHolderNodeBlock.HOLDER))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
 							.withExistingParent(ctx.getName(), "block/cube_all")
@@ -216,8 +217,10 @@ public class LTBlocks {
 
 			B_CRAFT_SIDE = LaserTransport.REGISTRATE.block("craft_ingredient_holder",
 							(p) -> DelegateBlock.newBaseBlock(FULL_LIT,
-									ItemHolderNodeBlock.SET, ItemHolderNodeBlock.TAKE,
-									ItemHolderNodeBlock.UPDATE, ItemHolderNodeBlock.CONN_SIDE,
+									ItemHolderNodeBlock.SET_ONE,
+									ItemHolderNodeBlock.TAKE,
+									ItemHolderNodeBlock.UPDATE,
+									ItemHolderNodeBlock.CONN_SIDE,
 									ItemHolderNodeBlock.SIDE))
 					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
 							.generate(ItemHolderNodeBlock.ORIENTATION_SIDE, true))
@@ -228,8 +231,11 @@ public class LTBlocks {
 
 			B_CRAFT_CORE = LaserTransport.REGISTRATE.block("craft_result_holder",
 							(p) -> DelegateBlock.newBaseBlock(FULL_LIT,
-									ItemHolderNodeBlock.TAKE, ItemHolderNodeBlock.UPDATE,
-									ItemHolderNodeBlock.CONN_CORE, ItemHolderNodeBlock.CORE))
+									ItemHolderNodeBlock.TAKE,
+									ItemHolderNodeBlock.UPDATE,
+									ItemHolderNodeBlock.REMOVE,
+									ItemHolderNodeBlock.CONN_CORE,
+									ItemHolderNodeBlock.CORE))
 					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
 							.generate(ItemHolderNodeBlock.ORIENTATION_CORE, false))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)

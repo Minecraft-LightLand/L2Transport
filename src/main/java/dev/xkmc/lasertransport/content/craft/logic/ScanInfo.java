@@ -1,16 +1,14 @@
 package dev.xkmc.lasertransport.content.craft.logic;
 
-import com.mojang.datafixers.util.Pair;
-import dev.xkmc.lasertransport.content.craft.block.Orientation;
 import dev.xkmc.lasertransport.content.craft.tile.CraftSideBlockEntity;
-import dev.xkmc.lasertransport.init.registrate.LTBlocks;
+import dev.xkmc.lasertransport.init.registrate.LTItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public record ScanInfo(int count, Direction facing, Direction y_neg, int dx, int dy, int w, int h) {
 
@@ -45,33 +43,6 @@ public record ScanInfo(int count, Direction facing, Direction y_neg, int dx, int
 		return new ScanInfo(0, facing, facing.getAxis() == Direction.Axis.Y ? Direction.NORTH : Direction.UP, 0, 0, 1, 1);
 	}
 
-	public static Pair<TreeSet<BlockPos>, TreeSet<BlockPos>> scan(Level level, BlockPos self, Orientation o) {
-		Queue<BlockPos> queue = new ArrayDeque<>();
-		TreeSet<BlockPos> list = new TreeSet<>();
-		TreeSet<BlockPos> error = new TreeSet<>();
-		TreeSet<BlockPos> visited = new TreeSet<>();
-		visited.add(self);
-		queue.add(self);
-		while (queue.size() > 0) {
-			BlockPos current = queue.poll();
-			for (Direction dire : o.sides) {
-				BlockPos next = current.relative(dire);
-				if (visited.contains(next)) continue;
-				visited.add(next);
-				BlockState state = level.getBlockState(next);
-				if (state.getBlock() == LTBlocks.B_CRAFT_CORE.get()) {
-					queue.add(next);
-					error.add(next);
-				}
-				if (state.getBlock() == LTBlocks.B_CRAFT_SIDE.get()) {
-					queue.add(next);
-					list.add(next);
-				}
-			}
-		}
-		return Pair.of(list, error);
-	}
-
 	public CraftGrid compost(Level level, BlockPos self, ArrayList<BlockPos> targets) {
 		Direction x_neg = ScanInfo.getXAxis(facing, y_neg);
 		CraftItemSlot[][] tooltip = new CraftItemSlot[h][w];
@@ -88,6 +59,9 @@ public record ScanInfo(int count, Direction facing, Direction y_neg, int dx, int
 			ItemStack stack = ItemStack.EMPTY;
 			if (level.getBlockEntity(pos) instanceof CraftSideBlockEntity be) {
 				stack = be.getHolder().getStackInSlot(0);
+			}
+			if (stack.is(LTItems.FILLER.get())) {
+				stack = ItemStack.EMPTY;
 			}
 			tooltip[y - dy][x - dx] = new CraftItemSlot(CraftSlotType.ITEM, stack);
 		}

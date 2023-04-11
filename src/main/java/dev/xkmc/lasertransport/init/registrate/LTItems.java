@@ -45,6 +45,7 @@ public class LTItems {
 	public static final ItemEntry<FluxFilter> FLUX;
 	public static final ItemEntry<UpgradeItem> VALVE_UP, WATCH_UP, DROP_UP, PLACE_UP,
 			SPEED_UP_0, SPEED_UP_1, SPEED_UP_2, SPEED_UP_INF, DIST_UP_0, THR_UP_0, THR_UP_1, THR_UP_2;
+	public static final ItemEntry<Item> FILLER;
 
 	static {
 		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().lang("Linker Wand").register();
@@ -68,6 +69,8 @@ public class LTItems {
 			THR_UP_1 = REGISTRATE.item("throughput_upgrade_1", p -> new UpgradeItem(p, new ThroughputUpgrade(16))).lang("Throughput Upgrade II").register();
 			THR_UP_2 = REGISTRATE.item("throughput_upgrade_2", p -> new UpgradeItem(p, new ThroughputUpgrade(64))).lang("Throughput Upgrade III").register();
 		}
+
+		FILLER = REGISTRATE.item("filler", Item::new).defaultModel().lang("Filler").register();
 	}
 
 
