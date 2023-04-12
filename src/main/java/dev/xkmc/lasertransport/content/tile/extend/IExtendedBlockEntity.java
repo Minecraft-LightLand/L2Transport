@@ -6,6 +6,7 @@ import dev.xkmc.lasertransport.content.tile.base.CoolDownType;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableConnector;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableNode;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
@@ -19,20 +20,28 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 	@Nullable
 	BlockPos getTarget();
 
+	@Nullable
+	Level getTargetLevel();
+
+	default boolean forceLoad() {
+		return true;
+	}
+
 	@Override
 	default List<BlockPos> getVisibleConnection() {
 		BlockPos target = getTarget();
-		return target == null ? List.of() : List.of(target);
+		Level targetLevel = getTargetLevel();
+		if (getThis().getLevel() == null ||
+				targetLevel != getThis().getLevel() ||
+				target == null ||
+				target.distSqr(getThis().getBlockPos()) > 256 // TODO config
+		) return List.of();
+		return List.of(target);
 	}
 
 	@Override
 	default IRenderableConnector getConnector() {
 		return this;
-	}
-
-	@Override
-	default boolean isTargetValid(BlockPos pos) {
-		return getThis().getLevel() != null && getThis().getLevel().getBlockEntity(pos) != null;
 	}
 
 	@Override
@@ -53,14 +62,17 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 	<C> LazyOptional<C> getCapabilityOneStep(ICapabilityHolder<C> cap);
 
 	static <C> LazyOptional<C> getCapabilityImpl(IExtendedBlockEntity self, ICapabilityHolder<C> cap) {
-		BlockPos pos = self.getTarget();
-		if (self.getThis().getLevel() != null && pos != null) {
-			BlockEntity be = self.getThis().getLevel().getBlockEntity(pos);
+		BlockPos targetPos = self.getTarget();
+		Level targetLevel = self.getTargetLevel();
+		Level selfLevel = self.getThis().getLevel();
+		boolean loaded = self.forceLoad() || targetLevel != null && targetPos != null && targetLevel.isLoaded(targetPos);
+		if (selfLevel != null && targetLevel != null && targetPos != null && loaded) {
+			BlockEntity be = targetLevel.getBlockEntity(targetPos);
 			if (be != null) {
 				if (be instanceof IExtendedBlockEntity target) {
-					Set<BlockPos> set = new TreeSet<>();
-					set.add(self.getThis().getBlockPos());
-					set.add(pos);
+					Set<MultiLevelTarget> set = new TreeSet<>();
+					set.add(MultiLevelTarget.of(selfLevel, self.getThis().getBlockPos()));
+					set.add(MultiLevelTarget.of(targetLevel, targetPos));
 					return recursiveCap(target, cap, set);
 				}
 				return self.getCapabilityOneStep(cap);
@@ -69,14 +81,18 @@ public interface IExtendedBlockEntity extends IRenderableNode, IRenderableConnec
 		return LazyOptional.empty();
 	}
 
-	static <C> LazyOptional<C> recursiveCap(IExtendedBlockEntity self, ICapabilityHolder<C> cap, Set<BlockPos> set) {
+	static <C> LazyOptional<C> recursiveCap(IExtendedBlockEntity self, ICapabilityHolder<C> cap, Set<MultiLevelTarget> set) {
 		if (self.getThis().getLevel() != null) {
-			BlockPos pos = self.getTarget();
-			if (pos == null || set.contains(pos)) return LazyOptional.empty();
-			BlockEntity be = self.getThis().getLevel().getBlockEntity(pos);
+			BlockPos targetPos = self.getTarget();
+			Level targetLevel = self.getTargetLevel();
+			boolean loaded = self.forceLoad() || targetLevel != null && targetPos != null && targetLevel.isLoaded(targetPos);
+			if (targetPos == null || targetLevel == null || !loaded ||
+					set.contains(MultiLevelTarget.of(targetLevel, targetPos)))
+				return LazyOptional.empty();
+			BlockEntity be = self.getThis().getLevel().getBlockEntity(targetPos);
 			if (be != null) {
 				if (be instanceof IExtendedBlockEntity target) {
-					set.add(pos);
+					set.add(MultiLevelTarget.of(targetLevel, targetPos));
 					return recursiveCap(target, cap, set);
 				}
 				return self.getCapabilityOneStep(cap);

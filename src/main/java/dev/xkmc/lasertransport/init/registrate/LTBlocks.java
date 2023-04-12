@@ -20,6 +20,7 @@ import dev.xkmc.lasertransport.content.craft.tile.ItemHolderBlockEntity;
 import dev.xkmc.lasertransport.content.tile.base.NodeBlockItem;
 import dev.xkmc.lasertransport.content.tile.base.PowerTriggerBlockMethod;
 import dev.xkmc.lasertransport.content.tile.block.*;
+import dev.xkmc.lasertransport.content.tile.extend.EnderExtendedBlockEntity;
 import dev.xkmc.lasertransport.content.tile.extend.ExtendedBlockEntity;
 import dev.xkmc.lasertransport.content.tile.fluid.*;
 import dev.xkmc.lasertransport.content.tile.flux.OrderedFluxNodeBlockEntity;
@@ -46,12 +47,13 @@ public class LTBlocks {
 
 	private static final BlockMethod TRIGGER = new PowerTriggerBlockMethod();
 
-	public static final BlockEntry<DelegateBlock> B_EXTENDED,
+	public static final BlockEntry<DelegateBlock> B_EXTENDED, B_ENDER,
 			B_ITEM_SIMPLE, B_ITEM_ORDERED, B_ITEM_SYNCED, B_ITEM_DISTRIBUTE, B_ITEM_RETRIEVE,
 			B_FLUID_SIMPLE, B_FLUID_ORDERED, B_FLUID_SYNCED, B_FLUID_DISTRIBUTE, B_FLUID_RETRIEVE,
 			B_FLUX_SIMPLE, B_FLUX_ORDERED, B_FLUX_RETRIEVE, B_ITEM_HOLDER, B_CRAFT_SIDE, B_CRAFT_CORE;
 
 	public static final BlockEntityEntry<ExtendedBlockEntity> TE_EXTENDED;
+	public static final BlockEntityEntry<EnderExtendedBlockEntity> TE_ENDER;
 
 	public static final BlockEntityEntry<SimpleItemNodeBlockEntity> TE_ITEM_SIMPLE;
 	public static final BlockEntityEntry<OrderedItemNodeBlockEntity> TE_ITEM_ORDERED;
@@ -96,7 +98,15 @@ public class LTBlocks {
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.EXTENDED)).build().register();
 
+			B_ENDER = LaserTransport.REGISTRATE.block("node_ender",
+							(p) -> DelegateBlock.newBaseBlock(NOLIT, ExtensionBlock.ENDER, ExtensionBlock.SIMPLE))
+					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ENDER_EXTEND)).build().register();
+
 			TE_EXTENDED = LaserTransport.REGISTRATE.blockEntity("node_extended", ExtendedBlockEntity::new)
+					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
+
+			TE_ENDER = LaserTransport.REGISTRATE.blockEntity("node_ender", EnderExtendedBlockEntity::new)
 					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
 		}
 

@@ -84,8 +84,8 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 		}
 		ItemStack linker = Proxy.getPlayer().getMainHandItem();
 		if (linker.getItem() instanceof ILinker item && item.storesPos()) {
-			BlockPos pos = LinkerItem.getPos(linker);
-			if (pos != null && pos.equals(entity.getBlockPos())) {
+			LinkerItem.LinkData pos = LinkerItem.getData(linker);
+			if (pos != null && pos.pos().equals(entity.getBlockPos())) {
 				br.setColorHSB(0, 0, 0.5f);
 				Vec3 p = Proxy.getPlayer().getEyePosition(partialTick);
 				BlockPos c = entity.getBlockPos();

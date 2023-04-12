@@ -1,6 +1,7 @@
 {
   "values": [
     "lasertransport:node_extended",
+    "lasertransport:node_ender",
     "lasertransport:node_item_simple",
     "lasertransport:node_item_ordered",
     "lasertransport:node_item_synced",

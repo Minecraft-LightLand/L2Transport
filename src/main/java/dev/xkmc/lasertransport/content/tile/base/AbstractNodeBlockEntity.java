@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -146,8 +147,8 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	}
 
 	@Override
-	public void link(BlockPos pos) {
-		if (pos.equals(getBlockPos()))
+	public void link(BlockPos pos, Level level) {
+		if (pos.equals(getBlockPos()) || level != this.level)
 			return;
 		getConnector().link(pos.immutable());
 		sync();

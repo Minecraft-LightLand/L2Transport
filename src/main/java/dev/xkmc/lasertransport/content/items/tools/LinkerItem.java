@@ -1,11 +1,13 @@
 package dev.xkmc.lasertransport.content.items.tools;
 
-import dev.xkmc.l2library.util.nbt.NBTObj;
+import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
+import dev.xkmc.lasertransport.content.tile.extend.MultiLevelTarget;
 import dev.xkmc.lasertransport.init.data.LangData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,12 +21,20 @@ import java.util.List;
 
 public class LinkerItem extends Item implements ILinker {
 
-	private static final String KEY_POS = "first_pos";
+	public record LinkData(ResourceLocation level, BlockPos pos, boolean crossDim) {
+
+		public static LinkData of(UseOnContext ctx, ILinkableNode node) {
+			ResourceLocation level = ctx.getLevel().dimension().location();
+			return new LinkData(level, ctx.getClickedPos(), node.crossDimension());
+		}
+	}
+
+	private static final String KEY = "first";
 
 	@Nullable
-	public static BlockPos getPos(ItemStack stack) {
-		if (stack.getTag() != null && stack.getTag().contains(KEY_POS, Tag.TAG_COMPOUND)) {
-			return new NBTObj(stack, KEY_POS).toBlockPos();
+	public static LinkData getData(ItemStack stack) {
+		if (stack.getTag() != null && stack.getTag().contains(KEY, Tag.TAG_COMPOUND)) {
+			return TagCodec.valueFromTag(stack.getOrCreateTagElement(KEY), LinkData.class);
 		}
 		return null;
 	}
@@ -37,27 +47,41 @@ public class LinkerItem extends Item implements ILinker {
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
 		BlockEntity old = null;
-		BlockPos storedPos = getPos(stack);
-		if (storedPos != null) {
-			old = ctx.getLevel().getBlockEntity(storedPos);
+		LinkData data = getData(stack);
+		if (data != null) {
+			if (ctx.getLevel().dimension().location().equals(data.level)) {
+				old = ctx.getLevel().getBlockEntity(data.pos);
+			} else if (data.crossDim()) {
+				if (ctx.getLevel().isClientSide()) {
+					return InteractionResult.SUCCESS;
+				} else {
+					Level other = new MultiLevelTarget(data.level(), data.pos()).getLevel(ctx.getLevel());
+					if (other != null) {
+						old = other.getBlockEntity(data.pos());
+					}
+				}
+			}
 		}
 		if (old instanceof ILinkableNode node) {
-			if (old.getBlockPos().distSqr(ctx.getClickedPos()) > node.getMaxDistanceSqr()) {
+			if (!node.crossDimension() && old.getBlockPos().distSqr(ctx.getClickedPos()) > node.getMaxDistanceSqr()) {
 				old = null;
 			}
 		}
 		if (old instanceof ILinkableNode node) {
 			if (node.isTargetValid(ctx.getClickedPos())) {
 				if (!ctx.getLevel().isClientSide()) {
-					node.link(ctx.getClickedPos());
-					stack.removeTagKey(KEY_POS);
+					node.link(ctx.getClickedPos(), ctx.getLevel());
+					stack.removeTagKey(KEY);
 				}
 				return InteractionResult.SUCCESS;
 			}
 		}
-		if (be instanceof ILinkableNode) {
+		if (be instanceof ILinkableNode node) {
 			if (!ctx.getLevel().isClientSide()) {
-				new NBTObj(stack, KEY_POS).fromBlockPos(ctx.getClickedPos());
+				var comp = TagCodec.valueToTag(LinkData.of(ctx, node));
+				if (comp != null) {
+					stack.getOrCreateTag().put(KEY, comp);
+				}
 			}
 			return InteractionResult.SUCCESS;
 		}
