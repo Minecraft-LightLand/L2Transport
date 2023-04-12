@@ -27,7 +27,7 @@ public class BlockGenerator {
 			files[i] = pvd.models().withExistingParent(ctx.getName() + "_type_" + i,
 							pvd.modLoc("block/craft_base" + (type.alt ? "_alt" : "")))
 					.texture("north", pvd.modLoc(texture + "/front_" + type.id))
-					.texture("south", pvd.modLoc(texture + "/bottom"))
+					.texture("south", pvd.modLoc(texture + "/back_" + type.id))
 					.texture("up", type.open(Direction.UP) ? empty : side)
 					.texture("down", type.open(Direction.DOWN) ? empty : side)
 					.texture("east", type.open(Direction.EAST) ? empty : side)

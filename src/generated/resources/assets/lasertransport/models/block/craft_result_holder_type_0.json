@@ -5,7 +5,7 @@
     "down": "lasertransport:block/node/craft/result/side",
     "east": "lasertransport:block/node/craft/result/side",
     "north": "lasertransport:block/node/craft/result/front_0",
-    "south": "lasertransport:block/node/craft/result/bottom",
+    "south": "lasertransport:block/node/craft/result/back_0",
     "up": "lasertransport:block/node/craft/result/side",
     "west": "lasertransport:block/node/craft/result/side"
   }
