@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:ender_eye"
+  },
+  "base": {
+    "item": "lasertransport:node_extended"
+  },
+  "result": {
+    "item": "lasertransport:node_ender"
+  }
+}

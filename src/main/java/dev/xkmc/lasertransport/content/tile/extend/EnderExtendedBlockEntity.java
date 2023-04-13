@@ -1,5 +1,6 @@
 package dev.xkmc.lasertransport.content.tile.extend;
 
+import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
@@ -8,6 +9,7 @@ import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;
 import dev.xkmc.lasertransport.content.tile.base.ConnectionRenderBlockEntity;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
+import dev.xkmc.lasertransport.init.data.LTModConfig;
 import dev.xkmc.lasertransport.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -23,11 +25,16 @@ import org.jetbrains.annotations.Nullable;
 
 @SerialClass
 public class EnderExtendedBlockEntity extends ConnectionRenderBlockEntity
-		implements IExtendedBlockEntity, ILinkableNode, IFakeCapabilityTile {
+		implements IExtendedBlockEntity, ILinkableNode, IFakeCapabilityTile, TickableBlockEntity {
 
 
 	@SerialClass.SerialField(toClient = true)
 	private MultiLevelTarget target = MultiLevelTarget.NULL;
+
+	@SerialClass.SerialField(toClient = true)
+	private boolean hasTarget = false;
+
+	private int refreshTimer = 0;
 
 	public EnderExtendedBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -110,12 +117,38 @@ public class EnderExtendedBlockEntity extends ConnectionRenderBlockEntity
 		ans.add(TooltipType.NAME, Component.translatable(getBlockState().getBlock().getDescriptionId()).withStyle(ChatFormatting.YELLOW));
 		ans.add(TooltipType.DESC, LangData.ENDER_EXTEND.get());
 		if (getTarget() != null) {
-			//ans.add(TooltipType.DESC, LangData.INVALID.get());
-			ans.add(TooltipType.FILTER, Component.literal(target.dim() + ", " + target.pos()));
+			if (!hasTarget) {
+				ans.add(TooltipType.FILTER, LangData.INFO_ENDER_INVALID.get());
+			}
+			BlockPos tp = target.pos();
+			ans.add(TooltipType.FILTER, LangData.INFO_ENDER_POS.get(tp.getX(), tp.getY(), tp.getZ()));
+			ans.add(TooltipType.FILTER, LangData.INFO_ENDER_LEVEL.get(target.dim().getPath()));
 		} else {
-			ans.add(TooltipType.FILTER, Component.literal("no target"));
+			ans.add(TooltipType.FILTER, LangData.INFO_ENDER_EMPTY.get());
 		}
 		return ans;
 	}
 
+
+	@Override
+	public boolean forceLoad() {
+		return true;//TODO to upgrade
+	}
+
+	@Override
+	public void tick() {
+		if (level == null || level.isClientSide()) return;
+		if (!forceLoad()) return;
+		refreshTimer++;
+		if (refreshTimer < LTModConfig.COMMON.enderPollInterval.get()) return;
+		refreshTimer = 0;
+		Level targetLevel = getTargetLevel();
+		BlockPos targetPos = getTarget();
+		if (targetLevel == null || targetPos == null) return;
+		boolean newTarget = targetLevel.getBlockEntity(targetPos) instanceof ExtendedBlockEntity;
+		if (newTarget != hasTarget) {
+			hasTarget = newTarget;
+			sync();
+		}
+	}
 }

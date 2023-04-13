@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_node_extended": {
+    "has_ender_eye": {
       "conditions": {
         "items": [
           {
             "items": [
-              "lasertransport:node_extended"
+              "minecraft:ender_eye"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lasertransport:item_holder_from_node_extended_stonecutting"
+        "recipe": "lasertransport:node_ender"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_node_extended",
+      "has_ender_eye",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lasertransport:item_holder_from_node_extended_stonecutting"
+      "lasertransport:node_ender"
     ]
   }
 }

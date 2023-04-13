@@ -48,7 +48,6 @@ public class SelectorRegistry {
 	);
 
 	public static final IItemSelector CRAFT = new ItemSelector(
-			LTBlocks.B_ITEM_HOLDER.asStack(),
 			LTBlocks.B_CRAFT_SIDE.asStack(),
 			LTBlocks.B_CRAFT_CORE.asStack()
 	);

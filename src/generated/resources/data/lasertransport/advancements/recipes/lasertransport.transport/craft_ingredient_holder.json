@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item_holder": {
+    "has_crafting_table": {
       "conditions": {
         "items": [
           {
             "items": [
-              "lasertransport:item_holder"
+              "minecraft:crafting_table"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "lasertransport:craft_result_holder_from_item_holder_stonecutting"
+        "recipe": "lasertransport:craft_ingredient_holder"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item_holder",
+      "has_crafting_table",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "lasertransport:craft_result_holder_from_item_holder_stonecutting"
+      "lasertransport:craft_ingredient_holder"
     ]
   }
 }

@@ -96,12 +96,14 @@ public class LTBlocks {
 			B_EXTENDED = LaserTransport.REGISTRATE.block("node_extended",
 							(p) -> DelegateBlock.newBaseBlock(NOLIT, ExtensionBlock.EXTENDED, ExtensionBlock.SIMPLE))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.EXTENDED)).build().register();
+					.defaultLoot().lang("Extension Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.EXTENDED)).build().register();
 
 			B_ENDER = LaserTransport.REGISTRATE.block("node_ender",
 							(p) -> DelegateBlock.newBaseBlock(NOLIT, ExtensionBlock.ENDER, ExtensionBlock.SIMPLE))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ENDER_EXTEND)).build().register();
+					.defaultLoot().lang("Ender Extension Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.ENDER_EXTEND)).build().register();
 
 			TE_EXTENDED = LaserTransport.REGISTRATE.blockEntity("node_extended", ExtendedBlockEntity::new)
 					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
@@ -114,27 +116,32 @@ public class LTBlocks {
 			B_ITEM_SIMPLE = LaserTransport.REGISTRATE.block("node_item_simple",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SIMPLE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
+					.defaultLoot().lang("Simple Item Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
 
 			B_ITEM_ORDERED = LaserTransport.REGISTRATE.block("node_item_ordered",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.ORDERED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
+					.defaultLoot().lang("Near-First Item Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
 
 			B_ITEM_SYNCED = LaserTransport.REGISTRATE.block("node_item_synced",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.SYNCED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SYNCED)).build().register();
+					.defaultLoot().lang("Synced Item Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.SYNCED)).build().register();
 
 			B_ITEM_DISTRIBUTE = LaserTransport.REGISTRATE.block("node_item_distribute",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, ItemTransferBlock.DISTRIBUTE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.DISTRIBUTE)).build().register();
+					.defaultLoot().lang("Iterative Item Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.DISTRIBUTE)).build().register();
 
 			B_ITEM_RETRIEVE = LaserTransport.REGISTRATE.block("node_item_retrieve",
 							(p) -> DelegateBlock.newBaseBlock(LIT, ItemNodeSetFilter.ITEM, BlockProxy.ALL_DIRECTION, ItemTransferBlock.RETRIEVE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
+					.defaultLoot().lang("Retrieving Item Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
 
 
 			TE_ITEM_SIMPLE = LaserTransport.REGISTRATE.blockEntity("node_item_simple", SimpleItemNodeBlockEntity::new)
@@ -152,27 +159,32 @@ public class LTBlocks {
 			B_FLUID_SIMPLE = LaserTransport.REGISTRATE.block("node_fluid_simple",
 							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SIMPLE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
+					.defaultLoot().lang("Simple Fluid Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
 
 			B_FLUID_ORDERED = LaserTransport.REGISTRATE.block("node_fluid_ordered",
 							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.ORDERED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
+					.defaultLoot().lang("Near-First Fluid Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
 
 			B_FLUID_SYNCED = LaserTransport.REGISTRATE.block("node_fluid_synced",
 							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.SYNCED, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SYNCED)).build().register();
+					.defaultLoot().lang("Synced Fluid Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.SYNCED)).build().register();
 
 			B_FLUID_DISTRIBUTE = LaserTransport.REGISTRATE.block("node_fluid_distribute",
 							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, FluidTransferBlock.DISTRIBUTE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.DISTRIBUTE)).build().register();
+					.defaultLoot().lang("Iterative Fluid Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.DISTRIBUTE)).build().register();
 
 			B_FLUID_RETRIEVE = LaserTransport.REGISTRATE.block("node_fluid_retrieve",
 							(p) -> DelegateBlock.newBaseBlock(LIT, FluidNodeSetFilter.FLUID, BlockProxy.ALL_DIRECTION, FluidTransferBlock.RETRIEVE, ExtensionBlock.FILTER, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
+					.defaultLoot().lang("Retrieving Fluid Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
 
 
 			TE_FLUID_SIMPLE = LaserTransport.REGISTRATE.blockEntity("node_fluid_simple", SimpleFluidNodeBlockEntity::new)
@@ -190,17 +202,20 @@ public class LTBlocks {
 			B_FLUX_SIMPLE = LaserTransport.REGISTRATE.block("node_flux_simple",
 							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.SIMPLE, ExtensionBlock.SIMPLE, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
+					.defaultLoot().lang("Simple Flux Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.SIMPLE)).build().register();
 
 			B_FLUX_ORDERED = LaserTransport.REGISTRATE.block("node_flux_ordered",
 							(p) -> DelegateBlock.newBaseBlock(NOLIT, FluxTransferBlock.ORDERED, ExtensionBlock.SIMPLE, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
+					.defaultLoot().lang("Near-First Flux Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.ORDERED)).build().register();
 
 			B_FLUX_RETRIEVE = LaserTransport.REGISTRATE.block("node_flux_retrieve",
 							(p) -> DelegateBlock.newBaseBlock(NOLIT, BlockProxy.ALL_DIRECTION, FluxTransferBlock.RETRIEVE, ExtensionBlock.SIMPLE, TRIGGER))
 					.blockstate(LTBlocks::genNodeModel).tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang().item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
+					.defaultLoot().lang("Retrieving Flux Node")
+					.item((b, p) -> new NodeBlockItem(b, p, LangData.RETRIEVE)).build().register();
 
 			TE_FLUX_SIMPLE = LaserTransport.REGISTRATE.blockEntity("node_flux_simple", SimpleFluxNodeBlockEntity::new)
 					.validBlock(B_FLUX_SIMPLE).renderer(() -> NodeRenderer::new).register();
@@ -220,7 +235,7 @@ public class LTBlocks {
 							.texture("all", new ResourceLocation(LaserTransport.MODID, "block/node/" + ctx.getName()))
 							.renderType("cutout")))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang()
+					.defaultLoot().lang("Item Holder")
 					.item((b, p) -> new NodeBlockItem(b, p, LangData.ITEM_HOLDER)).build()
 					.register();
 
@@ -234,7 +249,7 @@ public class LTBlocks {
 					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
 							.generate(ItemHolderNodeBlock.ORIENTATION_SIDE, true))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang()
+					.defaultLoot().lang("Crafting Matrix - Ingredient Holder")
 					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_SIDE)).build()
 					.register();
 
@@ -248,7 +263,7 @@ public class LTBlocks {
 					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
 							.generate(ItemHolderNodeBlock.ORIENTATION_CORE, false))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-					.defaultLoot().defaultLang()
+					.defaultLoot().lang("Crafting Matrix Core - Result Holder")
 					.item((b, p) -> new NodeBlockItem(b, p, LangData.CRAFT_CORE)).build()
 					.register();
 

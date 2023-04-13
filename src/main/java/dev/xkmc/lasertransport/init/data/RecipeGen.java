@@ -11,9 +11,11 @@ import dev.xkmc.lasertransport.init.registrate.LTItems;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.UpgradeRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -28,7 +30,6 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_ITEM_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_FLUID_SIMPLE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_FLUX_SIMPLE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_EXTENDED.get()), LTBlocks.B_ITEM_HOLDER);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_RETRIEVE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_ORDERED);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_SIMPLE.get()), LTBlocks.B_ITEM_DISTRIBUTE);
@@ -39,9 +40,12 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUID_SIMPLE.get()), LTBlocks.B_FLUID_SYNCED);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUX_SIMPLE.get()), LTBlocks.B_FLUX_RETRIEVE);
 		pvd.stonecutting(DataIngredient.items(LTBlocks.B_FLUX_SIMPLE.get()), LTBlocks.B_FLUX_ORDERED);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_HOLDER.get()), LTBlocks.B_CRAFT_SIDE);
-		pvd.stonecutting(DataIngredient.items(LTBlocks.B_ITEM_HOLDER.get()), LTBlocks.B_CRAFT_CORE);
 		pvd.stonecutting(DataIngredient.items(Items.PAPER), LTItems.FILLER);
+
+		smithing(pvd, LTBlocks.B_EXTENDED.get().asItem(), Items.ENDER_EYE, LTBlocks.B_ENDER.get().asItem());
+		smithing(pvd, LTBlocks.B_EXTENDED.get().asItem(), Items.CHEST, LTBlocks.B_ITEM_HOLDER.get().asItem());
+		smithing(pvd, LTBlocks.B_EXTENDED.get().asItem(), Items.CRAFTING_TABLE, LTBlocks.B_CRAFT_SIDE.get().asItem());
+		pvd.stonecutting(DataIngredient.items(LTBlocks.B_CRAFT_SIDE.get()), LTBlocks.B_CRAFT_CORE);
 
 		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.LINKER.get())::unlockedBy, Items.COPPER_INGOT)
 				.pattern(" AB").pattern(" BB").pattern("B  ")
@@ -145,6 +149,10 @@ public class RecipeGen {
 
 	private static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, InventoryChangeTrigger.TriggerInstance, T> func, Item item) {
 		return func.apply("has_" + pvd.safeName(item), DataIngredient.items(item).getCritereon(pvd));
+	}
+
+	public static void smithing(RegistrateRecipeProvider pvd, Item in, Item mat, Item out) {
+		unlock(pvd, UpgradeRecipeBuilder.smithing(Ingredient.of(in), Ingredient.of(mat), out)::unlocks, mat).save(pvd, getID(out));
 	}
 
 }

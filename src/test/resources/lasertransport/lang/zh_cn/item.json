@@ -1,6 +1,6 @@
 {
   "block.lasertransport": {
-	"node_extended": "远程扩展节点",
+	"node_extended": "扩展节点",
 	"node_fluid_distribute": "流体节点-顺序遍历",
 	"node_fluid_ordered": "流体节点-优先遍历",
 	"node_fluid_retrieve": "流体提取节点",
@@ -16,7 +16,8 @@
 	"node_item_synced": "物品节点-同步",
 	"craft_ingredient_holder": "合成输入接口",
 	"craft_result_holder": "合成输出接口",
-	"item_holder": "物品寄存器"
+	"item_holder": "物品寄存器",
+	"node_ender": "末影扩展节点"
   },
   "item.lasertransport": {
 	"linker": "连接手杖",

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:crafting_table"
+  },
+  "base": {
+    "item": "lasertransport:node_extended"
+  },
+  "result": {
+    "item": "lasertransport:craft_ingredient_holder"
+  }
+}

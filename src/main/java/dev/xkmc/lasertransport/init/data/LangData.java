@@ -16,6 +16,10 @@ public enum LangData {
 	INFO_SPEED("info.speed", "Transfer cool down: %s", 1, ChatFormatting.AQUA),
 	INFO_SYNC("info.sync", "Force transfer %s to all targets", 1, ChatFormatting.AQUA),
 	INFO_FLUX("info.flux", "Transmitting %s", 1, ChatFormatting.AQUA),
+	INFO_ENDER_EMPTY("info.ender.empty", "No target connected.", 0, ChatFormatting.RED),
+	INFO_ENDER_INVALID("info.ender.invalid", "Target invalid.", 0, ChatFormatting.RED),
+	INFO_ENDER_POS("info.ender.pos", "Target position: (%s, %s, %s)", 3, ChatFormatting.AQUA),
+	INFO_ENDER_LEVEL("info.ender.level", "Target dimension: %s", 1, ChatFormatting.AQUA),
 
 	SIMPLE("connect.simple", "Connects to only one target. When adding filter, only allow content matching filter to pass, and gate content amount to the filter amount.", 0, ChatFormatting.GRAY),
 	DISTRIBUTE("connect.distribute", "Connects to multiple targets. When receiving content, iterate through all targets until finding one valid target. Only send to 1 target, and start from the next one next time.", 0, ChatFormatting.GRAY),

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "minecraft:chest"
+  },
+  "base": {
+    "item": "lasertransport:node_extended"
+  },
+  "result": {
+    "item": "lasertransport:item_holder"
+  }
+}

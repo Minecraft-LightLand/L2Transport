@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "lasertransport:item_holder"
-  },
-  "result": "lasertransport:craft_ingredient_holder"
-}

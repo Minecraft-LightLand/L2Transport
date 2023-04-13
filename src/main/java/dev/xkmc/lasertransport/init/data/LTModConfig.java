@@ -38,6 +38,7 @@ public class LTModConfig {
 		public final ForgeConfigSpec.IntValue defaultCoolDown;
 		public final ForgeConfigSpec.IntValue defaultNodeDistance;
 		public final ForgeConfigSpec.IntValue defaultFluidPacket;
+		public final ForgeConfigSpec.IntValue enderPollInterval;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			defaultCoolDown = builder.comment("Default node cool down in ticks")
@@ -46,6 +47,8 @@ public class LTModConfig {
 					.defineInRange("defaultNodeDistance", 16, 1, 64);
 			defaultFluidPacket = builder.comment("Default fluid transfer amount")
 					.defineInRange("defaultFluidPacket", 1000, 1, 80000);
+			enderPollInterval = builder.comment("Ender extension node polling interval")
+					.defineInRange("enderPollInterval", 10, 1, 80);
 		}
 
 	}
