@@ -147,11 +147,12 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	}
 
 	@Override
-	public void link(BlockPos pos, Level level) {
+	public LangData link(BlockPos pos, Level level) {
 		if (pos.equals(getBlockPos()) || level != this.level)
-			return;
+			return LangData.MSG_LINKER_CANCEL;
 		getConnector().link(pos.immutable());
 		sync();
+		return LangData.MSG_LINKER_SUCCEED;
 	}
 
 	@Override
@@ -193,6 +194,9 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	@Override
 	public boolean isTargetValid(BlockPos pos) {
 		if (getUpgrade(UpgradeFlag.LEVEL) != null) {
+			return true;
+		}
+		if (level != null && (level.getBlockEntity(pos) instanceof ILinkableNode node && node.crossDimension())) {
 			return true;
 		}
 		return getValidTarget().getHolder(this, pos).resolve().isPresent();

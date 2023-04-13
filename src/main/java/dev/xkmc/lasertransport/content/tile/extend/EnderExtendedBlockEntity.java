@@ -58,7 +58,7 @@ public class EnderExtendedBlockEntity extends ConnectionRenderBlockEntity
 	@Nullable
 	@Override
 	public BlockPos getTarget() {
-		return target == MultiLevelTarget.NULL ? null : target.pos();
+		return target.equals(MultiLevelTarget.NULL) ? null : target.pos();
 	}
 
 	@Override
@@ -69,12 +69,13 @@ public class EnderExtendedBlockEntity extends ConnectionRenderBlockEntity
 	}
 
 	@Override
-	public void link(BlockPos clickedPos, Level level) {
+	public LangData link(BlockPos clickedPos, Level level) {
 		if (!(level.getBlockEntity(clickedPos) instanceof ExtendedBlockEntity)) {
-			return;
+			return LangData.MSG_LINKER_CANCEL;
 		}
 		target = MultiLevelTarget.of(level, clickedPos);
 		sync();
+		return LangData.MSG_LINKER_SUCCEED;
 	}
 
 	@Override

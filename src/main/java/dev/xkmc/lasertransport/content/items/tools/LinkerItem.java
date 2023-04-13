@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +27,12 @@ public class LinkerItem extends Item implements ILinker {
 		public static LinkData of(UseOnContext ctx, ILinkableNode node) {
 			ResourceLocation level = ctx.getLevel().dimension().location();
 			return new LinkData(level, ctx.getClickedPos(), node.crossDimension());
+		}
+	}
+
+	public static void sendMessage(UseOnContext ctx, LangData data) {
+		if (ctx.getPlayer() instanceof ServerPlayer player) {
+			player.sendSystemMessage(data.get(), true);
 		}
 	}
 
@@ -70,8 +77,9 @@ public class LinkerItem extends Item implements ILinker {
 		if (old instanceof ILinkableNode node) {
 			if (node.isTargetValid(ctx.getClickedPos())) {
 				if (!ctx.getLevel().isClientSide()) {
-					node.link(ctx.getClickedPos(), ctx.getLevel());
+					LangData result = node.link(ctx.getClickedPos(), ctx.getLevel());
 					stack.removeTagKey(KEY);
+					sendMessage(ctx, result);
 				}
 				return InteractionResult.SUCCESS;
 			}
@@ -81,6 +89,7 @@ public class LinkerItem extends Item implements ILinker {
 				var comp = TagCodec.valueToTag(LinkData.of(ctx, node));
 				if (comp != null) {
 					stack.getOrCreateTag().put(KEY, comp);
+					sendMessage(ctx, LangData.MSG_LINKER_FIRST);
 				}
 			}
 			return InteractionResult.SUCCESS;
@@ -91,6 +100,16 @@ public class LinkerItem extends Item implements ILinker {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.WAND_LINK.get());
+		LinkData data = getData(stack);
+		if (data != null) {
+			list.add(LangData.INFO_ENDER_LEVEL.get(data.level().getPath()));
+			list.add(LangData.INFO_ENDER_POS.get(data.pos().getX(), data.pos().getY(), data.pos().getZ()));
+		}
+	}
+
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return getData(stack) != null;
 	}
 
 	@Override

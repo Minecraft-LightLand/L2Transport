@@ -109,7 +109,7 @@ public class LTBlocks {
 					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
 
 			TE_ENDER = LaserTransport.REGISTRATE.blockEntity("node_ender", EnderExtendedBlockEntity::new)
-					.validBlock(B_EXTENDED).renderer(() -> NodeRenderer::new).register();
+					.validBlock(B_ENDER).renderer(() -> NodeRenderer::new).register();
 		}
 
 		{

@@ -21,6 +21,11 @@ public enum LangData {
 	INFO_ENDER_POS("info.ender.pos", "Target position: (%s, %s, %s)", 3, ChatFormatting.AQUA),
 	INFO_ENDER_LEVEL("info.ender.level", "Target dimension: %s", 1, ChatFormatting.AQUA),
 
+	MSG_LINKER_FIRST("msg.linker.first","First Point Set",0,null),
+	MSG_LINKER_CANCEL("msg.linker.cancel","Action Cancelled",0,null),
+	MSG_LINKER_SUCCEED("msg.linker.succeed","Connection Set",0,null),
+	MSG_LINKER_REMOVE("msg.linker.remove","Connection Removed",0,null),
+
 	SIMPLE("connect.simple", "Connects to only one target. When adding filter, only allow content matching filter to pass, and gate content amount to the filter amount.", 0, ChatFormatting.GRAY),
 	DISTRIBUTE("connect.distribute", "Connects to multiple targets. When receiving content, iterate through all targets until finding one valid target. Only send to 1 target, and start from the next one next time.", 0, ChatFormatting.GRAY),
 	SYNCED("connect.synced", "Connects to multiple targets. When receiving content, attempt to send the same amount to all target, and otherwise send no content. Send 1 by default, and when applying filter, send the same amount as the filter amount.", 0, ChatFormatting.GRAY),

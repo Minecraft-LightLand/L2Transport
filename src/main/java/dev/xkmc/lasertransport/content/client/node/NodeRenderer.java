@@ -6,6 +6,7 @@ import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lasertransport.content.items.tools.ILinker;
 import dev.xkmc.lasertransport.content.items.tools.LinkerItem;
 import dev.xkmc.lasertransport.content.tile.base.CoolDownType;
+import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableConnector;
 import dev.xkmc.lasertransport.content.tile.base.IRenderableNode;
 import dev.xkmc.lasertransport.init.data.LTModConfig;
@@ -63,7 +64,7 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 			float percentage = Mth.clamp(coolDown / max, 0, 1);
 			CoolDownType type = connector.getType(target);
 			if (!entity.isTargetValid(target)) {
-				type = type.invalidate();
+					type = type.invalidate();
 			}
 			type.setColor(percentage, br::setColorHSB);
 

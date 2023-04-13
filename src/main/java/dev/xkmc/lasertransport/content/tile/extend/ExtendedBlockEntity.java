@@ -73,16 +73,19 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 	}
 
 	@Override
-	public void link(BlockPos pos, Level level) {
+	public LangData link(BlockPos pos, Level level) {
 		if (level != this.level) {
-			return;
+			return LangData.MSG_LINKER_CANCEL;
 		}
 		if (pos.equals(getTarget()) || pos.equals(getBlockPos())) {
 			target = new Holder(null);
+			sync();
+			return LangData.MSG_LINKER_REMOVE;
 		} else {
 			target = new Holder(pos.immutable());
+			sync();
+			return LangData.MSG_LINKER_SUCCEED;
 		}
-		sync();
 	}
 
 	@Override
