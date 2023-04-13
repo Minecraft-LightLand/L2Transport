@@ -11,6 +11,10 @@
 	"fluid_config": "流体过滤",
 	"item_config": "物品过滤"
   },
+  "patchouli.lasertransport": {
+	"title": "激光物流教程",
+	"landing": "欢迎来到激光物流。本模组提供了高效、低卡顿、无管道的运输物品、流体、能量、以及各式其他模组资源的方式。"
+  },
   "lasertransport": {
 	"flux": {
 	  "forge.energy": "能量 (FE)",
@@ -47,7 +51,7 @@
 	  "ender": {
 		"empty": "未设置目标",
 		"invalid": "目标不存在",
-		"level": "目标为度: %s",
+		"level": "目标维度: %s",
 		"pos": "目标位置: (%s, %s, %s)"
 	  }
 	},
@@ -75,6 +79,14 @@
 	  "rotate": "右键方块旋转方块。蹲下右键逆向旋转方块。",
 	  "validate": "右键节点清除所有不成立的连接。",
 	  "flux": "选择通量类型，然后右键通量节点设置节点的通量类型。与之连接的通量节点的通量类型会被全部一起设置。"
+	},
+	"msg": {
+	  "linker": {
+		"cancel": "操作取消",
+		"first": "起点确定",
+		"remove": "链接移除",
+		"succeed": "链接建立"
+	  }
 	}
   }
 }

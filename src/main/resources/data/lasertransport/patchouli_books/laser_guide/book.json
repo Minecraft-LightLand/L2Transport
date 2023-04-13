@@ -1,0 +1,7 @@
+{
+  "name": "patchouli.lasertransport.title",
+  "landing_text": "patchouli.lasertransport.landing",
+  "version": 1,
+  "model": "lasertransport:book",
+  "creative_tab": "lasertransport.transport"
+}

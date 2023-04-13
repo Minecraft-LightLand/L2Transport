@@ -1,12 +1,12 @@
 package dev.xkmc.lasertransport.init.data;
 
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
+import dev.xkmc.lasertransport.compat.PatchouliLang;
 import dev.xkmc.lasertransport.init.LaserTransport;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.BiConsumer;
 
 public enum LangData {
 	INFO_WHITELIST("info.whitelist", "Whitelist: %s", 1, ChatFormatting.AQUA),
@@ -96,17 +96,18 @@ public enum LangData {
 	}
 
 
-	public static void addTranslations(BiConsumer<String, String> pvd) {
+	public static void addTranslations(RegistrateLangProvider pvd) {
 		for (LangData lang : values()) {
-			pvd.accept(lang.id, lang.def);
+			pvd.add(lang.id, lang.def);
 		}
-		pvd.accept("itemGroup.lasertransport.transport", "Laser Transport");
-		pvd.accept("key.categories.lasertransport", "Laser Transport Keys");
-		pvd.accept(Keys.UP.id, "Select Up");
-		pvd.accept(Keys.DOWN.id, "Select Down");
-		pvd.accept(Keys.LEFT.id, "Select Left");
-		pvd.accept(Keys.RIGHT.id, "Select Right");
+		pvd.add("itemGroup.lasertransport.transport", "Laser Transport");
+		pvd.add("key.categories.lasertransport", "Laser Transport Keys");
+		pvd.add(Keys.UP.id, "Select Up");
+		pvd.add(Keys.DOWN.id, "Select Down");
+		pvd.add(Keys.LEFT.id, "Select Left");
+		pvd.add(Keys.RIGHT.id, "Select Right");
 
+		PatchouliLang.genLang(pvd);
 	}
 
 }

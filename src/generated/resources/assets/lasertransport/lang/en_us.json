@@ -73,6 +73,10 @@
   "lasertransport.info.speed": "Transfer cool down: %s",
   "lasertransport.info.sync": "Force transfer %s to all targets",
   "lasertransport.info.whitelist": "Whitelist: %s",
+  "lasertransport.msg.linker.cancel": "Action Cancelled",
+  "lasertransport.msg.linker.first": "First Point Set",
+  "lasertransport.msg.linker.remove": "Connection Removed",
+  "lasertransport.msg.linker.succeed": "Connection Set",
   "lasertransport.screen.blacklist": "Using blacklist. Click to switch to whitelist.",
   "lasertransport.screen.lock": "Locked. Click to unlock.",
   "lasertransport.screen.match_item": "Match item only. Click to match NBT.",
@@ -91,5 +95,7 @@
   "lasertransport.wand.flux": "Select the flux type, and right click a node to set the flux type. When multiple nodes are connected, all connected nodes will be set to the same flux type altogether.",
   "lasertransport.wand.link": "Right click a node to start linking. Right click another block to link. Right click the node itself to halt. Right click an already linked node to unlink.",
   "lasertransport.wand.rotate": "Right click a block to rotate. Shift right click to rotate in the other direction.",
-  "lasertransport.wand.validate": "Right click a node to remove all invalid links."
+  "lasertransport.wand.validate": "Right click a node to remove all invalid links.",
+  "patchouli.lasertransport.landing": "Welcome to Laser Transport, an efficient, low lag, pipe-less transportation mod that supports items, fluids, energy, and various mod resources in well known mods.",
+  "patchouli.lasertransport.title": "Laser Transport Guide"
 }

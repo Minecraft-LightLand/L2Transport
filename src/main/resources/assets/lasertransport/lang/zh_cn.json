@@ -44,6 +44,8 @@
   "key.lasertransport.right": "选择-右",
   "container.lasertransport.fluid_config": "流体过滤",
   "container.lasertransport.item_config": "物品过滤",
+  "patchouli.lasertransport.title": "激光物流教程",
+  "patchouli.lasertransport.landing": "欢迎来到激光物流。本模组提供了高效、低卡顿、无管道的运输物品、流体、能量、以及各式其他模组资源的方式。",
   "lasertransport.flux.forge.energy": "能量 (FE)",
   "lasertransport.flux.mekanism.gas": "气体 (通用机械)",
   "lasertransport.flux.ars_nouveau.source": "魔源 (新生魔艺)",
@@ -71,7 +73,7 @@
   "lasertransport.info.flux": "传输类型：%s",
   "lasertransport.info.ender.empty": "未设置目标",
   "lasertransport.info.ender.invalid": "目标不存在",
-  "lasertransport.info.ender.level": "目标为度: %s",
+  "lasertransport.info.ender.level": "目标维度: %s",
   "lasertransport.info.ender.pos": "目标位置: (%s, %s, %s)",
   "lasertransport.upgrade.distance": "连接距离: x%s",
   "lasertransport.upgrade.level": "允许把物品实体丢到地上",
@@ -91,5 +93,9 @@
   "lasertransport.wand.link": "右键节点开始连接。右键另一个方块设置连接。右键节点本身取消。右键已存在的目标删除连接。",
   "lasertransport.wand.rotate": "右键方块旋转方块。蹲下右键逆向旋转方块。",
   "lasertransport.wand.validate": "右键节点清除所有不成立的连接。",
-  "lasertransport.wand.flux": "选择通量类型，然后右键通量节点设置节点的通量类型。与之连接的通量节点的通量类型会被全部一起设置。"
+  "lasertransport.wand.flux": "选择通量类型，然后右键通量节点设置节点的通量类型。与之连接的通量节点的通量类型会被全部一起设置。",
+  "lasertransport.msg.linker.cancel": "操作取消",
+  "lasertransport.msg.linker.first": "起点确定",
+  "lasertransport.msg.linker.remove": "链接移除",
+  "lasertransport.msg.linker.succeed": "链接建立"
 }

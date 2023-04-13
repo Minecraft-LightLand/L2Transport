@@ -49,6 +49,7 @@ public class LaserTransport {
 		LTItems.register();
 		LTMenus.register();
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		CompatHandler.register();
 	}
 
@@ -78,7 +79,6 @@ public class LaserTransport {
 	}
 
 	public static void gatherData(GatherDataEvent event) {
-		LangData.addTranslations(REGISTRATE::addRawLang);
 	}
 
 }
