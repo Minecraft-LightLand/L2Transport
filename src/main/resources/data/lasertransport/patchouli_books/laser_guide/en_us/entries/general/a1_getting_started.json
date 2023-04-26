@@ -1,0 +1,16 @@
+{
+  "name": "First Step - Extract Items",
+  "icon": "lasertransport:node_item_retrieve",
+  "category": "lasertransport:general",
+  "sortnum": 1,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "To get a quick start, place 2 chests, place an Item Retrieving Node next to a chest, and use Link Wand to link the node to another chest. To do this, right click the node first, and then right click the destination chest.$(br2)By default the node performs a transaction every 4 seconds, and each transaction transfers a stack. The beam will turn green when transaction succeed, or red when failed. The color will fade to grey as it cools down."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": ""
+	}
+  ]
+}

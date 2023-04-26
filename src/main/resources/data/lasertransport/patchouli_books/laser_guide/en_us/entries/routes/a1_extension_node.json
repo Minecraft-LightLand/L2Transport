@@ -1,0 +1,17 @@
+{
+  "name": "Extension Node",
+  "icon": "lasertransport:node_extended",
+  "category": "lasertransport:routes",
+  "sortnum": 1,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This node exposes a face of a block for automation interactions. All other blocks trying to interact with this node will interact with the face of the target it points to instead.$(br2)This is useful for simple automation on far away blocks without cool down, allowing more flexible build."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_extended",
+	  "text": "Be sure to expose the correct fact for interaction. It only exposes one face, and interactions from all faces on this block will be treated as interaction on the face of the target block this node points to."
+	}
+  ]
+}

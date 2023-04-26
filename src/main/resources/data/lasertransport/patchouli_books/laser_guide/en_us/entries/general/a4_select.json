@@ -1,0 +1,16 @@
+{
+  "name": "Switch between wands or nodes",
+  "icon": "lasertransport:rotate",
+  "category": "lasertransport:general",
+  "sortnum": 4,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "When holding wands or nodes, you can see a list of item popping up on the left of the screen. Then you can press up and down arrow to switch between the items. This feature allows you to bring fewer items in your inventory and make building network more convenient."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "The available selection lists are:$(li)5 kinds of wands.$(li)7 kinds of basic upgrades.$(li)5 item nodes.$(li)5 fluid nodes$(li)3 flux nodes.$(li)All kinds of flux wand configuration$(li)Crafting matrix ingredient/result holder"
+	}
+  ]
+}

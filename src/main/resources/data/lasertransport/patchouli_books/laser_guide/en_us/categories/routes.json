@@ -1,0 +1,5 @@
+{
+  "name": "Node Types",
+  "description": "Articles here explains types of node and how they work. There are 2 categories:$(li)Extension nodes. They allows interacting with a block remotely.$(li)Content Transfer Node: They move things from one block to another.",
+  "icon": "lasertransport:node_item_ordered"
+}

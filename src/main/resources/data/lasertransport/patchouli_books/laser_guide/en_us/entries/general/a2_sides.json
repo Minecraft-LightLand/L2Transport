@@ -1,0 +1,16 @@
+{
+  "name": "Sides Matter",
+  "icon": "lasertransport:node_extended",
+  "category": "lasertransport:general",
+  "sortnum": 2,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Now we can try to interface with a furnace. Note that we insert ingredients on top, fuels from the side, and extract results from the bottom. Lasers will interact with the block through the face the laser shoots into. (pretending it's a full block). Similarly, for other blocks that dedicate each side to a specific purpose or slot, you would need to have laser pointing from that direction."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "If you want to insert ingredients while your source is on the side, you can add an intermediate node above the furnace, let it points to the furnace, and have your retrieving node pointing to that node.$(br2)There are 2 choices: Extension Node or Simple Item Node. Simple Item Node is an intermediate node that pass the item forward having its own cool down. Extension Node is a shadow reference of the target block's target face, allowing any interaction without cool down."
+	}
+  ]
+}

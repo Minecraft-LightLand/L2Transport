@@ -1,0 +1,17 @@
+{
+  "name": "Near-First Node",
+  "icon": "lasertransport:node_item_ordered",
+  "category": "lasertransport:routes",
+  "sortnum": 6,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This kind of node try to send items to one node first, and if the node cannot receive item anymore, it switch to the next node. The priority is sorted based on the distance to the target: The nearest target will have higher priority.$(br2)Filter amount on this node specifies the upper limit of transaction. $(br2)Note that having targets with the same distance cause undefined sorting behavior. Please avoid this scenario."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_item_ordered",
+	  "text": "If you want to prioritize a target that is far away, you can use an intermediate node close to this node, such as an $(l:routes/a1_extension_node)extension node(/l) or $(l:routes/a4_simple_node)simple node(/l).$(br2)If you want 2 targets to have the same priority, use an $(l:routes/a8_distribute)iterative node(/l) or a $(l:routes/a7_synced)synced node(/l) as the intermediate node."
+	}
+  ]
+}

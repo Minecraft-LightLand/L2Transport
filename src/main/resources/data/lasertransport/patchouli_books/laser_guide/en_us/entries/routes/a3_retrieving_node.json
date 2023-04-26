@@ -1,0 +1,17 @@
+{
+  "name": "Retrieving Node",
+  "icon": "lasertransport:node_item_retrieve",
+  "category": "lasertransport:routes",
+  "sortnum": 3,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This node is attached to a side of an adjacent block to extract items, and send extracted items to a target this node points to. If you want to extract from a far away node, use an $(l:routes/a1_extension_node)extension node(/l) as intermediate node.$(br2)The $(l:concepts/a1_filter)filter(/l) decides what to extract, and the filter amount specifies the exact amount to extract. Set the amount to 0 (or *) to extract any amount."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_item_retrieve",
+	  "text": "This node (and all nodes) does not store any item. If an item is failed to inserted to the target block, it will not be retrieved from the source.$(br2)It tries one slot at a time. Thus, if you set the filter amount to 2 while having only 1 item per slot, it will fail to extract even if you have enough items. Use mods like Drawer if you want to extract more than 64 items at a time."
+	}
+  ]
+}

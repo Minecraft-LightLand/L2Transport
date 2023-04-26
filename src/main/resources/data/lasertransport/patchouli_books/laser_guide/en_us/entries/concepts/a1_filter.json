@@ -1,0 +1,16 @@
+{
+  "name": "Filter",
+  "icon": "lasertransport:node_item_retrieve",
+  "category": "lasertransport:concepts",
+  "sortnum": 1,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Filter can be set directly by right clicking with item, or through filter UI.$(br2)To set filter, right click node with the item (or fluid bucket for fluids). To set filter amount, right click node with the same item to copy amount, or use configuration wand to fine tune the amount. Right click node with configuration wand to open filter UI."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "In filter UI, right click filter slot with item (or fluid bucket), or drag from JEI into filter slot to set filter.$(br2)You can switch between whitelist and blacklist, or specify if you want to care about item/fluid NBT or not.$(br2)You can also lock the filter to prevent accidental modification outside of the filter UI."
+	}
+  ]
+}

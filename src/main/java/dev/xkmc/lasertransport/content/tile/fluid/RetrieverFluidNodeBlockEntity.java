@@ -2,6 +2,7 @@ package dev.xkmc.lasertransport.content.tile.fluid;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lasertransport.content.capability.fluid.CauldronFluidHandler;
+import dev.xkmc.lasertransport.content.capability.fluid.LevelFluidHandler;
 import dev.xkmc.lasertransport.content.configurables.ConfigConnectorType;
 import dev.xkmc.lasertransport.content.configurables.FluidConfigurable;
 import dev.xkmc.lasertransport.content.connector.ExtractConnector;
@@ -58,6 +59,9 @@ public class RetrieverFluidNodeBlockEntity extends AbstractFluidNodeBlockEntity<
 				BlockState state = level.getBlockState(next);
 				if (state.is(BlockTags.CAULDRONS)) {
 					connector.performExtract(tryRetrieve(new CauldronFluidHandler(level, next, state)));
+					markDirty();
+				} else if (!LevelFluidHandler.getFluid(level, next, state).isEmpty()) {
+					connector.performExtract(tryRetrieve(new LevelFluidHandler(level, next, state)));
 					markDirty();
 				}
 			}
