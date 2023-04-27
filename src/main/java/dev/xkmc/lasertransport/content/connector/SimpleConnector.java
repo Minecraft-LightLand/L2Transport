@@ -34,11 +34,13 @@ public class SimpleConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public void link(BlockPos pos) {
+	public boolean link(BlockPos pos) {
 		if (this.pos.t() != null && this.pos.t().equals(pos)) {
 			this.pos = new Holder(null);
+			return false;
 		} else {
 			this.pos = new Holder(pos);
+			return true;
 		}
 	}
 

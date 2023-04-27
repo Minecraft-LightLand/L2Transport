@@ -13,7 +13,7 @@ public interface IConnector extends NetworkType, IRenderableConnector {
 
 	void perform();
 
-	void link(BlockPos pos);
+	boolean link(BlockPos pos);
 
 	void removeIf(Predicate<BlockPos> o);
 

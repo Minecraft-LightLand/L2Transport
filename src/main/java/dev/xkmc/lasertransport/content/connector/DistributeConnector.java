@@ -46,10 +46,16 @@ public class DistributeConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public void link(BlockPos pos) {
-		if (list.contains(pos)) list.remove(pos);
-		else list.add(pos);
+	public boolean link(BlockPos pos) {
 		id = 0;
+		if (list.contains(pos)) {
+			list.remove(pos);
+			return false;
+		}
+		else {
+			list.add(pos);
+			return true;
+		}
 	}
 
 	@Override

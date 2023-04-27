@@ -3,6 +3,7 @@ package dev.xkmc.lasertransport.content.tile.fluid;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.lasertransport.content.capability.fluid.IFluidNodeBlockEntity;
+import dev.xkmc.lasertransport.content.capability.fluid.LevelFluidHandler;
 import dev.xkmc.lasertransport.content.capability.fluid.NodalFluidHandler;
 import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
@@ -38,7 +39,10 @@ public abstract class AbstractFluidNodeBlockEntity<BE extends AbstractFluidNodeB
 	@Override
 	public boolean isTargetValid(BlockPos pos) {
 		assert level != null;
-		return super.isTargetValid(pos) || level.getBlockState(pos).is(BlockTags.CAULDRONS);
+		if (super.isTargetValid(pos)) return true;
+		BlockState state = level.getBlockState(pos);
+		if (state.is(BlockTags.CAULDRONS)) return true;
+		return !LevelFluidHandler.getFluid(level, pos, state).isEmpty();
 	}
 
 	@Override

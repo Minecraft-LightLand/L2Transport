@@ -6,12 +6,32 @@
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "Upgrade can boost or add node functionality:$(li)Valve Upgrade: Allow redstone to disable node.$(li)Watch Upgrade: when transaction succeed, emit redstone pulse.$(li)Drop Upgrade: Allow dropping items in world.$(li)Place Upgrade: Allow placing block/fluid in world.$(li)Speed Upgrade: Reduce node cooldown.$(li)Throughput Upgrade: Increase maximum amount per transaction.$(li)Distance Upgrade: Increase connection distance."
+	  "text": "Wands are for configuring and tweaking nodes. There are 5 kinds of wands:$(li)Linker Wand$(li)Rotate Wand$(li)Validate Wand$(li)Clear Wand$(li)Configuration Wand$(br)You can switch between wands through $(l:concepts/a4_select)quick selection$(/l)."
 	},
 	{
 	  "type": "patchouli:spotlight",
-	  "item": "lasertransport:valve_upgrade",
-	  "text": "To apply upgrade, right click node with upgrade. To remove upgrade, use clear wand to shift click the block or break the block.$(br2)Upgrade of the same type cannot be applied together.$(li)Valve and watch are both redston type.$(li)Drop and place are both output type.$(br)One node can have one speed, one throughput, and one distance upgrade."
+	  "item": "lasertransport:linker",
+	  "text": "Linker Wand is capable of set and remove connections. Right click one node, and it will link to your wand. Then right click a block for the node to connect to that target. There will be a system message notifying you the status of action.$(br2)Connect a node back to itself will cancel the action, and connect node to a target twice will remove the connection."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:validator",
+	  "text": "When you remove a target block, the link will not remove itself automatically, in case you want to place another block in the same place.$(br2)To clear all invalid connections, you can use the Validate Wand to right click the node, and all invalid connections will be removed."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:clear",
+	  "text": "Clear Wand has multiple functions.$(li)Right click a node will remove all its connections.$(li)Shift right click a node with upgrades will retrieve all upgrades from the node.$(li)Shift right click a node with no upgrade will retrieve the node back into your inventory."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:rotate",
+	  "text": "Rotate Wand can help you to rotate blocks that has orientation. Right click to rotate, and shift right click to rotate back. Almost all blocks, vanilla or modded, can be rotated this way.$(br2)Please don't rotate things such as a large chest. Weird thing may happen."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:configurator",
+	  "text": "$(li)Press direction keys or scroll to alter filter amount.$(li)Right click node to open advanced filter UI.$(li)Press Shift or Alt to disable, so that you can use the item $(l:concepts/a4_select)selector$(/l) overlay."
 	}
   ]
 }

@@ -57,6 +57,7 @@ public class RecipeGen {
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.CLEAR);
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.ROTATE);
 		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.CONFIG);
+		pvd.stonecutting(DataIngredient.items(LTItems.LINKER.get()), LTItems.FLUX);
 
 		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.VALVE_UP.get(), 4)::unlockedBy, Items.QUARTZ)
 				.pattern(" A ").pattern("ABA").pattern(" A ")

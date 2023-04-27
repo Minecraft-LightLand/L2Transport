@@ -10,7 +10,7 @@
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Fluid nodes support $(l:concepts/a1_filter)filter$(/l) through right click with bucket, fine tune amount through configuration wand, and open complex filter UI for full control.$(br2)In filter UI, right click filter slot with fluid bucket, or drag fluids from JEI into filter slot to set filters.$(br2)You can specify if you want to care about fluid NBT or not."
+	  "text": "Fluid nodes support $(l:concepts/a1_filter)filter$(/l) through right click with bucket, fine tune amount through $(l:concepts/a3_wands)configuration wand$(/l), and open complex filter UI for full control.$(br2)In filter UI, right click filter slot with fluid bucket, or drag fluids from JEI into filter slot to set filters.$(br2)You can specify if you want to care about fluid NBT or not."
 	}
   ]
 }

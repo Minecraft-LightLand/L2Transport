@@ -29,9 +29,15 @@ public class OrderedConnector extends SingleCoolDownConnector {
 	}
 
 	@Override
-	public void link(BlockPos pos) {
-		if (set.contains(pos)) set.remove(pos);
-		else set.add(pos);
+	public boolean link(BlockPos pos) {
+		if (set.contains(pos)) {
+			set.remove(pos);
+			return false;
+		}
+		else {
+			set.add(pos);
+			return true;
+		}
 	}
 
 	@Override

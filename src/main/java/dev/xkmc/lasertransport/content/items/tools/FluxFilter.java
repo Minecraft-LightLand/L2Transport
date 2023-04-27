@@ -63,6 +63,9 @@ public class FluxFilter extends Item implements ILinker {
 
 	@Override
 	public Component getName(ItemStack stack) {
+		if (stack.getTag() != null && stack.getTag().getBoolean("no_name")) {
+			return super.getName(stack);
+		}
 		return super.getName(stack).copy().append(" - ").append(get(stack).getTypeDesc());
 	}
 

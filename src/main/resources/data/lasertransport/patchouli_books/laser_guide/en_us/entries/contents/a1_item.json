@@ -10,7 +10,7 @@
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Item nodes support $(l:concepts/a1_filter)filter$(/l) through right click, fine tune amount through configuration wand, or open complex filter UI for full control.$(br2)In filter UI, right click filter slot with item, or drag item from JEI into filter slot to set filter.$(br2)You can specify if you want to care about item NBT or not."
+	  "text": "Item nodes support $(l:concepts/a1_filter)filter$(/l) through right click, fine tune amount through $(l:concepts/a3_wands)configuration wand$(/l), or open complex filter UI for full control.$(br2)In filter UI, right click filter slot with item, or drag item from JEI into filter slot to set filter.$(br2)You can specify if you want to care about item NBT or not."
 	}
   ]
 }
