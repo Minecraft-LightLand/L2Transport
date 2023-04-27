@@ -1,7 +1,7 @@
 {
   "name": "First Step - Extract Items",
   "icon": "lasertransport:node_item_retrieve",
-  "category": "lasertransport:general",
+  "category": "lasertransport:quick_start",
   "sortnum": 1,
   "pages": [
 	{

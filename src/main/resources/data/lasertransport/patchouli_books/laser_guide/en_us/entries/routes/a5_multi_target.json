@@ -6,7 +6,7 @@
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "When you want to send items to multiple targets, you need to specify distribution logic from the 3 choices:$(li)$(l:routes/a6_near_first)Near-First Node(/l) for targets with different levels of priorities.$(li)$(l:routes/a7_synced)Synced Node(/l) for targets that need to get the exact same amount of items. $(li)$(l:routes/a8_distribute)Iterative Node(/l) for targets that need equal opportunity to receive items."
+	  "text": "When you want to send items to multiple targets, you need to specify distribution logic from the 3 choices:$(li)$(l:routes/a6_near_first)Near-First Node$(/l) for targets with different levels of priorities.$(li)$(l:routes/a7_synced)Synced Node$(/l) for targets that need to get the exact same amount of items. $(li)$(l:routes/a8_distribute)Iterative Node$(/l) for targets that need equal opportunity to receive items."
 	}
   ]
 }

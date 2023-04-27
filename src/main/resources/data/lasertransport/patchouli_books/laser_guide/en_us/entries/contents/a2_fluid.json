@@ -6,11 +6,11 @@
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "Default fluid transfer amount is 1 bucket. You can use upgrades to increase it.$(br2)Fluid nodes can retrieve fluids in the world, but can only retrieve the source. It can also interact with cauldrons, but can only insert/extract by 1 bucket, and can only carry water and lava. Placing fluid on ground requires place upgrade."
+	  "text": "Default fluid transfer amount is 1 bucket. You can use upgrades to increase it.$(br2)Fluid nodes can retrieve fluids in the world, but can only retrieve the source. It can also interact with cauldrons, but can only insert/extract by 1 bucket, and can only carry water and lava. Placing fluid on ground requires $(l:concepts/a2_upgrades)place upgrade$(/l)."
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Fluid nodes support $(l:concepts/a1_filter)filter(/l) through right click with bucket, fine tune amount through configuration wand, and open complex filter UI for full control.$(br2)In filter UI, right click filter slot with fluid bucket, or drag fluids from JEI into filter slot to set filters.$(br2)You can specify if you want to care about fluid NBT or not."
+	  "text": "Fluid nodes support $(l:concepts/a1_filter)filter$(/l) through right click with bucket, fine tune amount through configuration wand, and open complex filter UI for full control.$(br2)In filter UI, right click filter slot with fluid bucket, or drag fluids from JEI into filter slot to set filters.$(br2)You can specify if you want to care about fluid NBT or not."
 	}
   ]
 }

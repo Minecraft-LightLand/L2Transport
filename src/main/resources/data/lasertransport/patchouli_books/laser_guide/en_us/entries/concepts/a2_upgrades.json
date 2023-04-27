@@ -1,0 +1,17 @@
+{
+  "name": "Upgrades",
+  "icon": "lasertransport:valve_upgrade",
+  "category": "lasertransport:concepts",
+  "sortnum": 2,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Upgrade can boost or add node functionality:$(li)Valve Upgrade: Allow redstone to disable node.$(li)Watch Upgrade: when transaction succeed, emit redstone pulse.$(li)Drop Upgrade: Allow dropping items in world.$(li)Place Upgrade: Allow placing block/fluid in world.$(li)Speed Upgrade: Reduce node cooldown.$(li)Throughput Upgrade: Increase maximum amount per transaction.$(li)Distance Upgrade: Increase connection distance."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:valve_upgrade",
+	  "text": "To apply upgrade, right click node with upgrade. To remove upgrade, use clear wand to shift click the block or break the block.$(br2)Upgrade of the same type cannot be applied together.$(li)Valve and watch are both redston type.$(li)Drop and place are both output type.$(br)One node can have one speed, one throughput, and one distance upgrade."
+	}
+  ]
+}

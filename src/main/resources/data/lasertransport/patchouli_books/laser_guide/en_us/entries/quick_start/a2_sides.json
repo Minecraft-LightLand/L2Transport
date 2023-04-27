@@ -1,7 +1,7 @@
 {
   "name": "Sides Matter",
   "icon": "lasertransport:node_extended",
-  "category": "lasertransport:general",
+  "category": "lasertransport:quick_start",
   "sortnum": 2,
   "pages": [
 	{

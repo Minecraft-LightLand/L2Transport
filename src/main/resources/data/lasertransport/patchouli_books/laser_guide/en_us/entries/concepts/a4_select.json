@@ -1,7 +1,7 @@
 {
-  "name": "Switch between wands or nodes",
+  "name": "Switch Wands and Nodes",
   "icon": "lasertransport:rotate",
-  "category": "lasertransport:general",
+  "category": "lasertransport:concepts",
   "sortnum": 4,
   "pages": [
 	{

@@ -11,7 +11,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "lasertransport:node_item_synced",
-	  "text": "To use this node efficiently, set the filter amount for this node and previous nodes. For example, if you have 5 targets and you want to send 10 items to each every time, you need to set the filter amount for this node at 10, but set the extraction amount in the $(l:routes/a3_retrieving_node)retrieving node(/l) at 50. Otherwise, it will constantly fail to send, as there aren't enough item to satisfy requirements."
+	  "text": "To use this node efficiently, set the filter amount for this node and previous nodes. For example, if you have 5 targets and you want to send 10 items to each every time, you need to set the filter amount for this node at 10, but set the extraction amount in the $(l:routes/a3_retrieving_node)retrieving node$(/l) at 50. Otherwise, it will constantly fail to send, as there aren't enough item to satisfy requirements."
 	}
   ]
 }
