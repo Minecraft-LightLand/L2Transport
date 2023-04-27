@@ -1,0 +1,17 @@
+{
+  "name": "Item Holder",
+  "icon": "lasertransport:item_holder",
+  "category": "lasertransport:concepts",
+  "sortnum": 5,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This block holds a stack of item. It cannot receive anymore items when it already has items, regardless if they may merge.$(br2)It may hold stacks larger than stack limit."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:item_holder",
+	  "text": "If you use hopper to transfer items in, it will only hold one, as hoppers transfer items one by one."
+	}
+  ]
+}

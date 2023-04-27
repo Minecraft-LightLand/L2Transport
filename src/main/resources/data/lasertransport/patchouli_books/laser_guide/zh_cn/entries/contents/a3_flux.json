@@ -1,0 +1,17 @@
+{
+  "name": "Transfer Energy/Mana",
+  "icon": "lasertransport:node_flux_retrieve",
+  "category": "lasertransport:contents",
+  "sortnum": 3,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This system supports transferring all kinds of other modded intangible things such as energy. Let's call them flux.$(br2)Flux nodes work the same as other nodes, but require setting the type of content to transfer. Use flux wand to select and set the type. Set it on one node will set it on all other connected flux nodes as well."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:flux_filter{\"no_name\":true}",
+	  "text": "Flux nodes do not support filter, but still supports filter amount. The best practice is to transfer only one kind of flux per network, so flux of the same type don't get mixed together.$(br2)Currently flux node supports:$(li)Energy from Forge$(li)Gas from Mekanism$(li)Mana from Botania$(li)Source from Ars Nouveau"
+	}
+  ]
+}

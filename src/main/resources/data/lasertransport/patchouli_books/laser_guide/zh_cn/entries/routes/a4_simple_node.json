@@ -1,0 +1,17 @@
+{
+  "name": "Simple Node",
+  "icon": "lasertransport:node_item_simple",
+  "category": "lasertransport:routes",
+  "sortnum": 4,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This node sends item to one target. It cannot extract items, but can: $(li)Serve as intermediate node to carry items to further targets.$(li)Create complex $(l:concepts/a1_filter)filtering$(/l) logic.$(li)Add redstone control using $(l:concepts/a2_upgrades)watch or valve upgrade(/l) to control item flow."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_item_simple",
+	  "text": "When paired with multi-target nodes, it can also:$(li)Specify priorities for $(l:routes/a6_near_first)near-first node$(/l).$(li)Serve as sorting filter when paired with $(l:routes/a8_distribute)iterative node$(/l)."
+	}
+  ]
+}

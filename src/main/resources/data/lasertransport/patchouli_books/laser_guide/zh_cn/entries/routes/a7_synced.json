@@ -1,0 +1,17 @@
+{
+  "name": "Synced Node",
+  "icon": "lasertransport:node_item_synced",
+  "category": "lasertransport:routes",
+  "sortnum": 7,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This node sends the same amount of item to all nodes. If one target cannot accept item by that exact amount, all targets will not get any item. By default, it will only send 1 item to each target. When you set filter amount, it will enforce sending that amount to each target.$(br2)This is useful when you want the item flow to be in synchronization in strict sense. For example, for Crafting Matrix."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_item_synced",
+	  "text": "To use this node efficiently, set the filter amount for this node and previous nodes. For example, if you have 5 targets and you want to send 10 items to each every time, you need to set the filter amount for this node at 10, but set the extraction amount in the $(l:routes/a3_retrieving_node)retrieving node$(/l) at 50. Otherwise, it will constantly fail to send, as there aren't enough item to satisfy requirements."
+	}
+  ]
+}

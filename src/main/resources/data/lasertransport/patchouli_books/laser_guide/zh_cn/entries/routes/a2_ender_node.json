@@ -1,0 +1,17 @@
+{
+  "name": "Ender Extension Node",
+  "icon": "lasertransport:node_ender",
+  "category": "lasertransport:routes",
+  "sortnum": 2,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This node connects to an $(l:routes/a1_extension_node)extension node$(/l) in a far away area or in another dimension. To link the node, right click this ender node first, and then right click the target extension node. System message will tell you if connection is successful.$(br2)Please note that it can only connect to extension node. If you want to connect to other kinds of nodes, use an extension node as intermediate node."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_ender",
+	  "text": "Note that while this node can access target even when the target chunk is not loaded, it does not keep the chunk loaded. To keep machines working, force load the target chunk using other methods."
+	}
+  ]
+}

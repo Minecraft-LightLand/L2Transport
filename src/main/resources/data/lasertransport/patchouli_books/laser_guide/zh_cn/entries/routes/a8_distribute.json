@@ -1,0 +1,17 @@
+{
+  "name": "Iterative Node",
+  "icon": "lasertransport:node_item_distribute",
+  "category": "lasertransport:routes",
+  "sortnum": 8,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "This node will iterate through all nodes to try to send item, and stop on the first successful transfer. When it successfully sends items to one target, it will start from the next target in next round.$(br2)The filter amount on this node specifies the maximum amount of transaction.$(br2)The order this node iterates through is the order those targets are connected to it. You can configure the iteration order by reconnecting the targets."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:node_item_distribute",
+	  "text": "Node that this node will give all targets equal opportunity to receive items, but does not enforce same item flow. If one node can't accept item when queried, it has to wait till the next round to get items.$(br2)Also, if you are sending large quantity of items at once while the supply is low, you might find that one round takes quite a long time to go over. To resolve this, reduce the filter amount to speed up supply accumulation."
+	}
+  ]
+}
