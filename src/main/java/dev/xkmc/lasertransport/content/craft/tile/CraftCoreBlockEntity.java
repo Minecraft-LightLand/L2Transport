@@ -22,6 +22,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -84,7 +85,7 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 			if (level != null && !level.isClientSide())
 				revalidate();
 		}
-		if (shouldCraft) {
+		if (shouldCraft && !getBlockState().getValue(BlockStateProperties.TRIGGERED)) {
 			shouldCraft = false;
 			if (level != null && !level.isClientSide) {
 				tryCraft();

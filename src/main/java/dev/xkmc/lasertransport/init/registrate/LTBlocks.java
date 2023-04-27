@@ -259,7 +259,8 @@ public class LTBlocks {
 									ItemHolderNodeBlock.UPDATE,
 									ItemHolderNodeBlock.REMOVE,
 									ItemHolderNodeBlock.CONN_CORE,
-									ItemHolderNodeBlock.CORE))
+									ItemHolderNodeBlock.CORE,
+									BlockProxy.TRIGGER))
 					.blockstate((ctx, pvd) -> new BlockGenerator(ctx, pvd)
 							.generate(ItemHolderNodeBlock.ORIENTATION_CORE, false))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE)

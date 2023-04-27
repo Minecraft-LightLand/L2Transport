@@ -1,5 +1,6 @@
 package dev.xkmc.lasertransport.content.craft.logic;
 
+import dev.xkmc.lasertransport.init.registrate.LTItems;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
@@ -17,15 +18,17 @@ public class DelegatedCraftContainer extends CraftingContainer {
 		super(null, 0, 0);
 		this.grid = grid;
 		boolean empty = true;
+		boolean has_ingredient = false;
 		int min = -1;
 		for (var arr : grid.list()) {
 			for (var ar : arr) {
 				empty &= ar.stack().isEmpty();
+				has_ingredient |= !ar.stack().isEmpty() && !ar.stack().is(LTItems.FILLER.get());
 				int count = ar.stack().getCount();
 				min = count == 0 ? min : min < 0 ? count : Math.min(count, min);
 			}
 		}
-		this.isEmpty = empty;
+		this.isEmpty = empty || !has_ingredient;
 		this.min = min;
 	}
 

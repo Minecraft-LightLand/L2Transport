@@ -1,0 +1,33 @@
+{
+  "name": "Crafting Matrix",
+  "icon": "lasertransport:craft_result_holder",
+  "category": "lasertransport:concepts",
+  "sortnum": 6,
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:craft_result_holder",
+	  "title": "Result Holder (Core)",
+	  "text": "Crafting matrix consists of a result holder (matrix core) and several ingredient holders. Place the result holder first, with any facing you wants, and then place the ingredient holders to connect to it.$(br2)It's better to keep crafting matrices seperated, as if they detect each other, both will break."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:craft_ingredient_holder",
+	  "title": "Ingredient Holder",
+	  "text": "The crafting matrix will begin crafting once all ingredient holders are filled, crafting as much items as possible at once. Powering the core with redstone can pause crafting.$(br2)When an ingredient holder is disconnected from the result holder, it will break, dropping itself and contents as items."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "lasertransport:filler",
+	  "title": "Filler",
+	  "text": "If your recipe has disconnect parts, you can use filler item to fill them. Filler will not be consumed during crafting.$(br2)Look at the matrix core and you can see the crafting grid with items in them. The result holder will display with a cross. You can use $(l:concepts/a3_wands)rotate wand$(/l) to rotate the orientation of the grid."
+	},
+	{
+	  "type": "patchouli:image",
+	  "title": "Craft Grid Orientation",
+	  "images": [
+		"lasertransport:textures/patchouli/grid.png"
+	  ]
+	}
+  ]
+}
