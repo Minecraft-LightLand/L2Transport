@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lasertransport:craft_result_holder"
+    }
+  ],
+  "result": {
+    "item": "lasertransport:craft_ingredient_holder"
+  }
+}

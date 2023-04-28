@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lasertransport:valve_upgrade_from_watch_upgrade"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_watch_upgrade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lasertransport:watch_upgrade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_watch_upgrade",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lasertransport:valve_upgrade_from_watch_upgrade"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lasertransport:drop_upgrade"
+    }
+  ],
+  "result": {
+    "item": "lasertransport:valve_upgrade"
+  }
+}

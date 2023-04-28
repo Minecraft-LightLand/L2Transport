@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lasertransport:node_flux_retrieve"
+    }
+  ],
+  "result": {
+    "item": "lasertransport:node_flux_simple"
+  }
+}

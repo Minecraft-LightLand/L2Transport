@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lasertransport:linker_from_validator"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_validator": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lasertransport:validator"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_validator",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lasertransport:linker_from_validator"
+    ]
+  }
+}

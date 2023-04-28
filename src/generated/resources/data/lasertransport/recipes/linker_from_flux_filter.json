@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lasertransport:flux_filter"
+    }
+  ],
+  "result": {
+    "item": "lasertransport:linker"
+  }
+}

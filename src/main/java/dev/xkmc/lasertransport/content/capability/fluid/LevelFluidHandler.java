@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
@@ -17,7 +18,7 @@ public record LevelFluidHandler(Level level, BlockPos pos, BlockState state) imp
 		if (fluidState.isEmpty() || !fluidState.isSource()) return FluidStack.EMPTY;
 		BlockState correct = fluidState.getFluidType().getBlockForFluidState(level, pos, fluidState.getType().defaultFluidState());
 		if (state != correct) return FluidStack.EMPTY;
-		return new FluidStack(fluidState.getType(), 1000);
+		return new FluidStack(fluidState.getType(), FluidType.BUCKET_VOLUME);
 	}
 
 	@Override
@@ -45,13 +46,13 @@ public record LevelFluidHandler(Level level, BlockPos pos, BlockState state) imp
 	public int fill(FluidStack resource, FluidAction action) {
 		if (!state.canBeReplaced(resource.getFluid())) return 0;
 		if (level.getFluidState(pos).getType() == resource.getFluid()) return 0;
-		if (resource.getAmount() < 1000) return 0;
+		if (resource.getAmount() < FluidType.BUCKET_VOLUME) return 0;
 		if (action.execute()) {
 			BlockState correct = resource.getFluid().getFluidType()
 					.getBlockForFluidState(level, pos, resource.getFluid().defaultFluidState());
-			level.setBlockAndUpdate(pos, state);
+			level.setBlockAndUpdate(pos, correct);
 		}
-		return 1000;
+		return FluidType.BUCKET_VOLUME;
 	}
 
 	@Override
@@ -62,13 +63,22 @@ public record LevelFluidHandler(Level level, BlockPos pos, BlockState state) imp
 		}
 		FluidState fluidState = state.getFluidState();
 		if (fluidState.isEmpty() || !fluidState.isSource()) return FluidStack.EMPTY;
-		if (!resource.isFluidEqual(new FluidStack(fluidState.getType(), 1000))) return FluidStack.EMPTY;
+		if (!resource.isFluidEqual(new FluidStack(fluidState.getType(), FluidType.BUCKET_VOLUME)))
+			return FluidStack.EMPTY;
 		BlockState correct = fluidState.getFluidType().getBlockForFluidState(level, pos, fluidState.getType().defaultFluidState());
 		if (state != correct) return FluidStack.EMPTY;
 		if (action.execute()) {
-			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+			boolean clear = true;
+			if (fluidState.getType() instanceof FlowingFluid flowing) {
+				if (flowing.getNewLiquid(level, pos, Blocks.AIR.defaultBlockState()).isSource()) {
+					clear = false;
+				}
+			}
+			if (clear) {
+				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+			}
 		}
-		return new FluidStack(fluidState.getType(), 1000);
+		return new FluidStack(fluidState.getType(), FluidType.BUCKET_VOLUME);
 	}
 
 	@Override
@@ -84,7 +94,7 @@ public record LevelFluidHandler(Level level, BlockPos pos, BlockState state) imp
 		if (action.execute()) {
 			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}
-		return new FluidStack(fluidState.getType(), 1000);
+		return new FluidStack(fluidState.getType(), FluidType.BUCKET_VOLUME);
 	}
 
 }
