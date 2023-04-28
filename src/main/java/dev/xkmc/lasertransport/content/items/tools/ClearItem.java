@@ -1,7 +1,8 @@
 package dev.xkmc.lasertransport.content.items.tools;
 
-import dev.xkmc.lasertransport.content.capability.base.PopContentTile;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
+import dev.xkmc.lasertransport.content.tile.base.PopContentTile;
+import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
 import dev.xkmc.lasertransport.events.ItemConvertEvents;
 import dev.xkmc.lasertransport.init.data.LangData;
 import dev.xkmc.lasertransport.init.data.TagGen;
@@ -54,11 +55,20 @@ public class ClearItem extends Item implements ILinker {
 		BlockState state = ctx.getLevel().getBlockState(ctx.getClickedPos());
 		if (state.is(TagGen.RETRIEVABLE)) {
 			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
+				if (be instanceof SpecialRetrieveTile tile) {
+					for (ItemStack back : tile.getDrops()) {
+						ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
+						ctx.getPlayer().getInventory().placeItemBackInInventory(next);
+					}
+					return InteractionResult.SUCCESS;
+				}
 				ItemStack back = state.getBlock().asItem().getDefaultInstance();
 				ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
 				ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 				ctx.getLevel().setBlockAndUpdate(ctx.getClickedPos(), Blocks.AIR.defaultBlockState());
+				return InteractionResult.SUCCESS;
 			}
+			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;
 	}

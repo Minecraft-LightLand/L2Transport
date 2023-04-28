@@ -33,8 +33,7 @@ public class OrderedConnector extends SingleCoolDownConnector {
 		if (set.contains(pos)) {
 			set.remove(pos);
 			return false;
-		}
-		else {
+		} else {
 			set.add(pos);
 			return true;
 		}

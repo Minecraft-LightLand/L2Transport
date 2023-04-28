@@ -4,7 +4,7 @@ import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.BlockContainer;
 import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lasertransport.content.capability.base.PopContentTile;
+import dev.xkmc.lasertransport.content.tile.base.PopContentTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;

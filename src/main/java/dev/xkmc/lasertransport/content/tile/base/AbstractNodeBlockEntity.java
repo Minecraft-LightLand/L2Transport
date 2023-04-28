@@ -6,7 +6,6 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.lasertransport.content.capability.base.INodeBlockEntity;
-import dev.xkmc.lasertransport.content.capability.base.PopContentTile;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;

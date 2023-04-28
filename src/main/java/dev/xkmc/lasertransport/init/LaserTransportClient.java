@@ -1,10 +1,6 @@
 package dev.xkmc.lasertransport.init;
 
-import dev.xkmc.lasertransport.content.client.overlay.CraftTooltipOverlay;
-import dev.xkmc.lasertransport.content.client.overlay.NodeInfoOverlay;
-import dev.xkmc.lasertransport.content.client.overlay.NumberSetOverlay;
-import dev.xkmc.lasertransport.content.client.overlay.ToolSelectionOverlay;
-import dev.xkmc.lasertransport.content.client.overlay.ClientCraftTooltip;
+import dev.xkmc.lasertransport.content.client.overlay.*;
 import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
 import dev.xkmc.lasertransport.events.ClientGeneralEvents;
 import dev.xkmc.lasertransport.init.data.Keys;

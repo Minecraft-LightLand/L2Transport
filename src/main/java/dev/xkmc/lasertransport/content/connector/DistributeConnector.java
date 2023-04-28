@@ -51,8 +51,7 @@ public class DistributeConnector extends SingleCoolDownConnector {
 		if (list.contains(pos)) {
 			list.remove(pos);
 			return false;
-		}
-		else {
+		} else {
 			list.add(pos);
 			return true;
 		}

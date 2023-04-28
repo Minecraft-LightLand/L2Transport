@@ -1,4 +1,4 @@
-package dev.xkmc.lasertransport.content.capability.base;
+package dev.xkmc.lasertransport.content.tile.base;
 
 import net.minecraft.world.item.ItemStack;
 

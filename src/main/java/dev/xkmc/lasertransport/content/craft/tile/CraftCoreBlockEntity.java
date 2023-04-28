@@ -9,6 +9,7 @@ import dev.xkmc.lasertransport.content.craft.block.Orientation;
 import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
 import dev.xkmc.lasertransport.content.craft.logic.DelegatedCraftContainer;
 import dev.xkmc.lasertransport.content.craft.logic.ScanInfo;
+import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
 import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import dev.xkmc.lasertransport.init.registrate.LTItems;
 import dev.xkmc.lasertransport.util.Holder;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 @SerialClass
-public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
+public class CraftCoreBlockEntity extends ItemHolderBlockEntity implements SpecialRetrieveTile {
 
 	private static Pair<TreeSet<BlockPos>, TreeSet<BlockPos>> scan(Level level, BlockPos self, Orientation o) {
 		Queue<BlockPos> queue = new ArrayDeque<>();
@@ -73,6 +75,8 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 
 	@Nullable
 	private CraftingRecipe recipe;
+
+	private boolean supressBreak = false;
 
 	public CraftCoreBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -217,7 +221,7 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 	}
 
 	public void removeConnected() {
-		if (level == null || level.isClientSide()) return;
+		if (level == null || level.isClientSide() || supressBreak) return;
 		for (BlockPos pos : targets) {
 			if (level.getBlockState(pos).is(LTBlocks.B_CRAFT_SIDE.get())) {
 				level.destroyBlock(pos, true);
@@ -243,5 +247,19 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 			}
 		}
 		return ans;
+	}
+
+	@Override
+	public List<ItemStack> getDrops() {
+		int count = targets.size() + 1;
+		if (level != null && !level.isClientSide()) {
+			supressBreak = true;
+			for (BlockPos pos : targets) {
+				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+			}
+			level.setBlockAndUpdate(getBlockPos(), Blocks.AIR.defaultBlockState());
+			supressBreak = false;
+		}
+		return List.of(new ItemStack(LTBlocks.B_CRAFT_CORE.get().asItem(), count));
 	}
 }
