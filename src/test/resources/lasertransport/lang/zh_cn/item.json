@@ -1,19 +1,6 @@
 {
   "block.lasertransport": {
 	"node_extended": "扩展节点",
-	"node_fluid_distribute": "流体节点-顺序遍历",
-	"node_fluid_ordered": "流体节点-优先遍历",
-	"node_fluid_retrieve": "流体提取节点",
-	"node_fluid_simple": "流体节点",
-	"node_fluid_synced": "流体节点-同步",
-	"node_flux_ordered": "通量节点-优先遍历",
-	"node_flux_retrieve": "通量提取节点",
-	"node_flux_simple": "通量节点",
-	"node_item_distribute": "物品节点-顺序遍历",
-	"node_item_ordered": "物品节点-优先遍历",
-	"node_item_retrieve": "物品提取节点",
-	"node_item_simple": "物品节点",
-	"node_item_synced": "物品节点-同步",
 	"craft_ingredient_holder": "合成输入接口",
 	"craft_result_holder": "合成输出接口",
 	"item_holder": "物品寄存器",
@@ -39,5 +26,24 @@
 	"throughput_upgrade_1": "流量升级 II",
 	"throughput_upgrade_2": "流量升级 III",
 	"filler": "合成占位符"
+  },
+  "-cartesian": {
+	"nodes": {
+	  "path": "block.lasertransport",
+	  "list": [
+		{
+		  "node_fluid": "流体",
+		  "node_flux": "通量",
+		  "node_item": "物品"
+		},
+		{
+		  "distribute": "节点-顺序遍历",
+		  "ordered": "节点-优先遍历",
+		  "retrieve": "提取节点",
+		  "simple": "节点",
+		  "synced": "节点-同步"
+		}
+	  ]
+	}
   }
 }

@@ -5,6 +5,7 @@ import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.l2library.serial.network.PacketHandler;
 import dev.xkmc.lasertransport.compat.CompatHandler;
 import dev.xkmc.lasertransport.content.items.select.SelectorRegistry;
+import dev.xkmc.lasertransport.events.ItemConvertEvents;
 import dev.xkmc.lasertransport.init.data.LTModConfig;
 import dev.xkmc.lasertransport.init.data.LangData;
 import dev.xkmc.lasertransport.init.data.RecipeGen;
@@ -54,6 +55,7 @@ public class LaserTransport {
 	}
 
 	private static void registerForgeEvents() {
+		MinecraftForge.EVENT_BUS.register(ItemConvertEvents.class);
 	}
 
 	private static void registerModBusEvents(IEventBus bus) {

@@ -1,9 +1,10 @@
 package dev.xkmc.lasertransport.content.items.tools;
 
-import dev.xkmc.lasertransport.content.capability.base.ITargetTraceable;
-import dev.xkmc.lasertransport.content.tile.base.AbstractNodeBlockEntity;
+import dev.xkmc.lasertransport.content.capability.base.PopContentTile;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
+import dev.xkmc.lasertransport.events.ItemConvertEvents;
 import dev.xkmc.lasertransport.init.data.LangData;
+import dev.xkmc.lasertransport.init.data.TagGen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -32,20 +34,31 @@ public class ClearItem extends Item implements ILinker {
 					node.removeAll();
 					return InteractionResult.SUCCESS;
 				}
-				if (be instanceof AbstractNodeBlockEntity<?> xbe) {
-					var list = xbe.popUpgrade();
-					if (list.size() > 0) {
-						list.forEach(ctx.getPlayer().getInventory()::placeItemBackInInventory);
-						xbe.markDirty();
-						return InteractionResult.SUCCESS;
+			}
+			return InteractionResult.SUCCESS;
+		}
+		if (be instanceof PopContentTile xbe) {
+			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
+				var list = xbe.popContents();
+				if (list.size() > 0) {
+					for (ItemStack content : list) {
+						ItemStack next = ItemConvertEvents.convert(content, ctx.getPlayer());
+						ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 					}
-				}
-				if (be instanceof ITargetTraceable) {
-					ctx.getPlayer().getInventory().placeItemBackInInventory(be.getBlockState().getBlock().asItem().getDefaultInstance());
-					ctx.getLevel().setBlockAndUpdate(be.getBlockPos(), Blocks.AIR.defaultBlockState());
+					xbe.markDirty();
+					return InteractionResult.SUCCESS;
 				}
 			}
 			return InteractionResult.SUCCESS;
+		}
+		BlockState state = ctx.getLevel().getBlockState(ctx.getClickedPos());
+		if (state.is(TagGen.RETRIEVABLE)) {
+			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
+				ItemStack back = state.getBlock().asItem().getDefaultInstance();
+				ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
+				ctx.getPlayer().getInventory().placeItemBackInInventory(next);
+				ctx.getLevel().setBlockAndUpdate(ctx.getClickedPos(), Blocks.AIR.defaultBlockState());
+			}
 		}
 		return InteractionResult.PASS;
 	}

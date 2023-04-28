@@ -1,7 +1,5 @@
 {
   "values": [
-    "lasertransport:node_extended",
-    "lasertransport:node_ender",
     "lasertransport:node_item_simple",
     "lasertransport:node_item_ordered",
     "lasertransport:node_item_synced",
@@ -17,8 +15,14 @@
     "lasertransport:node_flux_synced",
     "lasertransport:node_flux_distribute",
     "lasertransport:node_flux_retrieve",
-    "lasertransport:item_holder",
     "lasertransport:craft_ingredient_holder",
-    "lasertransport:craft_result_holder"
+    "lasertransport:craft_result_holder",
+    "lasertransport:valve_upgrade",
+    "lasertransport:watch_upgrade",
+    "lasertransport:drop_upgrade",
+    "lasertransport:place_upgrade",
+    "lasertransport:speed_upgrade_0",
+    "lasertransport:distance_upgrade_0",
+    "lasertransport:throughput_upgrade_0"
   ]
 }

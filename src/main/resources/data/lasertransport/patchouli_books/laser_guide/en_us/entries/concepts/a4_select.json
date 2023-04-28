@@ -10,7 +10,7 @@
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "The available selection lists are:$(li)5 kinds of wands.$(li)7 kinds of basic upgrades.$(li)5 item nodes.$(li)5 fluid nodes$(li)3 flux nodes.$(li)All kinds of flux wand configuration$(li)Crafting matrix ingredient/result holder"
+	  "text": "The available selection lists are:$(li)5 kinds of wands.$(li)7 kinds of basic upgrades.$(li)5 item nodes.$(li)5 fluid nodes$(li)5 flux nodes.$(li)All kinds of flux wand configuration$(li)Crafting matrix ingredient/result holder"
 	}
   ]
 }

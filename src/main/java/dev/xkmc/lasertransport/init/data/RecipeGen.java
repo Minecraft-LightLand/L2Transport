@@ -22,38 +22,47 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
+@SuppressWarnings({"unused", "ConstantConditions"})
 public class RecipeGen {
 
 	private static final String currentFolder = "";
 
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
 		full(pvd, Items.REDSTONE_BLOCK, Items.IRON_INGOT, Items.COPPER_INGOT, LTBlocks.B_EXTENDED.get().asItem(), 16);
-		convert(pvd, LTBlocks.B_EXTENDED, LTBlocks.B_ITEM_SIMPLE);
-		convert(pvd, LTBlocks.B_EXTENDED, LTBlocks.B_FLUID_SIMPLE);
-		convert(pvd, LTBlocks.B_EXTENDED, LTBlocks.B_FLUX_SIMPLE);
-		convert(pvd, LTBlocks.B_ITEM_SIMPLE, LTBlocks.B_ITEM_RETRIEVE);
-		convert(pvd, LTBlocks.B_ITEM_SIMPLE, LTBlocks.B_ITEM_ORDERED);
-		convert(pvd, LTBlocks.B_ITEM_SIMPLE, LTBlocks.B_ITEM_DISTRIBUTE);
-		convert(pvd, LTBlocks.B_ITEM_SIMPLE, LTBlocks.B_ITEM_SYNCED);
-		convert(pvd, LTBlocks.B_FLUID_SIMPLE, LTBlocks.B_FLUID_RETRIEVE);
-		convert(pvd, LTBlocks.B_FLUID_SIMPLE, LTBlocks.B_FLUID_ORDERED);
-		convert(pvd, LTBlocks.B_FLUID_SIMPLE, LTBlocks.B_FLUID_DISTRIBUTE);
-		convert(pvd, LTBlocks.B_FLUID_SIMPLE, LTBlocks.B_FLUID_SYNCED);
-		convert(pvd, LTBlocks.B_FLUX_SIMPLE, LTBlocks.B_FLUX_RETRIEVE);
-		convert(pvd, LTBlocks.B_FLUX_SIMPLE, LTBlocks.B_FLUX_ORDERED);
+		convert(pvd, LTBlocks.B_EXTENDED,
+				LTBlocks.B_ITEM_SIMPLE,
+				LTBlocks.B_FLUID_SIMPLE,
+				LTBlocks.B_FLUX_SIMPLE);
+		convert(pvd, LTBlocks.B_ITEM_SIMPLE,
+				LTBlocks.B_ITEM_RETRIEVE,
+				LTBlocks.B_ITEM_ORDERED,
+				LTBlocks.B_ITEM_DISTRIBUTE,
+				LTBlocks.B_ITEM_SYNCED);
+		convert(pvd, LTBlocks.B_FLUID_SIMPLE,
+				LTBlocks.B_FLUID_RETRIEVE,
+				LTBlocks.B_FLUID_ORDERED,
+				LTBlocks.B_FLUID_DISTRIBUTE,
+				LTBlocks.B_FLUID_SYNCED);
+		convert(pvd, LTBlocks.B_FLUX_SIMPLE,
+				LTBlocks.B_FLUX_RETRIEVE,
+				LTBlocks.B_FLUX_SYNCED,
+				LTBlocks.B_FLUX_DISTRIBUTE,
+				LTBlocks.B_FLUX_ORDERED);
+		convert(pvd, LTItems.LINKER,
+				LTItems.VALIDATOR,
+				LTItems.CLEAR,
+				LTItems.ROTATE,
+				LTItems.CONFIG,
+				LTItems.FLUX);
+		convert(pvd, LTItems.VALVE_UP,
+				LTItems.WATCH_UP,
+				LTItems.DIST_UP_0,
+				LTItems.SPEED_UP_0,
+				LTItems.THR_UP_0,
+				LTItems.DROP_UP,
+				LTItems.PLACE_UP);
 		convert(pvd, () -> Items.PAPER, LTItems.FILLER);
 		convert(pvd, LTBlocks.B_CRAFT_SIDE, LTBlocks.B_CRAFT_CORE);
-		convert(pvd, LTItems.LINKER, LTItems.VALIDATOR);
-		convert(pvd, LTItems.LINKER, LTItems.CLEAR);
-		convert(pvd, LTItems.LINKER, LTItems.ROTATE);
-		convert(pvd, LTItems.LINKER, LTItems.CONFIG);
-		convert(pvd, LTItems.LINKER, LTItems.FLUX);
-		convert(pvd, LTItems.VALVE_UP, LTItems.WATCH_UP);
-		convert(pvd, LTItems.VALVE_UP, LTItems.DIST_UP_0);
-		convert(pvd, LTItems.VALVE_UP, LTItems.SPEED_UP_0);
-		convert(pvd, LTItems.VALVE_UP, LTItems.THR_UP_0);
-		convert(pvd, LTItems.VALVE_UP, LTItems.DROP_UP);
-		convert(pvd, LTItems.VALVE_UP, LTItems.PLACE_UP);
 
 		smithing(pvd, LTBlocks.B_EXTENDED.get().asItem(), Items.ENDER_EYE, LTBlocks.B_ENDER.get().asItem());
 		smithing(pvd, LTBlocks.B_EXTENDED.get().asItem(), Items.CHEST, LTBlocks.B_ITEM_HOLDER.get().asItem());
@@ -64,7 +73,6 @@ public class RecipeGen {
 				.define('A', Items.REDSTONE)
 				.define('B', Items.COPPER_INGOT)
 				.save(pvd);
-
 
 		unlock(pvd, ShapedRecipeBuilder.shaped(LTItems.VALVE_UP.get(), 4)::unlockedBy, Items.QUARTZ)
 				.pattern(" A ").pattern("ABA").pattern(" A ")
@@ -100,13 +108,15 @@ public class RecipeGen {
 				.define('B', LTItems.THR_UP_1.get())
 				.save(pvd);
 
-
 	}
 
-	private static void convert(RegistrateRecipeProvider pvd, Supplier<? extends ItemLike> a, Supplier<? extends ItemLike> b) {
-		pvd.stonecutting(DataIngredient.items(a.get()), b);
-		ResourceLocation id = getID(a.get().asItem(), "_from_" + ForgeRegistries.ITEMS.getKey(b.get().asItem()).getPath());
-		pvd.singleItemUnfinished(DataIngredient.items(b.get()), a, 1, 1).save(pvd, id);
+	@SafeVarargs
+	private static void convert(RegistrateRecipeProvider pvd, Supplier<? extends ItemLike> a, Supplier<? extends ItemLike>... bs) {
+		for (var b : bs) {
+			pvd.stonecutting(DataIngredient.items(a.get()), b);
+			ResourceLocation id = getID(a.get().asItem(), "_from_" + ForgeRegistries.ITEMS.getKey(b.get().asItem()).getPath());
+			pvd.singleItemUnfinished(DataIngredient.items(b.get()), a, 1, 1).save(pvd, id);
+		}
 	}
 
 	private static ResourceLocation getID(Item item) {

@@ -6,6 +6,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import dev.xkmc.lasertransport.content.capability.base.INodeBlockEntity;
+import dev.xkmc.lasertransport.content.capability.base.PopContentTile;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipType;
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
 
 @SerialClass
 public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity<BE>> extends ConnectionRenderBlockEntity
-		implements TickableBlockEntity, ILinkableNode, INodeBlockEntity, BlockContainer, IUpgradableBlock {
+		implements TickableBlockEntity, ILinkableNode, INodeBlockEntity, BlockContainer, IUpgradableBlock, PopContentTile {
 
 	protected final Set<UpgradeFlag> flags = new HashSet<>();
 
@@ -71,7 +72,7 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 		return Optional.of(ans);
 	}
 
-	public List<ItemStack> popUpgrade() {
+	public List<ItemStack> popContents() {
 		var ans = new ArrayList<>(upgrades.values());
 		for (var stack : ans) {
 			stack.setCount(1);

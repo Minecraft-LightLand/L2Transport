@@ -234,4 +234,14 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity {
 		return ans;
 	}
 
+	@Override
+	public List<ItemStack> popContents() {
+		var ans = super.popContents();
+		for (BlockPos pos : targets) {
+			if (level.getBlockEntity(pos) instanceof CraftSideBlockEntity be) {
+				ans.addAll(be.popContentsImpl());
+			}
+		}
+		return ans;
+	}
 }

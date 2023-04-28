@@ -4,6 +4,7 @@ import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2library.block.BlockContainer;
 import dev.xkmc.l2library.block.TickableBlockEntity;
 import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.lasertransport.content.capability.base.PopContentTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -17,11 +18,12 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SerialClass
 public class ItemHolderBlockEntity extends BaseBlockEntity implements
-		IItemHolderNode, DelaySyncBlockEntity, TickableBlockEntity, BlockContainer {
+		IItemHolderNode, DelaySyncBlockEntity, TickableBlockEntity, BlockContainer, PopContentTile {
 
 	@SerialClass.SerialField(toClient = true)
 	public final ItemInventory items = new ItemInventory(this);
@@ -68,4 +70,17 @@ public class ItemHolderBlockEntity extends BaseBlockEntity implements
 		return true;
 	}
 
+	@Override
+	public List<ItemStack> popContents() {
+		List<ItemStack> ans = new ArrayList<>();
+		for (ItemStack i : items.getAll()) {
+			if (i.isEmpty()) continue;
+			while (i.getCount() > i.getMaxStackSize()) {
+				ans.add(i.split(i.getMaxStackSize()));
+			}
+			ans.add(i);
+		}
+		items.setStackInSlot(0, ItemStack.EMPTY);
+		return ans;
+	}
 }
