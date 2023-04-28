@@ -29,48 +29,44 @@ public class ClearItem extends Item implements ILinker {
 	@Override
 	public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext ctx) {
 		BlockEntity be = ctx.getLevel().getBlockEntity(ctx.getClickedPos());
+		if (ctx.getPlayer() == null || ctx.getLevel().isClientSide())
+			return InteractionResult.SUCCESS;
 		if (be instanceof ILinkableNode node) {
-			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
-				if (!ctx.getPlayer().isShiftKeyDown()) {
-					node.removeAll();
-					return InteractionResult.SUCCESS;
-				}
+			if (!ctx.getPlayer().isShiftKeyDown()) {
+				node.removeAll();
+				return InteractionResult.SUCCESS;
 			}
+		}
+		if (!ctx.getPlayer().isShiftKeyDown()) {
 			return InteractionResult.SUCCESS;
 		}
 		if (be instanceof PopContentTile xbe) {
-			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
-				var list = xbe.popContents();
-				if (list.size() > 0) {
-					for (ItemStack content : list) {
-						ItemStack next = ItemConvertEvents.convert(content, ctx.getPlayer());
-						ctx.getPlayer().getInventory().placeItemBackInInventory(next);
-					}
-					xbe.markDirty();
-					return InteractionResult.SUCCESS;
+			var list = xbe.popContents();
+			if (list.size() > 0) {
+				for (ItemStack content : list) {
+					ItemStack next = ItemConvertEvents.convert(content, ctx.getPlayer());
+					ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 				}
+				xbe.markDirty();
+				return InteractionResult.SUCCESS;
 			}
-			return InteractionResult.SUCCESS;
 		}
 		BlockState state = ctx.getLevel().getBlockState(ctx.getClickedPos());
 		if (state.is(TagGen.RETRIEVABLE)) {
-			if (ctx.getPlayer() != null && !ctx.getLevel().isClientSide()) {
-				if (be instanceof SpecialRetrieveTile tile) {
-					for (ItemStack back : tile.getDrops()) {
-						ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
-						ctx.getPlayer().getInventory().placeItemBackInInventory(next);
-					}
-					return InteractionResult.SUCCESS;
+			if (be instanceof SpecialRetrieveTile tile) {
+				for (ItemStack back : tile.getDrops()) {
+					ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
+					ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 				}
-				ItemStack back = state.getBlock().asItem().getDefaultInstance();
-				ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
-				ctx.getPlayer().getInventory().placeItemBackInInventory(next);
-				ctx.getLevel().setBlockAndUpdate(ctx.getClickedPos(), Blocks.AIR.defaultBlockState());
 				return InteractionResult.SUCCESS;
 			}
+			ItemStack back = state.getBlock().asItem().getDefaultInstance();
+			ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
+			ctx.getPlayer().getInventory().placeItemBackInInventory(next);
+			ctx.getLevel().setBlockAndUpdate(ctx.getClickedPos(), Blocks.AIR.defaultBlockState());
 			return InteractionResult.SUCCESS;
 		}
-		return InteractionResult.PASS;
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override
