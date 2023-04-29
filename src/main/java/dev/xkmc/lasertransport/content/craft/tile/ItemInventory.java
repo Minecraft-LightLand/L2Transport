@@ -17,7 +17,7 @@ public class ItemInventory implements IItemHandlerModifiable {
 		public static LargeStack of(ItemStack stack) {
 			ItemStack copy = stack.copy();
 			copy.setCount(1);
-			return new LargeStack(stack, stack.getCount());
+			return new LargeStack(copy, stack.getCount());
 		}
 
 		public ItemStack toStack() {
@@ -28,7 +28,7 @@ public class ItemInventory implements IItemHandlerModifiable {
 	}
 
 	@SerialClass.SerialField(toClient = true)
-	public ArrayList<LargeStack> list = new ArrayList<>();
+	public ArrayList<LargeStack> items = new ArrayList<>();
 
 	private final IItemHolderNode be;
 
@@ -38,15 +38,15 @@ public class ItemInventory implements IItemHandlerModifiable {
 
 	@Override
 	public void setStackInSlot(int slot, ItemStack stack) {
-		list.clear();
+		items.clear();
 		if (!stack.isEmpty())
-			list.add(LargeStack.of(stack));
+			items.add(LargeStack.of(stack));
 		be.markDirty();
 	}
 
 	public void forceAdd(ItemStack stack) {
 		if (!stack.isEmpty())
-			list.add(LargeStack.of(stack));
+			items.add(LargeStack.of(stack));
 		be.markDirty();
 	}
 
@@ -56,23 +56,23 @@ public class ItemInventory implements IItemHandlerModifiable {
 	}
 
 	public List<ItemStack> getAll() {
-		return list.stream().map(LargeStack::toStack).toList();
+		return items.stream().map(LargeStack::toStack).toList();
 	}
 
 	@NotNull
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return slot < 0 || slot >= list.size() ? ItemStack.EMPTY : list.get(slot).toStack();
+		return slot < 0 || slot >= items.size() ? ItemStack.EMPTY : items.get(slot).toStack();
 	}
 
 	@NotNull
 	@Override
 	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
 		if (!be.canInsert()) return stack;
-		if (list.isEmpty()) {
+		if (items.isEmpty()) {
 			if (!simulate) {
 				if (!stack.isEmpty())
-					list.add(LargeStack.of(stack));
+					items.add(LargeStack.of(stack));
 				be.markDirty();
 			}
 			return ItemStack.EMPTY;
@@ -83,17 +83,19 @@ public class ItemInventory implements IItemHandlerModifiable {
 	@NotNull
 	@Override
 	public ItemStack extractItem(int slot, int amount, boolean simulate) {
-		if (!list.isEmpty()) {
-			int count = list.get(0).count();
+		if (!items.isEmpty()) {
+			int count = items.get(0).count();
 			int max = Math.min(Math.max(0, amount), count);
 			if (max == 0) {
 				return ItemStack.EMPTY;
 			}
-			ItemStack copy = this.list.get(0).toStack();
+			ItemStack copy = this.items.get(0).toStack();
 			if (!simulate) {
 				copy.shrink(max);
 				if (copy.isEmpty()) {
-					list.remove(0);
+					items.remove(0);
+				} else {
+					items.set(0, LargeStack.of(copy));
 				}
 				be.markDirty();
 			}
