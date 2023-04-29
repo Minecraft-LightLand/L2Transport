@@ -11,7 +11,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "lasertransport:linker",
-	  "text": "Linker Wand is capable of set and remove connections. Right click one node, and it will link to your wand. Then right click a block for the node to connect to that target. There will be a system message notifying you the status of action.$(br2)Connect a node back to itself will cancel the action, and connect node to a target twice will remove the connection."
+	  "text": "Right click one node to start linking. Then right click a block for the node to connect to that target (Press Shift to continue linking). There will be a system message notifying you the status of action.$(br2)Connect a node back to itself will cancel the action, and connect node to a target twice will remove the connection."
 	},
 	{
 	  "type": "patchouli:spotlight",

@@ -92,7 +92,7 @@
   "lasertransport.screen.unlock": "未锁定。点击锁定，防止在GUI以外修改过滤器",
   "lasertransport.wand.clear": "右键节点清除所有连接。蹲下右键节点清除所有升级。蹲下右键没有升级的节点回收节点。",
   "lasertransport.wand.config": "按方向键或者滚滚轮来设置单次传送数量。右键节点打开高级过滤配置。按shift或者alt禁用数量设置界面，启用手杖选择界面。",
-  "lasertransport.wand.link": "右键节点开始连接。右键另一个方块设置连接。右键节点本身取消。右键已存在的目标删除连接。",
+  "lasertransport.wand.link": "右键节点开始连接。右键另一个方块设置连接。右键节点本身取消。右键已存在的目标删除连接。蹲下右键可以继续添加目标。",
   "lasertransport.wand.rotate": "右键方块旋转方块。蹲下右键逆向旋转方块。",
   "lasertransport.wand.validate": "右键节点清除所有不成立的连接。",
   "lasertransport.wand.flux": "选择通量类型，然后右键通量节点设置节点的通量类型。与之连接的通量节点的通量类型会被全部一起设置。",

@@ -58,7 +58,7 @@ public enum LangData {
 	UI_MATCH_ITEM("screen.match_item", "Match item only. Click to match NBT.", 0, null),
 	UI_MATCH_TAG("screen.match_tag", "Match item and NBT. Click to match item only.", 0, null),
 
-	WAND_LINK("wand.link", "Right click a node to start linking. Right click another block to link. Right click the node itself to halt. Right click an already linked node to unlink.", 0, ChatFormatting.GRAY),
+	WAND_LINK("wand.link", "Right click a node to start linking. Right click another block to link. Right click the node itself to halt. Right click an already linked node to unlink. Shift to bulk linking.", 0, ChatFormatting.GRAY),
 	WAND_VALIDATE("wand.validate", "Right click a node to remove all invalid links.", 0, ChatFormatting.GRAY),
 	WAND_CLEAR("wand.clear", "Right click a node to clear all links. Shift right click a node to clear all upgrades. Shift right clock a node with no upgrades to retrieve the node.", 0, ChatFormatting.GRAY),
 	WAND_ROTATE("wand.rotate", "Right click a block to rotate. Shift right click to rotate in the other direction.", 0, ChatFormatting.GRAY),

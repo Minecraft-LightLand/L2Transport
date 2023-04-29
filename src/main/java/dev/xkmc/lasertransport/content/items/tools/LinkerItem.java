@@ -78,7 +78,9 @@ public class LinkerItem extends Item implements ILinker {
 			if (node.isTargetValid(ctx.getClickedPos())) {
 				if (!ctx.getLevel().isClientSide()) {
 					LangData result = node.link(ctx.getClickedPos(), ctx.getLevel());
-					stack.removeTagKey(KEY);
+					if (ctx.getPlayer() == null || !ctx.getPlayer().isShiftKeyDown()) {
+						stack.removeTagKey(KEY);
+					}
 					sendMessage(ctx, result);
 				}
 				return InteractionResult.SUCCESS;

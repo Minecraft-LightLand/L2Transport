@@ -95,7 +95,7 @@
   "lasertransport.wand.clear": "Right click a node to clear all links. Shift right click a node to clear all upgrades. Shift right clock a node with no upgrades to retrieve the node.",
   "lasertransport.wand.config": "Press direction keys or scroll to alter transfer limit. Right click node to open advanced filter config menu. Press Shift or Alt to disable so that you can use the item selector overlay.",
   "lasertransport.wand.flux": "Select the flux type, and right click a node to set the flux type. When multiple nodes are connected, all connected nodes will be set to the same flux type altogether.",
-  "lasertransport.wand.link": "Right click a node to start linking. Right click another block to link. Right click the node itself to halt. Right click an already linked node to unlink.",
+  "lasertransport.wand.link": "Right click a node to start linking. Right click another block to link. Right click the node itself to halt. Right click an already linked node to unlink. Shift to bulk linking.",
   "lasertransport.wand.rotate": "Right click a block to rotate. Shift right click to rotate in the other direction.",
   "lasertransport.wand.validate": "Right click a node to remove all invalid links.",
   "patchouli.lasertransport.landing": "Welcome to Laser Transport, an efficient, low lag, pipe-less transportation mod that supports items, fluids, energy, and various mod resources in well known mods.",
