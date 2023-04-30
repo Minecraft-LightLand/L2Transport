@@ -1,21 +1,34 @@
-package dev.xkmc.lasertransport.content.craft.logic;
+package dev.xkmc.lasertransport.compat.create;
 
+import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.contraptions.components.crafter.MechanicalCraftingInventory;
+import com.simibubi.create.content.contraptions.components.crafter.RecipeGridHandler;
+import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
+import dev.xkmc.lasertransport.content.craft.logic.DelegatedCraftContainer;
 import dev.xkmc.lasertransport.init.registrate.LTItems;
 import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class DelegatedCraftContainer extends CraftingContainer {
+import java.util.Optional;
 
-	public final CraftGrid grid;
+public class FakeMechanicalCraftContainer extends MechanicalCraftingInventory {
+
+	public static Optional<CraftingRecipe> getRecipes(Level level, DelegatedCraftContainer cont) {
+		FakeMechanicalCraftContainer fake = new FakeMechanicalCraftContainer(cont.grid);
+		return level.getRecipeManager().getRecipeFor(AllRecipeTypes.MECHANICAL_CRAFTING.getType(), fake, level);
+	}
+
+	private final CraftGrid grid;
 	private final boolean isEmpty;
 
 	public final int min;
 
 	@SuppressWarnings("ConstantConditions")
-	public DelegatedCraftContainer(CraftGrid grid) {
-		super(null, 0, 0);
+	public FakeMechanicalCraftContainer(CraftGrid grid) {
+		super(new RecipeGridHandler.GroupedItems());
 		this.grid = grid;
 		boolean empty = true;
 		boolean has_ingredient = false;

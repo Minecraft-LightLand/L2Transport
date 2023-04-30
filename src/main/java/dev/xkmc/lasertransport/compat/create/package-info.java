@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.lasertransport.compat.ponder;
+package dev.xkmc.lasertransport.compat.create;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

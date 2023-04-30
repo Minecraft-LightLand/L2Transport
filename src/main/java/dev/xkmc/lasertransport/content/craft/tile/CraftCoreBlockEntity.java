@@ -8,6 +8,7 @@ import dev.xkmc.lasertransport.content.craft.block.ItemHolderNodeBlock;
 import dev.xkmc.lasertransport.content.craft.block.Orientation;
 import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
 import dev.xkmc.lasertransport.content.craft.logic.DelegatedCraftContainer;
+import dev.xkmc.lasertransport.content.craft.logic.RecipeFinder;
 import dev.xkmc.lasertransport.content.craft.logic.ScanInfo;
 import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
 import dev.xkmc.lasertransport.init.registrate.LTBlocks;
@@ -19,7 +20,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -190,7 +190,7 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity implements Speci
 				return;
 			}
 		}
-		var opt = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, cont, level);
+		var opt = RecipeFinder.getRecipes(level, cont);
 		if (opt.isPresent()) {
 			recipe = opt.get();
 			assemble(recipe, cont);
@@ -262,4 +262,5 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity implements Speci
 		}
 		return List.of(new ItemStack(LTBlocks.B_CRAFT_CORE.get().asItem(), count));
 	}
+
 }
