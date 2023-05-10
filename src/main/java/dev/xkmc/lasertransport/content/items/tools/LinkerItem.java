@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.items.tools;
 
-import dev.xkmc.l2library.serial.codec.TagCodec;
+import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
 import dev.xkmc.lasertransport.content.tile.extend.MultiLevelTarget;
 import dev.xkmc.lasertransport.init.data.LangData;

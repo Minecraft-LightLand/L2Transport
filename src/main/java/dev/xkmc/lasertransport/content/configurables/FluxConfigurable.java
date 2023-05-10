@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.configurables;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.capability.generic.GenericHolder;
 import dev.xkmc.lasertransport.content.capability.generic.IGenericNodeBlockEntity;
 import net.minecraft.network.chat.MutableComponent;

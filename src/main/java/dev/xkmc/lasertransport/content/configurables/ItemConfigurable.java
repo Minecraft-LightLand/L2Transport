@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.configurables;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.capability.item.IItemNodeBlockEntity;
 import dev.xkmc.lasertransport.content.menu.container.ReadOnlyContainer;
 import dev.xkmc.lasertransport.content.menu.filter.ItemConfigMenu;

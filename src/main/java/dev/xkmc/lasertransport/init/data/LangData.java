@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.init.data;
 
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.lasertransport.compat.PatchouliLang;
 import dev.xkmc.lasertransport.init.LaserTransport;
 import net.minecraft.ChatFormatting;

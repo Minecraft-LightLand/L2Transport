@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.craft.block;
 
-import dev.xkmc.l2library.block.mult.OnReplacedBlockMethod;
+import dev.xkmc.l2modularblock.mult.OnReplacedBlockMethod;
 import dev.xkmc.lasertransport.content.craft.tile.CraftCoreBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

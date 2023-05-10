@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.craft.tile;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
 import dev.xkmc.lasertransport.util.Holder;
 import net.minecraft.core.BlockPos;

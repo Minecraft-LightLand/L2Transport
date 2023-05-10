@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.connector;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;

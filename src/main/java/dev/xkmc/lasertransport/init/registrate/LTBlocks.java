@@ -1,13 +1,13 @@
 package dev.xkmc.lasertransport.init.registrate;
 
-import dev.xkmc.l2library.block.BlockProxy;
-import dev.xkmc.l2library.block.DelegateBlock;
-import dev.xkmc.l2library.block.DelegateBlockProperties;
-import dev.xkmc.l2library.block.type.BlockMethod;
-import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
-import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
-import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2modularblock.BlockProxy;
+import dev.xkmc.l2modularblock.DelegateBlock;
+import dev.xkmc.l2modularblock.DelegateBlockProperties;
+import dev.xkmc.l2modularblock.type.BlockMethod;
 import dev.xkmc.lasertransport.content.client.node.CraftNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.FluidNodeRenderer;
 import dev.xkmc.lasertransport.content.client.node.ItemNodeRenderer;

@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.init.registrate;
 
-import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.lasertransport.content.items.tools.*;
 import dev.xkmc.lasertransport.content.items.upgrades.*;
 import dev.xkmc.lasertransport.init.LaserTransport;

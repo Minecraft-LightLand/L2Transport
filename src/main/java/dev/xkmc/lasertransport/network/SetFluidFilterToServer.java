@@ -1,7 +1,7 @@
 package dev.xkmc.lasertransport.network;
 
-import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.network.SerialPacketBase;
+import dev.xkmc.l2serial.network.SerialPacketBase;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.menu.ghost.IFluidConfigMenu;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fluids.FluidStack;

@@ -1,9 +1,9 @@
 package dev.xkmc.lasertransport.content.craft.tile;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
-import dev.xkmc.l2library.block.BlockContainer;
-import dev.xkmc.l2library.block.TickableBlockEntity;
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2modularblock.tile_api.BlockContainer;
+import dev.xkmc.l2modularblock.tile_api.TickableBlockEntity;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.tile.base.PopContentTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

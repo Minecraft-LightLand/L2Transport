@@ -1,10 +1,10 @@
 package dev.xkmc.lasertransport.content.tile.base;
 
-import dev.xkmc.l2library.block.BlockContainer;
-import dev.xkmc.l2library.block.TickableBlockEntity;
-import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.annotation.ServerOnly;
 import dev.xkmc.l2library.util.code.GenericItemStack;
+import dev.xkmc.l2modularblock.tile_api.BlockContainer;
+import dev.xkmc.l2modularblock.tile_api.TickableBlockEntity;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.client.overlay.TooltipBuilder;

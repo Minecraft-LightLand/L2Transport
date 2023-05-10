@@ -83,6 +83,12 @@ mixin {
 }
 
 repositories {
+    maven { url 'https://jitpack.io' }
+    maven {
+        // Location of the maven for mixed mappings, Registrate, and Flywheel
+        name 'tterrag maven'
+        url 'https://maven.tterrag.com/'
+    }
     maven {
         // Location of the maven that hosts JEI files (and TiC)
         name 'Progwml6 maven'
@@ -110,21 +116,43 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-common:${mixin_extras_version}"))
+    implementation("com.github.llamalad7.mixinextras:mixinextras-forge:${mixin_extras_version}")
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}")
-    runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:1.6.7")
+    implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
+    implementation fg.deobf(jarJar("dev.xkmc.l2modularblock:l2modularblock:1.0.0") {
+        transitive = false
+        jarJar.ranged(it, "[1.0.0,)")
+    })
+    implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.0.0")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
+    runtimeOnly fg.deobf("dev.xkmc.l2complements:l2complements:2.2.0.pre0")
+    runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.2.0.pre3")
+    runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:2.2.0.pre2-slim")
+    runtimeOnly fg.deobf("dev.xkmc.l2artifacts:l2artifacts:2.2.0.pre2")
+    runtimeOnly fg.deobf("dev.xkmc.l2archery:l2archery:2.2.0.pre1")
+
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3947982')
-    runtimeOnly fg.deobf('curse.maven:badpackets-615134:3903799')
-    runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
-    implementation fg.deobf('curse.maven:mekanism-268560:3954410')
-    implementation fg.deobf('curse.maven:create-328085:4174330')
-    implementation fg.deobf('curse.maven:ars-nouveau-401955:4391866')
-    implementation fg.deobf('curse.maven:botania-225643:4371117')
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.2-76")
+    implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
+
+    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:4512108')
+    runtimeOnly fg.deobf('curse.maven:badpackets-615134:4438956')
+    runtimeOnly fg.deobf('curse.maven:attributefix-280510:4445193')
+    runtimeOnly fg.deobf('curse.maven:max-health-fix-492246:4447240')
+
+    //runtimeOnly fg.deobf('curse.maven:bookshelf-228525:4454755')
+    //runtimeOnly fg.deobf('curse.maven:enchantment-descriptions-250419:4445054')
+    //runtimeOnly fg.deobf('curse.maven:appleskin-248787:4440123')
+    //implementation fg.deobf('curse.maven:the-twilight-forest-227639:4516391')
+
+    //runtimeOnly fg.deobf('curse.maven:storage-drawers-223852:3884263')
+    //implementation fg.deobf('curse.maven:mekanism-268560:3954410')
+    //implementation fg.deobf('curse.maven:create-328085:4174330')
+    //implementation fg.deobf('curse.maven:ars-nouveau-401955:4391866')
+    //implementation fg.deobf('curse.maven:botania-225643:4371117')
+    //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.2-76")
 
 }
 

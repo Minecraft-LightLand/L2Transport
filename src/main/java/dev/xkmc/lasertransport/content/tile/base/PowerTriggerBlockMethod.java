@@ -1,9 +1,9 @@
 package dev.xkmc.lasertransport.content.tile.base;
 
-import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
-import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
-import dev.xkmc.l2library.block.mult.ScheduleTickBlockMethod;
-import dev.xkmc.l2library.block.one.BlockPowerBlockMethod;
+import dev.xkmc.l2modularblock.mult.CreateBlockStateBlockMethod;
+import dev.xkmc.l2modularblock.mult.DefaultStateBlockMethod;
+import dev.xkmc.l2modularblock.mult.ScheduleTickBlockMethod;
+import dev.xkmc.l2modularblock.one.BlockPowerBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

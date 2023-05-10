@@ -2,7 +2,7 @@ package dev.xkmc.lasertransport.content.craft.tile;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.craft.block.ConnectBlockMethod;
 import dev.xkmc.lasertransport.content.craft.block.ItemHolderNodeBlock;
 import dev.xkmc.lasertransport.content.craft.block.Orientation;
@@ -198,7 +198,7 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity implements Speci
 	}
 
 	private void assemble(CraftingRecipe recipe, DelegatedCraftContainer cont) {
-		ItemStack stack = recipe.assemble(cont);
+		ItemStack stack = recipe.assemble(cont, level.registryAccess());
 		List<ItemStack> remainder = new ArrayList<>();
 		remainder.add(stack);
 		for (BlockPos pos : targets) {

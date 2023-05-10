@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.craft.block;
 
-import dev.xkmc.l2library.block.mult.NeighborUpdateBlockMethod;
+import dev.xkmc.l2modularblock.mult.NeighborUpdateBlockMethod;
 import dev.xkmc.lasertransport.content.craft.tile.CraftCoreBlockEntity;
 import dev.xkmc.lasertransport.content.craft.tile.CraftSideBlockEntity;
 import net.minecraft.core.BlockPos;

@@ -1,9 +1,9 @@
 package dev.xkmc.lasertransport.content.craft.block;
 
-import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
-import dev.xkmc.l2library.block.mult.PlacementBlockMethod;
-import dev.xkmc.l2library.block.mult.ShapeUpdateBlockMethod;
-import dev.xkmc.l2library.block.one.MirrorRotateBlockMethod;
+import dev.xkmc.l2modularblock.mult.CreateBlockStateBlockMethod;
+import dev.xkmc.l2modularblock.mult.PlacementBlockMethod;
+import dev.xkmc.l2modularblock.mult.ShapeUpdateBlockMethod;
+import dev.xkmc.l2modularblock.one.MirrorRotateBlockMethod;
 import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

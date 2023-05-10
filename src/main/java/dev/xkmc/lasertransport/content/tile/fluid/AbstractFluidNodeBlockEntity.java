@@ -1,7 +1,7 @@
 package dev.xkmc.lasertransport.content.tile.fluid;
 
-import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.code.GenericItemStack;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.capability.fluid.IFluidNodeBlockEntity;
 import dev.xkmc.lasertransport.content.capability.fluid.LevelFluidHandler;
 import dev.xkmc.lasertransport.content.capability.fluid.NodalFluidHandler;

@@ -1,7 +1,7 @@
 package dev.xkmc.lasertransport.content.tile.base;
 
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.client.node.RenderManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;

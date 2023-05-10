@@ -1,8 +1,8 @@
 package dev.xkmc.lasertransport.content.craft.model;
 
-import dev.xkmc.l2library.block.DelegateBlock;
-import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
+import dev.xkmc.l2modularblock.DelegateBlock;
 import dev.xkmc.lasertransport.content.craft.block.Orientation;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;

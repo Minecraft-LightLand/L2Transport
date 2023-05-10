@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.craft.block;
 
-import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
+import dev.xkmc.l2modularblock.mult.OnClickBlockMethod;
 import dev.xkmc.lasertransport.content.craft.tile.IItemHolderNode;
 import dev.xkmc.lasertransport.content.items.tools.ILinker;
 import dev.xkmc.lasertransport.content.tile.base.NodeBlockItem;

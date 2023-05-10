@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.compat;
 
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.lasertransport.init.LaserTransport;
 
 public enum PatchouliLang {

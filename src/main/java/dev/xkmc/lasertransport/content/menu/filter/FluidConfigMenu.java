@@ -1,7 +1,7 @@
 package dev.xkmc.lasertransport.content.menu.filter;
 
 import dev.xkmc.l2library.base.menu.SpriteManager;
-import dev.xkmc.l2library.util.code.Wrappers;
+import dev.xkmc.l2serial.util.Wrappers;
 import dev.xkmc.lasertransport.content.configurables.FluidConfigurable;
 import dev.xkmc.lasertransport.content.menu.container.FluidContainer;
 import dev.xkmc.lasertransport.content.menu.ghost.IFluidConfigMenu;

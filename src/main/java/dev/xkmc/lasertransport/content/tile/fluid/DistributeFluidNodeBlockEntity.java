@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.tile.fluid;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.configurables.ConfigConnectorType;
 import dev.xkmc.lasertransport.content.configurables.FluidConfigurable;
 import dev.xkmc.lasertransport.content.connector.DistributeConnector;

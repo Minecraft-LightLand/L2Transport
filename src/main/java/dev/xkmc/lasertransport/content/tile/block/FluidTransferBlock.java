@@ -1,7 +1,7 @@
 package dev.xkmc.lasertransport.content.tile.block;
 
-import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
-import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
+import dev.xkmc.l2modularblock.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2modularblock.one.BlockEntityBlockMethod;
 import dev.xkmc.lasertransport.content.tile.fluid.*;
 import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 

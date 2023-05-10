@@ -1,10 +1,11 @@
 package dev.xkmc.lasertransport.compat.jei;
 
-import dev.xkmc.l2library.util.code.Wrappers;
+import dev.xkmc.l2serial.util.Wrappers;
 import dev.xkmc.lasertransport.content.menu.filter.FluidConfigScreen;
 import dev.xkmc.lasertransport.content.menu.ghost.FluidTarget;
 import dev.xkmc.lasertransport.content.menu.ghost.ItemTarget;
 import mezz.jei.api.gui.handlers.IGhostIngredientHandler;
+import mezz.jei.api.ingredients.ITypedIngredient;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -14,7 +15,8 @@ import java.util.List;
 public class FluidFilterHandler implements IGhostIngredientHandler<FluidConfigScreen> {
 
 	@Override
-	public <I> List<Target<I>> getTargets(FluidConfigScreen gui, I ingredient, boolean doStart) {
+	public <I> List<Target<I>> getTargetsTyped(FluidConfigScreen gui, ITypedIngredient<I> ing, boolean doStart) {
+		var ingredient = ing.getIngredient();
 		if (ingredient instanceof ItemStack) {
 			return Wrappers.cast(gui.getTargets().stream().map(RITarget::new).toList());
 		}

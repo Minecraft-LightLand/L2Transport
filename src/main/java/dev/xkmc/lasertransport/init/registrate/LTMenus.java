@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.init.registrate;
 
-import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
+import com.tterrag.registrate.util.entry.MenuEntry;
 import dev.xkmc.lasertransport.content.menu.filter.FluidConfigMenu;
 import dev.xkmc.lasertransport.content.menu.filter.FluidConfigScreen;
 import dev.xkmc.lasertransport.content.menu.filter.ItemConfigMenu;

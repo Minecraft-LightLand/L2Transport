@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.tile.item;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.capability.item.IItemNodeBlockEntity;
 import dev.xkmc.lasertransport.content.capability.item.NodalItemHandler;
 import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;

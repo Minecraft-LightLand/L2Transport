@@ -1,8 +1,8 @@
 package dev.xkmc.lasertransport.content.tile.block;
 
-import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
-import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
-import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
+import dev.xkmc.l2modularblock.mult.CreateBlockStateBlockMethod;
+import dev.xkmc.l2modularblock.mult.DefaultStateBlockMethod;
+import dev.xkmc.l2modularblock.mult.OnClickBlockMethod;
 import dev.xkmc.lasertransport.content.items.tools.ILinker;
 import dev.xkmc.lasertransport.content.items.upgrades.UpgradeItem;
 import dev.xkmc.lasertransport.content.tile.item.AbstractItemNodeBlockEntity;

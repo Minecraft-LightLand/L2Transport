@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.capability.base;
 
-import dev.xkmc.l2library.util.code.Wrappers;
+import dev.xkmc.l2serial.util.Wrappers;
 import dev.xkmc.lasertransport.content.configurables.BaseConfigurable;
 import dev.xkmc.lasertransport.content.connector.IConnector;
 import dev.xkmc.lasertransport.content.items.upgrades.Upgrade;

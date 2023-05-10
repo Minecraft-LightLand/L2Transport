@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.tile.extend;
 
-import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.capability.wrapper.ForgeCapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.ICapabilityHolder;
 import dev.xkmc.lasertransport.content.capability.wrapper.IFakeCapabilityTile;
