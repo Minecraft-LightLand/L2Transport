@@ -18,6 +18,7 @@ apply plugin: 'org.spongepowered.mixin'
 version = "${ll_version}"
 group = 'dev.xkmc.lasertransport' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lasertransport'
+jarJar.enable()
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -172,6 +173,10 @@ jar {
     }
 }
 
+reobf {
+    jarJar {}
+}
+
 // Example configuration to allow publishing using the maven-publish plugin
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')
@@ -189,4 +194,21 @@ publishing {
             url "file://${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+tasks.jarJar.finalizedBy('reobfJarJar')
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.jarJar.configure {
+    // remove '-all' from jarJar jar file
+    classifier ''
+}
+
+jar {
+    // this now conflicts with jarJar as filenames are the same
+    // append a `-slim` to this jar, as this jar contains no pre-packaged libs
+    classifier 'slim'
 }
