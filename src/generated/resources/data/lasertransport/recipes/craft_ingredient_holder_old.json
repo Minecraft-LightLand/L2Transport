@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smithing_transform",
+  "type": "minecraft:smithing",
   "addition": {
     "item": "minecraft:crafting_table"
   },
@@ -8,8 +8,5 @@
   },
   "result": {
     "item": "lasertransport:craft_ingredient_holder"
-  },
-  "template": {
-    "item": "minecraft:paper"
   }
 }

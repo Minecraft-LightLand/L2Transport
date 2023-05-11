@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "A": {
       "item": "minecraft:blaze_powder"
@@ -19,5 +20,6 @@
   "result": {
     "count": 4,
     "item": "lasertransport:speed_upgrade_2"
-  }
+  },
+  "show_notification": true
 }

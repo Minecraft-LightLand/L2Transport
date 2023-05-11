@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "A": {
       "item": "minecraft:redstone"
@@ -16,5 +17,6 @@
   "result": {
     "count": 4,
     "item": "lasertransport:valve_upgrade"
-  }
+  },
+  "show_notification": true
 }
