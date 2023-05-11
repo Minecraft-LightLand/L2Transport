@@ -3,39 +3,17 @@ package dev.xkmc.lasertransport.init.registrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.lasertransport.content.items.tools.*;
 import dev.xkmc.lasertransport.content.items.upgrades.*;
-import dev.xkmc.lasertransport.init.LaserTransport;
 import dev.xkmc.lasertransport.init.data.TagGen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
 
 import static dev.xkmc.lasertransport.init.LaserTransport.REGISTRATE;
 
-@SuppressWarnings({"rawtypes", "unsafe"})
+@SuppressWarnings({"unsafe"})
 public class LTItems {
-
-	public static class Tab extends CreativeModeTab {
-
-		private final Supplier<ItemEntry> icon;
-
-		public Tab(String id, Supplier<ItemEntry> icon) {
-			super(LaserTransport.MODID + "." + id);
-			this.icon = icon;
-		}
-
-		@Override
-		public ItemStack makeIcon() {
-			return icon.get().asStack();
-		}
-	}
-
-	public static final Tab TAB_MAIN = new Tab("transport", () -> LTItems.LINKER);
-
-	static {
-		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
-	}
 
 	// -------- common --------
 	public static final ItemEntry<LinkerItem> LINKER;

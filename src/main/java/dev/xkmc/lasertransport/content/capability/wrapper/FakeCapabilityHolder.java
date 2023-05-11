@@ -1,6 +1,6 @@
 package dev.xkmc.lasertransport.content.capability.wrapper;
 
-import dev.xkmc.l2library.util.code.Wrappers;
+import dev.xkmc.l2serial.util.Wrappers;
 import dev.xkmc.lasertransport.content.capability.base.ITargetTraceable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

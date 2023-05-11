@@ -1,9 +1,12 @@
 package dev.xkmc.lasertransport.content.items.select;
 
+import dev.xkmc.l2library.init.events.select.item.IItemSelector;
 import dev.xkmc.lasertransport.content.capability.generic.GenericCapabilityRegistry;
 import dev.xkmc.lasertransport.content.capability.generic.ICapabilityEntry;
 import dev.xkmc.lasertransport.content.items.tools.FluxFilter;
+import dev.xkmc.lasertransport.init.LaserTransport;
 import dev.xkmc.lasertransport.init.registrate.LTItems;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -11,8 +14,10 @@ import java.util.List;
 
 public class FluxSelector extends IItemSelector {
 
-	public FluxSelector() {
+	public static final ResourceLocation ID = new ResourceLocation(LaserTransport.MODID, "flux_wand");
 
+	public FluxSelector() {
+		super(ID);
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class NodeInfoOverlay extends GuiComponent implements IGuiOverlay {
 		if (Minecraft.getInstance().screen != null) return null;
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player == null) return null;
-		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getReachDistance());
+		var ray = RayTraceUtil.rayTraceBlock(player.level, player, player.getBlockReach());
 		if (ray.getType() != HitResult.Type.BLOCK) return null;
 		BlockPos pos = ray.getBlockPos();
 		return player.level.getBlockEntity(pos);

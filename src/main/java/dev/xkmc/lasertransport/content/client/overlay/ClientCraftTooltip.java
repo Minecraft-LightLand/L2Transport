@@ -2,7 +2,6 @@ package dev.xkmc.lasertransport.content.client.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Matrix4f;
 import dev.xkmc.lasertransport.content.craft.logic.CraftGrid;
 import dev.xkmc.lasertransport.content.craft.logic.CraftSlotType;
 import net.minecraft.client.gui.Font;
@@ -14,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Matrix4f;
 
 public record ClientCraftTooltip(CraftGrid items) implements ClientTooltipComponent {
 
@@ -35,7 +35,7 @@ public record ClientCraftTooltip(CraftGrid items) implements ClientTooltipCompon
 	}
 
 	@Override
-	public void renderImage(Font font, int mouseX, int mouseY, PoseStack poseStack, ItemRenderer pItemRenderer, int blitOffset) {
+	public void renderImage(Font font, int mouseX, int mouseY, PoseStack poseStack, ItemRenderer pItemRenderer) {
 		for (int i = 0; i < items.height(); i++) {
 			for (int j = 0; j < items.width(); j++) {
 				int x = mouseX + j * 18;
@@ -43,14 +43,14 @@ public record ClientCraftTooltip(CraftGrid items) implements ClientTooltipCompon
 				var opt = this.items.list()[i][j];
 				if (opt.type() == CraftSlotType.EMPTY) continue;
 				if (opt.type() == CraftSlotType.RESULT) {
-					this.blit(poseStack, x, y, blitOffset, Texture.BLOCKED_SLOT);
+					this.blit(poseStack, x, y, 0, Texture.BLOCKED_SLOT);
 					continue;
 				}
-				this.blit(poseStack, x, y, blitOffset, Texture.SLOT);
+				this.blit(poseStack, x, y, 0, Texture.SLOT);
 				ItemStack itemstack = opt.stack();
 				if (itemstack.isEmpty()) continue;
-				pItemRenderer.renderAndDecorateItem(itemstack, x + 1, y + 1, i);
-				pItemRenderer.renderGuiItemDecorations(font, itemstack, x + 1, y + 1);
+				pItemRenderer.renderAndDecorateItem(poseStack, itemstack, x + 1, y + 1, i);
+				pItemRenderer.renderGuiItemDecorations(poseStack, font, itemstack, x + 1, y + 1);
 			}
 		}
 	}

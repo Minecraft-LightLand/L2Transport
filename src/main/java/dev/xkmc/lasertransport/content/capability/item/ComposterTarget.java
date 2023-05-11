@@ -47,7 +47,7 @@ public class ComposterTarget implements INetworkNode<ItemStack> {
 		if (state.getBlock() == Blocks.COMPOSTER) {
 			var c = ((ComposterBlock) state.getBlock()).getContainer(state, level, pos);
 			ItemStack item = token.split(1);
-			BlockState next = ComposterBlock.insertItem(state, (ServerLevel) level, item, pos);
+			BlockState next = ComposterBlock.insertItem(null, state, (ServerLevel) level, item, pos);
 			if (next != state) {
 				level.setBlockAndUpdate(pos, next);
 			}

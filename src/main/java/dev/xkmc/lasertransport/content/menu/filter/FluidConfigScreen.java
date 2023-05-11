@@ -43,10 +43,8 @@ public class FluidConfigScreen extends BaseConfigScreen<FluidConfigMenu> {
 		if (slot.container instanceof FluidContainer) {
 			poseStack.pushPose();
 			poseStack.translate(slot.x, slot.y, 0);
-			this.setBlitOffset(100);
 			RenderSystem.enableDepthTest();
 			ItemFluidRenderer.RENDERER.render(poseStack, menu.getConfig().getFluid(slot.getContainerSlot()));
-			this.setBlitOffset(0);
 			poseStack.popPose();
 		} else {
 			super.renderSlot(poseStack, slot);

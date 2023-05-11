@@ -1,9 +1,9 @@
 package dev.xkmc.lasertransport.content.items.tools;
 
+import dev.xkmc.l2library.init.events.select.item.ItemConvertor;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
 import dev.xkmc.lasertransport.content.tile.base.PopContentTile;
 import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
-import dev.xkmc.lasertransport.events.ItemConvertEvents;
 import dev.xkmc.lasertransport.init.data.LangData;
 import dev.xkmc.lasertransport.init.data.TagGen;
 import net.minecraft.network.chat.Component;
@@ -44,7 +44,7 @@ public class ClearItem extends Item implements ILinker {
 			var list = xbe.popContents();
 			if (list.size() > 0) {
 				for (ItemStack content : list) {
-					ItemStack next = ItemConvertEvents.convert(content, ctx.getPlayer());
+					ItemStack next = ItemConvertor.convert(content, ctx.getPlayer());
 					ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 				}
 				xbe.markDirty();
@@ -55,13 +55,13 @@ public class ClearItem extends Item implements ILinker {
 		if (state.is(TagGen.RETRIEVABLE)) {
 			if (be instanceof SpecialRetrieveTile tile) {
 				for (ItemStack back : tile.getDrops()) {
-					ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
+					ItemStack next = ItemConvertor.convert(back, ctx.getPlayer());
 					ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 				}
 				return InteractionResult.SUCCESS;
 			}
 			ItemStack back = state.getBlock().asItem().getDefaultInstance();
-			ItemStack next = ItemConvertEvents.convert(back, ctx.getPlayer());
+			ItemStack next = ItemConvertor.convert(back, ctx.getPlayer());
 			ctx.getPlayer().getInventory().placeItemBackInInventory(next);
 			ctx.getLevel().setBlockAndUpdate(ctx.getClickedPos(), Blocks.AIR.defaultBlockState());
 			return InteractionResult.SUCCESS;

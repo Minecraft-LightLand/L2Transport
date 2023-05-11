@@ -2,29 +2,30 @@ package dev.xkmc.lasertransport.content.client.overlay;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Matrix4f;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lasertransport.content.capability.base.INodeBlockEntity;
 import dev.xkmc.lasertransport.content.configurables.ConfigConnectorType;
 import dev.xkmc.lasertransport.content.configurables.NumericAdjustor;
-import dev.xkmc.lasertransport.init.registrate.LTItems;
+import dev.xkmc.lasertransport.events.NumericSel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.joml.Matrix4f;
 
 public class NumberSetOverlay extends GuiComponent implements IGuiOverlay {
 
 	private static final int Y_OFFSET = 36, BG = 0x7f100010, TEXT_PADDING_X = 5, TEXT_PADDING_Y = -2, SPACING = 4, LINE = 12;
 
 	public static boolean isScreenOn() {
-		if (ShiftManager.isAlternate()) return false;
-		if (Proxy.getClientPlayer().isShiftKeyDown()) return false;
-		return NodeInfoOverlay.getTarget() instanceof INodeBlockEntity && Proxy.getClientPlayer().getMainHandItem().is(LTItems.CONFIG.get());
+		LocalPlayer player = Proxy.getClientPlayer();
+		if (player == null) return false;
+		return NumericSel.INSTANCE.isClientActive(player);
 	}
 
 	private static BlockPos cache = null;
@@ -108,12 +109,10 @@ public class NumberSetOverlay extends GuiComponent implements IGuiOverlay {
 		fillGradient(matrix4f, bufferbuilder, dx - verW / 2 - preW, dy + TEXT_PADDING_Y, dx - verW / 2, dy + LINE + TEXT_PADDING_Y, 400, BG, BG);
 		fillGradient(matrix4f, bufferbuilder, dx - horW * 3 / 2, dy + LINE * 2 + SPACING + TEXT_PADDING_Y, dx + horW * 3 / 2, dy + LINE * 3 + SPACING + TEXT_PADDING_Y, 400, BG, BG);
 
-		RenderSystem.disableTexture();
 		RenderSystem.enableBlend();
 		RenderSystem.defaultBlendFunc();
 		RenderSystem.disableDepthTest();
 		BufferUploader.drawWithShader(bufferbuilder.end());
-		RenderSystem.enableTexture();
 
 		if (addC != null) gui.getFont().draw(poseStack, addC, dx - verW / 2f + TEXT_PADDING_X, dy - LINE, -1);
 		gui.getFont().draw(poseStack, curC, dx - verW / 2f + TEXT_PADDING_X, dy, -1);

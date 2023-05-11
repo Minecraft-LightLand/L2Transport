@@ -2,10 +2,13 @@ package dev.xkmc.lasertransport.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.init.events.select.SelectionRegistry;
+import dev.xkmc.l2library.init.events.select.item.IItemSelector;
 import dev.xkmc.l2library.serial.config.PacketHandler;
 import dev.xkmc.lasertransport.compat.CompatHandler;
-import dev.xkmc.lasertransport.content.items.select.SelectorRegistry;
-import dev.xkmc.lasertransport.events.ItemConvertEvents;
+import dev.xkmc.lasertransport.content.items.select.FluxSelector;
+import dev.xkmc.lasertransport.events.NumericSel;
+import dev.xkmc.lasertransport.init.data.ItemSelectConfigGen;
 import dev.xkmc.lasertransport.init.data.LTModConfig;
 import dev.xkmc.lasertransport.init.data.LangData;
 import dev.xkmc.lasertransport.init.data.RecipeGen;
@@ -47,18 +50,16 @@ public class LaserTransport {
 		LTBlocks.register();
 		LTItems.register();
 		LTMenus.register();
+		IItemSelector.register(new FluxSelector());
+		SelectionRegistry.register(-5000, NumericSel.INSTANCE);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		CompatHandler.register();
 	}
 
-	private static void registerForgeEvents() {
-		MinecraftForge.EVENT_BUS.register(ItemConvertEvents.class);
-	}
-
 	private static void registerModBusEvents(IEventBus bus) {
 		bus.addListener(LaserTransport::setup);
-		bus.addListener(EventPriority.LOWEST, LaserTransport::gatherData);
+		bus.addListener(LaserTransport::gatherData);
 	}
 
 	public LaserTransport() {
@@ -67,18 +68,14 @@ public class LaserTransport {
 		registerModBusEvents(bus);
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LaserTransportClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates(bus);
-		registerForgeEvents();
 		LTModConfig.init();
 	}
 
 	private static void setup(final FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			SelectorRegistry.register();
-
-		});
 	}
 
 	public static void gatherData(GatherDataEvent event) {
+		event.getGenerator().addProvider(event.includeServer(), new ItemSelectConfigGen(event.getGenerator()));
 	}
 
 }

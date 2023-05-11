@@ -1,7 +1,7 @@
 package dev.xkmc.lasertransport.content.client.node;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lasertransport.content.items.tools.ILinker;
 import dev.xkmc.lasertransport.content.items.tools.LinkerItem;
@@ -29,9 +29,9 @@ public class NodeRenderer<T extends BlockEntity & IRenderableNode> implements Bl
 									   BeamRenderer br, double x, double y, double z) {
 		double xz = Math.sqrt(x * x + z * z);
 		float len = (float) Math.sqrt(xz * xz + y * y);
-		mat.mulPose(Vector3f.YN.rotation((float) (Math.atan2(z, x) - Math.PI / 2)));
-		mat.mulPose(Vector3f.XN.rotation((float) (Math.atan2(y, xz))));
-		mat.mulPose(Vector3f.ZP.rotationDegrees(t1 * 4.5f));
+		mat.mulPose(Axis.YN.rotation((float) (Math.atan2(z, x) - Math.PI / 2)));
+		mat.mulPose(Axis.XN.rotation((float) (Math.atan2(y, xz))));
+		mat.mulPose(Axis.ZP.rotationDegrees(t1 * 4.5f));
 		float t2 = t1 * 0.5f;
 		float h = 0.05f;
 		br.setUV(0, 1, t2, t2 + len / h);

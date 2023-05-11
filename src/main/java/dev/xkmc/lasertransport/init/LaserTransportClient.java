@@ -36,7 +36,6 @@ public class LaserTransportClient {
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "node_info", new NodeInfoOverlay());
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "craft_tooltip", new CraftTooltipOverlay());
 		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "number_adjust", new NumberSetOverlay());
-		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "tool_select", ToolSelectionOverlay.INSTANCE);
 	}
 
 	@OnlyIn(Dist.CLIENT)

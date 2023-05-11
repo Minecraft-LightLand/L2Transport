@@ -28,21 +28,28 @@ import dev.xkmc.lasertransport.content.tile.item.*;
 import dev.xkmc.lasertransport.init.LaserTransport;
 import dev.xkmc.lasertransport.init.data.LangData;
 import dev.xkmc.lasertransport.init.data.TagGen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+
+import java.util.function.Supplier;
+
+import static dev.xkmc.lasertransport.init.LaserTransport.REGISTRATE;
 
 /**
  * handles blocks and block entities
  */
 public class LTBlocks {
 
-	static {
-		LaserTransport.REGISTRATE.creativeModeTab(() -> LTItems.TAB_MAIN);
-	}
+	public static final Supplier<CreativeModeTab> TAB = REGISTRATE
+			.buildCreativeModeTab("transport", e -> e
+					.icon(LTItems.LINKER::asStack)
+					.title(Component.translatable("itemGroup.lasertransport.transport")));
 
 	private static final BlockMethod TRIGGER = new PowerTriggerBlockMethod();
 
