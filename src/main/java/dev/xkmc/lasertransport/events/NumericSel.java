@@ -70,4 +70,8 @@ public class NumericSel implements ISelectionListener {
 		return false;
 	}
 
+	@Override
+	public boolean scrollBypassShift() {
+		return true;
+	}
 }

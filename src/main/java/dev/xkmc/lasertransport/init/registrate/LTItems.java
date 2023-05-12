@@ -27,12 +27,12 @@ public class LTItems {
 	public static final ItemEntry<Item> FILLER;
 
 	static {
-		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().lang("Linker Wand").register();
-		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().lang("Rotate Wand").register();
-		VALIDATOR = REGISTRATE.item("validator", ValidatorItem::new).defaultModel().lang("Validate Wand").register();
-		CLEAR = REGISTRATE.item("clear", ClearItem::new).defaultModel().lang("Clear Wand").register();
-		CONFIG = REGISTRATE.item("configurator", ConfiguratorItem::new).defaultModel().lang("Configuration Wand").register();
-		FLUX = REGISTRATE.item("flux_filter", FluxFilter::new).defaultModel().lang("Flux Select Wand").register();
+		LINKER = REGISTRATE.item("linker", LinkerItem::new).defaultModel().tag(TagGen.SELECTABLE).lang("Linker Wand").register();
+		ROTATE = REGISTRATE.item("rotate", RotateItem::new).defaultModel().tag(TagGen.SELECTABLE).lang("Rotate Wand").register();
+		VALIDATOR = REGISTRATE.item("validator", ValidatorItem::new).defaultModel().tag(TagGen.SELECTABLE).lang("Validate Wand").register();
+		CLEAR = REGISTRATE.item("clear", ClearItem::new).defaultModel().tag(TagGen.SELECTABLE).lang("Clear Wand").register();
+		CONFIG = REGISTRATE.item("configurator", ConfiguratorItem::new).tag(TagGen.SELECTABLE).defaultModel().lang("Configuration Wand").register();
+		FLUX = REGISTRATE.item("flux_filter", FluxFilter::new).defaultModel().tag(TagGen.SELECTABLE).lang("Flux Select Wand").register();
 
 		{
 			VALVE_UP = REGISTRATE.item("valve_upgrade", p -> new UpgradeItem(p, new ValveUpgrade())).tag(TagGen.SELECTABLE).register();

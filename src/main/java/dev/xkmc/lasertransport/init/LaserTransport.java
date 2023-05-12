@@ -51,7 +51,7 @@ public class LaserTransport {
 		LTItems.register();
 		LTMenus.register();
 		IItemSelector.register(new FluxSelector());
-		SelectionRegistry.register(-5000, NumericSel.INSTANCE);
+		SelectionRegistry.register(-3000, NumericSel.INSTANCE);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		CompatHandler.register();
