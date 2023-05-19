@@ -2,7 +2,6 @@ package dev.xkmc.lasertransport.content.craft.tile;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
-import dev.xkmc.lasertransport.util.Holder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -16,7 +15,7 @@ import java.util.List;
 public class CraftSideBlockEntity extends ItemHolderBlockEntity implements SpecialRetrieveTile {
 
 	@SerialClass.SerialField(toClient = true)
-	public Holder target = new Holder(null);
+	public BlockPos target = null;
 
 	public CraftSideBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -24,8 +23,8 @@ public class CraftSideBlockEntity extends ItemHolderBlockEntity implements Speci
 
 	@Nullable
 	public CraftCoreBlockEntity getParent() {
-		if (target.t() != null && level != null) {
-			if (level.getBlockEntity(target.t()) instanceof CraftCoreBlockEntity be) {
+		if (target != null && level != null) {
+			if (level.getBlockEntity(target) instanceof CraftCoreBlockEntity be) {
 				return be;
 			}
 		}

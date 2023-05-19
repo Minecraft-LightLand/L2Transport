@@ -150,9 +150,9 @@ public abstract class AbstractNodeBlockEntity<BE extends AbstractNodeBlockEntity
 	public LangData link(BlockPos pos, Level level) {
 		if (pos.equals(getBlockPos()) || level != this.level)
 			return LangData.MSG_LINKER_CANCEL;
-		getConnector().link(pos.immutable());
+		boolean success = getConnector().link(pos.immutable());
 		sync();
-		return LangData.MSG_LINKER_SUCCEED;
+		return success ? LangData.MSG_LINKER_SUCCEED : LangData.MSG_LINKER_REMOVE;
 	}
 
 	@Override

@@ -13,7 +13,6 @@ import dev.xkmc.lasertransport.content.craft.logic.ScanInfo;
 import dev.xkmc.lasertransport.content.tile.base.SpecialRetrieveTile;
 import dev.xkmc.lasertransport.init.registrate.LTBlocks;
 import dev.xkmc.lasertransport.init.registrate.LTItems;
-import dev.xkmc.lasertransport.util.Holder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -52,8 +51,8 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity implements Speci
 				}
 				if (state.getBlock() == LTBlocks.B_CRAFT_SIDE.get()) {
 					if (level.getBlockEntity(next) instanceof CraftSideBlockEntity be) {
-						if (be.target.t() != null && !be.target.t().equals(self)) {
-							error.add(be.target.t());
+						if (be.target != null && !be.target.equals(self)) {
+							error.add(be.target);
 						}
 					}
 					queue.add(next);
@@ -142,7 +141,7 @@ public class CraftCoreBlockEntity extends ItemHolderBlockEntity implements Speci
 			BlockState state = LTBlocks.B_CRAFT_SIDE.getDefaultState()
 					.setValue(ItemHolderNodeBlock.ORIENTATION_SIDE, orientation.ordinal);
 			if (level.getBlockEntity(pos) instanceof CraftSideBlockEntity be) {
-				be.target = new Holder(getBlockPos());
+				be.target = getBlockPos();
 				be.markDirty();
 			}
 			level.setBlock(pos, state, 2);

@@ -10,7 +10,6 @@ import dev.xkmc.lasertransport.content.tile.base.ConnectionRenderBlockEntity;
 import dev.xkmc.lasertransport.content.tile.base.ILinkableNode;
 import dev.xkmc.lasertransport.init.data.LTModConfig;
 import dev.xkmc.lasertransport.init.data.LangData;
-import dev.xkmc.lasertransport.util.Holder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +28,7 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 		implements IExtendedBlockEntity, ILinkableNode, IFakeCapabilityTile {
 
 	@SerialClass.SerialField(toClient = true)
-	private Holder target = new Holder(null);
+	private BlockPos target = null;
 
 	public ExtendedBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -59,7 +58,7 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 	@Nullable
 	@Override
 	public BlockPos getTarget() {
-		return target.t();
+		return target;
 	}
 
 	@Override
@@ -78,11 +77,11 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 			return LangData.MSG_LINKER_CANCEL;
 		}
 		if (pos.equals(getTarget()) || pos.equals(getBlockPos())) {
-			target = new Holder(null);
+			target = null;
 			sync();
 			return LangData.MSG_LINKER_REMOVE;
 		} else {
-			target = new Holder(pos.immutable());
+			target = pos.immutable();
 			sync();
 			return LangData.MSG_LINKER_SUCCEED;
 		}
@@ -91,14 +90,14 @@ public class ExtendedBlockEntity extends ConnectionRenderBlockEntity
 	@Override
 	public void validate() {
 		if (getTarget() != null && !isTargetValid(getTarget())) {
-			target = new Holder(null);
+			target = null;
 		}
 		sync();
 	}
 
 	@Override
 	public void removeAll() {
-		target = new Holder(null);
+		target = null;
 		sync();
 	}
 

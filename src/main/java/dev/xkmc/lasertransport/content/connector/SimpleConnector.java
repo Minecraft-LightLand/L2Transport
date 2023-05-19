@@ -2,7 +2,6 @@ package dev.xkmc.lasertransport.content.connector;
 
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.lasertransport.content.configurables.BaseConfigurable;
-import dev.xkmc.lasertransport.util.Holder;
 import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -14,7 +13,7 @@ import java.util.function.Predicate;
 public class SimpleConnector extends SingleCoolDownConnector {
 
 	@SerialClass.SerialField(toClient = true)
-	private Holder pos = new Holder(null);
+	private BlockPos pos = null;
 
 	protected final BaseConfigurable config;
 
@@ -25,29 +24,29 @@ public class SimpleConnector extends SingleCoolDownConnector {
 
 	@Override
 	public List<BlockPos> getVisibleConnection() {
-		return pos.t() == null ? List.of() : List.of(pos.t());
+		return pos == null ? List.of() : List.of(pos);
 	}
 
 	@Nullable
 	public BlockPos getPos() {
-		return pos.t();
+		return pos;
 	}
 
 	@Override
 	public boolean link(BlockPos pos) {
-		if (this.pos.t() != null && this.pos.t().equals(pos)) {
-			this.pos = new Holder(null);
+		if (this.pos != null && this.pos.equals(pos)) {
+			this.pos = null;
 			return false;
 		} else {
-			this.pos = new Holder(pos);
+			this.pos = pos;
 			return true;
 		}
 	}
 
 	@Override
 	public void removeIf(Predicate<BlockPos> o) {
-		if (pos.t() == null) return;
-		if (o.test(pos.t())) pos = new Holder(null);
+		if (pos == null) return;
+		if (o.test(pos)) pos = null;
 	}
 
 	@Override

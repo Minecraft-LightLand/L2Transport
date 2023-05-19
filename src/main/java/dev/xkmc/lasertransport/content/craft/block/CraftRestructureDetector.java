@@ -15,7 +15,7 @@ public class CraftRestructureDetector implements NeighborUpdateBlockMethod {
 	public void neighborChanged(Block block, BlockState blockState, Level level, BlockPos blockPos, Block block1, BlockPos blockPos1, boolean b) {
 		BlockEntity be = level.getBlockEntity(blockPos);
 		if (be instanceof CraftSideBlockEntity side) {
-			BlockPos pos = side.target.t();
+			BlockPos pos = side.target;
 			if (pos == null) return;
 			be = level.getBlockEntity(pos);
 		}
